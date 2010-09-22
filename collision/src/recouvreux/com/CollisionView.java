@@ -43,11 +43,7 @@ public class CollisionView extends View {
         	 mySpritePos.x = this.getWidth() - mySprite.getBounds().width();
          } else if (mySpritePos.x <= 0) {
         	 mySpritePos.x = 0;
-         } else if (mPitch > 0 && mySpritePos.x+50 > 100 && mySpritePos.y+50 >= 100 && mySpritePos.y <= 150) {
-        	 mySpritePos.x = 50;
-	     } else if (mySpritePos.x < 150 && mySpritePos.y+50 >= 100 && mySpritePos.y <= 150) {
-	    	 mySpritePos.x = 150;
-	     }
+         } 
          
          this.mySpritePos.y -= mHeading; 
           
@@ -55,12 +51,63 @@ public class CollisionView extends View {
               mySpritePos.y = this.getHeight() - mySprite.getBounds().height(); 
          } else if (mySpritePos.y <= 0) { 
              mySpritePos.y = 0;
-         } else if (mHeading > 0 && mySpritePos.y+50 > 100 && mySpritePos.x+50 >= 100 && mySpritePos.x <= 150) {
-        	 mySpritePos.y = 50;
-         } else if (mySpritePos.y < 150 && mySpritePos.x+50 >= 100 && mySpritePos.x <= 150) {
-        	 mySpritePos.y = 150;
          }
-          
+         
+         if( mySpritePos.x + 50 >= 100 && mySpritePos.x <= 150 && mySpritePos.y +50 >= 100 && mySpritePos.y <= 150 ) 
+         // suis-je dans la zone ou il y a collision ?
+         {
+        	if( (100 - (mySpritePos.x + 50)) > 0 )
+        	//Si collision en x alors collision à gauche
+        	{
+        		if( (100 - (mySpritePos.y + 50) ) > 0 )
+        		//Si collision en y alors collision en haut
+        		{
+        			if( (100 - (mySpritePos.x + 50)) < (100 - (mySpritePos.y + 50) ) )
+        			//collision en x, en gauche
+        			{
+        				mySpritePos.x = 50;
+        			} else {
+        			// collision en y, en haut
+        				mySpritePos.y = 50;
+        			}
+        		} else if( (mySpritePos.y - 150 ) > 0) {
+        		// collision en y (bas) possible
+        			if( (100 - (mySpritePos.x + 50)) < (mySpritePos.y - 150) )
+            		//collision en x, en gauche
+            		{
+            			mySpritePos.x = 50;
+            		} else {
+            		// collision en y, en bas
+            			mySpritePos.y = 150;
+            		}
+        		}
+        	} else if( (mySpritePos.x - 150) > 0 )
+        	//Si collision en x alors collision à droite
+        	{
+        		if( (100 - (mySpritePos.y + 50) ) > 0 )
+        		//Si collision en y alors collision en haut
+        		{
+        			if( (mySpritePos.x - 150) < (100 - (mySpritePos.y + 50) ) )
+        			//collision en x, a droite
+        			{
+        				mySpritePos.x = 150;
+        			} else {
+        			// collision en y, en haut
+        				mySpritePos.y = 50;
+        			}
+        		} else if( (mySpritePos.y - 150) > 0) {
+        		// collision en y (bas) possible
+        			if( (mySpritePos.x - 150) < (mySpritePos.y - 150)  )
+            		//collision en x, a droite
+            		{
+            			mySpritePos.x = 150;
+            		} else {
+            		// collision en y, en bas
+            			mySpritePos.y = 150;
+            		}
+        		}
+        	}
+         }
 
           /* Set the location, where the sprite 
            * will draw itself to the canvas */ 
