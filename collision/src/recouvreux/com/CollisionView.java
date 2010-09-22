@@ -79,14 +79,6 @@ public class CollisionView extends View {
           this.mySprite.draw(canvas); 
      } 
      
-     protected boolean isCollision(Point p1, Point p2) {
-    	 if (p1.x+50 <= p2.x || p1.x >= p2.x+50)
-    		 return false;
-    	 if(p1.y+50 <= p2.y || p2.y >= p2.y+50)
-    		 return false;
-    	 return true;
-     }
-     
      /*
       * handles key events in the game. Update the direction our snake is traveling
       * based on the DPAD. Ignore events that would cause the snake to immediately
