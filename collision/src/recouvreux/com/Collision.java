@@ -92,8 +92,8 @@ public class Collision extends Activity implements SensorEventListener {
      } 
 
     public void onSensorChanged(SensorEvent event) { 
-        //myCollisionView.mPitch=event.values[SensorManager.DATA_Z];
-        //myCollisionView.mHeading=event.values[SensorManager.DATA_Y];
+        myCollisionView.mPitch=event.values[SensorManager.DATA_Z];
+        myCollisionView.mHeading=event.values[SensorManager.DATA_Y];
         
          //updateOrientation(event.values[SensorManager.DATA_X], event.values[SensorManager.DATA_Y], event.values[SensorManager.DATA_Z]); 
           

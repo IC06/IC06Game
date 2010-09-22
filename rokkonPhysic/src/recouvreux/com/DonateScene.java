@@ -22,16 +22,19 @@ public class DonateScene extends Scene {
         public DonateScene() {
                 super(3, new int[] { 4, BOX_COUNT, 1 });
                 setBackground(background = new FixedBackground(Textures.background));
-                setWorld(world = new World(gravity = new Vector2(0, 0), false));
+                gravity = new Vector2(0, 0);
+                world = new World(gravity, false);
+                setWorld(world);
+                //setWorld(world = new World(gravity = new Vector2(0, 0), false)); // marche po...
                 createWalls();
                 createBoxes();
         }
        
         private void createWalls() {
-                wall = new PhysicalSprite[4];
+                /*wall = new PhysicalSprite[4];
                
                 wall[0] = new PhysicalSprite(0, -1, Donate.GAME_WIDTH, 1);
-                wall[0].createStaticBox();
+                wall[0].createStaticBox(); // marche po...
                 add(0, wall[0]);
                
                 wall[1] = new PhysicalSprite(Donate.GAME_WIDTH, 0, 1, Donate.GAME_HEIGHT);
@@ -44,11 +47,11 @@ public class DonateScene extends Scene {
                
                 wall[3] = new PhysicalSprite(-1, 0, 1, Donate.GAME_HEIGHT);
                 wall[3].createStaticBox();
-                add(0, wall[3]);        
+                add(0, wall[3]);*/
         }
        
         private void createBoxes() {
-                box = new PhysicalSprite[BOX_COUNT];
+                /*box = new PhysicalSprite[BOX_COUNT];
                 for(int i = 0; i < BOX_COUNT; i++) {
                         box[i] = new PhysicalSprite( (float)Math.random() * Donate.GAME_WIDTH, (float)Math.random() * Donate.GAME_HEIGHT, 0.2f + (float)Math.random() * 0.5f, 0.2f + (float)Math.random() * 0.5f );
                         box[i].setTexture(Textures.box);
@@ -56,16 +59,16 @@ public class DonateScene extends Scene {
                         box[i].createDynamicBox();
                         box[i].setBorder(0, 0, 0, 1);
                         add(1, box[i]);
-                }
+                }*/
         }
        
         @Override
         public void onGameLoop() {
-                if(Time.getTicks() > nextGravityShift) {
+                /*if(Time.getTicks() > nextGravityShift) {
                         nextGravityShift = Time.getTicks() + 1000;
                         gravity.set(8 - (float)Math.random() * 16, 8 - (float)Math.random() * 16);
                         world.setGravity(gravity);
-                }
+                }*/
         }
         
         @Override

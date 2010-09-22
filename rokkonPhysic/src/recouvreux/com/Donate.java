@@ -6,8 +6,8 @@ import com.stickycoding.rokon.RokonActivity;
 
 public class Donate extends RokonActivity {
         
-        public static final float GAME_WIDTH = 8f;
-        public static final float GAME_HEIGHT = 4.8f;
+        public static final float GAME_WIDTH = 480f;
+        public static final float GAME_HEIGHT = 320f;
                 
         private DonateScene scene;
 
