@@ -39,28 +39,26 @@ public class CollisionView extends View {
          
          this.mySpritePos.x -= mPitch; 
          
-          if (mySpritePos.x >= this.getWidth() - mySprite.getBounds().width()) { 
-              mySpritePos.x = this.getWidth() - mySprite.getBounds().width();
-          } else if (mySpritePos.x <= 0) {
-              mySpritePos.x = 0;
-          } else if (isCollision(mySpritePos,sprite2Pos)) {
-        	  if (mPitch > 0)
-        		  mySpritePos.x = 100;
-        	  else
-        		  mySpritePos.x = 150;
-          }
+         if (mySpritePos.x >= this.getWidth() - mySprite.getBounds().width()) { 
+        	 mySpritePos.x = this.getWidth() - mySprite.getBounds().width();
+         } else if (mySpritePos.x <= 0) {
+        	 mySpritePos.x = 0;
+         } else if (mPitch > 0 && mySpritePos.x+50 > 100 && mySpritePos.y+50 >= 100 && mySpritePos.y <= 150) {
+        	 mySpritePos.x = 50;
+	     } else if (mySpritePos.x < 150 && mySpritePos.y+50 >= 100 && mySpritePos.y <= 150) {
+	    	 mySpritePos.x = 150;
+	     }
          
          this.mySpritePos.y -= mHeading; 
           
-          if (mySpritePos.y >= this.getHeight() - mySprite.getBounds().height()) { 
+         if (mySpritePos.y >= this.getHeight() - mySprite.getBounds().height()) { 
               mySpritePos.y = this.getHeight() - mySprite.getBounds().height(); 
          } else if (mySpritePos.y <= 0) { 
-             mySpritePos.y = 0; 
-         } else if (isCollision(mySpritePos,sprite2Pos)) {
-	       	  if (mHeading > 0)
-	    		  mySpritePos.y = 100;
-	    	  else
-	    		  mySpritePos.y = 150;
+             mySpritePos.y = 0;
+         } else if (mHeading > 0 && mySpritePos.y+50 > 100 && mySpritePos.x+50 >= 100 && mySpritePos.x <= 150) {
+        	 mySpritePos.y = 50;
+         } else if (mySpritePos.y < 150 && mySpritePos.x+50 >= 100 && mySpritePos.x <= 150) {
+        	 mySpritePos.y = 150;
          }
           
 
