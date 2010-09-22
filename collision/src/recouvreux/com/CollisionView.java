@@ -43,9 +43,9 @@ public class CollisionView extends View {
         	 mySpritePos.x = this.getWidth() - mySprite.getBounds().width();
          } else if (mySpritePos.x <= 0) {
         	 mySpritePos.x = 0;
-         } else if (mPitch > 0 && mySpritePos.x+50 > 100 && mySpritePos.y+50 >= 100 && mySpritePos.y <= 150) {
+         } else if (mPitch > 0 && mySpritePos.x+50 >= 100 && mySpritePos.y+50 >= 100 && mySpritePos.y <= 150) {
         	 mySpritePos.x = 49;
-	     } else if (mySpritePos.x < 150 && mySpritePos.y+50 >= 100 && mySpritePos.y <= 150) {
+	     } else if (mySpritePos.x <= 150 && mySpritePos.y+50 >= 100 && mySpritePos.y <= 150) {
 	    	 mySpritePos.x = 151;
 	     }
          
