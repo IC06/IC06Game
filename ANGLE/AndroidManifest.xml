@@ -22,7 +22,7 @@
 		<activity android:name="Matthieu" android:clearTaskOnLaunch="true"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
 			android:screenOrientation="portrait"></activity>
-		<activity android:name="Thomas" android:clearTaskOnLaunch="true"
+		<activity android:name="com.thomas.MainActivity" android:clearTaskOnLaunch="true"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
 			android:screenOrientation="portrait"></activity>			
 		<activity android:name="Game" android:clearTaskOnLaunch="true"

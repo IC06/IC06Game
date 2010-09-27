@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.android.game.StepByStepGame;
+import com.thomas.MainActivity;
 
 /**
  * Set of tutorials to learn how to use ANGLE.
@@ -70,7 +71,7 @@ public class AngleTutorials extends Activity implements OnClickListener
 				startActivity(intent);
 				break;
 			case R.id.thomas:
-				intent = new Intent(this, Thomas.class);
+				intent = new Intent(this, MainActivity.class);
 				startActivity(intent);
 				break;
 		}
