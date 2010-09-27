@@ -65,7 +65,7 @@ public class AngleTutorials extends Activity implements OnClickListener
 				startActivity(intent);
 				break;
 			case R.id.matth:
-				intent = new Intent(this, StepByStepGame.class);
+				intent = new Intent(this, Matthieu.class);
 				startActivity(intent);
 				break;
 		}
