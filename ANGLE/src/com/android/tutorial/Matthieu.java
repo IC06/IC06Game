@@ -30,7 +30,7 @@ import com.android.angle.FPSCounter;
  * @author Ivan Pajuelo
  * 
  */
-public class Tutorial05 extends AngleActivity
+public class Matthieu extends AngleActivity
 {
 	private MyDemo mDemo;
 	
