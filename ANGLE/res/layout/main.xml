@@ -8,6 +8,7 @@
    <Button android:layout_height="wrap_content" android:id="@+id/tut04" android:layout_width="fill_parent" android:text="@string/tut04"/> 
    <Button android:layout_height="wrap_content" android:id="@+id/tut05" android:layout_width="fill_parent" android:text="@string/tut05"/> 
    <Button android:layout_height="wrap_content" android:id="@+id/matth" android:layout_width="fill_parent" android:text="@string/matth"/>    
+   <Button android:layout_height="wrap_content" android:id="@+id/thomas" android:layout_width="fill_parent" android:text="@string/thomas"/>    
     
     
    <Button android:layout_height="wrap_content" android:id="@+id/game" android:layout_width="fill_parent" android:text="@string/game"/> 

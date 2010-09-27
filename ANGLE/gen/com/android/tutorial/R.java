@@ -25,9 +25,10 @@ public final class R {
         public static final int LinearLayout01=0x7f060000;
         public static final int LinearLayout02=0x7f060002;
         public static final int ScrollView01=0x7f060001;
-        public static final int game=0x7f060009;
-        public static final int gamesteps=0x7f06000a;
+        public static final int game=0x7f06000a;
+        public static final int gamesteps=0x7f06000b;
         public static final int matth=0x7f060008;
+        public static final int thomas=0x7f060009;
         public static final int tut01=0x7f060003;
         public static final int tut02=0x7f060004;
         public static final int tut03=0x7f060005;
@@ -45,6 +46,7 @@ public final class R {
         public static final int game=0x7f050006;
         public static final int gamesteps=0x7f050007;
         public static final int matth=0x7f050008;
+        public static final int thomas=0x7f050009;
         public static final int tut01=0x7f050001;
         public static final int tut02=0x7f050002;
         public static final int tut03=0x7f050003;

@@ -27,6 +27,7 @@ public class AngleTutorials extends Activity implements OnClickListener
 		findViewById(R.id.tut04).setOnClickListener(this);
 		findViewById(R.id.tut05).setOnClickListener(this);
 		findViewById(R.id.matth).setOnClickListener(this);
+		findViewById(R.id.thomas).setOnClickListener(this);
 		findViewById(R.id.game).setOnClickListener(this);
 		findViewById(R.id.gamesteps).setOnClickListener(this);
 	}
@@ -66,6 +67,10 @@ public class AngleTutorials extends Activity implements OnClickListener
 				break;
 			case R.id.matth:
 				intent = new Intent(this, Matthieu.class);
+				startActivity(intent);
+				break;
+			case R.id.thomas:
+				intent = new Intent(this, Thomas.class);
 				startActivity(intent);
 				break;
 		}
