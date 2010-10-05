@@ -34,7 +34,8 @@ class Box extends AnglePhysicObject
 		float w = width/2, h = height/2;
 		// Note : la position des collider se fait par rapport à la position de l'objet : mPosition
 		// qui represente le centre de l'objet, de plus il faut considerer les axes x,y dans le sens habituel mathématique
-		addSegmentCollider(new AngleSegmentCollider(-w, h, w, h)); // haut
+		addSegmentCollider(new AngleSegmentCollider(0, 0, 50, 50));
+		//addSegmentCollider(new AngleSegmentCollider(-w, h, w, h)); // haut
 		//addSegmentCollider(new AngleSegmentCollider(-w, -h, w, -h)); // bas
 		//addSegmentCollider(new AngleSegmentCollider(-w, -h, -w, h)); // gauche
 		//addSegmentCollider(new AngleSegmentCollider(w, -h, w, h)); // droite
@@ -58,9 +59,9 @@ class Box extends AnglePhysicObject
 	public void draw(GL10 gl)
 	{
 		mSprite.mPosition.set(mPosition);
-		mSprite.draw(gl);
+		//mSprite.draw(gl);
 		//Draw colliders (beware calls GC)
-		//drawColliders(gl);
+		drawColliders(gl);
 	}
 	
 	

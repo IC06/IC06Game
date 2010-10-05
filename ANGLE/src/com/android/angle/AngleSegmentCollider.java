@@ -49,10 +49,10 @@ public class AngleSegmentCollider
 		/*
 		 * Modif de Thomas, l'affichage était inversé par rapport à la réalité, donc j'ai mis un "-" devant les attributs mX et mY
 		 */
-		vertices.put(count++, -mA.mX);
-		vertices.put(count++, -mA.mY);
-		vertices.put(count++, -mB.mX);
-		vertices.put(count++, -mB.mY);
+		vertices.put(count++, mA.mX);
+		vertices.put(count++, mA.mY);
+		vertices.put(count++, mB.mX);
+		vertices.put(count++, mB.mY);
 		gl.glVertexPointer(2, GL11.GL_FLOAT, 0, vertices);
 		gl.glDrawArrays(GL11.GL_LINES, 0, 2);
 		gl.glPopMatrix();
@@ -78,8 +78,8 @@ public class AngleSegmentCollider
 	public float closestDist(AngleCircleCollider other)
 	{
 		return Math
-				.abs((((mDir.mX) * ((other.mObject.mPosition.mY + other.mCenter.mY) - mObject.mPosition.mY + mA.mY)) - ((mDir.mY) * ((other.mObject.mPosition.mX + other.mCenter.mX)
-						- mObject.mPosition.mX + mA.mX)))
+				.abs((((mDir.mX) * ((other.mObject.mPosition.mY + other.mCenter.mY) - (mObject.mPosition.mY + mA.mY))) - ((mDir.mY) * ((other.mObject.mPosition.mX + other.mCenter.mX)
+						- (mObject.mPosition.mX + mA.mX))))
 						/ mLength);
 		
 	}

@@ -12,7 +12,6 @@ import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
 import com.android.angle.AngleActivity;
-import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AnglePhysicsEngine;
 import com.android.angle.AngleSegmentCollider;
@@ -60,7 +59,6 @@ public class MainActivity extends AngleActivity
 		AngleSpriteLayout mBallLayout, mBoxLayout;
 		AnglePhysicsEngine mPhysics;
 		Ball mBall;
-		float lastEventX, lastEventY;
 		
 		public MyDemo(AngleActivity activity)
 		{
@@ -100,16 +98,16 @@ public class MainActivity extends AngleActivity
 
 			// add barre
 			Box mBox = new Box(mBoxLayout,128,32,0,1);
-			mBox.mPosition.set(160,150);
+			mBox.mPosition.set(160,300);
 			mPhysics.addObject(mBox);
 
-			mBox = new Box(mBoxLayout,128,32,0,1);
+			/*mBox = new Box(mBoxLayout,128,32,0,1);
 			mBox.mPosition.set(50,300);
 			mPhysics.addObject(mBox);
 
 			mBox = new Box(mBoxLayout,128,32,0,1);
 			mBox.mPosition.set(150,450);
-			mPhysics.addObject(mBox);
+			mPhysics.addObject(mBox);*/
 			
 
 			mBall = new Ball (mBallLayout,29,10,1);
@@ -125,8 +123,6 @@ public class MainActivity extends AngleActivity
 			{
 				mBall.mVelocity.mX = (event.getX()-mBall.mPosition.mX);
 				mBall.mVelocity.mY = (event.getY()-mBall.mPosition.mY);
-				lastEventX = event.getX();
-				lastEventY = event.getY();
 			}
 			
 			return true;

@@ -57,7 +57,9 @@ public class AngleCircleCollider
 	 */
 	public boolean test(AngleSegmentCollider segmentCollider)
 	{
-		if (segmentCollider.closestDist(this) > mRadius)
+		float CH = segmentCollider.closestDist(this);
+		
+		if (CH > mRadius)
 			return false;
 		else
 		{
@@ -74,14 +76,52 @@ public class AngleCircleCollider
           0<r<1    P is interior to AB
 	         */
 			float 	Ax = segmentCollider.mObject.mPosition.mX + segmentCollider.mA.mX, 
-						Ay = segmentCollider.mObject.mPosition.mY -  segmentCollider.mA.mY,
+						Ay = segmentCollider.mObject.mPosition.mY + segmentCollider.mA.mY,
 						Bx = segmentCollider.mObject.mPosition.mX + segmentCollider.mB.mX,
-						By = segmentCollider.mObject.mPosition.mY -  segmentCollider.mB.mY,
+						By = segmentCollider.mObject.mPosition.mY +  segmentCollider.mB.mY,
 						Cx = mObject.mPosition.mX + mCenter.mX,
-						Cy = mObject.mPosition.mY - mCenter.mY;
-			double L2 =  (Bx-Ax)* (Bx-Ax)+(By-Ay)*(By-Ay);
+						Cy = mObject.mPosition.mY + mCenter.mY;
+			double L2 =  (Bx-Ax)* (Bx-Ax)+(By-Ay)*(By-Ay); // AB²
+			double AC2 = (Cx-Ax)* (Cx-Ax)+(Cy-Ay)*(Cy-Ay); // AC²
+			double BC2 = (Cx-Bx)* (Cx-Bx)+(Cy-By)*(Cy-By); // BC²
 			
-			double r = ( (Ay-Cy)*(Ay-By)-(Ax-Cx)*(Bx-Ax)) / L2;
+			double AH2 = AC2 - CH*CH;
+			double BH2 = BC2 - CH*CH;
+
+			
+			if ((AH2 + BH2) < (L2+5))
+			{
+				mNormal = segmentCollider.mNormal;
+				return true;
+			}
+			else if (BC2 < mRadius*mRadius)
+			{
+				float dX = Bx-Cx, dY = By-Cy;
+				float dist = (float) Math.sqrt(BC2);
+				if (dX > 0)
+					mNormal = (float) Math.acos(dY / dist); // edited
+					//mNormal = (float) Math.atan(dY / dX);
+				else
+					mNormal = (float) (Math.PI * 2 - Math.acos(dY / dist)); // edited
+				return true;
+			}
+			else if (AC2 < mRadius*mRadius)
+			{
+				float dX =Ax-Cx, dY = Ay-Cy;
+				float dist = (float) Math.sqrt(AC2);
+				if (dX > 0)
+					mNormal = (float) Math.acos(dY / dist); // edited
+					//mNormal = (float) Math.atan(dY / dX);
+				else
+					mNormal = (float) (Math.PI * 2 - Math.acos(dY / dist)); // edited
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+			
+			/* double r = ( (Ay-Cy)*(Ay-By)-(Ax-Cx)*(Bx-Ax)) / L2;
 			
 			
 			if (r < 0)
@@ -106,10 +146,10 @@ public class AngleCircleCollider
 					// The normal in a circle is the direction to the center of the other
 					// collider
 					if ((Bx-Cx) > 0)
-						//otherCollider.mNormal = (float) Math.acos(dY / dist); // edited
+						//mNormal = (float) Math.acos(dY / dist); // edited
 						mNormal = (float) Math.atan((By-Cy) / (Bx-Cx));
 					else
-						//otherCollider.mNormal = (float) (Math.PI * 2 - Math.acos(dY / dist)); // edited
+						//mNormal = (float) (Math.PI * 2 - Math.acos(dY / dist)); // edited
 						mNormal = (float) (Math.PI + Math.atan((By-Cy) / (Bx-Cx)));
 					
 					return true;
@@ -120,7 +160,7 @@ public class AngleCircleCollider
 			{
 				mNormal = segmentCollider.mNormal;
 				return true;
-			}
+			}*/
 		}
 	}
 
