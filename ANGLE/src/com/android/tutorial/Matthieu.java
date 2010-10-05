@@ -98,10 +98,10 @@ public class Matthieu extends AngleActivity
 		{
 			super(4, 0);
 			mSprite=new AngleSprite(layout);
-			addSegmentCollider(new AngleSegmentCollider(-40, -40, 40, -40));
-			addSegmentCollider(new AngleSegmentCollider(40, -40, 40, 40));
-			addSegmentCollider(new AngleSegmentCollider(40, 40, -40, 40));
-			addSegmentCollider(new AngleSegmentCollider(-40, 40, -40, -40));
+			addSegmentCollider(new AngleSegmentCollider(-40, 0, 0, -40));
+			addSegmentCollider(new AngleSegmentCollider(0, -40, 40, 0));
+			addSegmentCollider(new AngleSegmentCollider(40, 0, 0, 40));
+			addSegmentCollider(new AngleSegmentCollider(0, 40, -40, 0));
 			mMass = 0;
 			mBounce = 0.8f; // Coefficient of restitution (1 return all the energy)  >Coeficiente de restituci�n (1 devuelve toda la energia)
 		}
