@@ -42,9 +42,20 @@ public class AngleVector
 	}
 
 	/*
-	 * 
-	 * public float length() { return (float) Math.sqrt((mX * mX) + (mY * mY)); }
-	 * 
+	 * author : Thomas
+	 */
+	public float length()
+	{
+		return (float) Math.sqrt((mX * mX) + (mY * mY));
+	}
+	/*
+	 * author : Thomas
+	 */
+	public float lenghtPow2()
+	{
+		return (mX * mX) + (mY * mY);
+	}
+	 /* 
 	 * public void normalize() { float len = length();
 	 * 
 	 * if (len != 0.0f) { mX /= len; mY /= len; } else { mX = 0.0f; mY = 0.0f; }

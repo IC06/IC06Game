@@ -57,6 +57,11 @@ public class AnglePhysicObject extends AngleObject
 		}
 	}
 
+	/**
+	 * Edited by thomas
+	 * @param other
+	 * @return
+	 */
 	public boolean collide(AnglePhysicObject other)
 	{
 		for (int mc = 0; mc < mCircleCollidersCount; mc++)
@@ -65,7 +70,8 @@ public class AnglePhysicObject extends AngleObject
 			{
 				if (mCircleColliders[mc].test(other.mSegmentColliders[oc]))
 				{
-					kynetics(other, other.mSegmentColliders[oc].mNormal);
+					//kynetics(other, other.mSegmentColliders[oc].mNormal); // edited
+					kynetics(other, mCircleColliders[mc].mNormal);
 					return true;
 				}
 			}
@@ -73,7 +79,8 @@ public class AnglePhysicObject extends AngleObject
 			{
 				if (mCircleColliders[mc].test(other.mCircleColliders[oc]))
 				{
-					kynetics(other, other.mCircleColliders[oc].mNormal);
+					kynetics(other, other.mCircleColliders[oc].mNormal); // edited
+					//kynetics(other, mCircleColliders[mc].mNormal);
 					return true;
 				}
 			}
@@ -106,7 +113,7 @@ public class AnglePhysicObject extends AngleObject
 
 	public void kynetics(AnglePhysicObject other, float normal)
 	{
-		// TODO rotar el sistema +normal, hacer los cálculos y volver a rotar
+		// TODO rotar el sistema +normal, hacer los cï¿½lculos y volver a rotar
 		// -normal
 		float nCos = (float) Math.cos(normal);
 		float nSin = (float) Math.sin(normal);

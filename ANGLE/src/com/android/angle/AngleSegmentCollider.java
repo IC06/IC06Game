@@ -16,9 +16,9 @@ import javax.microedition.khronos.opengles.GL11;
 public class AngleSegmentCollider
 {
 	protected AnglePhysicObject mObject;
-	protected AngleVector mA;
-	protected AngleVector mB;
-	protected AngleVector mDir;
+	protected AngleVector mA; // point A
+	protected AngleVector mB; // point B
+	protected AngleVector mDir; // vecteur directeur
 	protected AngleVector mDiff;
 	protected AngleVector mClosest;
 	protected float mNormal;
@@ -46,10 +46,13 @@ public class AngleSegmentCollider
 		gl.glTranslatef(mObject.mPosition.mX, mObject.mPosition.mY, 0.0f);
 		vertices.clear();
 		int count = 0;
-		vertices.put(count++, mA.mX);
-		vertices.put(count++, mA.mY);
-		vertices.put(count++, mB.mX);
-		vertices.put(count++, mB.mY);
+		/*
+		 * Modif de Thomas, l'affichage était inversé par rapport à la réalité, donc j'ai mis un "-" devant les attributs mX et mY
+		 */
+		vertices.put(count++, -mA.mX);
+		vertices.put(count++, -mA.mY);
+		vertices.put(count++, -mB.mX);
+		vertices.put(count++, -mB.mY);
 		gl.glVertexPointer(2, GL11.GL_FLOAT, 0, vertices);
 		gl.glDrawArrays(GL11.GL_LINES, 0, 2);
 		gl.glPopMatrix();
@@ -78,5 +81,7 @@ public class AngleSegmentCollider
 				.abs((((mDir.mX) * ((other.mObject.mPosition.mY + other.mCenter.mY) - mObject.mPosition.mY + mA.mY)) - ((mDir.mY) * ((other.mObject.mPosition.mX + other.mCenter.mX)
 						- mObject.mPosition.mX + mA.mX)))
 						/ mLength);
+		
 	}
+	
 }
