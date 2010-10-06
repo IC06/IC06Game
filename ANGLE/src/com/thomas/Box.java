@@ -2,6 +2,7 @@ package com.thomas;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import com.android.angle.AngleCircleCollider;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSprite;
@@ -34,8 +35,9 @@ class Box extends AnglePhysicObject
 		float w = width/2, h = height/2;
 		// Note : la position des collider se fait par rapport à la position de l'objet : mPosition
 		// qui represente le centre de l'objet, de plus il faut considerer les axes x,y dans le sens habituel mathématique
-		addSegmentCollider(new AngleSegmentCollider(0, 0, 50, 50));
-		//addSegmentCollider(new AngleSegmentCollider(-w, h, w, h)); // haut
+		//addSegmentCollider(new AngleSegmentCollider(0, 0, 50, 50));
+		//addCircleCollider(new AngleCircleCollider(50,0,29));
+		addSegmentCollider(new AngleSegmentCollider(-w, h, w, h)); // haut
 		//addSegmentCollider(new AngleSegmentCollider(-w, -h, w, -h)); // bas
 		//addSegmentCollider(new AngleSegmentCollider(-w, -h, -w, h)); // gauche
 		//addSegmentCollider(new AngleSegmentCollider(w, -h, w, h)); // droite
@@ -49,7 +51,7 @@ class Box extends AnglePhysicObject
 	@Override
 	public float getSurface()
 	{
-		return 0; 
+		return mWidth * mHeight; 
 	}
 
 	/**

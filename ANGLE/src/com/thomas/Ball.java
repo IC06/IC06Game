@@ -16,6 +16,9 @@ import com.android.angle.AngleSpriteLayout;
 class Ball extends AnglePhysicObject
 {
 	private AngleSprite mSprite;
+	protected enum Color {BLEU, VERT};
+	protected Color mColor;
+	protected float mRadius;
 
 	/**
 	 * 
@@ -27,12 +30,27 @@ class Ball extends AnglePhysicObject
 	public Ball(AngleSpriteLayout layout, float radius, float mass, float bounce)
 	{
 		super(0, 1);
+		mColor = Color.BLEU;
 		mSprite=new AngleSprite(layout);
 		addCircleCollider(new AngleCircleCollider(0, 0, radius));
+		mRadius = radius;
 		mMass = mass;
-		mBounce = bounce; // Coefficient of restitution (1 return all the energy)  >Coeficiente de restituci�n (1 devuelve toda la energia)
+		mBounce = bounce; // Coefficient of restitution (1 return all the energy)
 	}
 
+	public void setColor(Color newColor)
+	{
+		mColor = newColor;
+	}
+	
+	public void switchColor()
+	{
+		if (mColor == Color.BLEU)
+			mColor = Color.VERT;
+		else
+			mColor = Color.BLEU;
+	}
+	
 	/**
 	 * I think this function does nothing important
 	 * @return surface
@@ -40,7 +58,7 @@ class Ball extends AnglePhysicObject
 	@Override
 	public float getSurface()
 	{
-		return 29 * 2; // Radius * 2  >Radio * 2
+		return 29 * 2; // Radius * 2
 	}
 
 	/**
@@ -52,9 +70,10 @@ class Ball extends AnglePhysicObject
 	public void draw(GL10 gl)
 	{
 		mSprite.mPosition.set(mPosition);
-		mSprite.draw(gl);
-		//Draw colliders (beware calls GC)
-		//drawColliders(gl);
+		if (mColor == Color.BLEU)
+			mSprite.draw(gl);
+		else
+			drawColliders(gl);
 	}
 	
 	

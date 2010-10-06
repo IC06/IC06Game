@@ -13,7 +13,6 @@ import android.widget.FrameLayout;
 
 import com.android.angle.AngleActivity;
 import com.android.angle.AnglePhysicObject;
-import com.android.angle.AnglePhysicsEngine;
 import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleUI;
@@ -57,51 +56,69 @@ public class MainActivity extends AngleActivity
 	private class MyDemo extends AngleUI
 	{
 		AngleSpriteLayout mBallLayout, mBoxLayout;
-		AnglePhysicsEngine mPhysics;
+		MyPhysicsEngine mPhysics;
 		Ball mBall;
+		float WIDTH, HEIGHT;
 		
 		public MyDemo(AngleActivity activity)
 		{
 			super(activity);
+			WIDTH = 320f;
+			HEIGHT = 480f;
 			mBallLayout = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ball, 0, 0, 128, 128);
 			mBoxLayout = new AngleSpriteLayout(mGLSurfaceView, 128, 32, com.android.tutorial.R.drawable.box, 0, 0, 256, 64);
-			mPhysics=new AnglePhysicsEngine(20);
+			mPhysics=new MyPhysicsEngine(20,WIDTH,HEIGHT);
 			mPhysics.mViscosity = 0f; // Air viscosity
 			addObject(mPhysics);
 			
 
 			// Add 4 segment colliders to simulate walls
 			AnglePhysicObject mWall = new AnglePhysicObject(1, 0);
-			mWall.mPosition.set(160, 479);
-			mWall.addSegmentCollider(new AngleSegmentCollider(-160, 0, 160, 0));
+			mWall.mPosition.set(0, HEIGHT);
+			mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, WIDTH, 0));
 			mWall.mBounce = 1f;
 			mPhysics.addObject(mWall); // Down wall
 			
-			mWall = new AnglePhysicObject(1, 0);
-			mWall.mPosition.set(160, 0);
-			mWall.addSegmentCollider(new AngleSegmentCollider(160, 0, -160, 0));
+			/*mWall = new AnglePhysicObject(1, 0);
+			mWall.mPosition.set(0, 0);
+			mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, WIDTH, 0));
 			mWall.mBounce = 1f;
 			mPhysics.addObject(mWall); // Up wall
 			
 			mWall = new AnglePhysicObject(1, 0);
-			mWall.mPosition.set(319, 240);
-			mWall.addSegmentCollider(new AngleSegmentCollider(0, 240, 0, -240));
+			mWall.mPosition.set(WIDTH, 0);
+			mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, 0, HEIGHT));
 			mWall.mBounce = 1f;
 			mPhysics.addObject(mWall); // Right wall
 			
 			mWall = new AnglePhysicObject(1, 0);
-			mWall.mPosition.set(0, 240);
-			mWall.addSegmentCollider(new AngleSegmentCollider(0, -240, 0, 240));
+			mWall.mPosition.set(0, 0);
+			mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, 0, HEIGHT));
 			mWall.mBounce = 1f;
-			mPhysics.addObject(mWall); // Left wall
-			
+			mPhysics.addObject(mWall); // Left wall*/
 
 			// add barre
-			Box mBox = new Box(mBoxLayout,128,32,0,1);
+			Plateforme mPlateforme = new Plateforme(mBoxLayout,100,1);
+			mPlateforme.mPosition.set(160,300);
+			mPhysics.addObject(mPlateforme);
+			
+			mPlateforme = new Plateforme(mBoxLayout,100,1);
+			mPlateforme.mPosition.set(200,250);
+			mPhysics.addObject(mPlateforme);
+			
+			mPlateforme = new Plateforme(mBoxLayout,100,1);
+			mPlateforme.mPosition.set(130,200);
+			mPhysics.addObject(mPlateforme);
+
+			mPlateforme = new Plateforme(mBoxLayout,100,1);
+			mPlateforme.mPosition.set(160,150);
+			mPhysics.addObject(mPlateforme);
+			
+			/*Box mBox = new Box(mBoxLayout,128,32,0,1);
 			mBox.mPosition.set(160,300);
 			mPhysics.addObject(mBox);
 
-			/*mBox = new Box(mBoxLayout,128,32,0,1);
+			mBox = new Box(mBoxLayout,128,32,0,1);
 			mBox.mPosition.set(50,300);
 			mPhysics.addObject(mBox);
 
@@ -111,7 +128,7 @@ public class MainActivity extends AngleActivity
 			
 
 			mBall = new Ball (mBallLayout,29,10,1);
-			mBall.mPosition.set(50,50);
+			mBall.mPosition.set(50,300);
 			mPhysics.addObject(mBall);
 			
 		}
@@ -119,11 +136,7 @@ public class MainActivity extends AngleActivity
 		@Override
 		public boolean onTouchEvent(MotionEvent event)
 		{
-			if (event.getAction()==MotionEvent.ACTION_MOVE)
-			{
-				mBall.mVelocity.mX = (event.getX()-mBall.mPosition.mX);
-				mBall.mVelocity.mY = (event.getY()-mBall.mPosition.mY);
-			}
+			mBall.mVelocity.mX = (event.getX()-WIDTH/2);
 			
 			return true;
 		}
