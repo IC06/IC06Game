@@ -76,7 +76,7 @@ public class MainActivity extends AngleActivity
 
 			// Add 4 segment colliders to simulate walls
 			AnglePhysicObject mWall = new AnglePhysicObject(1, 0);
-			mWall.mPosition.set(0, HEIGHT);
+			mWall.mPosition.set(0, HEIGHT-15);
 			mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, WIDTH, 0));
 			mWall.mBounce = 1f;
 			mPhysics.addObject(mWall); // Down wall
@@ -116,6 +116,31 @@ public class MainActivity extends AngleActivity
 			mPlateforme.mPosition.set(160,150);
 			mPhysics.addObject(mPlateforme);
 			
+			mPlateforme = new Plateforme(mBoxLayout,100,1);
+			mPlateforme.mPosition.set(300,100);
+			mPhysics.addObject(mPlateforme);
+			
+			mPlateforme = new Plateforme(mBoxLayout,100,1);
+			mPlateforme.mPosition.set(50,350);
+			mPhysics.addObject(mPlateforme);
+			
+			mPlateforme = new Plateforme(mBoxLayout,100,1);
+			mPlateforme.mPosition.set(200,340);
+			mPhysics.addObject(mPlateforme);
+			
+			mPlateforme = new Plateforme(mBoxLayout,100,1);
+			mPlateforme.mPosition.set(250,400);
+			mPhysics.addObject(mPlateforme);
+			
+			mPlateforme = new Plateforme(mBoxLayout,100,1);
+			mPlateforme.mPosition.set(200,410);
+			mPhysics.addObject(mPlateforme);
+			
+			mPlateforme = new Plateforme(mBoxLayout,100,1);
+			mPlateforme.mPosition.set(140,420);
+			mPhysics.addObject(mPlateforme);
+			
+			
 			/*Box mBox = new Box(mBoxLayout,128,32,0,1);
 			mBox.mPosition.set(160,300);
 			mPhysics.addObject(mBox);
@@ -145,7 +170,7 @@ public class MainActivity extends AngleActivity
 
 		public void setGravity(float x, float y)
 		{
-			mPhysics.mGravity.set(x,y);
+			mPhysics.mGravity.set(x,10f);
 		}
 		
 	}
