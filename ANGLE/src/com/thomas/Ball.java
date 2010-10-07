@@ -15,8 +15,8 @@ import com.android.angle.AngleSpriteLayout;
  */
 class Ball extends AnglePhysicObject
 {
-	private AngleSprite mSprite;
-	protected enum Color {BLEU, VERT};
+	private AngleSprite mSpriteB, mSpriteV, mSpriteO;
+	protected enum Color {BLEU, VERT, ORANGE};
 	protected Color mColor;
 	protected float mRadius;
 
@@ -27,11 +27,13 @@ class Ball extends AnglePhysicObject
 	 * @param mass Mass of the ball
 	 * @param bounce Coefficient of restitution(1 return all the energy)
 	 */
-	public Ball(AngleSpriteLayout layout, float radius, float mass, float bounce)
+	public Ball(AngleSpriteLayout layoutV, AngleSpriteLayout layoutB, AngleSpriteLayout layoutO, float radius, float mass, float bounce)
 	{
 		super(0, 1);
 		mColor = Color.BLEU;
-		mSprite=new AngleSprite(layout);
+		mSpriteB=new AngleSprite(layoutB);
+		mSpriteV=new AngleSprite(layoutV);
+		mSpriteO=new AngleSprite(layoutO);
 		addCircleCollider(new AngleCircleCollider(0, 0, radius));
 		mRadius = radius;
 		mMass = mass;
@@ -45,10 +47,12 @@ class Ball extends AnglePhysicObject
 	
 	public void switchColor()
 	{
-		if (mColor == Color.BLEU)
+		if (mColor == Color.ORANGE)
 			mColor = Color.VERT;
-		else
+		else if(mColor == Color.VERT)
 			mColor = Color.BLEU;
+		else
+			mColor = Color.ORANGE;
 	}
 	
 	/**
@@ -69,11 +73,16 @@ class Ball extends AnglePhysicObject
 	@Override
 	public void draw(GL10 gl)
 	{
-		mSprite.mPosition.set(mPosition);
-		if (mColor == Color.BLEU)
-			mSprite.draw(gl);
-		else
-			drawColliders(gl);
+		if (mColor == Color.BLEU) {
+			mSpriteB.mPosition.set(mPosition);
+			mSpriteB.draw(gl);
+		} else if (mColor == Color.VERT) {
+			mSpriteV.mPosition.set(mPosition);
+			mSpriteV.draw(gl);
+		} else if (mColor == Color.ORANGE) {
+			mSpriteO.mPosition.set(mPosition);
+			mSpriteO.draw(gl);
+		}
 	}
 	
 	
