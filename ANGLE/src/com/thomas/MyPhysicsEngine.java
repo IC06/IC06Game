@@ -30,8 +30,8 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	{
 		int size, posX, next, now;
 		now = (int) (Math.random() * 100);
-		next = (int) (Math.random() * (150 - 15)) + 15;
-		if(now > 60)
+		next = (int) (Math.random() * (150 - 10)) + 10;
+		if(now > 40)
 		{
 			size = (int) (Math.random() * (mWorldWidth/2 - 50)) + 50;
 			posX = (int) (Math.random() * (mWorldWidth - size)) + size / 2;
@@ -92,7 +92,13 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 						mChildO.mPosition.mX = mWorldWidth;
 						mChildO.switchColor();
 					}
-					if (mChildO.mPosition.mY < mWorldHeight/4)
+					if (mChildO.mPosition.mY < mWorldHeight/16)
+					{
+						translateAll(new AngleVector(0,4));
+					} else if (mChildO.mPosition.mY < mWorldHeight/8)
+					{
+						translateAll(new AngleVector(0,2));
+					} else if (mChildO.mPosition.mY < mWorldHeight/4)
 					{
 						translateAll(new AngleVector(0,1));
 					}
