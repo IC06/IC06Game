@@ -5,6 +5,7 @@ package com.thomas;
 
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AnglePhysicsEngine;
+import com.android.angle.AngleSurfaceView;
 import com.android.angle.AngleVector;
 
 /**
@@ -14,16 +15,39 @@ import com.android.angle.AngleVector;
 public class MyPhysicsEngine extends AnglePhysicsEngine
 {
 	float mWorldWidth, mWorldHeight;
+	AngleSurfaceView mGLSurfaceView;
+	int ToNewPlateforme = 5;
 	
-	public MyPhysicsEngine(int maxObjects, float worldWidth, float worldHeight)
+	public MyPhysicsEngine(int maxObjects, float worldWidth, float worldHeight,AngleSurfaceView SurfaceView)
 	{
 		super(maxObjects);
 		mWorldWidth = worldWidth;
 		mWorldHeight = worldHeight;
+		mGLSurfaceView = SurfaceView; 
 	}
 
+	private int randomNew()
+	{
+		int size, posX, next, now;
+		now = (int) (Math.random() * 100);
+		next = (int) (Math.random() * (150 - 15)) + 15;
+		if(now > 60)
+		{
+			size = (int) (Math.random() * (mWorldWidth/2 - 50)) + 50;
+			posX = (int) (Math.random() * (mWorldWidth - size)) + size / 2;
+			Plateforme newPlateforme = new Plateforme(mGLSurfaceView, size, 1);
+			newPlateforme.mPosition.set(posX,-1);
+			addObject(newPlateforme);
+		}
+		return next;
+	}
+	
 	private void translateAll(AngleVector t)
 	{
+		ToNewPlateforme--;
+		if(ToNewPlateforme<=0) {
+			ToNewPlateforme = randomNew();
+		}
 		for (int o = 0; o < mChildsCount; o++)
 		{
 			if (mChilds[o] instanceof AnglePhysicObject)
@@ -31,11 +55,8 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				AnglePhysicObject mChildO = (AnglePhysicObject) mChilds[o];
 				mChildO.mPosition.add(t);
 				if(mChildO.mPosition.mY > mWorldHeight) 
-				{ if (mChildO instanceof Box) {
-					mChildO.mPosition.mY = -1; 
-				} else {
+				{
 					removeObject(mChildO);
-				}
 				}
 			}
 		}
