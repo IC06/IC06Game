@@ -30,6 +30,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 			{
 				AnglePhysicObject mChildO = (AnglePhysicObject) mChilds[o];
 				mChildO.mPosition.add(t);
+				if(mChildO.mPosition.mY > mWorldHeight) { removeObject(mChildO); } 
 			}
 		}
 	}
