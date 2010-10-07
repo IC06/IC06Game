@@ -41,10 +41,10 @@ public class MainActivity extends AngleActivity
 		@Override
 		public void onSensorChanged(SensorEvent event)
 		{
-			/*if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
+			if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
 			{
 				mDemo.setGravity(-10*event.values[0],10*event.values[1]);
-			}*/
+			}
 		}
    };
 	private SensorManager mSensorManager; 	
