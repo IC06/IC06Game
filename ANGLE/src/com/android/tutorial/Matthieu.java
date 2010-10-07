@@ -47,11 +47,6 @@ public class Matthieu extends AngleActivity
 			if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
 			{
 				mDemo.setGravity(-10*event.values[0],10*event.values[1]);
-				
-				//mDemo.setTexte(Float.toString(event.values[0]));
-				
-				//Ridicule de vouloir fixer la gravité ici pour passer en emulateur car en emulateur on rentre pas dans cette fonction
-				//mDemo.setGravity(0,100);
 			}
 		}
    };
@@ -82,8 +77,6 @@ public class Matthieu extends AngleActivity
 		{
 			mSprite.mPosition.set(mPosition);
 			mSprite.draw(gl);
-			//Draw colliders (beware calls GC)
-			//>Dibujado de los lolisionadores (cuidado, llama al GC)
 			drawColliders(gl);
 		}
 		
@@ -97,15 +90,18 @@ public class Matthieu extends AngleActivity
 		public Mur(AngleSpriteLayout layout)
 		{
 			super(4, 0);
-			mSprite=new AngleSprite(layout);
-			addSegmentCollider(new AngleSegmentCollider(-40, 0, 0, -40));
-			addSegmentCollider(new AngleSegmentCollider(0, -40, 40, 0));
-			addSegmentCollider(new AngleSegmentCollider(40, 0, 0, 40));
-			addSegmentCollider(new AngleSegmentCollider(0, 40, -40, 0));
+			//mSprite=new AngleSprite(layout);
+			addSegmentCollider(new AngleSegmentCollider(-40, -5, 40, -5));
+			addSegmentCollider(new AngleSegmentCollider(40, -5, 40, 5));
+			addSegmentCollider(new AngleSegmentCollider(40, 5, -40, 5));
+			addSegmentCollider(new AngleSegmentCollider(-40, 5, -40, -5));
 			mMass = 0;
+			mVelocity.mX = 0;
+			mVelocity.mY = -8;
+			dieu = true;
 			mBounce = 0.8f; // Coefficient of restitution (1 return all the energy)  >Coeficiente de restituci�n (1 devuelve toda la energia)
 		}
-
+		
 		@Override
 		public void draw(GL10 gl)
 		{
@@ -128,11 +124,11 @@ public class Matthieu extends AngleActivity
 			super(activity);
 			mBallLayout = new AngleSpriteLayout(mGLSurfaceView, 64, 64, R.drawable.ball, 0, 0, 128, 128);
 			mPhysics=new AnglePhysicsEngine(20);
-			mPhysics.mViscosity = 0f; // Air viscosity >Viscosidad del aire
+			mPhysics.mViscosity = 0f;
 			addObject(mPhysics);
 			
 			Mur mMur = new Mur (mBallLayout);
-			mMur.mPosition.set(160, 240);
+			mMur.mPosition.set(160, 480);
 			mPhysics.addObject(mMur); // Down wall
 			
 			
@@ -168,7 +164,8 @@ public class Matthieu extends AngleActivity
 			mWall.mBounce = 1f;
 			mPhysics.addObject(mWall); // Left wall
 		}
-
+		
+		
 		@Override
 		public boolean onTouchEvent(MotionEvent event)
 		{

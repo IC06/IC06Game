@@ -4,7 +4,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 /**
  * Base physic object
- * 
+ * si l'attribue dieu est à true, alors l'objet ne subira pas les collisions
  * @author Ivan Pajuelo
  * 
  */
@@ -22,6 +22,7 @@ public class AnglePhysicObject extends AngleObject
 	public AngleVector mDelta;
 	private int mFriction;
 	public AngleVector mPosition; //Set to change the position of the sprite
+	protected boolean dieu = false; //ce segment ne subira pas les collisions si true
 
 	public AnglePhysicObject(int maxSegmentColliders, int maxCircleColliders)
 	{
@@ -109,8 +110,8 @@ public class AnglePhysicObject extends AngleObject
 	public float getSurface()
 	{
 		return 0;
-	}
-
+	}	
+	
 	public void kynetics(AnglePhysicObject other, float normal)
 	{
 		// TODO rotar el sistema +normal, hacer los c�lculos y volver a rotar
@@ -154,10 +155,14 @@ public class AnglePhysicObject extends AngleObject
 		nSin = (float) Math.sin(-normal);
 
 		// devuelve el sistema a su sitio
-		mVelocity.mX = mFinalVelX * nCos - mFinalVelY * nSin;
-		mVelocity.mY = mFinalVelY * nCos + mFinalVelX * nSin;
-		other.mVelocity.mX = oFinalVelX * nCos - oFinalVelY * nSin;
-		other.mVelocity.mY = oFinalVelY * nCos + oFinalVelX * nSin;
+		if(!dieu) {
+			mVelocity.mX = mFinalVelX * nCos - mFinalVelY * nSin;
+			mVelocity.mY = mFinalVelY * nCos + mFinalVelX * nSin;
+		}
+		if(!other.dieu) {
+			other.mVelocity.mX = oFinalVelX * nCos - oFinalVelY * nSin;
+			other.mVelocity.mY = oFinalVelY * nCos + oFinalVelX * nSin;
+		}
 	}
 
 	

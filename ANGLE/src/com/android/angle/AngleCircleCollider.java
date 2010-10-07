@@ -89,7 +89,7 @@ public class AngleCircleCollider
 			double BH2 = BC2 - CH*CH;
 
 			
-			if ((AH2 + BH2) < (L2+5))
+			if ((AH2 + BH2) < (L2+1))
 			{
 				mNormal = segmentCollider.mNormal;
 				return true;
