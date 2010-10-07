@@ -16,7 +16,6 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 {
 	float mWorldWidth, mWorldHeight;
 	AngleSurfaceView mGLSurfaceView;
-	int ToNewPlateforme = 5;
 	
 	public MyPhysicsEngine(int maxObjects, float worldWidth, float worldHeight,AngleSurfaceView SurfaceView)
 	{
@@ -26,28 +25,19 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		mGLSurfaceView = SurfaceView; 
 	}
 
-	private int randomNew()
+	private void addPlateform()
 	{
-		int size, posX, next, now;
-		now = (int) (Math.random() * 100);
-		next = (int) (Math.random() * (150 - 10)) + 10;
-		if(now > 40)
-		{
-			size = (int) (Math.random() * (mWorldWidth/2 - 50)) + 50;
-			posX = (int) (Math.random() * (mWorldWidth - size)) + size / 2;
+		// TODO : cette fonction est pas térrible pour l'instant
+		float size, posX;
+			size = (float) (Math.random() * (mWorldWidth/2 - 50)) + 50;
+			posX = (float) (Math.random() * (mWorldWidth - size)) + size / 2;
 			Plateforme newPlateforme = new Plateforme(mGLSurfaceView, size, 1);
 			newPlateforme.mPosition.set(posX,-1);
 			addObject(newPlateforme);
-		}
-		return next;
 	}
 	
 	private void translateAll(AngleVector t)
 	{
-		ToNewPlateforme--;
-		if(ToNewPlateforme<=0) {
-			ToNewPlateforme = randomNew();
-		}
 		for (int o = 0; o < mChildsCount; o++)
 		{
 			if (mChilds[o] instanceof AnglePhysicObject)
@@ -56,7 +46,9 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				mChildO.mPosition.add(t);
 				if(mChildO.mPosition.mY > mWorldHeight) 
 				{
+					// TODO : rajouter une gestion de la difficultée = de moins en moins de plateforme, tout en laissant le jeu possible
 					removeObject(mChildO);
+					addPlateform();
 				}
 			}
 		}
@@ -92,16 +84,17 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 						mChildO.mPosition.mX = mWorldWidth;
 						mChildO.switchColor();
 					}
-					if (mChildO.mPosition.mY < mWorldHeight/16)
-					{
+					
+					// TODO : meilleur gestion du défilement de l'écran, il faut enfait que la derniere plateforme touchée se retrouve en bas,
+					// donc il faut faire par rapport aux plateformes et non par rapport à la balle
+					if (mChildO.mPosition.mY < mWorldHeight/8)
+						translateAll(new AngleVector(0,64));
+					else if (mChildO.mPosition.mY < mWorldHeight/4)
+						translateAll(new AngleVector(0,16));
+					else if (mChildO.mPosition.mY < mWorldHeight/2)
 						translateAll(new AngleVector(0,4));
-					} else if (mChildO.mPosition.mY < mWorldHeight/8)
-					{
-						translateAll(new AngleVector(0,2));
-					} else if (mChildO.mPosition.mY < mWorldHeight/4)
-					{
+					else if (mChildO.mPosition.mY < mWorldHeight * 0.75)
 						translateAll(new AngleVector(0,1));
-					}
 					
 					for (int c = 0; c < mChildsCount; c++)
 					{
@@ -113,7 +106,6 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 								if (mChildO.collide(mChildC))
 								{
 									mChildO.mPosition.mX -= mChildO.mDelta.mX;
-									mChildO.mPosition.mY -= mChildO.mDelta.mY;
 									mChildO.mVelocity.mY = -3 * mChildO.mRadius * 2; // la balle rebondit toujours de la même hauteur (simule un saut)
 									mChildC.mDelta.mX = mChildC.mVelocity.mX * secondsElapsed;
 									mChildC.mDelta.mY = mChildC.mVelocity.mY * secondsElapsed;
