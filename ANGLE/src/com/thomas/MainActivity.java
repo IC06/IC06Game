@@ -69,7 +69,7 @@ public class MainActivity extends AngleActivity
 			mBallLayoutB = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ballb, 0, 0, 128, 128);
 			mBallLayoutO = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ball, 0, 0, 128, 128);
 			mBoxLayout = new AngleSpriteLayout(mGLSurfaceView, 128, 32, com.android.tutorial.R.drawable.box, 0, 0, 256, 64);
-			mPhysics=new MyPhysicsEngine(20,WIDTH,HEIGHT);
+			mPhysics=new MyPhysicsEngine(20,WIDTH,HEIGHT,mGLSurfaceView);
 			mPhysics.mViscosity = 0f; // Air viscosity
 			addObject(mPhysics);
 			
@@ -183,7 +183,7 @@ public class MainActivity extends AngleActivity
 
       mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE); 
       
-		mGLSurfaceView.addObject(new FPSCounter());
+		//mGLSurfaceView.addObject(new FPSCounter());
 
 		FrameLayout mMainLayout=new FrameLayout(this);
 		mMainLayout.addView(mGLSurfaceView);
