@@ -62,7 +62,6 @@ class Box extends AnglePhysicObject
 	{
 		mSprite.mPosition.set(mPosition);
 		//mSprite.draw(gl);
-		//Draw colliders (beware calls GC)
 		drawColliders(gl);
 	}
 	
