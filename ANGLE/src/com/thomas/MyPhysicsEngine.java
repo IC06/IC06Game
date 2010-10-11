@@ -87,14 +87,8 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					
 					// TODO : meilleur gestion du défilement de l'écran, il faut enfait que la derniere plateforme touchée se retrouve en bas,
 					// donc il faut faire par rapport aux plateformes et non par rapport à la balle
-					if (mChildO.mPosition.mY < mWorldHeight/8)
-						translateAll(new AngleVector(0,64));
-					else if (mChildO.mPosition.mY < mWorldHeight/4)
-						translateAll(new AngleVector(0,16));
-					else if (mChildO.mPosition.mY < mWorldHeight/2)
-						translateAll(new AngleVector(0,4));
-					else if (mChildO.mPosition.mY < mWorldHeight * 0.75)
-						translateAll(new AngleVector(0,1));
+					if (mChildO.mPosition.mY < mWorldHeight/2)
+						translateAll(new AngleVector(0,mWorldHeight/2 - mChildO.mPosition.mY));
 					
 					for (int c = 0; c < mChildsCount; c++)
 					{
