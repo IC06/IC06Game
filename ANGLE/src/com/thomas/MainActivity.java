@@ -152,13 +152,13 @@ public class MainActivity extends AngleActivity
 			
 		}
 
-		/*@Override
+		@Override
 		public boolean onTouchEvent(MotionEvent event)
 		{
-			//mBall.mVelocity.mX = (event.getX()-WIDTH/2);
+			mBall.mVelocity.mX = (event.getX()-WIDTH/2);
 			
 			return true;
-		}*/
+		}
 
 		public void setGravity(float x, float y)
 		{

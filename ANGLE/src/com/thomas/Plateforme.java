@@ -7,11 +7,14 @@ import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSprite;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleSurfaceView;
+import com.thomas.Ball.Color;
 
 public class Plateforme extends AnglePhysicObject
 {
 	private AngleSprite mSprite;
 	private float mWidth;
+	protected enum Color {BLEU, VERT, ORANGE, TOUTE};
+	protected Color mColor;
 
 	/**
 	 * 
@@ -28,9 +31,10 @@ public class Plateforme extends AnglePhysicObject
 		addSegmentCollider(new AngleSegmentCollider(-w, 0, w, 0)); // haut
 		mMass = 0;
 		mBounce = bounce;
+		mColor = Color.TOUTE;
 	}
 	
-	public Plateforme(AngleSurfaceView view, float width, float bounce)
+	public Plateforme(AngleSurfaceView view, float width, float bounce, int color)
 	{
 		super(1, 0); // Note : super (nb_segment, nb_circle);
 		mSprite = new AngleSprite(new AngleSpriteLayout(view, 128, 32, com.android.tutorial.R.drawable.box, 0, 0, 256, 64));
@@ -39,6 +43,14 @@ public class Plateforme extends AnglePhysicObject
 		addSegmentCollider(new AngleSegmentCollider(-w, 0, w, 0)); // haut
 		mMass = 0;
 		mBounce = bounce;
+		if(color==1)
+			mColor = Color.ORANGE;
+		else if(color==2)
+			mColor = Color.BLEU;
+		else if(color==3)
+			mColor = Color.VERT;
+		else
+			mColor = Color.TOUTE;
 	}
 
 	/**
@@ -58,7 +70,15 @@ public class Plateforme extends AnglePhysicObject
 	{
 		mSprite.mPosition.set(mPosition);
 		//mSprite.draw(gl);
-		drawColliders(gl);
+		if(mColor == Color.ORANGE)
+			drawColliders(gl,1f,0f,0f);
+		else if(mColor ==  Color.BLEU)
+			drawColliders(gl,0f,0f,1f);
+		else if(mColor == Color.VERT)
+			drawColliders(gl,0f,1f,0f);
+		else
+			drawColliders(gl,1f,1f,1f);
+		
 	}
 	
 }

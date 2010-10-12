@@ -29,9 +29,11 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	{
 		// TODO : cette fonction est pas térrible pour l'instant
 		float size, posX;
+		int couleur;
 			size = 85.f;
 			posX = (float) (Math.random() * (mWorldWidth - size)) + size / 2;
-			Plateforme newPlateforme = new Plateforme(mGLSurfaceView, size, 1);
+			couleur = (int) (Math.random() * 5);
+			Plateforme newPlateforme = new Plateforme(mGLSurfaceView, size, 1,couleur);
 			newPlateforme.mPosition.set(posX,-1);
 			addObject(newPlateforme);
 	}
