@@ -17,6 +17,9 @@ import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleUI;
 
+// Pour voir si le jeu est bien fluide (à commenté dans la version finale) 
+import com.android.angle.FPSCounter;
+
 /**
  * Use some pseudo-physic
  * 
@@ -171,7 +174,8 @@ public class MainActivity extends AngleActivity
 
       mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE); 
       
-		//mGLSurfaceView.addObject(new FPSCounter());
+        // a commenté dans la version finale (pour voir la fluidité du jeu)      
+		mGLSurfaceView.addObject(new FPSCounter());
 
 		FrameLayout mMainLayout=new FrameLayout(this);
 		mMainLayout.addView(mGLSurfaceView);
