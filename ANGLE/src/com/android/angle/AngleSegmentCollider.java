@@ -32,7 +32,7 @@ public class AngleSegmentCollider
 		calculate();
 	}
 
-	public void draw(GL10 gl)
+	public void draw(GL10 gl,float R,float V, float B)
 	{
 		FloatBuffer vertices;
 		vertices = ByteBuffer.allocateDirect(2 * 2 * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
@@ -42,7 +42,7 @@ public class AngleSegmentCollider
 
 		gl.glPushMatrix();
 		gl.glLoadIdentity();
-		gl.glColor4f(1f, 0f, 0f, 1f);
+		gl.glColor4f(R, V, B, 1f);
 		gl.glTranslatef(mObject.mPosition.mX, mObject.mPosition.mY, 0.0f);
 		vertices.clear();
 		int count = 0;

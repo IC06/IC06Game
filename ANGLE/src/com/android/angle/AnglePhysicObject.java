@@ -169,9 +169,17 @@ public class AnglePhysicObject extends AngleObject
 	public void drawColliders(GL10 gl)
 	{
 		for (int mc = 0; mc < mCircleCollidersCount; mc++)
-			mCircleColliders[mc].draw(gl);
+			mCircleColliders[mc].draw(gl,0f,1f,0f);
 		for (int mc = 0; mc < mSegmentCollidersCount; mc++)
-			mSegmentColliders[mc].draw(gl);
+			mSegmentColliders[mc].draw(gl,1f,0f,0f);
+	}
+	
+	public void drawColliders(GL10 gl, float R, float V, float B)
+	{
+		for (int mc = 0; mc < mCircleCollidersCount; mc++)
+			mCircleColliders[mc].draw(gl,R,V,B);
+		for (int mc = 0; mc < mSegmentCollidersCount; mc++)
+			mSegmentColliders[mc].draw(gl,R,V,B);
 	}
 
 }

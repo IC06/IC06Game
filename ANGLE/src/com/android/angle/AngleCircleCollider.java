@@ -164,7 +164,7 @@ public class AngleCircleCollider
 		}
 	}
 
-	protected void draw(GL10 gl)
+	protected void draw(GL10 gl,float R,float V, float B)
 	{
 		final int segments = 20;
 
@@ -173,7 +173,7 @@ public class AngleCircleCollider
 
 		gl.glPushMatrix();
 		gl.glLoadIdentity();
-		gl.glColor4f(0f, 1f, 0f, 1f);
+		gl.glColor4f(R, V, B, 1f);
 		gl.glTranslatef(mObject.mPosition.mX + mCenter.mX, mObject.mPosition.mY + mCenter.mY, 0.0f);
 		FloatBuffer vertices;
 		vertices = ByteBuffer.allocateDirect(segments * 2 * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
