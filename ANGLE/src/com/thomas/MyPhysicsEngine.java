@@ -16,6 +16,7 @@ import com.thomas.Ball.Color;
 public class MyPhysicsEngine extends AnglePhysicsEngine
 {
 	float mWorldWidth, mWorldHeight;
+	int toNewPlateform=10;
 	AngleSurfaceView mGLSurfaceView;
 	
 	public MyPhysicsEngine(int maxObjects, float worldWidth, float worldHeight,AngleSurfaceView SurfaceView)
@@ -26,21 +27,26 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		mGLSurfaceView = SurfaceView; 
 	}
 
-	private void addPlateform()
+	private void addPlateform(float decalage)
 	{
 		// TODO : cette fonction est pas térrible pour l'instant
 		float size, posX;
 		int couleur;
-			size = 85.f;
+		size = 85.f;
+		toNewPlateform-=(int)decalage;
+		if(toNewPlateform<0) {
+		    toNewPlateform = (int) (Math.random() * (100-25) + 25);
 			posX = (float) (Math.random() * (mWorldWidth - size)) + size / 2;
 			couleur = (int) (Math.random() * 5);
 			Plateforme newPlateforme = new Plateforme(mGLSurfaceView, size, 1,couleur);
 			newPlateforme.mPosition.set(posX,-1);
 			addObject(newPlateforme);
+		}
 	}
 	
 	private void translateAll(AngleVector t)
 	{
+		addPlateform(t.mY);
 		for (int o = 0; o < mChildsCount; o++)
 		{
 			if (mChilds[o] instanceof AnglePhysicObject)
@@ -49,9 +55,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				mChildO.mPosition.add(t);
 				if(mChildO.mPosition.mY > mWorldHeight) 
 				{
-					// TODO : rajouter une gestion de la difficultée = de moins en moins de plateforme, tout en laissant le jeu possible
 					removeObject(mChildO);
-					addPlateform();
 				}
 			}
 		}
