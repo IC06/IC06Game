@@ -48,7 +48,7 @@ public class MainActivity extends AngleActivity
 			{
 				//mBall.mVelocity.mX = (10*event.values[0]-WIDTH/2);
 				//mDemo.setGravity(-10*event.values[0],10*event.values[1]);
-				mDemo.setGravity(-10*event.values[0],10);
+				mDemo.setGravity(-1*event.values[0],5);
 			}
 		}
    };
@@ -185,7 +185,7 @@ public class MainActivity extends AngleActivity
 		mDemo=new MyDemo(this);
 		setUI(mDemo);
 		
-		mDemo.setGravity(0f,10f);
+		mDemo.setGravity(0f,5f);
 	}
 
 
