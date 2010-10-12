@@ -13,7 +13,6 @@ public class Plateforme extends AnglePhysicObject
 {
 	private AngleSprite mSprite;
 	private float mWidth;
-	protected enum Color {BLEU, VERT, ORANGE, TOUTE};
 	protected Color mColor;
 
 	/**

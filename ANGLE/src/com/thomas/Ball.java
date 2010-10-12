@@ -17,7 +17,7 @@ class Ball extends AnglePhysicObject
 {
 	private AngleSprite mSprite;
 	private AngleSpriteLayout mTextureB, mTextureV, mTextureO;
-	protected enum Color {BLEU, VERT, ORANGE};
+	protected enum Color {BLEU, VERT, ORANGE, TOUTE};
 	protected Color mColor;
 	protected float mRadius;
 
