@@ -46,8 +46,9 @@ public class MainActivity extends AngleActivity
 		{
 			if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
 			{
-				mBall.mVelocity.mX = (10*event.values[0]-WIDTH/2);
-				// mDemo.setGravity(-10*event.values[0],10*event.values[1]);
+				//mBall.mVelocity.mX = (10*event.values[0]-WIDTH/2);
+				//mDemo.setGravity(-10*event.values[0],10*event.values[1]);
+				mDemo.setGravity(-10*event.values[0],10);
 			}
 		}
    };
@@ -72,7 +73,7 @@ public class MainActivity extends AngleActivity
 			mBallLayoutV = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ballv, 0, 0, 128, 128);
 			mBallLayoutO = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ball, 0, 0, 128, 128);			
 			mBoxLayout = new AngleSpriteLayout(mGLSurfaceView, 128, 32, com.android.tutorial.R.drawable.box, 0, 0, 256, 64);
-			mPhysics=new MyPhysicsEngine(20,WIDTH,HEIGHT,mGLSurfaceView);
+			mPhysics=new MyPhysicsEngine(40,WIDTH,HEIGHT,mGLSurfaceView);
 			mPhysics.mViscosity = 0f; // Air viscosity
 			addObject(mPhysics);
 			
@@ -151,13 +152,13 @@ public class MainActivity extends AngleActivity
 			
 		}
 
-		@Override
+		/*@Override
 		public boolean onTouchEvent(MotionEvent event)
 		{
-			mBall.mVelocity.mX = (event.getX()-WIDTH/2);
+			//mBall.mVelocity.mX = (event.getX()-WIDTH/2);
 			
 			return true;
-		}
+		}*/
 
 		public void setGravity(float x, float y)
 		{
