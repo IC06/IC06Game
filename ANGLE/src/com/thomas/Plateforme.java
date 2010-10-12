@@ -27,7 +27,8 @@ public class Plateforme extends AnglePhysicObject
 		mSprite=new AngleSprite(layout);
 		mWidth = width;
 		float w = width/2;
-		addSegmentCollider(new AngleSegmentCollider(-w, 0, w, 0)); // haut
+		addSegmentCollider(new PlateformeCollider(-w,w, 0)); // haut
+		//addSegmentCollider(new AngleSegmentCollider(-w, 0, w, 0)); // haut
 		mMass = 0;
 		mBounce = bounce;
 		mColor = Color.TOUTE;

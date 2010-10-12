@@ -24,6 +24,15 @@ public class AngleSegmentCollider
 	protected float mNormal;
 	private float mLength;
 
+	/*
+	 * Constructeur par defaut vide
+	 * @author Thomas
+	 */
+	public AngleSegmentCollider()
+	{
+	}
+	
+	
 	public AngleSegmentCollider(float x1, float y1, float x2, float y2)
 	{
 		mA = new AngleVector(x1, y1);
