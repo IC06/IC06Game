@@ -149,7 +149,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									}
 								}
 							}
-							else if (!(mChilds[c] instanceof Plateforme) && mChilds[c] instanceof AnglePhysicObject)
+							/*else if (!(mChilds[c] instanceof Plateforme) && mChilds[c] instanceof AnglePhysicObject)
 							{
 								AnglePhysicObject mChildC = (AnglePhysicObject) mChilds[c];
 								if (mChildO.collide(mChildC))
@@ -160,7 +160,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									mChildC.mDelta.mY = mChildC.mVelocity.mY * secondsElapsed;
 									break;
 								}
-							}
+							}*/
 						}
 					}
 				}
