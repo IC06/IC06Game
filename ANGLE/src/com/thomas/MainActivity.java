@@ -59,7 +59,7 @@ public class MainActivity extends AngleActivity
 	
 	private class MyDemo extends AngleUI
 	{
-		AngleSpriteLayout mBallLayoutV, mBallLayoutB, mBallLayoutO, mBoxLayout;
+		AngleSpriteLayout mBallLayoutB, mBallLayoutV, mBallLayoutO, mBoxLayout;
 		MyPhysicsEngine mPhysics;
 		
 		public MyDemo(AngleActivity activity)
@@ -68,9 +68,9 @@ public class MainActivity extends AngleActivity
 			WIDTH = 320f;
 			HEIGHT = 480f;
 			//TODO : réduire taille de la balle
-			mBallLayoutV = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ballv, 0, 0, 128, 128);
 			mBallLayoutB = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ballb, 0, 0, 128, 128);
-			mBallLayoutO = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ball, 0, 0, 128, 128);
+			mBallLayoutV = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ballv, 0, 0, 128, 128);
+			mBallLayoutO = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ball, 0, 0, 128, 128);			
 			mBoxLayout = new AngleSpriteLayout(mGLSurfaceView, 128, 32, com.android.tutorial.R.drawable.box, 0, 0, 256, 64);
 			mPhysics=new MyPhysicsEngine(20,WIDTH,HEIGHT,mGLSurfaceView);
 			mPhysics.mViscosity = 0f; // Air viscosity
@@ -145,7 +145,7 @@ public class MainActivity extends AngleActivity
 			
 			
 
-			mBall = new Ball (mBallLayoutV,mBallLayoutB,mBallLayoutO,29,10,1);
+			mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutO,29,10,1);
 			mBall.mPosition.set(50,300);
 			mPhysics.addObject(mBall);
 			
