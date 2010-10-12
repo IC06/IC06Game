@@ -46,9 +46,9 @@ public class MainActivity extends AngleActivity
 		{
 			if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
 			{
-				//mBall.mVelocity.mX = (10*event.values[0]-WIDTH/2);
+				mBall.mVelocity.mX = (-100*event.values[0]);
 				//mDemo.setGravity(-10*event.values[0],10*event.values[1]);
-				mDemo.setGravity(-1*event.values[0],5);
+				//mDemo.setGravity(-4*event.values[0],10);
 			}
 		}
    };
@@ -159,6 +159,7 @@ public class MainActivity extends AngleActivity
 			
 			return true;
 		}
+		
 
 		public void setGravity(float x, float y)
 		{
@@ -185,7 +186,7 @@ public class MainActivity extends AngleActivity
 		mDemo=new MyDemo(this);
 		setUI(mDemo);
 		
-		mDemo.setGravity(0f,5f);
+		mDemo.setGravity(0f,10f);
 	}
 
 
