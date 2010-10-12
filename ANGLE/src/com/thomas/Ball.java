@@ -89,8 +89,7 @@ class Ball extends AnglePhysicObject
 	@Override
 	public void delete()
 	{
-		for (int t=0;t<mChildsCount;t++)
-			mChilds[t].delete();
+		super.delete();
 		// TODO GAME OVER !!!
 	}
 	
