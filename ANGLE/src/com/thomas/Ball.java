@@ -40,6 +40,7 @@ class Ball extends AnglePhysicObject
 		mRadius = radius;
 		mMass = mass;
 		mBounce = bounce; // Coefficient of restitution (1 return all the energy)
+		mVelocity.mY = -5;
 	}
 
 	public void setColor(Color newColor)
@@ -83,6 +84,7 @@ class Ball extends AnglePhysicObject
 	{
 			mSprite.mPosition.set(mPosition);
 			mSprite.draw(gl);
+			drawColliders(gl);
 	}
 	
 
