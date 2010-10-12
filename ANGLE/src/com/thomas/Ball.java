@@ -85,5 +85,14 @@ class Ball extends AnglePhysicObject
 			mSprite.draw(gl);
 	}
 	
+
+	@Override
+	public void delete()
+	{
+		for (int t=0;t<mChildsCount;t++)
+			mChilds[t].delete();
+		// TODO GAME OVER !!!
+	}
+	
 	
 };
