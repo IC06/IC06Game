@@ -84,7 +84,7 @@ class Ball extends AnglePhysicObject
 	{
 			mSprite.mPosition.set(mPosition);
 			mSprite.draw(gl);
-			drawColliders(gl);
+			//drawColliders(gl);
 	}
 	
 
