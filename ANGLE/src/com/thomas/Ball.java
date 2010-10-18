@@ -82,7 +82,7 @@ class Ball extends AnglePhysicObject
 	
 	public Color getColor()
 	{
-		return mColors[1];
+		return mColors[0];
 	}
 	
 	/**
