@@ -2,7 +2,6 @@ package com.thomas;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import com.android.angle.AngleCircleCollider;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSprite;
 import com.android.angle.AngleSpriteLayout;
@@ -16,9 +15,9 @@ import com.android.angle.AngleSpriteLayout;
 class Ball extends AnglePhysicObject
 {
 	private AngleSprite mSprite;
-	private AngleSpriteLayout mTextureB, mTextureV, mTextureO;
-	protected enum Color {BLEU, VERT, ORANGE, TOUTE};
-	protected Color mColor;
+	private AngleSpriteLayout mTextureB, mTextureV, mTextureR;
+	protected enum Color {BLEU, VERT, ROUGE, TOUTE};
+	private Color mColors[];
 	protected float mRadius;
 
 	/**
@@ -28,40 +27,62 @@ class Ball extends AnglePhysicObject
 	 * @param mass Mass of the ball
 	 * @param bounce Coefficient of restitution(1 return all the energy)
 	 */
-	public Ball(AngleSpriteLayout textureB, AngleSpriteLayout textureV, AngleSpriteLayout textureO, float radius, float mass, float bounce)
+	public Ball(AngleSpriteLayout textureB, AngleSpriteLayout textureV, AngleSpriteLayout textureR, float radius, float mass, float bounce)
 	{
 		super(0, 1);
-		mColor = Color.ORANGE;
-		mSprite=new AngleSprite(textureO);
+		mColors = new Color[3];
+		mColors[0] = Color.ROUGE;
+		mColors[1] = Color.BLEU;
+		mColors[2] = Color.VERT;
+		mSprite=new AngleSprite(textureR);
 		mTextureB=textureB;
 		mTextureV=textureV;
-		mTextureO=textureO;
-		addCircleCollider(new AngleCircleCollider(0, 0, radius));
+		mTextureR=textureR;
+		addCircleCollider(new BallCollider(0, 0, radius));
 		mRadius = radius;
 		mMass = mass;
 		mBounce = bounce; // Coefficient of restitution (1 return all the energy)
 		mVelocity.mY = -5;
 	}
 
-	public void setColor(Color newColor)
+	/**
+	 * si on change de couleur en passant à travers le bord gauche de l'écran
+	 * @author thomas
+	 */
+	public void changeColorLeft()
 	{
-		mColor = newColor;
-		if (newColor == Color.ORANGE)
-			mSprite.setLayout(mTextureO);
-		else if(mColor == Color.VERT)
+		Color temp = mColors[0];
+		mColors[0] = mColors[2];
+		mColors[2] = mColors[1];
+		mColors[1] = temp;
+		setColor(mColors[1]);
+	}
+	/**
+	 * si on change de couleur en passant à travers le bord droit de l'écran
+	 * @author thomas
+	 */
+	public void changeColorRight()
+	{
+		Color temp = mColors[0];
+		mColors[0] = mColors[1];
+		mColors[1] = mColors[2];
+		mColors[2] = temp;
+		setColor(mColors[1]);
+	}
+	
+	private void setColor(Color newColor)
+	{
+		if (newColor == Color.ROUGE)
+			mSprite.setLayout(mTextureR);
+		else if(newColor == Color.VERT)
 			mSprite.setLayout(mTextureV);
 		else
 			mSprite.setLayout(mTextureB);
 	}
 	
-	public void switchColor()
+	public Color getColor()
 	{
-		if (mColor == Color.ORANGE)
-			setColor(Color.VERT);
-		else if(mColor == Color.VERT)
-			setColor(Color.BLEU);
-		else
-			setColor(Color.ORANGE);
+		return mColors[1];
 	}
 	
 	/**
@@ -71,7 +92,7 @@ class Ball extends AnglePhysicObject
 	@Override
 	public float getSurface()
 	{
-		return 29 * 2; // Radius * 2
+		return (float) (mRadius * 2 * 3.14);
 	}
 
 	/**
