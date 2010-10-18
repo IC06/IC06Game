@@ -93,4 +93,18 @@ public class AngleSegmentCollider
 		
 	}
 	
+	public AngleVector getmA()
+	{
+		return mA;
+	}
+
+	public AngleVector getmB()
+	{
+		return mB;
+	}
+	
+	public AnglePhysicObject getmObject()
+	{
+		return mObject;
+	}
 }
