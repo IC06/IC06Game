@@ -60,7 +60,7 @@ public class MainActivity extends AngleActivity
 	
 	private class MyDemo extends AngleUI
 	{
-		AngleSpriteLayout mBallLayoutB, mBallLayoutV, mBallLayoutO, mBoxLayout;
+		AngleSpriteLayout mBallLayoutB, mBallLayoutV, mBallLayoutO, mBoxLayout, mBackGroundLayout;
 		MyPhysicsEngine mPhysics;
 		
 		public MyDemo(AngleActivity activity)
@@ -69,14 +69,24 @@ public class MainActivity extends AngleActivity
 			WIDTH = 320f;
 			HEIGHT = 480f;
 			//TODO : réduire taille de la balle
-			mBallLayoutB = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ballb, 0, 0, 128, 128);
-			mBallLayoutV = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ballv, 0, 0, 128, 128);
-			mBallLayoutO = new AngleSpriteLayout(mGLSurfaceView, 64, 64, com.android.tutorial.R.drawable.ball, 0, 0, 128, 128);			
+			mBallLayoutB = new AngleSpriteLayout(mGLSurfaceView, 32, 32, com.android.tutorial.R.drawable.ballb, 0, 0, 128, 128);
+			mBallLayoutV = new AngleSpriteLayout(mGLSurfaceView, 32, 32, com.android.tutorial.R.drawable.ballv, 0, 0, 128, 128);
+			mBallLayoutO = new AngleSpriteLayout(mGLSurfaceView, 32, 32, com.android.tutorial.R.drawable.ball, 0, 0, 128, 128);
+			mBackGroundLayout =new AngleSpriteLayout(mGLSurfaceView,com.android.tutorial.R.drawable.fondo);
 			mBoxLayout = new AngleSpriteLayout(mGLSurfaceView, 128, 32, com.android.tutorial.R.drawable.box, 0, 0, 256, 64);
+			
+			// on ajoute le background en premier à MyDemo pour qu'il soit dessiné en premier
+			Background mBackGround = new Background(mBackGroundLayout);
+			addObject(mBackGround);
+			
+			// on ajoute la balle au moteur en premier pour qu'il la dessine en dernier, voir la fonction draw surchargé de MyPhysicEngine
 			mPhysics=new MyPhysicsEngine(40,WIDTH,HEIGHT,mGLSurfaceView);
 			mPhysics.mViscosity = 0f; // Air viscosity
 			addObject(mPhysics);
-			
+
+			mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutO,20,20,1);
+			mBall.mPosition.set(50,300);
+			mPhysics.addObject(mBall);
 
 			// Add 4 segment colliders to simulate walls
 			AnglePhysicObject mWall = new AnglePhysicObject(1, 0);
@@ -145,10 +155,6 @@ public class MainActivity extends AngleActivity
 			mPhysics.addObject(mPlateforme);
 			
 			
-
-			mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutO,29,10,1);
-			mBall.mPosition.set(50,300);
-			mPhysics.addObject(mBall);
 			
 		}
 

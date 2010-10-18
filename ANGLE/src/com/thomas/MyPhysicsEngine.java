@@ -3,6 +3,8 @@
  */
 package com.thomas;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AnglePhysicsEngine;
 import com.android.angle.AngleSurfaceView;
@@ -10,6 +12,7 @@ import com.android.angle.AngleVector;
 import com.thomas.Ball.Color;
 
 /**
+ * L'objet ajouté en premier à cet objet sera dessiné en dernier
  * @author thomas
  *
  */
@@ -121,12 +124,12 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					if (mChildO.mPosition.mX > mWorldWidth)
 					{
 						mChildO.mPosition.mX = 0;
-						mChildO.switchColor();
+						mChildO.changeColorLeft();
 					}
 					else if  (mChildO.mPosition.mX < 0)
 					{
 						mChildO.mPosition.mX = mWorldWidth;
-						mChildO.switchColor();
+						mChildO.changeColorRight();
 					}
 					
 					// TODO : meilleur gestion du défilement de l'écran, il faut enfait que la derniere plateforme touchée se retrouve en bas,
@@ -138,15 +141,16 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					{
 						if (c != o)
 						{
-							if (mChilds[c] instanceof Plateforme && mChildO.mVelocity.mY > 0) // l'objet est de type plateforme
+							if (mChilds[c] instanceof Plateforme // l'objet est de type plateforme
+									&& mChildO.mVelocity.mY > 0)  // et il est entrain de monter
 							{
 								Plateforme mChildC = (Plateforme) mChilds[c];
-								if(mChildC.mColor == mChildO.mColor || mChildC.mColor == Color.TOUTE)
+								if(mChildC.mColor == mChildO.getColor() || mChildC.mColor == Color.TOUTE) // si l'objet est de la même couleure
 								{
 									if (mChildO.collide(mChildC))
 									{
 										mChildO.mPosition.mX -= mChildO.mDelta.mX;
-										mChildO.mVelocity.mY = -3 * mChildO.mRadius * 2; // la balle rebondit toujours de la même hauteur (simule un saut)
+										mChildO.mVelocity.mY = - 15 * mChildO.mRadius; // la balle rebondit toujours de la même hauteur (simule un saut)
 										mChildC.mDelta.mX = mChildC.mVelocity.mX * secondsElapsed;
 										mChildC.mDelta.mY = mChildC.mVelocity.mY * secondsElapsed;
 										break;
@@ -177,4 +181,16 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	{
 		super.step(secondsElapsed);
 	}
+
+	/**
+	 * @author thomas
+	 */
+	@Override
+	public void draw(GL10 gl)
+	{
+		for (int t=1;t<mChildsCount;t++)
+			mChilds[t].draw(gl);
+		mChilds[0].draw(gl); // balle dessiné en dernier
+	}
+	
 }
