@@ -44,7 +44,7 @@ public class Plateforme extends AnglePhysicObject
 		mMass = 0;
 		mBounce = bounce;
 		if(color==1)
-			mColor = Color.ORANGE;
+			mColor = Color.ROUGE;
 		else if(color==2)
 			mColor = Color.BLEU;
 		else if(color==3)
@@ -70,7 +70,7 @@ public class Plateforme extends AnglePhysicObject
 	{
 		mSprite.mPosition.set(mPosition);
 		//mSprite.draw(gl);
-		if(mColor == Color.ORANGE)
+		if(mColor == Color.ROUGE)
 			drawColliders(gl,1f,0f,0f);
 		else if(mColor ==  Color.BLEU)
 			drawColliders(gl,0f,0f,1f);
