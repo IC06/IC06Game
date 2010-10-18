@@ -2,7 +2,6 @@ package com.thomas;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import com.android.angle.AngleCircleCollider;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSprite;
