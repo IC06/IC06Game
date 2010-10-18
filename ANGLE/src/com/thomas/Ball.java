@@ -31,8 +31,8 @@ class Ball extends AnglePhysicObject
 	{
 		super(0, 1);
 		mColors = new Color[3];
-		mColors[0] = Color.ROUGE;
-		mColors[1] = Color.BLEU;
+		mColors[0] = Color.BLEU;
+		mColors[1] = Color.ROUGE;
 		mColors[2] = Color.VERT;
 		mSprite=new AngleSprite(textureR);
 		mTextureB=textureB;
@@ -82,7 +82,7 @@ class Ball extends AnglePhysicObject
 	
 	public Color getColor()
 	{
-		return mColors[0];
+		return mColors[1];
 	}
 	
 	/**
