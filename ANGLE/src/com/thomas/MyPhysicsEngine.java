@@ -124,12 +124,12 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					if (mChildO.mPosition.mX > mWorldWidth)
 					{
 						mChildO.mPosition.mX = 0;
-						mChildO.changeColorLeft();
+						mChildO.changeColorRight();
 					}
 					else if  (mChildO.mPosition.mX < 0)
 					{
 						mChildO.mPosition.mX = mWorldWidth;
-						mChildO.changeColorRight();
+						mChildO.changeColorLeft();
 					}
 					
 					// TODO : meilleur gestion du défilement de l'écran, il faut enfait que la derniere plateforme touchée se retrouve en bas,
