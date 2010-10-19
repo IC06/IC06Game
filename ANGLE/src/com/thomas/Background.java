@@ -8,22 +8,12 @@ import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleVector;
 
 /** 
-* @author Ivan Pajuelo
+* @author thomas
 */
 public class Background extends AngleObject
 {
 	public AngleSprite mGround;
 
-	//STEP 28:
-	//This object should be simple and contain only the smileys,
-	//but I have a little more complicated to show the versatility of the engine
-	//In the constructor, we say that may contain up to 100 children.
-	//The chid 0, will always be the bottom. So we fit 99 smileys
-	//>PASO 28:
-	//>Este objeto deber�a ser m�s simple y contener �nicamente los smileys,
-	//>pero lo he complicado un poco m�s para mostrar la versatilidad del motor
-	//>Para empezar, en el constructor, le decimos que podr� contener hasta 100 hijos.
-	//>El hijo 0, siempre ser� el fondo. As� que nos caben 99 smileys
 	public Background(AngleSpriteLayout layout)
 	{
 		super(1);
