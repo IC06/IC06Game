@@ -69,10 +69,11 @@ public class MainActivity extends AngleActivity
 			WIDTH = 320f;
 			HEIGHT = 480f;
 			//TODO : réduire taille de la balle
-			mBallLayoutB = new AngleSpriteLayout(mGLSurfaceView, 32, 32, com.android.tutorial.R.drawable.ballb, 0, 0, 128, 128);
-			mBallLayoutV = new AngleSpriteLayout(mGLSurfaceView, 32, 32, com.android.tutorial.R.drawable.ballv, 0, 0, 128, 128);
-			mBallLayoutO = new AngleSpriteLayout(mGLSurfaceView, 32, 32, com.android.tutorial.R.drawable.ball, 0, 0, 128, 128);
-			mBackGroundLayout =new AngleSpriteLayout(mGLSurfaceView,com.android.tutorial.R.drawable.fondo);
+			int d = 64;
+			mBallLayoutB = new AngleSpriteLayout(mGLSurfaceView, d, d, com.android.tutorial.R.drawable.ballb, 0, 0, 128, 128);
+			mBallLayoutV = new AngleSpriteLayout(mGLSurfaceView, d, d, com.android.tutorial.R.drawable.ballv, 0, 0, 128, 128);
+			mBallLayoutO = new AngleSpriteLayout(mGLSurfaceView, d, d, com.android.tutorial.R.drawable.ball, 0, 0, 128, 128);
+			mBackGroundLayout =new AngleSpriteLayout(mGLSurfaceView,320,480,com.android.tutorial.R.drawable.fondo,0,0,320,480);
 			mBoxLayout = new AngleSpriteLayout(mGLSurfaceView, 128, 32, com.android.tutorial.R.drawable.box, 0, 0, 256, 64);
 			
 			// on ajoute le background en premier à MyDemo pour qu'il soit dessiné en premier
@@ -80,11 +81,11 @@ public class MainActivity extends AngleActivity
 			addObject(mBackGround);
 			
 			// on ajoute la balle au moteur en premier pour qu'il la dessine en dernier, voir la fonction draw surchargé de MyPhysicEngine
-			mPhysics=new MyPhysicsEngine(40,WIDTH,HEIGHT,mGLSurfaceView);
+			mPhysics=new MyPhysicsEngine(20,WIDTH,HEIGHT,mGLSurfaceView);
 			mPhysics.mViscosity = 0f; // Air viscosity
 			addObject(mPhysics);
 
-			mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutO,20,20,1);
+			mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutO,32,20,1);
 			mBall.mPosition.set(50,300);
 			mPhysics.addObject(mBall);
 

@@ -145,12 +145,12 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									&& mChildO.mVelocity.mY > 0)  // et il est entrain de monter
 							{
 								Plateforme mChildC = (Plateforme) mChilds[c];
-								if(mChildC.mColor == mChildO.getColor() || mChildC.mColor == Color.TOUTE) // si l'objet est de la même couleure
+								if(mChildC.mColor == Color.TOUTE || mChildC.mColor == mChildO.getColor()) // si l'objet est de la même couleure
 								{
 									if (mChildO.collide(mChildC))
 									{
 										mChildO.mPosition.mX -= mChildO.mDelta.mX;
-										mChildO.mVelocity.mY = - 15 * mChildO.mRadius; // la balle rebondit toujours de la même hauteur (simule un saut)
+										mChildO.mVelocity.mY = - 8 * mChildO.mRadius; // la balle rebondit toujours de la même hauteur (simule un saut)
 										mChildC.mDelta.mX = mChildC.mVelocity.mX * secondsElapsed;
 										mChildC.mDelta.mY = mChildC.mVelocity.mY * secondsElapsed;
 										break;
