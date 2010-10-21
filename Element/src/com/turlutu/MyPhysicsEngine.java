@@ -19,13 +19,16 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	float mWorldWidth, mWorldHeight;
 	int toNewPlateform=10;
 	AngleSurfaceView mGLSurfaceView;
+	GameUI mGameUI;
+	int mCounterScore;
 	
-	public MyPhysicsEngine(int maxObjects, float worldWidth, float worldHeight,AngleSurfaceView SurfaceView)
+	public MyPhysicsEngine(int maxObjects, float worldWidth, float worldHeight,AngleSurfaceView SurfaceView, GameUI gameUI)
 	{
 		super(maxObjects);
 		mWorldWidth = worldWidth;
 		mWorldHeight = worldHeight;
-		mGLSurfaceView = SurfaceView; 
+		mGLSurfaceView = SurfaceView;
+		mGameUI = gameUI;
 	}
 
 	private void addPlateform(float decalage)
@@ -44,6 +47,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 			addObject(newPlateforme);
 		}
 	}
+	
 	
 	private void translateAll(AngleVector t)
 	{
@@ -71,35 +75,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 			if (mChilds[o] instanceof Ball)
 			{
 				Ball mChildO = (Ball) mChilds[o];
-				// Gravity
-				//mChildO.mVelocity.mX += mChildO.mMass * mGravity.mX * secondsElapsed;
-				mChildO.mVelocity.mY += mChildO.mMass * mGravity.mY * secondsElapsed;
-				/*if ((mChildO.mVelocity.mX != 0) || (mChildO.mVelocity.mY != 0))
-				{
-					// Air viscosity
-					if (mViscosity > 0)
-					{
-						float surface = mChildO.getSurface();
-						if (surface > 0)
-						{
-							float decay = surface * mViscosity * secondsElapsed;
-							if (mChildO.mVelocity.mX > decay)
-								mChildO.mVelocity.mX -= decay;
-							else if (mChildO.mVelocity.mX < -decay)
-								mChildO.mVelocity.mX += decay;
-							else
-								mChildO.mVelocity.mX = 0;
-							if (mChildO.mVelocity.mY > decay)
-								mChildO.mVelocity.mY -= decay;
-							else if (mChildO.mVelocity.mY < -decay)
-								mChildO.mVelocity.mY += decay;
-							else
-								mChildO.mVelocity.mY = 0;
-						}
-					}
-				}*/
-				// Velocity
-				mChildO.mDelta.mX = mChildO.mVelocity.mX * secondsElapsed;
+				mChildO.mVelocity.mY += mChildO.mMass * mGravity.mY * secondsElapsed;mChildO.mDelta.mX = mChildO.mVelocity.mX * secondsElapsed;
 				mChildO.mDelta.mY = mChildO.mVelocity.mY * secondsElapsed;
 			}
 		}
@@ -114,9 +90,17 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 			if (mChilds[o] instanceof Ball)
 			{
 				Ball mChildO = (Ball) mChilds[o];
+				
+				// perdu
+				if (mChildO.mPosition.mY > mWorldHeight)
+				{
+					mChildO.delete();
+					return;
+				}
+				
 				if ((mChildO.mDelta.mX != 0) || (mChildO.mDelta.mY != 0))
 				{
-					// Collision
+					// Changement d'état
 					mChildO.mPosition.mX += mChildO.mDelta.mX;
 					mChildO.mPosition.mY += mChildO.mDelta.mY;
 					if (mChildO.mPosition.mX > mWorldWidth)
@@ -130,11 +114,23 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 						mChildO.changeColorLeft();
 					}
 					
-					// TODO : meilleur gestion du défilement de l'écran, il faut enfait que la derniere plateforme touchée se retrouve en bas,
-					// donc il faut faire par rapport aux plateformes et non par rapport à la balle
+					// translation
 					if (mChildO.mPosition.mY < mWorldHeight/2)
+					{
+						mCounterScore += 1;
 						translateAll(new AngleVector(0,mWorldHeight/2 - mChildO.mPosition.mY));
+					}
+					// score
+					if (mChildO.mVelocity.mY < 0) // la balle descend
+					{
+						if (mCounterScore != 0)
+						{
+							mGameUI.upScore(mCounterScore);
+							mCounterScore = 0;
+						}
+					}
 					
+					// collisions
 					for (int c = 0; c < mChildsCount; c++)
 					{
 						if (c != o)

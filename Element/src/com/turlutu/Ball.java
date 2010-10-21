@@ -19,7 +19,8 @@ class Ball extends AnglePhysicObject
 	protected enum Color {BLEU, VERT, ROUGE, TOUTE};
 	private Color mColors[];
 	protected float mRadius;
-
+	private GameUI mGame;
+	
 	/**
 	 * 
 	 * @param layout Img to use
@@ -27,7 +28,7 @@ class Ball extends AnglePhysicObject
 	 * @param mass Mass of the ball
 	 * @param bounce Coefficient of restitution(1 return all the energy)
 	 */
-	public Ball(AngleSpriteLayout textureB, AngleSpriteLayout textureV, AngleSpriteLayout textureR, float radius, float mass, float bounce)
+	public Ball(AngleSpriteLayout textureB, AngleSpriteLayout textureV, AngleSpriteLayout textureR, float radius, float mass, float bounce, GameUI game)
 	{
 		super(0, 1);
 		mColors = new Color[3];
@@ -43,6 +44,7 @@ class Ball extends AnglePhysicObject
 		mMass = mass;
 		mBounce = bounce; // Coefficient of restitution (1 return all the energy)
 		mVelocity.mY = -5;
+		mGame = game;
 	}
 
 	/**
@@ -112,8 +114,8 @@ class Ball extends AnglePhysicObject
 	@Override
 	public void delete()
 	{
+		mGame.backToMenu();
 		super.delete();
-		// TODO GAME OVER !!!
 	}
 	
 	

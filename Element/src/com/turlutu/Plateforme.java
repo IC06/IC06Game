@@ -39,7 +39,7 @@ public class Plateforme extends AnglePhysicObject
 	{
 		super(1, 0); // Note : super (nb_segment, nb_circle);
 		// TODO ici c'est moche
-		mSprite = new AngleSprite(new AngleSpriteLayout(view, 128, 32, com.turlutu.R.drawable.box, 0, 0, 256, 64));
+		mSprite = new AngleSprite(new AngleSpriteLayout(view, 128, 32, com.turlutu.R.drawable.ball, 0, 0, 256, 64));
 		mWidth = width;
 		float w = width/2;
 		addSegmentCollider(new AngleSegmentCollider(-w, 0, w, 0)); // haut

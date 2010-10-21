@@ -17,7 +17,8 @@ import com.android.angle.FPSCounter;
 
 public class MainActivity extends AngleActivity
 {
-	private GameUI mGame;
+	protected GameUI mGame;
+	protected MenuUI mMenu;
 	
    private final SensorEventListener mListener = new SensorEventListener() 
    {
@@ -57,7 +58,12 @@ public class MainActivity extends AngleActivity
 		setContentView(mMainLayout);
 		
 		mGame=new GameUI(this);
-		setUI(mGame);
+		mMenu=new MenuUI(this);
+		setUI(mMenu);
+		
+		/*FrameLayout mainLayout=new FrameLayout(this);
+		mainLayout.addView(mGLSurfaceView);
+		setContentView(mainLayout);*/
 		
 		mGame.setGravity(0f,10f);
 	}

@@ -11,18 +11,13 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int anglelogo=0x7f020000;
+        public static final int aaa=0x7f020000;
         public static final int ball=0x7f020001;
         public static final int ballb=0x7f020002;
         public static final int ballv=0x7f020003;
         public static final int bg_menu=0x7f020004;
-        public static final int box=0x7f020005;
-        public static final int fondo=0x7f020006;
-        public static final int icon=0x7f020007;
-        public static final int mira=0x7f020008;
-        public static final int panel=0x7f020009;
-        public static final int salto=0x7f02000a;
-        public static final int tilemap=0x7f02000b;
+        public static final int fond=0x7f020005;
+        public static final int icon=0x7f020006;
     }
     public static final class layout {
         public static final int main=0x7f030000;
