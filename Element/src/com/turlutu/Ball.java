@@ -75,11 +75,23 @@ class Ball extends AnglePhysicObject
 	private void setColor(Color newColor)
 	{
 		if (newColor == Color.ROUGE)
+		{
+			mGame.mSpriteLeft.setLayout(mTextureB);
 			mSprite.setLayout(mTextureR);
+			mGame.mSpriteRight.setLayout(mTextureV);
+		}
 		else if(newColor == Color.VERT)
+		{
+			mGame.mSpriteLeft.setLayout(mTextureR);
 			mSprite.setLayout(mTextureV);
+			mGame.mSpriteRight.setLayout(mTextureB);
+		}
 		else
+		{
+			mGame.mSpriteLeft.setLayout(mTextureV);
 			mSprite.setLayout(mTextureB);
+			mGame.mSpriteRight.setLayout(mTextureR);
+		}
 	}
 	
 	public Color getColor()

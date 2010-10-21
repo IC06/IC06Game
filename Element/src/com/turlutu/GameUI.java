@@ -7,20 +7,23 @@ import com.android.angle.AngleActivity;
 import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
+import com.android.angle.AngleRotatingSprite;
 import com.android.angle.AngleSegmentCollider;
+import com.android.angle.AngleSprite;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
 
 public class GameUI extends AngleUI {
 
-	private AngleSpriteLayout mBallLayoutB, mBallLayoutV, mBallLayoutO, mBoxLayout, mBackGroundLayout;
+	private AngleSpriteLayout mBallLayoutB, mBallLayoutV, mBallLayoutR, mBoxLayout, mBackGroundLayout;
 	private MyPhysicsEngine mPhysics;
 	private float WIDTH,HEIGHT;
 	protected Ball mBall;
 	private AngleObject ogDashboard;
 	private AngleString mString;
 	protected int mScore;
+	protected AngleRotatingSprite mSpriteLeft, mSpriteRight;
 	
 	public GameUI(AngleActivity activity)
 	{
@@ -28,16 +31,21 @@ public class GameUI extends AngleUI {
 		WIDTH = 320f;
 		HEIGHT = 480f;
 		mScore = 0;
-		//TODO : réduire taille de la balle
 		int d = 64;
 		mBallLayoutB = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballb, 0, 0, 128, 128);
 		mBallLayoutV = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballv, 0, 0, 128, 128);
-		mBallLayoutO = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ball, 0, 0, 128, 128);
+		mBallLayoutR = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ball, 0, 0, 128, 128);
+		// TODO voir quelle image convient le mieu au background
 		/*mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond,0,0,320,480);
 		
 		// on ajoute le background en premier à MyDemo pour qu'il soit dessiné en premier
 		Background mBackGround = new Background(mBackGroundLayout);
 		addObject(mBackGround);*/
+		
+		mSpriteLeft = new AngleRotatingSprite(0,240,mBallLayoutB);
+		addObject(mSpriteLeft);
+		mSpriteRight = new AngleRotatingSprite(320,240,mBallLayoutV);
+		addObject(mSpriteRight);
 		
 		
 		// on ajoute la balle au moteur en premier pour qu'il la dessine en dernier, voir la fonction draw surchargé de MyPhysicEngine
@@ -59,7 +67,7 @@ public class GameUI extends AngleUI {
 	{
 		mString.set("0");
 
-		mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutO,32,20,1,this);
+		mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutR,32,20,1,this);
 		mBall.mPosition.set(50,300);
 		mPhysics.addObject(mBall);
 		
@@ -123,5 +131,18 @@ public class GameUI extends AngleUI {
 		init();
 		((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
 	}
+	
+	@Override
+	public void step(float secondsElapsed)
+	{
+		if (secondsElapsed > 0.08)
+			secondsElapsed = (float) 0.04;
+		
+		mSpriteLeft.mRotation += secondsElapsed * 20;
+		mSpriteRight.mRotation += secondsElapsed * 20;
+		
+		super.step(secondsElapsed);
+	}
+	
 	
 }
