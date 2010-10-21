@@ -70,6 +70,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	@Override
 	protected void physics(float secondsElapsed)
 	{
+		
 		for (int o = 0; o < mChildsCount; o++)
 		{
 			if (mChilds[o] instanceof Ball)
@@ -85,6 +86,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	@Override
 	protected void kynetics(float secondsElapsed)
 	{
+		
 		for (int o = 0; o < mChildsCount; o++)
 		{
 			if (mChilds[o] instanceof Ball)
@@ -174,6 +176,9 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	@Override
 	public void step(float secondsElapsed)
 	{
+		if (secondsElapsed > 0.08)
+			secondsElapsed = (float) 0.04;
+		
 		super.step(secondsElapsed);
 	}
 
