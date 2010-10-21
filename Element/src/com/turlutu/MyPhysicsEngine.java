@@ -20,7 +20,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	int toNewPlateform=10;
 	AngleSurfaceView mGLSurfaceView;
 	GameUI mGameUI;
-	int mCounterScore;
+	private int mCounterScore;
 	
 	public MyPhysicsEngine(int maxObjects, float worldWidth, float worldHeight,AngleSurfaceView SurfaceView, GameUI gameUI)
 	{
@@ -92,6 +92,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				Ball mChildO = (Ball) mChilds[o];
 				
 				// perdu
+				// TODO trouver où Matthieu a mis l'autre suppression de la balle dans le code (surement dans le code de ANGLE)
 				if (mChildO.mPosition.mY > mWorldHeight)
 				{
 					mChildO.delete();
@@ -113,15 +114,15 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 						mChildO.mPosition.mX = mWorldWidth;
 						mChildO.changeColorLeft();
 					}
-					
+
 					// translation
 					if (mChildO.mPosition.mY < mWorldHeight/2)
 					{
-						mCounterScore += 1;
+						mCounterScore += (int) (mWorldHeight/2 - mChildO.mPosition.mY);
 						translateAll(new AngleVector(0,mWorldHeight/2 - mChildO.mPosition.mY));
 					}
 					// score
-					if (mChildO.mVelocity.mY < 0) // la balle descend
+					if (mChildO.mVelocity.mY > 0) // la balle descend
 					{
 						if (mCounterScore != 0)
 						{
@@ -136,7 +137,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 						if (c != o)
 						{
 							if (mChilds[c] instanceof Plateforme // l'objet est de type plateforme
-									&& mChildO.mVelocity.mY > 0)  // et il est entrain de monter
+									&& mChildO.mVelocity.mY > 0)  // et il est entrain de descendre
 							{
 								Plateforme mChildC = (Plateforme) mChilds[c];
 								if(mChildC.mColor == Color.TOUTE || mChildC.mColor == mChildO.getColor()) // si l'objet est de la même couleure

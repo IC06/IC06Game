@@ -17,8 +17,8 @@ public class Background extends AngleObject
 		super(1);
 
 		mGround=(AngleSprite)addObject(new AngleSprite(0,0,layout));
-		mGround.mPosition.mX = 256;
-		mGround.mPosition.mY = 256f;
+		mGround.mPosition.mX = 160;
+		mGround.mPosition.mY = 240;
 	}
 
 
