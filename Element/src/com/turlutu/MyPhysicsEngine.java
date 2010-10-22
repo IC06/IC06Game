@@ -81,9 +81,9 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				// je garde juste le calcul de vitesse pour savoir quand arreter de monter/descendre mais dans le calcul je fige la vitesse
 				mChildO.mDelta.mX = mChildO.mVelocity.mX * secondsElapsed;
 				if(mChildO.mVelocity.mY > 0)
-					mChildO.mDelta.mY = 10 * secondsElapsed;
+					mChildO.mDelta.mY = 175 * secondsElapsed;
 				else
-					mChildO.mDelta.mY = -10 * secondsElapsed;
+					mChildO.mDelta.mY = -175 * secondsElapsed;
 			}
 		}
 	}
@@ -153,7 +153,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									if (mChildO.collide(mChildC))
 									{
 										mChildO.mPosition.mX -= mChildO.mDelta.mX;
-										mChildO.mVelocity.mY = - 8 * mChildO.mRadius; // la balle rebondit toujours de la même hauteur (simule un saut)
+										mChildO.mVelocity.mY = - 6 * mChildO.mRadius; // la balle rebondit toujours de la même hauteur (simule un saut)
 										mChildC.mDelta.mX = mChildC.mVelocity.mX * secondsElapsed;
 										mChildC.mDelta.mY = mChildC.mVelocity.mY * secondsElapsed;
 										break;
