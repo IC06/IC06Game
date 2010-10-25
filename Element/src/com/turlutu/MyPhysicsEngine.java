@@ -77,11 +77,11 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 			{
 				Ball mChildO = (Ball) mChilds[o];
 				mChildO.mVelocity.mY += mChildO.mMass * mGravity.mY * secondsElapsed;
-				// Je pense que cette méthode de calcul impliquera toujours un rebond lent, je vais donc tenter une autre approche
-				// je garde juste le calcul de vitesse pour savoir quand arreter de monter/descendre mais dans le calcul je fige la vitesse
 				mChildO.mDelta.mX = mChildO.mVelocity.mX * secondsElapsed;
-				if(mChildO.mVelocity.mY > 0)
+				if(mChildO.mVelocity.mY > 20)
 					mChildO.mDelta.mY = 175 * secondsElapsed;
+				else if(mChildO.mVelocity.mY > -20)
+					mChildO.mDelta.mY = mChildO.mVelocity.mY * 175/20 * secondsElapsed;
 				else
 					mChildO.mDelta.mY = -175 * secondsElapsed;
 			}
