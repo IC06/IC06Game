@@ -33,13 +33,13 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 
 	private void addPlateform(float decalage)
 	{
-		// TODO : cette fonction est pas térrible pour l'instant
+		// TODO : cette fonction est pas terrible pour l'instant
 		float size, posX;
 		int couleur;
 		size = 85.f;
 		toNewPlateform-=(int)decalage;
 		if(toNewPlateform<0) {
-		    toNewPlateform = (int) (Math.random() * (100-25) + 25);
+		    toNewPlateform = (int) (Math.random() * (80-15) + 15);
 			posX = (float) (Math.random() * (mWorldWidth - size)) + size / 2;
 			couleur = (int) (Math.random() * 5);
 			Plateforme newPlateforme = new Plateforme(mGLSurfaceView, size, 1,couleur);
@@ -124,20 +124,21 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					}
 
 					// translation
-					if (mChildO.mPosition.mY < mWorldHeight/2)
+					if (mChildO.mPosition.mY < mWorldHeight/3)
 					{
-						mCounterScore += (int) (mWorldHeight/2 - mChildO.mPosition.mY);
-						translateAll(new AngleVector(0,mWorldHeight/2 - mChildO.mPosition.mY));
+						mCounterScore = (int) (mWorldHeight/3 - mChildO.mPosition.mY);
+						mGameUI.upScore(mCounterScore); // En mettant ça ici, on gagne 2 tests
+						translateAll(new AngleVector(0,mWorldHeight/3 - mChildO.mPosition.mY));
 					}
 					// score
-					if (mChildO.mVelocity.mY > 0) // la balle descend
+					/*if (mChildO.mVelocity.mY > 0) // la balle descend
 					{
 						if (mCounterScore != 0)
 						{
 							mGameUI.upScore(mCounterScore);
 							mCounterScore = 0;
 						}
-					}
+					}*/
 					
 					// collisions
 					for (int c = 0; c < mChildsCount; c++)
@@ -182,7 +183,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	@Override
 	public void step(float secondsElapsed)
 	{
-		if (secondsElapsed > 0.08)
+		if (secondsElapsed > 0.06)
 			secondsElapsed = (float) 0.04;
 		
 		super.step(secondsElapsed);
@@ -190,6 +191,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 
 	/**
 	 * @author thomas
+	 * 
 	 */
 	@Override
 	public void draw(GL10 gl)

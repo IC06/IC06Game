@@ -51,7 +51,7 @@ public class MainActivity extends AngleActivity
 		mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE); 
       
         // a commenté dans la version finale (pour voir la fluidité du jeu)      
-		mGLSurfaceView.addObject(new FPSCounter());
+		//mGLSurfaceView.addObject(new FPSCounter());
 
 		FrameLayout mMainLayout=new FrameLayout(this);
 		mMainLayout.addView(mGLSurfaceView);

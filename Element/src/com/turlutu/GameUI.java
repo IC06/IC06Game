@@ -22,7 +22,7 @@ public class GameUI extends AngleUI {
 	protected Ball mBall;
 	private AngleObject ogDashboard;
 	private AngleString mString;
-	protected int mScore;
+	protected int mScore,lastupdate;
 	protected AngleRotatingSprite mSpriteLeft, mSpriteRight;
 	
 	public GameUI(AngleActivity activity)
@@ -122,7 +122,12 @@ public class GameUI extends AngleUI {
 	public void upScore(int value)
 	{
 		mScore += value;
-		mString.set(String.valueOf(mScore));
+		lastupdate++;
+		if(lastupdate>15)
+		{
+			mString.set(String.valueOf(mScore));
+			lastupdate=0;
+		}
 	}
 	
 	public void backToMenu()
