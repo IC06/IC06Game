@@ -76,14 +76,14 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 			if (mChilds[o] instanceof Ball)
 			{
 				Ball mChildO = (Ball) mChilds[o];
-				mChildO.mVelocity.mY += mChildO.mMass * mGravity.mY * secondsElapsed;
+				mChildO.mVelocity.mY += mChildO.mMass * mGravity.mY * 10 * secondsElapsed;
 				mChildO.mDelta.mX = mChildO.mVelocity.mX * secondsElapsed;
-				if(mChildO.mVelocity.mY > 20)
+				mChildO.mDelta.mY = mChildO.mVelocity.mY * secondsElapsed;
+				if(mChildO.mDelta.mY > 175 * secondsElapsed) {
 					mChildO.mDelta.mY = 175 * secondsElapsed;
-				else if(mChildO.mVelocity.mY > -20)
-					mChildO.mDelta.mY = mChildO.mVelocity.mY * 175/20 * secondsElapsed;
-				else
+				} else if(mChildO.mDelta.mY < -175 * secondsElapsed) {
 					mChildO.mDelta.mY = -175 * secondsElapsed;
+				}
 			}
 		}
 	}
@@ -154,7 +154,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									if (mChildO.collide(mChildC))
 									{
 										mChildO.mPosition.mX -= mChildO.mDelta.mX;
-										mChildO.mVelocity.mY = - 6 * mChildO.mRadius; // la balle rebondit toujours de la même hauteur (simule un saut)
+										mChildO.mVelocity.mY = - 60 * mChildO.mRadius; // la balle rebondit toujours de la même hauteur (simule un saut)
 										mChildC.mDelta.mX = mChildC.mVelocity.mX * secondsElapsed;
 										mChildC.mDelta.mY = mChildC.mVelocity.mY * secondsElapsed;
 										break;
