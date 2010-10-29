@@ -1,6 +1,7 @@
 package com.turlutu;
 
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.android.angle.AngleActivity;
@@ -9,10 +10,10 @@ import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleRotatingSprite;
 import com.android.angle.AngleSegmentCollider;
-import com.android.angle.AngleSprite;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
+import com.android.angle.AngleVector;
 
 public class GameUI extends AngleUI {
 
@@ -28,6 +29,7 @@ public class GameUI extends AngleUI {
 	public GameUI(AngleActivity activity)
 	{
 		super(activity);
+		Log.i("GameUI", "GameUI constructor debut");
 		WIDTH = 320f;
 		HEIGHT = 480f;
 		mScore = 0;
@@ -51,25 +53,68 @@ public class GameUI extends AngleUI {
 		// on ajoute la balle au moteur en premier pour qu'il la dessine en dernier, voir la fonction draw surchargé de MyPhysicEngine
 		mPhysics=new MyPhysicsEngine(20,WIDTH,HEIGHT,activity.mGLSurfaceView,this);
 		mPhysics.mViscosity = 0f; // Air viscosity
+		mPhysics.mGravity = new AngleVector(0,10);
 		addObject(mPhysics);
 
 		// le score
 		ogDashboard=addObject(new AngleObject());
 		AngleFont fntCafe25 = new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(activity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
-		AngleFont fntBazaronite=new AngleFont(mActivity.mGLSurfaceView, 18, Typeface.createFromAsset(mActivity.getAssets(),"bazaronite.ttf"), 222, 0, 2, 255, 100, 255, 255);
+		//AngleFont fntBazaronite=new AngleFont(mActivity.mGLSurfaceView, 18, Typeface.createFromAsset(mActivity.getAssets(),"bazaronite.ttf"), 222, 0, 2, 255, 100, 255, 255);
 		mString = (AngleString)ogDashboard.addObject(new AngleString(fntCafe25,"0",50,20,AngleString.aCenter));
 		
 
-		init();
+		mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutR,32,20,1,this);
+		mPhysics.addObject(mBall);
+
+		//init();
+		Log.i("GameUI", "GameUI constructor fin");
 	}
 	
+	@Override
+	public void onActivate()
+	{
+		Log.i("GameUI", "GameUI onActivate debut");
+		mScore=0;
+		mString.set("0");
+		init();
+		super.onActivate();
+		Log.i("GameUI", "GameUI onActivate fin");
+	}
+
+	@Override
+	public void onDeactivate()
+	{
+		Log.i("GameUI", "GameUI onDeactivate debut");
+		for (int i=1; i<20; i++)
+		{
+			if (mPhysics.childAt(i) instanceof AnglePhysicObject)
+			{
+				mPhysics.removeObject(i);
+			}
+		}
+		super.onDeactivate();
+		Log.i("GameUI", "GameUI onDeactivate fin");
+	}
+	/*
+	@Override
+	public void onPause()
+	{
+      mSensorManager.unregisterListener(mListener); 
+      super.onPause();
+	}
+
+
+	@Override
+	public void onResume()
+	{
+      mSensorManager.registerListener(mListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_FASTEST); 		
+		super.onResume();
+	}
+	*/
 	private void init()
 	{
-		mString.set("0");
 
-		mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutR,32,20,1,this);
 		mBall.mPosition.set(50,300);
-		mPhysics.addObject(mBall);
 		
 		// ajoute une plateforme en bas qui prend toute la place pour le debut
 		AnglePhysicObject mWall = new AnglePhysicObject(1, 0);
@@ -132,8 +177,6 @@ public class GameUI extends AngleUI {
 	
 	public void backToMenu()
 	{
-		mPhysics.removeAll();
-		init();
 		((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
 	}
 	
