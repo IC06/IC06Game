@@ -106,7 +106,7 @@ class Ball extends AnglePhysicObject
 	@Override
 	public float getSurface()
 	{
-		return (float) (mRadius * 2 * 3.14);
+		return (float) (mRadius * mRadius * 3.14);
 	}
 
 	/**
@@ -123,12 +123,5 @@ class Ball extends AnglePhysicObject
 	}
 	
 
-	@Override
-	public void delete()
-	{
-		mGame.backToMenu();
-		super.delete();
-	}
-	
 	
 };
