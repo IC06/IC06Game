@@ -66,7 +66,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		}
 	}
 	
-	
+	/*
 	@Override
 	protected void physics(float secondsElapsed)
 	{
@@ -87,7 +87,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 			}
 		}
 	}
-
+*/
 
 	@Override
 	protected void kynetics(float secondsElapsed)
@@ -101,9 +101,10 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				
 				// perdu
 				// TODO trouver où Matthieu a mis l'autre suppression de la balle dans le code (surement dans le code de ANGLE)
+				// apparement c'est pas dans anglephysicengine ou angle physicobject
 				if (mChildO.mPosition.mY > mWorldHeight)
 				{
-					mChildO.delete();
+					mGameUI.backToMenu();
 					return;
 				}
 				
@@ -154,7 +155,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									if (mChildO.collide(mChildC))
 									{
 										mChildO.mPosition.mX -= mChildO.mDelta.mX;
-										mChildO.mVelocity.mY = - 60 * mChildO.mRadius; // la balle rebondit toujours de la même hauteur (simule un saut)
+										mChildO.mVelocity.mY = - 6 * mChildO.mRadius; // la balle rebondit toujours de la même hauteur (simule un saut)
 										mChildC.mDelta.mX = mChildC.mVelocity.mX * secondsElapsed;
 										mChildC.mDelta.mY = mChildC.mVelocity.mY * secondsElapsed;
 										break;
