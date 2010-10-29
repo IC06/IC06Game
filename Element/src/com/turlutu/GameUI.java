@@ -52,8 +52,8 @@ public class GameUI extends AngleUI {
 		
 		// on ajoute la balle au moteur en premier pour qu'il la dessine en dernier, voir la fonction draw surchargé de MyPhysicEngine
 		mPhysics=new MyPhysicsEngine(20,WIDTH,HEIGHT,activity.mGLSurfaceView,this);
-		mPhysics.mViscosity = 0f; // Air viscosity
-		mPhysics.mGravity = new AngleVector(0,10);
+		mPhysics.mViscosity = 1f; // Air viscosity
+		mPhysics.mGravity = new AngleVector(0,10f);
 		addObject(mPhysics);
 
 		// le score
@@ -63,7 +63,7 @@ public class GameUI extends AngleUI {
 		mString = (AngleString)ogDashboard.addObject(new AngleString(fntCafe25,"0",50,20,AngleString.aCenter));
 		
 
-		mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutR,32,20,1,this);
+		mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutR,32,80,1,this);
 		mPhysics.addObject(mBall);
 
 		//init();
@@ -115,6 +115,7 @@ public class GameUI extends AngleUI {
 	{
 
 		mBall.mPosition.set(50,300);
+		mBall.mVelocity.mY = -600;
 		
 		// ajoute une plateforme en bas qui prend toute la place pour le debut
 		AnglePhysicObject mWall = new AnglePhysicObject(1, 0);

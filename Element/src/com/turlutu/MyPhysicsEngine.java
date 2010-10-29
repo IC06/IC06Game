@@ -66,16 +66,21 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		}
 	}
 	
-	/*
+	
 	@Override
 	protected void physics(float secondsElapsed)
 	{
-		
 		for (int o = 0; o < mChildsCount; o++)
 		{
 			if (mChilds[o] instanceof Ball)
 			{
-				Ball mChildO = (Ball) mChilds[o];
+				Ball ball = (Ball) mChilds[o];
+				ball.mAcceleration.mY =  ball.mMass*mGravity.mY - mViscosity * ball.mVelocity.mY;
+				ball.mVelocity.mY += ball.mAcceleration.mY * secondsElapsed;
+				
+				ball.mDelta.mX = ball.mVelocity.mX * secondsElapsed;
+				ball.mDelta.mY = ball.mVelocity.mY * secondsElapsed;
+				/*Ball mChildO = (Ball) mChilds[o];
 				mChildO.mVelocity.mY += mChildO.mMass * mGravity.mY * 10 * secondsElapsed;
 				mChildO.mDelta.mX = mChildO.mVelocity.mX * secondsElapsed;
 				mChildO.mDelta.mY = mChildO.mVelocity.mY * secondsElapsed;
@@ -83,11 +88,11 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					mChildO.mDelta.mY = 175 * secondsElapsed;
 				} else if(mChildO.mDelta.mY < -175 * secondsElapsed) {
 					mChildO.mDelta.mY = -175 * secondsElapsed;
-				}
+				}*/
 			}
 		}
 	}
-*/
+
 
 	@Override
 	protected void kynetics(float secondsElapsed)
@@ -155,7 +160,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									if (mChildO.collide(mChildC))
 									{
 										mChildO.mPosition.mX -= mChildO.mDelta.mX;
-										mChildO.mVelocity.mY = - 6 * mChildO.mRadius; // la balle rebondit toujours de la même hauteur (simule un saut)
+										mChildO.mVelocity.mY = - 600; // la balle rebondit toujours de la même hauteur (simule un saut)
 										mChildC.mDelta.mX = mChildC.mVelocity.mX * secondsElapsed;
 										mChildC.mDelta.mY = mChildC.mVelocity.mY * secondsElapsed;
 										break;
@@ -184,7 +189,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	@Override
 	public void step(float secondsElapsed)
 	{
-		if (secondsElapsed > 0.06)
+		if (secondsElapsed > 0.04)
 			secondsElapsed = (float) 0.04;
 		
 		super.step(secondsElapsed);

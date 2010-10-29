@@ -5,6 +5,7 @@ import javax.microedition.khronos.opengles.GL10;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSprite;
 import com.android.angle.AngleSpriteLayout;
+import com.android.angle.AngleVector;
 
 /**
  * extends AnglePhysicObject
@@ -20,6 +21,7 @@ class Ball extends AnglePhysicObject
 	private Color mColors[];
 	protected float mRadius;
 	private GameUI mGame;
+	protected AngleVector mAcceleration;
 	
 	/**
 	 * 
@@ -31,6 +33,7 @@ class Ball extends AnglePhysicObject
 	public Ball(AngleSpriteLayout textureB, AngleSpriteLayout textureV, AngleSpriteLayout textureR, float radius, float mass, float bounce, GameUI game)
 	{
 		super(0, 1);
+		mAcceleration = new AngleVector(0f,0f);
 		mColors = new Color[3];
 		mColors[0] = Color.BLEU;
 		mColors[1] = Color.ROUGE;
