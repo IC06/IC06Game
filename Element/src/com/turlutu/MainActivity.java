@@ -22,12 +22,12 @@ public class MainActivity extends AngleActivity
 	
    private final SensorEventListener mListener = new SensorEventListener() 
    {
-		@Override
+		//@Override
 		public void onAccuracyChanged(Sensor sensor, int accuracy)
 		{
 		}
 
-		@Override
+		//@Override
 		public void onSensorChanged(SensorEvent event)
 		{
 			if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
