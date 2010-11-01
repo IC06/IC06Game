@@ -14,6 +14,7 @@ import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
 import com.android.angle.AngleVector;
+import com.turlutu.Ball.Color;
 
 public class GameUI extends AngleUI {
 
@@ -25,6 +26,7 @@ public class GameUI extends AngleUI {
 	private AngleString mString;
 	protected int mScore,lastupdate;
 	protected AngleRotatingSprite mSpriteLeft, mSpriteRight;
+	private AngleSpriteLayout mBordsLayout[];
 	
 	public GameUI(AngleActivity activity)
 	{
@@ -37,6 +39,10 @@ public class GameUI extends AngleUI {
 		mBallLayoutB = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballb, 0, 0, 128, 128);
 		mBallLayoutV = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballv, 0, 0, 128, 128);
 		mBallLayoutR = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ball, 0, 0, 128, 128);
+		mBordsLayout = new AngleSpriteLayout[3];
+		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 128, com.turlutu.R.drawable.bord_bleu, 0, 0, 128, 128);
+		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 128, com.turlutu.R.drawable.bord_rouge, 0, 0, 128, 128);
+		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 128, com.turlutu.R.drawable.bord_vert, 0, 0, 128, 128);
 		// TODO voir quelle image convient le mieu au background
 		/*mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond,0,0,320,480);
 		
@@ -44,10 +50,11 @@ public class GameUI extends AngleUI {
 		Background mBackGround = new Background(mBackGroundLayout);
 		addObject(mBackGround);*/
 		
-		mSpriteLeft = new AngleRotatingSprite(0,240,mBallLayoutB);
+		mSpriteLeft = new AngleRotatingSprite(0,240,mBordsLayout[0]);
+		mSpriteRight = new AngleRotatingSprite(320,240,mBordsLayout[2]);
 		addObject(mSpriteLeft);
-		mSpriteRight = new AngleRotatingSprite(320,240,mBallLayoutV);
 		addObject(mSpriteRight);
+		
 		
 		
 		// on ajoute la balle au moteur en premier pour qu'il la dessine en dernier, voir la fonction draw surchargé de MyPhysicEngine
@@ -193,5 +200,24 @@ public class GameUI extends AngleUI {
 		super.step(secondsElapsed);
 	}
 	
+	public void setSpriteRight(Color newColor)
+	{
+		if (newColor == Color.BLEU)
+			mSpriteRight.setLayout(mBordsLayout[0]);
+		else if (newColor == Color.ROUGE)
+			mSpriteRight.setLayout(mBordsLayout[1]);
+		else
+			mSpriteRight.setLayout(mBordsLayout[2]);
+	}
+	
+	public void setSpriteLeft(Color newColor)
+	{
+		if (newColor == Color.BLEU)
+			mSpriteLeft.setLayout(mBordsLayout[0]);
+		else if (newColor == Color.ROUGE)
+			mSpriteLeft.setLayout(mBordsLayout[1]);
+		else
+			mSpriteLeft.setLayout(mBordsLayout[2]);
+	}
 	
 }

@@ -160,6 +160,8 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									if (mChildO.collide(mChildC))
 									{
 										mChildO.mPosition.mX -= mChildO.mDelta.mX;
+										mChildO.mPosition.mY -= mChildO.mDelta.mY;
+										//mChildO.mPosition.mY = mChildC.mPosition.mY-mChildO.mRadius;
 										mChildO.mVelocity.mY = - 600; // la balle rebondit toujours de la même hauteur (simule un saut)
 										mChildC.mDelta.mX = mChildC.mVelocity.mX * secondsElapsed;
 										mChildC.mDelta.mY = mChildC.mVelocity.mY * secondsElapsed;
