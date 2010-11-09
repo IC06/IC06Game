@@ -31,6 +31,10 @@ public class GameUI extends AngleUI {
 	public GameUI(AngleActivity activity)
 	{
 		super(activity);
+	}
+	
+	public void create(AngleActivity activity)
+	{
 		Log.i("GameUI", "GameUI constructor debut");
 		WIDTH = 320f;
 		HEIGHT = 480f;

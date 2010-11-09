@@ -11,19 +11,18 @@ import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
 
-public class MenuUI  extends AngleUI
+public class OptionsUI  extends AngleUI
 {
 	
 	private AngleObject ogMenuTexts;
 	
-	private AngleString strPlay;
-	private AngleString strHiScore;
+	//private AngleString strPlay;
+	//private AngleString strHiScore;
 	private AngleString strExit;
-	private AngleString strOptions;
+	//private AngleString strOptions;
 
-	private int mHiScore;
 
-	public MenuUI(AngleActivity activity)
+	public OptionsUI(AngleActivity activity)
 	{
 		super(activity);
 		ogMenuTexts = new AngleObject();
@@ -35,22 +34,11 @@ public class MenuUI  extends AngleUI
 
 		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
 		
-		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Play", 160, 180, AngleString.aCenter));
+/*		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Play", 160, 180, AngleString.aCenter));
 		strHiScore = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Hi Score", 160, 210, AngleString.aCenter));
 		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Options", 160, 240, AngleString.aCenter));
-		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Exit", 160, 390, AngleString.aCenter));
-		
-		//This is our structure right now:
-		//---------------------------
-		//mGLSurfaceView
-		// >mTheGame
-		// >mTheMenu
-		//   >sprBackground
-		//   >ogMenuTexts
-		//     >strPlay
-		//     >strHiScore
-		//     >strExit
-		//---------------------------
+	*/	strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Retour", 160, 390, AngleString.aCenter));
+
 	}
 
 	@Override
@@ -61,12 +49,10 @@ public class MenuUI  extends AngleUI
 			float eX = event.getX();
 			float eY = event.getY();
 
-			if (strPlay.test(eX, eY))
+			/*if (strPlay.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mGame);
-			if (strOptions.test(eX, eY))
-				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mOptions);
-			else if (strExit.test(eX, eY))
-				mActivity.finish();
+			else */if (strExit.test(eX, eY))
+				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
 
 			return true;
 		}
@@ -76,9 +62,9 @@ public class MenuUI  extends AngleUI
 	@Override
 	public void onActivate()
 	{
-		if (((MainActivity) mActivity).mGame.mScore>mHiScore)
+		/*if (((MainActivity) mActivity).mGame.mScore>mHiScore)
 				mHiScore=((MainActivity) mActivity).mGame.mScore;
-		strHiScore.set("Hi Score: "+mHiScore);
+		strHiScore.set("Hi Score: "+mHiScore);*/
 		super.onActivate();
 	}
 	
