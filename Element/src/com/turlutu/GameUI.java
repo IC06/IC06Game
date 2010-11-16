@@ -44,7 +44,7 @@ public class GameUI extends AngleUI {
 		mBallLayoutV = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballv, 0, 0, 128, 128);
 		mBallLayoutR = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ball, 0, 0, 128, 128);
 		mBordsLayout = new AngleSpriteLayout[3];
-		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 50, 200, com.turlutu.R.drawable.bord_bleu, 0, 0, 50, 200);
+		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bleu2, 0, 0, 64, 256);
 		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 50, 200, com.turlutu.R.drawable.bord_rouge, 0, 0, 50, 200);
 		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 50, 200, com.turlutu.R.drawable.bord_vert, 0, 0, 50, 200);
 		// TODO voir quelle image convient le mieu au background
