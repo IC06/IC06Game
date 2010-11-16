@@ -8,7 +8,7 @@ import com.android.angle.AngleActivity;
 import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
-import com.android.angle.AngleRotatingSprite;
+import com.android.angle.AngleSprite;
 import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
@@ -25,7 +25,7 @@ public class GameUI extends AngleUI {
 	private AngleObject ogDashboard;
 	private AngleString mString;
 	protected int mScore,lastupdate;
-	protected AngleRotatingSprite mSpriteLeft, mSpriteRight;
+	protected AngleSprite mSpriteLeft, mSpriteRight;
 	private AngleSpriteLayout mBordsLayout[];
 	
 	public GameUI(AngleActivity activity)
@@ -44,9 +44,9 @@ public class GameUI extends AngleUI {
 		mBallLayoutV = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballv, 0, 0, 128, 128);
 		mBallLayoutR = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ball, 0, 0, 128, 128);
 		mBordsLayout = new AngleSpriteLayout[3];
-		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 128, com.turlutu.R.drawable.bord_bleu, 0, 0, 128, 128);
-		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 128, com.turlutu.R.drawable.bord_rouge, 0, 0, 128, 128);
-		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 128, com.turlutu.R.drawable.bord_vert, 0, 0, 128, 128);
+		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 50, 200, com.turlutu.R.drawable.bord_bleu, 0, 0, 50, 200);
+		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 50, 200, com.turlutu.R.drawable.bord_rouge, 0, 0, 50, 200);
+		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 50, 200, com.turlutu.R.drawable.bord_vert, 0, 0, 50, 200);
 		// TODO voir quelle image convient le mieu au background
 		/*mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond,0,0,320,480);
 		
@@ -54,8 +54,8 @@ public class GameUI extends AngleUI {
 		Background mBackGround = new Background(mBackGroundLayout);
 		addObject(mBackGround);*/
 		
-		mSpriteLeft = new AngleRotatingSprite(0,240,mBordsLayout[0]);
-		mSpriteRight = new AngleRotatingSprite(320,240,mBordsLayout[2]);
+		mSpriteLeft = new AngleSprite(0,240,mBordsLayout[0]);
+		mSpriteRight = new AngleSprite(320,240,mBordsLayout[2]);
 		addObject(mSpriteLeft);
 		addObject(mSpriteRight);
 		
@@ -180,7 +180,7 @@ public class GameUI extends AngleUI {
 	{
 		mScore += value;
 		lastupdate++;
-		if(lastupdate>15)
+		if(lastupdate>7)
 		{
 			mString.set(String.valueOf(mScore));
 			lastupdate=0;
@@ -197,9 +197,6 @@ public class GameUI extends AngleUI {
 	{
 		if (secondsElapsed > 0.08)
 			secondsElapsed = (float) 0.04;
-		
-		mSpriteLeft.mRotation += secondsElapsed * 20;
-		mSpriteRight.mRotation += secondsElapsed * 20;
 		
 		super.step(secondsElapsed);
 	}
