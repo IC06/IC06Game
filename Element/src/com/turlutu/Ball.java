@@ -121,8 +121,15 @@ class Ball extends AnglePhysicObject
 	public void draw(GL10 gl)
 	{
 			mSprite.mPosition.set(mPosition);
-			mSprite.draw(gl);
-			//drawColliders(gl);
+			//mSprite.draw(gl);
+			if(mColors[1] == Color.ROUGE)
+				drawColliders(gl,1f,0f,0f);
+			else if(mColors[1] ==  Color.BLEU)
+				drawColliders(gl,0f,0f,1f);
+			else if(mColors[1] == Color.VERT)
+				drawColliders(gl,0f,1f,0f);
+			else
+				drawColliders(gl,1f,1f,1f);
 	}
 	
 
