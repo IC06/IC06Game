@@ -92,14 +92,14 @@ class EglHelper
 		 * Before we can issue GL commands, we need to make sure the context is
 		 * current and bound to a surface.
 		 */
-		try
+		/* MATTHIEU : Je voit pas l'interet et j'ai l'impression qu'en commentant le jeu est plus fluide try
 		{
 			Thread.sleep(100);
 		}
 		catch (InterruptedException e)
 		{
 			e.printStackTrace();
-		}
+		}*/
 		mEgl.eglMakeCurrent(mEglDisplay, mEglSurface, mEglSurface, mEglContext);
 //		if (mEgl.eglGetError() == EGL11.EGL_CONTEXT_LOST)
 //			android.os.Process.killProcess(android.os.Process.myPid());

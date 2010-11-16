@@ -27,17 +27,17 @@ public class AngleActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		try
-		{
-			Thread.sleep(100);
+		//try
+		//{
+			//Thread.sleep(100);
 			mGLSurfaceView = new AngleSurfaceView(this);
 			mGLSurfaceView.setAwake(true);
 			mGLSurfaceView.start();
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
+		//}
+		//catch (InterruptedException e)
+		//{
+		//	e.printStackTrace();
+		//}
 	}
 
 	/**

@@ -31,21 +31,25 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		mGameUI = gameUI;
 	}
 
-	private void addPlateform(float decalage)
+	private void addPlateform(final float decalage)
 	{
 		// TODO : cette fonction est pas terrible pour l'instant
-		float size, posX;
-		int couleur;
-		size = 85.f;
-		toNewPlateform-=(int)decalage;
-		if(toNewPlateform<0) {
-		    toNewPlateform = (int) (Math.random() * (80-15) + 15);
-			posX = (float) (Math.random() * (mWorldWidth - size)) + size / 2;
-			couleur = (int) (Math.random() * 5);
-			Plateforme newPlateforme = new Plateforme(mGLSurfaceView, size, 1,couleur);
-			newPlateforme.mPosition.set(posX,-1);
-			addObject(newPlateforme);
-		}
+		new Thread() {
+			@Override public void run() {
+				float size, posX;
+				int couleur;
+				size = 85.f;
+				toNewPlateform-=(int)decalage;
+				if(toNewPlateform<0) {
+				    toNewPlateform = (int) (Math.random() * (80-15) + 15);
+					posX = (float) (Math.random() * (mWorldWidth - size)) + size / 2;
+					couleur = (int) (Math.random() * 5);
+					Plateforme newPlateforme = new Plateforme(mGLSurfaceView, size, 1,couleur);
+					newPlateforme.mPosition.set(posX,-1);
+					addObject(newPlateforme);
+				}
+			}
+		}.start();
 	}
 	
 	
