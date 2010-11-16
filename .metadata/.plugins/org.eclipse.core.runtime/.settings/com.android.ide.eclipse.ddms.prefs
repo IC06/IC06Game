@@ -1,3 +1,8 @@
-#Sat Oct 30 23:27:50 CEST 2010
+#Tue Nov 09 17:50:24 CET 2010
+com.android.ide.eclipse.ddms.logcat.time=122
+com.android.ide.eclipse.ddms.logcat.pid=42
 eclipse.preferences.version=1
-com.android.ide.eclipse.ddms.adb=/home/thomas/android-sdk-linux_86/tools/adb
+com.android.ide.eclipse.ddms.adb=/home/matthieu/UTC/TC03/IC06/PROJECT/android-sdk-linux_x86/tools/adb
+com.android.ide.eclipse.ddms.logcat.message=1022
+com.android.ide.eclipse.ddms.logcat.level=18
+com.android.ide.eclipse.ddms.logcat.tag=74
