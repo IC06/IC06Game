@@ -18,14 +18,14 @@ import com.turlutu.Ball.Color;
 
 public class GameUI extends AngleUI {
 
-	private AngleSpriteLayout mBallLayoutB, mBallLayoutV, mBallLayoutR, mBoxLayout, mBackGroundLayout,l1,l2,l3;
+	private AngleSpriteLayout mBallLayoutB, mBallLayoutV, mBallLayoutR, mBoxLayout, mBackGroundLayout;
 	private MyPhysicsEngine mPhysics;
 	private float WIDTH,HEIGHT;
 	protected Ball mBall;
 	private AngleObject ogDashboard;
 	private AngleString mString;
 	protected int mScore,lastupdate;
-	protected AngleSprite mSpriteLeft, mSpriteRight,s1,s2,s3;
+	protected AngleSprite mSpriteLeft, mSpriteRight;
 	private AngleSpriteLayout mBordsLayout[];
 	
 	public GameUI(AngleActivity activity)
@@ -44,12 +44,9 @@ public class GameUI extends AngleUI {
 		mBallLayoutV = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballv, 0, 0, 128, 128);
 		mBallLayoutR = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ball, 0, 0, 128, 128);
 		mBordsLayout = new AngleSpriteLayout[3];
-		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bleu2, 0, 0, 64, 256);
+		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 50, 200, com.turlutu.R.drawable.bord_bleu, 0, 0, 50, 200);
 		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 50, 200, com.turlutu.R.drawable.bord_rouge, 0, 0, 50, 200);
-		mBordsLayout[2] = new AngleSpriteLayout(mActivity.mGLSurfaceView,50,200,com.turlutu.R.drawable.bord_vert);
-		l1 = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 64, com.turlutu.R.drawable.bleu2_h, 0, 0, 64, 64);
-		l2 = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 64, com.turlutu.R.drawable.bleu2_m, 0, 0, 64, 64);
-		l3 = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 64, com.turlutu.R.drawable.bleu2_b, 0, 0, 64, 64);
+		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 50, 200, com.turlutu.R.drawable.bord_vert, 0, 0, 50, 200);
 		// TODO voir quelle image convient le mieu au background
 		/*mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond,0,0,320,480);
 		
@@ -57,15 +54,9 @@ public class GameUI extends AngleUI {
 		Background mBackGround = new Background(mBackGroundLayout);
 		addObject(mBackGround);*/
 		
-		s1 = new AngleSprite(0,176,l1);
-		s2 = new AngleSprite(0,240,l2);
-		s3 = new AngleSprite(0,304,l3);
-		addObject(s1);
-		addObject(s2);
-		addObject(s3);
-		//mSpriteLeft = new AngleSprite(0,240,mBordsLayout[0]);
+		mSpriteLeft = new AngleSprite(0,240,mBordsLayout[0]);
 		mSpriteRight = new AngleSprite(320,240,mBordsLayout[2]);
-		//addObject(mSpriteLeft);
+		addObject(mSpriteLeft);
 		addObject(mSpriteRight);
 		
 		
