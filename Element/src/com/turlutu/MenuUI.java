@@ -35,9 +35,9 @@ public class MenuUI  extends AngleUI
 
 		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
 		
-		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Play", 160, 180, AngleString.aCenter));
+		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Play", 160, 160, AngleString.aCenter));
 		strHiScore = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Hi Score", 160, 210, AngleString.aCenter));
-		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Options", 160, 240, AngleString.aCenter));
+		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Options", 160, 260, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Exit", 160, 390, AngleString.aCenter));
 		
 		//This is our structure right now:
