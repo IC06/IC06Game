@@ -84,15 +84,6 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				
 				ball.mDelta.mX = ball.mVelocity.mX * secondsElapsed;
 				ball.mDelta.mY = ball.mVelocity.mY * secondsElapsed;
-				/*Ball mChildO = (Ball) mChilds[o];
-				mChildO.mVelocity.mY += mChildO.mMass * mGravity.mY * 10 * secondsElapsed;
-				mChildO.mDelta.mX = mChildO.mVelocity.mX * secondsElapsed;
-				mChildO.mDelta.mY = mChildO.mVelocity.mY * secondsElapsed;
-				if(mChildO.mDelta.mY > 175 * secondsElapsed) {
-					mChildO.mDelta.mY = 175 * secondsElapsed;
-				} else if(mChildO.mDelta.mY < -175 * secondsElapsed) {
-					mChildO.mDelta.mY = -175 * secondsElapsed;
-				}*/
 			}
 		}
 	}
@@ -133,22 +124,13 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 						mChildO.changeColorLeft();
 					}
 
-					// translation
+					// translation + score
 					if (mChildO.mPosition.mY < mWorldHeight/3)
 					{
 						mCounterScore = (int) (mWorldHeight/3 - mChildO.mPosition.mY);
 						mGameUI.upScore(mCounterScore); // En mettant ça ici, on gagne 2 tests
 						translateAll(new AngleVector(0,mWorldHeight/3 - mChildO.mPosition.mY));
 					}
-					// score
-					/*if (mChildO.mVelocity.mY > 0) // la balle descend
-					{
-						if (mCounterScore != 0)
-						{
-							mGameUI.upScore(mCounterScore);
-							mCounterScore = 0;
-						}
-					}*/
 					
 					// collisions
 					for (int c = 0; c < mChildsCount; c++)
