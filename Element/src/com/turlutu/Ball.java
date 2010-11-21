@@ -3,6 +3,7 @@ package com.turlutu;
 import javax.microedition.khronos.opengles.GL10;
 
 import com.android.angle.AnglePhysicObject;
+import com.android.angle.AngleSound;
 import com.android.angle.AngleSprite;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleVector;
@@ -22,6 +23,7 @@ class Ball extends AnglePhysicObject
 	protected float mRadius;
 	private GameUI mGame;
 	protected AngleVector mAcceleration;
+	private AngleSound sndJump;
 	
 	/**
 	 * 
@@ -30,9 +32,10 @@ class Ball extends AnglePhysicObject
 	 * @param mass Mass of the ball
 	 * @param bounce Coefficient of restitution(1 return all the energy)
 	 */
-	public Ball(AngleSpriteLayout textureB, AngleSpriteLayout textureV, AngleSpriteLayout textureR, float radius, float mass, float bounce, GameUI game)
+	public Ball(AngleSpriteLayout textureB, AngleSpriteLayout textureV, AngleSpriteLayout textureR, float radius, float mass, float bounce, AngleSound soundJump, GameUI game)
 	{
 		super(0, 1);
+		sndJump = soundJump;
 		mAcceleration = new AngleVector(0f,0f);
 		mColors = new Color[3];
 		mColors[0] = Color.BLEU;
@@ -132,6 +135,10 @@ class Ball extends AnglePhysicObject
 				drawColliders(gl,1f,1f,1f);
 	}
 	
-
+	public void jump()
+	{
+		mVelocity.mY = -600;
+		sndJump.play(1,false);
+	}
 	
 };

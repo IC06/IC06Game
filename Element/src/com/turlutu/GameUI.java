@@ -8,6 +8,7 @@ import com.android.angle.AngleActivity;
 import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
+import com.android.angle.AngleSound;
 import com.android.angle.AngleSprite;
 import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSpriteLayout;
@@ -27,6 +28,7 @@ public class GameUI extends AngleUI {
 	protected int mScore,lastupdate;
 	protected AngleSprite mSpriteLeft, mSpriteRight;
 	private AngleSpriteLayout mBordsLayout[];
+	private AngleSound sndJump;
 	
 	public GameUI(AngleActivity activity)
 	{
@@ -39,6 +41,7 @@ public class GameUI extends AngleUI {
 		WIDTH = 320f;
 		HEIGHT = 480f;
 		mScore = 0;
+		sndJump=new AngleSound(mActivity,R.raw.jump);
 		int d = 64;
 		mBallLayoutB = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballb, 0, 0, 128, 128);
 		mBallLayoutV = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballv, 0, 0, 128, 128);
@@ -74,7 +77,7 @@ public class GameUI extends AngleUI {
 		mString = (AngleString)ogDashboard.addObject(new AngleString(fntCafe25,"0",50,20,AngleString.aCenter));
 		
 
-		mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutR,32,80,1,this);
+		mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutR,32,80,1,sndJump,this);
 		mPhysics.addObject(mBall);
 
 		//init();
