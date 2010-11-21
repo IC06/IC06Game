@@ -24,6 +24,8 @@
 			android:screenOrientation="portrait"></activity>
 	<activity android:name="com.android.game.StepByStepGame" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:screenOrientation="portrait"></activity>
 <activity android:name="TestSprites" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:clearTaskOnLaunch="true" android:screenOrientation="portrait"></activity>
+
+<activity android:name="TestSon" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:screenOrientation="portrait" android:clearTaskOnLaunch="true"></activity>
 </application>
 	<uses-sdk android:minSdkVersion="3" />
 
