@@ -38,11 +38,11 @@ public class Plateforme extends AnglePhysicObject
 	public Plateforme(AngleSurfaceView view, float width, float bounce, int color)
 	{
 		super(1, 0); // Note : super (nb_segment, nb_circle);
-		// TODO ici c'est moche
+		// TODO ici c'est moche : on recré un layout à chaque fois = nul nul et renul, en plus c'est le sprite de la balle
 		mSprite = new AngleSprite(new AngleSpriteLayout(view, 128, 32, com.turlutu.R.drawable.ball, 0, 0, 256, 64));
 		mWidth = width;
 		float w = width/2;
-		addSegmentCollider(new AngleSegmentCollider(-w, 0, w, 0)); // haut
+		addSegmentCollider(new PlateformeCollider(-w, w, 0)); // haut
 		mMass = 0;
 		mBounce = bounce;
 		if(color==1)
@@ -81,6 +81,11 @@ public class Plateforme extends AnglePhysicObject
 		else
 			drawColliders(gl,1f,1f,1f);
 		
+	}
+
+	public PlateformeCollider collider()
+	{
+		return (PlateformeCollider) mSegmentColliders[0];
 	}
 	
 }
