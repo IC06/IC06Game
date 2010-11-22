@@ -171,7 +171,7 @@ public class GameUI extends AngleUI {
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		mBall.mVelocity.mX = (event.getX()-WIDTH/2);
+		mBall.mVelocity.mX = (event.getX()-WIDTH/2)*2;
 		
 		return true;
 	}
