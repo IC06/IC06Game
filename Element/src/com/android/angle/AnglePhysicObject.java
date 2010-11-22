@@ -22,8 +22,6 @@ public class AnglePhysicObject extends AngleObject
 	public AngleVector mDelta;
 	private int mFriction;
 	public AngleVector mPosition; //Set to change the position of the sprite
-	// TODO virer cet attribut
-	protected boolean dieu = false; //ce segment ne subira pas les collisions si true
 
 	public AnglePhysicObject(int maxSegmentColliders, int maxCircleColliders)
 	{
@@ -156,15 +154,10 @@ public class AnglePhysicObject extends AngleObject
 		nSin = (float) Math.sin(-normal);
 
 		// devuelve el sistema a su sitio
-		// TODO ici virer aussi
-		if(!dieu) {
-			mVelocity.mX = mFinalVelX * nCos - mFinalVelY * nSin;
-			mVelocity.mY = mFinalVelY * nCos + mFinalVelX * nSin;
-		}
-		if(!other.dieu) {
-			other.mVelocity.mX = oFinalVelX * nCos - oFinalVelY * nSin;
-			other.mVelocity.mY = oFinalVelY * nCos + oFinalVelX * nSin;
-		}
+		mVelocity.mX = mFinalVelX * nCos - mFinalVelY * nSin;
+		mVelocity.mY = mFinalVelY * nCos + mFinalVelX * nSin;
+		other.mVelocity.mX = oFinalVelX * nCos - oFinalVelY * nSin;
+		other.mVelocity.mY = oFinalVelY * nCos + oFinalVelX * nSin;
 	}
 
 	
