@@ -4,10 +4,8 @@ package com.turlutu;
 import javax.microedition.khronos.opengles.GL10;
 
 import com.android.angle.AnglePhysicObject;
-import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSprite;
 import com.android.angle.AngleSpriteLayout;
-import com.android.angle.AngleSurfaceView;
 import com.turlutu.Ball.Color;
 
 public class Plateforme extends AnglePhysicObject
@@ -15,44 +13,30 @@ public class Plateforme extends AnglePhysicObject
 	private AngleSprite mSprite;
 	private float mWidth;
 	protected Color mColor;
+	
+	static public float SIZE = 85;
 
-	/**
-	 * 
-	 * @param layout sprite
-	 * @param width width of the plateform
-	 * @param bounce Coefficient of restitution (1 return all the energy) 
-	 */
-	public Plateforme(AngleSpriteLayout layout, float width, float bounce)
+	public Plateforme(AngleSpriteLayout layout)
+	{
+		super(1,0);
+		init(layout,SIZE,0,1,Color.TOUTE); 
+	}
+	
+	public Plateforme(AngleSpriteLayout layout, Color color)
 	{
 		super(1, 0); // Note : super (nb_segment, nb_circle);
+		init(layout,SIZE,0,1,color); 
+	}
+
+	public void init(AngleSpriteLayout layout, float width, float mass, float bounce, Color color)
+	{
 		mSprite=new AngleSprite(layout);
 		mWidth = width;
 		float w = width/2;
 		addSegmentCollider(new PlateformeCollider(-w,w, 0)); // haut
-		//addSegmentCollider(new AngleSegmentCollider(-w, 0, w, 0)); // haut
-		mMass = 0;
+		mMass = mass;
 		mBounce = bounce;
-		mColor = Color.TOUTE;
-	}
-	
-	public Plateforme(AngleSurfaceView view, float width, float bounce, int color)
-	{
-		super(1, 0); // Note : super (nb_segment, nb_circle);
-		// TODO ici c'est moche : on recré un layout à chaque fois = nul nul et renul, en plus c'est le sprite de la balle
-		mSprite = new AngleSprite(new AngleSpriteLayout(view, 128, 32, com.turlutu.R.drawable.ball, 0, 0, 256, 64));
-		mWidth = width;
-		float w = width/2;
-		addSegmentCollider(new PlateformeCollider(-w, w, 0)); // haut
-		mMass = 0;
-		mBounce = bounce;
-		if(color==1)
-			mColor = Color.ROUGE;
-		else if(color==2)
-			mColor = Color.BLEU;
-		else if(color==3)
-			mColor = Color.VERT;
-		else
-			mColor = Color.TOUTE;
+		mColor = color;
 	}
 
 	/**

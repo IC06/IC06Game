@@ -143,27 +143,27 @@ public class GameUI extends AngleUI {
 		
 
 		// add barre
-		Plateforme mPlateforme = new Plateforme(mPlateformeLayout,100,1);
+		Plateforme mPlateforme = new Plateforme(mPlateformeLayout);
 		mPlateforme.mPosition.set(140,420);
 		mPhysics.addObject(mPlateforme);
 		
-		mPlateforme = new Plateforme(mPlateformeLayout,100,1);
+		mPlateforme = new Plateforme(mPlateformeLayout);
 		mPlateforme.mPosition.set(50,350);
 		mPhysics.addObject(mPlateforme);
 		
-		mPlateforme = new Plateforme(mPlateformeLayout,100,1);
+		mPlateforme = new Plateforme(mPlateformeLayout);
 		mPlateforme.mPosition.set(160,300);
 		mPhysics.addObject(mPlateforme);
 		
-		mPlateforme = new Plateforme(mPlateformeLayout,100,1);
+		mPlateforme = new Plateforme(mPlateformeLayout);
 		mPlateforme.mPosition.set(200,250);
 		mPhysics.addObject(mPlateforme);
 		
-		mPlateforme = new Plateforme(mPlateformeLayout,100,1);
+		mPlateforme = new Plateforme(mPlateformeLayout);
 		mPlateforme.mPosition.set(130,200);
 		mPhysics.addObject(mPlateforme);
 		
-		mPlateforme = new Plateforme(mPlateformeLayout,100,1);
+		mPlateforme = new Plateforme(mPlateformeLayout);
 		mPlateforme.mPosition.set(300,100);
 		mPhysics.addObject(mPlateforme);
 	}
