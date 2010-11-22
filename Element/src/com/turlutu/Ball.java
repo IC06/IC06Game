@@ -161,7 +161,7 @@ class Ball extends AnglePhysicObject
 		
 		if ((Ax < Bx && Ax < X && X < Bx)
 			or(Ax < Bx && Bx <X && X < Ax))*/
-		mPosition.mY = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmA().mY - mRadius;
+		mPosition.mY = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmA().mY - mRadius - 1;
 	}
 	
 };
