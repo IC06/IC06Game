@@ -23,7 +23,7 @@ public class BallCollider extends AngleCircleCollider {
 						Ay = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmA().mY,
 						By = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmB().mY,
 						X = mObject.mPosition.mX + mCenter.mX,
-						Y = mObject.mPosition.mY + mCenter.mY;
+						Y = mObject.mPosition.mY + mCenter.mY + mRadius - 15;
 			if (Y < Ay)
 			{
 				if (Ax < Bx && Ax < X && X < Bx)

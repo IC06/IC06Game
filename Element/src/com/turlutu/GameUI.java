@@ -19,7 +19,7 @@ import com.turlutu.Ball.Color;
 
 public class GameUI extends AngleUI {
 
-	private AngleSpriteLayout mBallLayoutB, mBallLayoutV, mBallLayoutR, mBoxLayout, mBackGroundLayout;
+	protected AngleSpriteLayout mBallLayoutB, mBallLayoutV, mBallLayoutR, mPlateformeLayout, mBackGroundLayout;
 	private MyPhysicsEngine mPhysics;
 	private float WIDTH,HEIGHT;
 	protected Ball mBall;
@@ -42,11 +42,13 @@ public class GameUI extends AngleUI {
 		HEIGHT = 480f;
 		mScore = 0;
 		sndJump=new AngleSound(mActivity,R.raw.jump);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 32, 32, com.turlutu.R.drawable.ball, 0, 0, 128, 128);
 		int d = 64;
 		mBallLayoutB = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballb, 0, 0, 128, 128);
 		mBallLayoutV = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballv, 0, 0, 128, 128);
 		mBallLayoutR = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ball, 0, 0, 128, 128);
 		mBordsLayout = new AngleSpriteLayout[3];
+		// TODO l'image bleu n'est pas à la bonne taille dans les fichiers
 		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bord_bleu);
 		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bord_rouge);
 		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bord_vert);
@@ -65,7 +67,7 @@ public class GameUI extends AngleUI {
 		
 		
 		// on ajoute la balle au moteur en premier pour qu'il la dessine en dernier, voir la fonction draw surchargé de MyPhysicEngine
-		mPhysics=new MyPhysicsEngine(20,WIDTH,HEIGHT,activity.mGLSurfaceView,this);
+		mPhysics=new MyPhysicsEngine(20,WIDTH,HEIGHT,activity.mGLSurfaceView, this);
 		mPhysics.mViscosity = 1f; // Air viscosity
 		mPhysics.mGravity = new AngleVector(0,10f);
 		addObject(mPhysics);
@@ -141,27 +143,27 @@ public class GameUI extends AngleUI {
 		
 
 		// add barre
-		Plateforme mPlateforme = new Plateforme(mBoxLayout,100,1);
+		Plateforme mPlateforme = new Plateforme(mPlateformeLayout,100,1);
 		mPlateforme.mPosition.set(140,420);
 		mPhysics.addObject(mPlateforme);
 		
-		mPlateforme = new Plateforme(mBoxLayout,100,1);
+		mPlateforme = new Plateforme(mPlateformeLayout,100,1);
 		mPlateforme.mPosition.set(50,350);
 		mPhysics.addObject(mPlateforme);
 		
-		mPlateforme = new Plateforme(mBoxLayout,100,1);
+		mPlateforme = new Plateforme(mPlateformeLayout,100,1);
 		mPlateforme.mPosition.set(160,300);
 		mPhysics.addObject(mPlateforme);
 		
-		mPlateforme = new Plateforme(mBoxLayout,100,1);
+		mPlateforme = new Plateforme(mPlateformeLayout,100,1);
 		mPlateforme.mPosition.set(200,250);
 		mPhysics.addObject(mPlateforme);
 		
-		mPlateforme = new Plateforme(mBoxLayout,100,1);
+		mPlateforme = new Plateforme(mPlateformeLayout,100,1);
 		mPlateforme.mPosition.set(130,200);
 		mPhysics.addObject(mPlateforme);
 		
-		mPlateforme = new Plateforme(mBoxLayout,100,1);
+		mPlateforme = new Plateforme(mPlateformeLayout,100,1);
 		mPlateforme.mPosition.set(300,100);
 		mPhysics.addObject(mPlateforme);
 	}

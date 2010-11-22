@@ -141,4 +141,27 @@ class Ball extends AnglePhysicObject
 		sndJump.play(1,false);
 	}
 	
+	public boolean collide(Plateforme other)
+	{
+		if (mCircleColliders[0].test(other.collider()))
+		{
+			gererCollision((PlateformeCollider)other.collider());
+			return true;
+		}
+		return false;
+	}
+	
+	private void gererCollision(PlateformeCollider segmentCollider)
+	{
+		/*float	Ax = segmentCollider.getmObject().mPosition.mX + segmentCollider.getmA().mX,
+					Bx = segmentCollider.getmObject().mPosition.mX + segmentCollider.getmB().mX,
+					Ay = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmA().mY,
+					X = mObject.mPosition.mX + mCenter.mX,
+					Y = mObject.mPosition.mY + mCenter.mY + mRadius - 20;
+		
+		if ((Ax < Bx && Ax < X && X < Bx)
+			or(Ax < Bx && Bx <X && X < Ax))*/
+		mPosition.mY = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmA().mY - mRadius;
+	}
+	
 };
