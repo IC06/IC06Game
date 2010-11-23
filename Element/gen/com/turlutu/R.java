@@ -20,6 +20,10 @@ public final class R {
         public static final int bord_vert=0x7f020006;
         public static final int fond=0x7f020007;
         public static final int icon=0x7f020008;
+        public static final int plateformeb=0x7f020009;
+        public static final int plateformer=0x7f02000a;
+        public static final int plateformev=0x7f02000b;
+        public static final int plateformew=0x7f02000c;
     }
     public static final class layout {
         public static final int main=0x7f030000;
