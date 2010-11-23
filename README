@@ -1,1 +1,20 @@
 son du saut (boink) http://www.freesound.org/samplesViewSingle.php?id=61847
+
+
+algo des plateformes :
+
+const max_dy # écart en y maximum
+const max_dx # écart en x maximum # peut etre qu'on peut mettre tout l'écran
+dx,dy # écart max actue
+
+new_x, new_y = (random(dx,max_dx),random(dy,max_dy))
+
+couleur = random
+
+create Plateforme(new_x,new_y,couleur)
+
+si dx < max_dx:
+	dx++
+
+si dy < max_dy:
+	dy++

@@ -19,18 +19,20 @@ public final class R {
         public static final int bord_bleu=0x7f020005;
         public static final int bord_rouge=0x7f020006;
         public static final int bord_vert=0x7f020007;
-        public static final int fond=0x7f020008;
-        public static final int icon=0x7f020009;
-        public static final int plateformeb=0x7f02000a;
-        public static final int plateformer=0x7f02000b;
-        public static final int plateformev=0x7f02000c;
-        public static final int plateformew=0x7f02000d;
+        public static final int bords=0x7f020008;
+        public static final int fond=0x7f020009;
+        public static final int icon=0x7f02000a;
+        public static final int plateforme=0x7f02000b;
+        public static final int plateformeb=0x7f02000c;
+        public static final int plateformer=0x7f02000d;
+        public static final int plateformev=0x7f02000e;
+        public static final int plateformew=0x7f02000f;
     }
     public static final class layout {
         public static final int main=0x7f030000;
     }
     public static final class raw {
-        public static final int bonus1=0x7f040000;
+        public static final int bonus=0x7f040000;
         public static final int jump=0x7f040001;
     }
     public static final class string {
