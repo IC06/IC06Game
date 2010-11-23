@@ -21,8 +21,8 @@ public class LoadingUI  extends AngleUI
 	public LoadingUI(AngleActivity activity)
 	{
 		super(activity);
+		//addObject(new AngleSprite(160, 240, new AngleSpriteLayout(mActivity.mGLSurfaceView, 320, 480,  com.turlutu.R.drawable.bg_menu)));
 		ogMenuTexts = new AngleObject();
-		addObject(new AngleSprite(160, 240, new AngleSpriteLayout(mActivity.mGLSurfaceView, 320, 480,  com.turlutu.R.drawable.bg_menu)));
 		addObject(ogMenuTexts);
 		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
 		strLoad = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Loading...", 160, 180, AngleString.aCenter));
@@ -32,12 +32,19 @@ public class LoadingUI  extends AngleUI
 	@Override
 	public void onActivate()
 	{
-		super.onActivate();
 		new Thread() {
 			@Override public void run() {
+				//TODO l'écran loading ne sert pas, ce n'est pas la création des UI qui prend du temps, ce doit être le chargement de toutes les options
+				/*
+				while(true)
+				{
+					if (false)
+						break;
+				}*/
 				((MainActivity) mActivity).load();
 			}
 		}.start();
+		super.onActivate();
 	}
 	
 }

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.android.angle.AngleActivity;
+import com.android.angle.FPSCounter;
 //import com.android.angle.FPSCounter;
 
 
@@ -55,7 +56,7 @@ public class MainActivity extends AngleActivity
 		mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE); 
       
         // a commenté dans la version finale (pour voir la fluidité du jeu)      
-		//mGLSurfaceView.addObject(new FPSCounter());
+		mGLSurfaceView.addObject(new FPSCounter());
 
 		FrameLayout mMainLayout=new FrameLayout(this);
 		mMainLayout.addView(mGLSurfaceView);
@@ -80,7 +81,6 @@ public class MainActivity extends AngleActivity
 		mMenu=new MenuUI(this);
 		mOptions=new OptionsUI(this);
 		mGame=new GameUI(this);
-		mGame.create(this);
 		mGame.setGravity(0f,10f);
 		setUI(mMenu);
 		Log.i("MainActivity", "Load() fin");
