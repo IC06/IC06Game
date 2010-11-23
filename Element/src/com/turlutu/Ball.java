@@ -141,6 +141,17 @@ class Ball extends AnglePhysicObject
 		sndJump.play(1,false);
 	}
 	
+	public boolean collide(Bonus other)
+	{
+		if (mCircleColliders[0].test(other.collider()))
+		{
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
 	public boolean collide(Plateforme other)
 	{
 		if (mCircleColliders[0].test(other.collider()))

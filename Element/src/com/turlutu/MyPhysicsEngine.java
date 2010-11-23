@@ -73,7 +73,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					}
 					if(Math.random()>0.7) { // 30% de chance d'avoir un bonus
 						Bonus bonus = new Bonus(mGameUI);
-						bonus.mPosition.set(posX+(int) (Math.random() * (Plateforme.SIZE) - (Plateforme.SIZE / 2)),-9);
+						bonus.mPosition.set(posX+(int) (Math.random() * (Plateforme.SIZE) - (Plateforme.SIZE / 2)),-15);
 						addObject(bonus);
 					}
 					Plateforme newPlateforme = new Plateforme(sprite,color);
@@ -96,6 +96,11 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				mChildO.mPosition.add(t);
 				if(mChildO.mPosition.mY > mWorldHeight) 
 				{
+					if(mChildO instanceof Bonus)
+					{
+						Bonus mybonus = (Bonus) mChildO;
+						mybonus.end();
+					}
 					removeObject(mChildO);
 				}
 			}
@@ -180,6 +185,12 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 										mChildO.jump();
 										break;
 									}
+								}
+							} else if (mChilds[c] instanceof Bonus) {
+								Bonus mChildC = (Bonus) mChilds[c];
+								if (mChildO.collide(mChildC))
+								{
+									mChildC.touch();
 								}
 							}
 							/*else if (!(mChilds[c] instanceof Plateforme) && mChilds[c] instanceof AnglePhysicObject)

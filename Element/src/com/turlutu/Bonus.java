@@ -23,6 +23,7 @@ class Bonus extends AnglePhysicObject
 	protected float mRadius;
 	private GameUI mGame;
 	private AngleSound sndTouch;
+	private boolean mustdraw = true;
 	
 	static int radius = 8;
 	static int nbtype = 6;
@@ -54,6 +55,25 @@ class Bonus extends AnglePhysicObject
 
 	}
 	
+	/*
+	 * Le bonus est touché
+	 */
+	public void touch()
+	{
+		if(mustdraw) { // Sinon on a deja touché ce bonus
+			mustdraw = false; // On ne dessine plus le bonus
+			sndTouch.play(1,false); // On joue la music
+		}
+	}
+	
+	/*
+	 * On arrete d'effectuer l'action du bonus
+	 */
+	public void end()
+	{
+		
+	}
+	
 	/**
 	 * @return surface
 	 */
@@ -71,32 +91,16 @@ class Bonus extends AnglePhysicObject
 	@Override
 	public void draw(GL10 gl)
 	{
+		if(mustdraw) {
 			mSprite.mPosition.set(mPosition);
 			mSprite.draw(gl);
 			drawColliders(gl,1f,0f,0f);
-	}
-	
-	public boolean collide(Plateforme other)
-	{
-		if (mCircleColliders[0].test(other.collider()))
-		{
-			gererCollision((PlateformeCollider)other.collider());
-			return true;
 		}
-		return false;
 	}
 	
-	private void gererCollision(PlateformeCollider segmentCollider)
+	public BallCollider collider()
 	{
-		/*float	Ax = segmentCollider.getmObject().mPosition.mX + segmentCollider.getmA().mX,
-					Bx = segmentCollider.getmObject().mPosition.mX + segmentCollider.getmB().mX,
-					Ay = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmA().mY,
-					X = mObject.mPosition.mX + mCenter.mX,
-					Y = mObject.mPosition.mY + mCenter.mY + mRadius - 20;
-		
-		if ((Ax < Bx && Ax < X && X < Bx)
-			or(Ax < Bx && Bx <X && X < Ax))*/
-		mPosition.mY = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmA().mY - mRadius - 1;
+		return (BallCollider) mCircleColliders[0];
 	}
 	
 };
