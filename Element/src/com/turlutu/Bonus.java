@@ -5,8 +5,6 @@ import javax.microedition.khronos.opengles.GL10;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSound;
 import com.android.angle.AngleSprite;
-import com.android.angle.AngleSpriteLayout;
-import com.android.angle.AngleVector;
 
 /**
  * extends AnglePhysicObject
@@ -33,12 +31,9 @@ class Bonus extends AnglePhysicObject
 		super(0, 1);
 		mGame = game;
 		mType = (int) (Math.random() * (nbtype));
-		// Sound of type
-		//if(mGame.sndBonus.length >= mType) {
-		//	sndTouch = mGame.sndBonus[mType];
-		//} else {
-			sndTouch = mGame.sndBonusDefault;
-		//}
+
+		sndTouch = mGame.sndBonusDefault;
+		
 		if(mType==0)
 			mSprite=new AngleSprite(mGame.bonusTexture0);
 		else if(mType==1)
@@ -63,6 +58,10 @@ class Bonus extends AnglePhysicObject
 		if(mustdraw) { // Sinon on a deja touché ce bonus
 			mustdraw = false; // On ne dessine plus le bonus
 			sndTouch.play(1,false); // On joue la music
+			
+			// Position du bonus
+			// Malgrès le fait qu'il n'est plus affiché il translattera quand même et finira par atteindre le bas ou il sera supprimé + juste avant call end()
+			mPosition.set(0,(int) Math.random() * 100 - 50);
 		}
 	}
 	
