@@ -29,7 +29,8 @@ public class GameUI extends AngleUI {
 	protected AngleSprite mSpriteLeft, mSpriteRight;
 	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformeb;
 	private AngleSpriteLayout mBordsLayout[];
-	private AngleSound sndJump;
+	protected AngleSound sndJump, sndBonus[], sndBonusDefault;
+	protected AngleSpriteLayout bonusTexture[];
 	
 	public GameUI(AngleActivity activity)
 	{
@@ -39,6 +40,19 @@ public class GameUI extends AngleUI {
 		HEIGHT = 480f;
 		mScore = 0;
 		sndJump=new AngleSound(mActivity,R.raw.jump);
+		// BONUS
+		sndBonusDefault=new AngleSound(mActivity,R.raw.bonus1);
+		
+		sndBonus[0]=new AngleSound(mActivity,R.raw.bonus1);
+		
+		bonusTexture[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 0, 0, 16, 16);
+		bonusTexture[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 16, 0, 16, 16);
+		bonusTexture[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 32, 0, 16, 16);
+		bonusTexture[3] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 48, 0, 16, 16);
+		bonusTexture[4] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 64, 0, 16, 16);
+		bonusTexture[5] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 80, 0, 16, 16);		
+		
+		// PLATEFORME
 		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 32, com.turlutu.R.drawable.plateformew, 0, 0, 85, 20);
 		mPlateformew = new AngleSprite(mPlateformeLayout);
 		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 32, com.turlutu.R.drawable.plateformer, 0, 0, 85, 20);
@@ -151,6 +165,10 @@ public class GameUI extends AngleUI {
 		Plateforme Plateforme = new Plateforme(mPlateformew);
 		Plateforme.mPosition.set(140,420);
 		mPhysics.addObject(Plateforme);
+		
+		Bonus bonus = new Bonus(this);
+		bonus.mPosition.set(140,428);
+		mPhysics.addObject(bonus);
 		
 		Plateforme = new Plateforme(mPlateformew);
 		Plateforme.mPosition.set(50,350);
