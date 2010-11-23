@@ -6,6 +6,7 @@ import javax.microedition.khronos.opengles.GL10;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AnglePhysicsEngine;
 import com.android.angle.AngleSpriteLayout;
+import com.android.angle.AngleSprite;
 import com.android.angle.AngleSurfaceView;
 import com.android.angle.AngleVector;
 import com.turlutu.Ball.Color;
@@ -40,7 +41,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				float posX;
 				int couleur;
 				Color color;
-				AngleSpriteLayout layout;
+				AngleSprite sprite;
 				toNewPlateform-=(int)decalage;
 				if(toNewPlateform<0) {
 				    toNewPlateform = (int) (Math.random() * (80-15) + 15);
@@ -51,26 +52,26 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					{
 						case 0:
 							color = Color.BLEU;
-							layout = mGameUI.mPlateformeLayout;
+							sprite = mGameUI.mPlateformeb;
 							break;
 							
 						case 1:
 							color = Color.ROUGE;
-							layout = mGameUI.mPlateformeLayout;
+							sprite = mGameUI.mPlateformer;
 							break;
 							
 						case 2:
 							color = Color.VERT;
-							layout = mGameUI.mPlateformeLayout;
+							sprite = mGameUI.mPlateformev;
 							break;
 							
 						case 3:
 						default:
 							color = Color.TOUTE;
-							layout = mGameUI.mPlateformeLayout;
+							sprite = mGameUI.mPlateformew;
 							break;
 					}
-					Plateforme newPlateforme = new Plateforme(layout,color);
+					Plateforme newPlateforme = new Plateforme(sprite,color);
 					newPlateforme.mPosition.set(posX,-1);
 					addObject(newPlateforme);
 				}

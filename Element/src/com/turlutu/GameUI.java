@@ -27,6 +27,7 @@ public class GameUI extends AngleUI {
 	private AngleString mString;
 	protected int mScore,lastupdate;
 	protected AngleSprite mSpriteLeft, mSpriteRight;
+	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformeb;
 	private AngleSpriteLayout mBordsLayout[];
 	private AngleSound sndJump;
 	
@@ -38,7 +39,16 @@ public class GameUI extends AngleUI {
 		HEIGHT = 480f;
 		mScore = 0;
 		sndJump=new AngleSound(mActivity,R.raw.jump);
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 32, 32, com.turlutu.R.drawable.ball, 0, 0, 128, 128);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 32, com.turlutu.R.drawable.plateformew, 0, 0, 85, 20);
+		mPlateformew = new AngleSprite(mPlateformeLayout);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 32, com.turlutu.R.drawable.plateformer, 0, 0, 85, 20);
+		mPlateformer = new AngleSprite(mPlateformeLayout);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 32, com.turlutu.R.drawable.plateformev, 0, 0, 85, 20);
+		mPlateformev = new AngleSprite(mPlateformeLayout);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 32, com.turlutu.R.drawable.plateformeb, 0, 0, 85, 20);
+		mPlateformeb = new AngleSprite(mPlateformeLayout);
+
+		
 		int d = 64;
 		mBallLayoutB = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballb, 0, 0, 128, 128);
 		mBallLayoutV = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballv, 0, 0, 128, 128);
@@ -138,29 +148,29 @@ public class GameUI extends AngleUI {
 		
 
 		// add barre
-		Plateforme mPlateforme = new Plateforme(mPlateformeLayout);
-		mPlateforme.mPosition.set(140,420);
-		mPhysics.addObject(mPlateforme);
+		Plateforme Plateforme = new Plateforme(mPlateformew);
+		Plateforme.mPosition.set(140,420);
+		mPhysics.addObject(Plateforme);
 		
-		mPlateforme = new Plateforme(mPlateformeLayout);
-		mPlateforme.mPosition.set(50,350);
-		mPhysics.addObject(mPlateforme);
+		Plateforme = new Plateforme(mPlateformew);
+		Plateforme.mPosition.set(50,350);
+		mPhysics.addObject(Plateforme);
 		
-		mPlateforme = new Plateforme(mPlateformeLayout);
-		mPlateforme.mPosition.set(160,300);
-		mPhysics.addObject(mPlateforme);
+		Plateforme = new Plateforme(mPlateformew);
+		Plateforme.mPosition.set(160,300);
+		mPhysics.addObject(Plateforme);
 		
-		mPlateforme = new Plateforme(mPlateformeLayout);
-		mPlateforme.mPosition.set(200,250);
-		mPhysics.addObject(mPlateforme);
+		Plateforme = new Plateforme(mPlateformew);
+		Plateforme.mPosition.set(200,250);
+		mPhysics.addObject(Plateforme);
 		
-		mPlateforme = new Plateforme(mPlateformeLayout);
-		mPlateforme.mPosition.set(130,200);
-		mPhysics.addObject(mPlateforme);
+		Plateforme = new Plateforme(mPlateformew);
+		Plateforme.mPosition.set(130,200);
+		mPhysics.addObject(Plateforme);
 		
-		mPlateforme = new Plateforme(mPlateformeLayout);
-		mPlateforme.mPosition.set(300,100);
-		mPhysics.addObject(mPlateforme);
+		Plateforme = new Plateforme(mPlateformew);
+		Plateforme.mPosition.set(300,100);
+		mPhysics.addObject(Plateforme);
 	}
 
 	@Override
