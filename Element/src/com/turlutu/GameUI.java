@@ -49,12 +49,11 @@ public class GameUI extends AngleUI {
 		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bord_rouge);
 		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bord_vert);
 		// TODO voir quelle image convient le mieu au background
-		/*mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond,0,0,320,480);
+		/*mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
 		
 		// on ajoute le background en premier à MyDemo pour qu'il soit dessiné en premier
 		Background mBackGround = new Background(mBackGroundLayout);
 		addObject(mBackGround);*/
-		
 		mSpriteLeft = new AngleSprite(0,240,mBordsLayout[0]);
 		mSpriteRight = new AngleSprite(320,240,mBordsLayout[2]);
 		addObject(mSpriteLeft);
