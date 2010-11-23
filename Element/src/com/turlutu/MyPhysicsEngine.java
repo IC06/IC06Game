@@ -71,6 +71,11 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 							sprite = mGameUI.mPlateformew;
 							break;
 					}
+					if(Math.random()>0.7) { // 30% de chance d'avoir un bonus
+						Bonus bonus = new Bonus(mGameUI);
+						bonus.mPosition.set(posX+(int) (Math.random() * (Plateforme.SIZE) - (Plateforme.SIZE / 2)),-9);
+						addObject(bonus);
+					}
 					Plateforme newPlateforme = new Plateforme(sprite,color);
 					newPlateforme.mPosition.set(posX,-1);
 					addObject(newPlateforme);

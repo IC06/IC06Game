@@ -29,8 +29,9 @@ public class GameUI extends AngleUI {
 	protected AngleSprite mSpriteLeft, mSpriteRight;
 	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformeb;
 	private AngleSpriteLayout mBordsLayout[];
-	protected AngleSound sndJump, sndBonus[], sndBonusDefault;
-	protected AngleSpriteLayout bonusTexture[];
+	//protected AngleSound sndJump, sndBonus[], sndBonusDefault;
+	protected AngleSound sndJump, sndBonusDefault;
+	protected AngleSpriteLayout bonusTexture0,bonusTexture1,bonusTexture2,bonusTexture3,bonusTexture4,bonusTexture5;
 	
 	public GameUI(AngleActivity activity)
 	{
@@ -43,23 +44,23 @@ public class GameUI extends AngleUI {
 		// BONUS
 		sndBonusDefault=new AngleSound(mActivity,R.raw.bonus1);
 		
-		sndBonus[0]=new AngleSound(mActivity,R.raw.bonus1);
+		//sndBonus[0]=new AngleSound(mActivity,R.raw.bonus1);
 		
-		bonusTexture[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 0, 0, 16, 16);
-		bonusTexture[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 16, 0, 16, 16);
-		bonusTexture[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 32, 0, 16, 16);
-		bonusTexture[3] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 48, 0, 16, 16);
-		bonusTexture[4] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 64, 0, 16, 16);
-		bonusTexture[5] = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 16, com.turlutu.R.drawable.bonus, 80, 0, 16, 16);		
+		bonusTexture0 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 0, 0, 16, 16);
+		bonusTexture1 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 16, 0, 16, 16);
+		bonusTexture2 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 32, 0, 16, 16);
+		bonusTexture3 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 48, 0, 16, 16);
+		bonusTexture4 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 64, 0, 16, 16);
+		bonusTexture5 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 80, 0, 16, 16);	
 		
 		// PLATEFORME
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 32, com.turlutu.R.drawable.plateformew, 0, 0, 85, 20);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 85, 20, com.turlutu.R.drawable.plateformew, 0, 0, 85, 20);
 		mPlateformew = new AngleSprite(mPlateformeLayout);
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 32, com.turlutu.R.drawable.plateformer, 0, 0, 85, 20);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 85, 20, com.turlutu.R.drawable.plateformer, 0, 0, 85, 20);
 		mPlateformer = new AngleSprite(mPlateformeLayout);
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 32, com.turlutu.R.drawable.plateformev, 0, 0, 85, 20);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 85, 20, com.turlutu.R.drawable.plateformev, 0, 0, 85, 20);
 		mPlateformev = new AngleSprite(mPlateformeLayout);
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 128, 32, com.turlutu.R.drawable.plateformeb, 0, 0, 85, 20);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 85, 20, com.turlutu.R.drawable.plateformeb, 0, 0, 85, 20);
 		mPlateformeb = new AngleSprite(mPlateformeLayout);
 
 		

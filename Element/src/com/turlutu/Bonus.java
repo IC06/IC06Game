@@ -31,15 +31,25 @@ class Bonus extends AnglePhysicObject
 	{
 		super(0, 1);
 		mGame = game;
-		mType = (int) (Math.random() * (nbtype + 1));
+		mType = (int) (Math.random() * (nbtype));
 		// Sound of type
-		if(mGame.sndBonus.length >= mType) {
-			sndTouch = mGame.sndBonus[mType];
-		} else {
+		//if(mGame.sndBonus.length >= mType) {
+		//	sndTouch = mGame.sndBonus[mType];
+		//} else {
 			sndTouch = mGame.sndBonusDefault;
-		}
-		AngleSpriteLayout texture = mGame.bonusTexture[mType];
-		mSprite=new AngleSprite(texture);
+		//}
+		if(mType==0)
+			mSprite=new AngleSprite(mGame.bonusTexture0);
+		else if(mType==1)
+			mSprite=new AngleSprite(mGame.bonusTexture1);
+		else if(mType==2)
+			mSprite=new AngleSprite(mGame.bonusTexture2);
+		else if(mType==3)
+			mSprite=new AngleSprite(mGame.bonusTexture3);
+		else if(mType==4)
+			mSprite=new AngleSprite(mGame.bonusTexture4);
+		else if(mType==5)
+			mSprite=new AngleSprite(mGame.bonusTexture5);
 		addCircleCollider(new BallCollider(0, 0, radius));
 
 	}
