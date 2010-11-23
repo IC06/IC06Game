@@ -65,9 +65,6 @@ public class MainActivity extends AngleActivity
 		mLoading=new LoadingUI(this);
 		setUI(mLoading);
 		
-		
-		
-		
 		/*FrameLayout mainLayout=new FrameLayout(this);
 		mainLayout.addView(mGLSurfaceView);
 		setContentView(mainLayout);*/

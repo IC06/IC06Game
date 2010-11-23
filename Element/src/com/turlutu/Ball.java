@@ -38,10 +38,10 @@ class Ball extends AnglePhysicObject
 		sndJump = soundJump;
 		mAcceleration = new AngleVector(0f,0f);
 		mColors = new Color[3];
-		mColors[0] = Color.BLEU;
-		mColors[1] = Color.ROUGE;
-		mColors[2] = Color.VERT;
-		mSprite=new AngleSprite(textureR);
+		mColors[0] = Color.ROUGE;
+		mColors[1] = Color.VERT;
+		mColors[2] = Color.BLEU;
+		mSprite=new AngleSprite(textureV);
 		mTextureB=textureB;
 		mTextureV=textureV;
 		mTextureR=textureR;
