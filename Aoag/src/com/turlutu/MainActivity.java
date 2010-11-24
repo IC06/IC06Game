@@ -23,6 +23,7 @@ public class MainActivity extends AngleActivity
 	protected MenuUI mMenu;
 	protected OptionsUI mOptions;
 	protected LoadingUI mLoading;
+	private boolean loaded = false;
 	
    private final SensorEventListener mListener = new SensorEventListener() 
    {
@@ -34,7 +35,7 @@ public class MainActivity extends AngleActivity
 		//@Override
 		public void onSensorChanged(SensorEvent event)
 		{
-			if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
+			if (loaded & event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
 			{
 				mGame.mBall.mVelocity.mX = (-100*event.values[0]);
 				//mDemo.setGravity(-10*event.values[0],10*event.values[1]);
@@ -81,6 +82,7 @@ public class MainActivity extends AngleActivity
 		mGame.setGravity(0f,10f);
 		setUI(mMenu);
 		Log.i("MainActivity", "Load() fin");
+		loaded = true;
 	}
 
 
