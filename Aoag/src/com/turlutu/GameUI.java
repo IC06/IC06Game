@@ -27,7 +27,7 @@ public class GameUI extends AngleUI {
 	private AngleString mString;
 	protected int mScore,lastupdate;
 	protected AngleSprite mSpriteLeft, mSpriteRight;
-	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformeb;
+	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformej;
 	private AngleSpriteLayout mBordsLayout[];
 	//protected AngleSound sndJump, sndBonus[], sndBonusDefault;
 	protected AngleSound sndJump, sndBonusDefault;
@@ -54,13 +54,13 @@ public class GameUI extends AngleUI {
 		bonusTexture5 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 80, 0, 16, 16);	
 		
 		// PLATEFORME
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 80, 16, com.turlutu.R.drawable.plateforme, 0, 0, 128, 16);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 1, 64, 30);
 		mPlateformer = new AngleSprite(mPlateformeLayout);
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 80, 16, com.turlutu.R.drawable.plateforme, 0, 16, 128, 16);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 34, 64, 30);
+		mPlateformej = new AngleSprite(mPlateformeLayout);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 66, 64, 30);
 		mPlateformev = new AngleSprite(mPlateformeLayout);
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 80, 16, com.turlutu.R.drawable.plateforme, 0, 32, 128, 16);
-		mPlateformeb = new AngleSprite(mPlateformeLayout);
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 80, 16, com.turlutu.R.drawable.plateforme, 0, 48, 128, 16);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 98, 64, 30);
 		mPlateformew = new AngleSprite(mPlateformeLayout);
 
 		
@@ -75,18 +75,17 @@ public class GameUI extends AngleUI {
 		
 		
 		mBordsLayout = new AngleSpriteLayout[3];
-		// TODO l'image bleu n'est pas à la bonne taille dans les fichiers
 		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,0,0,64,256);
 		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,64,0,64,256);
 		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,128,0,64,256);
 		// TODO voir quelle image convient le mieu au background
-		/*mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
+		mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
 		
 		// on ajoute le background en premier à MyDemo pour qu'il soit dessiné en premier
 		Background mBackGround = new Background(mBackGroundLayout);
-		addObject(mBackGround);*/
+		addObject(mBackGround);
 		mSpriteLeft = new AngleSprite(0,240,mBordsLayout[0]);
-		mSpriteRight = new AngleSprite(320,240,mBordsLayout[2]);
+		mSpriteRight = new AngleSprite(320,240,mBordsLayout[1]);
 		addObject(mSpriteLeft);
 		addObject(mSpriteRight);
 		
@@ -237,9 +236,9 @@ public class GameUI extends AngleUI {
 		if (newColor == Color.ROUGE)
 			mSpriteRight.setLayout(mBordsLayout[0]);
 		else if (newColor == Color.VERT)
-			mSpriteRight.setLayout(mBordsLayout[1]);
-		else
 			mSpriteRight.setLayout(mBordsLayout[2]);
+		else
+			mSpriteRight.setLayout(mBordsLayout[1]);
 	}
 	
 	public void setSpriteLeft(Color newColor)
@@ -247,9 +246,9 @@ public class GameUI extends AngleUI {
 		if (newColor == Color.ROUGE)
 			mSpriteLeft.setLayout(mBordsLayout[0]);
 		else if (newColor == Color.VERT)
-			mSpriteLeft.setLayout(mBordsLayout[1]);
-		else
 			mSpriteLeft.setLayout(mBordsLayout[2]);
+		else
+			mSpriteLeft.setLayout(mBordsLayout[1]);
 	}
 	
 }

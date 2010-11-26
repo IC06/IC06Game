@@ -51,8 +51,8 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					switch (couleur)
 					{
 						case 0:
-							color = Color.BLEU;
-							sprite = mGameUI.mPlateformeb;
+							color = Color.JAUNE;
+							sprite = mGameUI.mPlateformej;
 							break;
 							
 						case 1:

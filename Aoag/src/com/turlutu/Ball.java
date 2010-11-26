@@ -18,7 +18,7 @@ class Ball extends AnglePhysicObject
 {
 	private AngleSprite mSprite;
 	private AngleSpriteLayout mTexture[];
-	protected enum Color {BLEU, VERT, ROUGE, TOUTE};
+	protected enum Color {JAUNE, VERT, ROUGE, TOUTE};
 	private Color mColors[];
 	protected float mRadius;
 	private GameUI mGame;
@@ -40,7 +40,7 @@ class Ball extends AnglePhysicObject
 		mColors = new Color[3];
 		mColors[0] = Color.ROUGE;
 		mColors[1] = Color.VERT;
-		mColors[2] = Color.BLEU;
+		mColors[2] = Color.JAUNE;
 		mSprite=new AngleSprite(texture[0]);
 		mTexture=texture;
 		addCircleCollider(new BallCollider(0, 0, radius));
@@ -80,20 +80,20 @@ class Ball extends AnglePhysicObject
 	{
 		if (newColor == Color.ROUGE)
 		{
-			mGame.setSpriteLeft(Color.BLEU);
-			mSprite.setLayout(mTexture[4]);
+			mGame.setSpriteLeft(Color.JAUNE);
+			mSprite.setLayout(mTexture[5]);
 			mGame.setSpriteRight(Color.VERT);
 		}
 		else if(newColor == Color.VERT)
 		{
 			mGame.setSpriteLeft(Color.ROUGE);
-			mSprite.setLayout(mTexture[0]);
-			mGame.setSpriteRight(Color.BLEU);
+			mSprite.setLayout(mTexture[1]);
+			mGame.setSpriteRight(Color.JAUNE);
 		}
 		else
 		{
 			mGame.setSpriteLeft(Color.VERT);
-			mSprite.setLayout(mTexture[2]);
+			mSprite.setLayout(mTexture[3]);
 			mGame.setSpriteRight(Color.ROUGE);
 		}
 	}

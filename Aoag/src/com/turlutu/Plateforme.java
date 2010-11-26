@@ -13,7 +13,7 @@ public class Plateforme extends AnglePhysicObject
 	private float mWidth;
 	protected Color mColor;
 	
-	static public float SIZE = 85;
+	static public float SIZE = 70;
 
 	public Plateforme(AngleSprite plateformeblanche)
 	{
@@ -57,7 +57,7 @@ public class Plateforme extends AnglePhysicObject
 		mSprite.draw(gl);
 		/*if(mColor == Color.ROUGE)
 			drawColliders(gl,1f,0f,0f);
-		else if(mColor ==  Color.BLEU)
+		else if(mColor ==  Color.JAUNE)
 			drawColliders(gl,0f,0f,1f);
 		else if(mColor == Color.VERT)
 			drawColliders(gl,0f,1f,0f);
