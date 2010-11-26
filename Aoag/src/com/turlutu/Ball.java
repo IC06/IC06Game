@@ -24,6 +24,7 @@ class Ball extends AnglePhysicObject
 	private GameUI mGame;
 	protected AngleVector mAcceleration;
 	private AngleSound sndJump;
+	protected int sens = 1;
 	
 	/**
 	 * 
@@ -103,6 +104,17 @@ class Ball extends AnglePhysicObject
 		return mColors[1];
 	}
 	
+	public int getIntTexture()
+	{
+		if ( mColors[1] == Color.VERT ) {
+			return 0 + sens;
+		} else if ( mColors[1] == Color.JAUNE ){
+			return 2 + sens;
+		} else {
+			return 4 + sens;
+		}
+	}
+	
 	/**
 	 * I think this function does nothing important
 	 * @return surface
@@ -137,6 +149,13 @@ class Ball extends AnglePhysicObject
 	{
 		mVelocity.mY = -600;
 		sndJump.play(1,false);
+	}
+	
+	public void changeSens(int n)
+	{
+		sens+=n;
+		mSprite.setLayout(mTexture[getIntTexture()]);
+
 	}
 	
 	public boolean collide(Bonus other)
