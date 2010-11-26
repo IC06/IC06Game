@@ -17,7 +17,7 @@ import com.android.angle.AngleVector;
 class Ball extends AnglePhysicObject
 {
 	private AngleSprite mSprite;
-	private AngleSpriteLayout mTextureB, mTextureV, mTextureR;
+	private AngleSpriteLayout mTexture[];
 	protected enum Color {BLEU, VERT, ROUGE, TOUTE};
 	private Color mColors[];
 	protected float mRadius;
@@ -32,7 +32,7 @@ class Ball extends AnglePhysicObject
 	 * @param mass Mass of the ball
 	 * @param bounce Coefficient of restitution(1 return all the energy)
 	 */
-	public Ball(AngleSpriteLayout textureB, AngleSpriteLayout textureV, AngleSpriteLayout textureR, float radius, float mass, float bounce, AngleSound soundJump, GameUI game)
+	public Ball(AngleSpriteLayout texture[], float radius, float mass, float bounce, AngleSound soundJump, GameUI game)
 	{
 		super(0, 1);
 		sndJump = soundJump;
@@ -41,10 +41,8 @@ class Ball extends AnglePhysicObject
 		mColors[0] = Color.ROUGE;
 		mColors[1] = Color.VERT;
 		mColors[2] = Color.BLEU;
-		mSprite=new AngleSprite(textureV);
-		mTextureB=textureB;
-		mTextureV=textureV;
-		mTextureR=textureR;
+		mSprite=new AngleSprite(texture[0]);
+		mTexture=texture;
 		addCircleCollider(new BallCollider(0, 0, radius));
 		mRadius = radius;
 		mMass = mass;
@@ -83,19 +81,19 @@ class Ball extends AnglePhysicObject
 		if (newColor == Color.ROUGE)
 		{
 			mGame.setSpriteLeft(Color.BLEU);
-			mSprite.setLayout(mTextureR);
+			mSprite.setLayout(mTexture[4]);
 			mGame.setSpriteRight(Color.VERT);
 		}
 		else if(newColor == Color.VERT)
 		{
 			mGame.setSpriteLeft(Color.ROUGE);
-			mSprite.setLayout(mTextureV);
+			mSprite.setLayout(mTexture[0]);
 			mGame.setSpriteRight(Color.BLEU);
 		}
 		else
 		{
 			mGame.setSpriteLeft(Color.VERT);
-			mSprite.setLayout(mTextureB);
+			mSprite.setLayout(mTexture[2]);
 			mGame.setSpriteRight(Color.ROUGE);
 		}
 	}
@@ -124,15 +122,15 @@ class Ball extends AnglePhysicObject
 	public void draw(GL10 gl)
 	{
 			mSprite.mPosition.set(mPosition);
-			//mSprite.draw(gl);
-			if(mColors[1] == Color.ROUGE)
+			mSprite.draw(gl);
+			/*if(mColors[1] == Color.ROUGE)
 				drawColliders(gl,1f,0f,0f);
 			else if(mColors[1] ==  Color.BLEU)
 				drawColliders(gl,0f,0f,1f);
 			else if(mColors[1] == Color.VERT)
 				drawColliders(gl,0f,1f,0f);
 			else
-				drawColliders(gl,1f,1f,1f);
+				drawColliders(gl,1f,1f,1f);*/
 	}
 	
 	public void jump()

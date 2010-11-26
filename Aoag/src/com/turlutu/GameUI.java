@@ -19,7 +19,7 @@ import com.turlutu.Ball.Color;
 
 public class GameUI extends AngleUI {
 
-	protected AngleSpriteLayout mBallLayoutB, mBallLayoutV, mBallLayoutR, mPlateformeLayout, mBackGroundLayout;
+	protected AngleSpriteLayout mBallLayout[], mPlateformeLayout, mBackGroundLayout;
 	private MyPhysicsEngine mPhysics;
 	private float WIDTH,HEIGHT;
 	protected Ball mBall;
@@ -65,9 +65,15 @@ public class GameUI extends AngleUI {
 
 		
 		int d = 64;
-		mBallLayoutB = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballb, 0, 0, 128, 128);
-		mBallLayoutV = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ballv, 0, 0, 128, 128);
-		mBallLayoutR = new AngleSpriteLayout(activity.mGLSurfaceView, d, d, com.turlutu.R.drawable.ball, 0, 0, 128, 128);
+		mBallLayout = new AngleSpriteLayout[6];
+		mBallLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,0,0,42,64);
+		mBallLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,42,0,42,64);
+		mBallLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,85,0,42,64);
+		mBallLayout[3] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,127,0,42,64);
+		mBallLayout[4] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,169,0,42,64);
+		mBallLayout[5] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,211,0,42,64);		
+		
+		
 		mBordsLayout = new AngleSpriteLayout[3];
 		// TODO l'image bleu n'est pas à la bonne taille dans les fichiers
 		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,0,0,64,256);
@@ -99,7 +105,7 @@ public class GameUI extends AngleUI {
 		mString = (AngleString)ogDashboard.addObject(new AngleString(fntCafe25,"0",50,20,AngleString.aCenter));
 		
 
-		mBall = new Ball (mBallLayoutB,mBallLayoutV,mBallLayoutR,32,80,1,sndJump,this);
+		mBall = new Ball (mBallLayout,32,80,1,sndJump,this);
 		mPhysics.addObject(mBall);
 
 		//init();
