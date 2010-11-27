@@ -33,24 +33,13 @@ public class MenuUI  extends AngleUI
 		
 		addObject(ogMenuTexts);
 
-		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
+		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 0, 0, 0, 255);
 		
-		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Play", 160, 160, AngleString.aCenter));
+		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Play", 160, 110, AngleString.aLeft));
 		strHiScore = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Hi Score", 160, 210, AngleString.aCenter));
-		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Options", 160, 260, AngleString.aCenter));
-		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Exit", 160, 390, AngleString.aCenter));
+		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Options", 175, 295, AngleString.aCenter));
+		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Exit", 250, 360, AngleString.aCenter));
 		
-		//This is our structure right now:
-		//---------------------------
-		//mGLSurfaceView
-		// >mTheGame
-		// >mTheMenu
-		//   >sprBackground
-		//   >ogMenuTexts
-		//     >strPlay
-		//     >strHiScore
-		//     >strExit
-		//---------------------------
 	}
 
 	@Override
