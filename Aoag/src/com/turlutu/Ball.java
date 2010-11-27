@@ -24,7 +24,7 @@ class Ball extends AnglePhysicObject
 	private GameUI mGame;
 	protected AngleVector mAcceleration;
 	private AngleSound sndJump;
-	protected int sens = 1;
+	public int sens = 1;
 	
 	/**
 	 * 
@@ -151,11 +151,14 @@ class Ball extends AnglePhysicObject
 		sndJump.play(1,false);
 	}
 	
-	public void changeSens(int n)
+	public void changeSens()
 	{
-		sens+=n;
+		if(mVelocity.mX<0) {
+			sens=0;
+		} else if(mVelocity.mX>0) {
+			sens=1;
+		}
 		mSprite.setLayout(mTexture[getIntTexture()]);
-
 	}
 	
 	public boolean collide(Bonus other)

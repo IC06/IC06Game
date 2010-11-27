@@ -116,15 +116,14 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 			if (mChilds[o] instanceof Ball)
 			{
 				Ball ball = (Ball) mChilds[o];
-				if(mGravity.mY>0 && ball.sens != 1)
-					ball.changeSens(1);
-				else if(mGravity.mY<0 && ball.sens != 0)
-					ball.changeSens(-1);
+
 				ball.mAcceleration.mY =  ball.mMass*mGravity.mY - mViscosity * ball.mVelocity.mY;
 				ball.mVelocity.mY += ball.mAcceleration.mY * secondsElapsed;
 				
 				ball.mDelta.mX = ball.mVelocity.mX * secondsElapsed;
 				ball.mDelta.mY = ball.mVelocity.mY * secondsElapsed;
+				ball.changeSens();
+
 			}
 		}
 	}
