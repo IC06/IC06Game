@@ -64,7 +64,6 @@ public class GameUI extends AngleUI {
 		mPlateformew = new AngleSprite(mPlateformeLayout);
 
 		
-		int d = 64;
 		mBallLayout = new AngleSpriteLayout[6];
 		mBallLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,0,0,42,64);
 		mBallLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,42,0,42,64);

@@ -1,11 +1,10 @@
 package com.turlutu;
 
 import android.graphics.Typeface;
+
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
-import com.android.angle.AngleSprite;
-import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
 

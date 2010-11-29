@@ -22,11 +22,12 @@ public final class R {
         public static final int bords=0x7f020008;
         public static final int fond=0x7f020009;
         public static final int icon=0x7f02000a;
-        public static final int plateforme=0x7f02000b;
-        public static final int plateformeb=0x7f02000c;
-        public static final int plateformer=0x7f02000d;
-        public static final int plateformev=0x7f02000e;
-        public static final int plateformew=0x7f02000f;
+        public static final int persos=0x7f02000b;
+        public static final int plateforme=0x7f02000c;
+        public static final int plateformeb=0x7f02000d;
+        public static final int plateformer=0x7f02000e;
+        public static final int plateformev=0x7f02000f;
+        public static final int plateformew=0x7f020010;
     }
     public static final class raw {
         public static final int bonus=0x7f030000;

@@ -5,7 +5,6 @@ import javax.microedition.khronos.opengles.GL10;
 
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AnglePhysicsEngine;
-import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleSprite;
 import com.android.angle.AngleSurfaceView;
 import com.android.angle.AngleVector;
