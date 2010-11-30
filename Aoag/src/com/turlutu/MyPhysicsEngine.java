@@ -3,6 +3,8 @@ package com.turlutu;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import android.util.Log;
+
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AnglePhysicsEngine;
 import com.android.angle.AngleSprite;
@@ -22,6 +24,8 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	AngleSurfaceView mGLSurfaceView;
 	GameUI mGameUI;
 	private int mCounterScore;
+	final private float max_dy=130f;
+	private float dy,new_y,current_max_dy;
 	
 	public MyPhysicsEngine(int maxObjects, float worldWidth, float worldHeight,AngleSurfaceView SurfaceView, GameUI gameUI)
 	{
@@ -30,14 +34,66 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		mWorldHeight = worldHeight;
 		mGLSurfaceView = SurfaceView;
 		mGameUI = gameUI;
+		dy = 30;
+		current_max_dy = 60;
 	}
 
 	private void addPlateform(final float decalage)
 	{
-		// TODO : cette fonction est pas terrible pour l'instant
-		new Thread() {
-			@Override public void run() {
-				float posX;
+		// TODO réinitialiser la difficultée
+		new_y -= decalage;
+		if (new_y < 0)
+		{
+			new_y = max_dy;
+			new_y = dy + (float) (Math.random() * (current_max_dy - dy));
+			float d = 10f/dy;
+			if (dy < max_dy){dy+=d;}
+			if (current_max_dy < max_dy){current_max_dy+=d;}
+			Log.i("DY",""+dy+" "+current_max_dy);
+			new Thread() 
+			{
+				@Override 
+				public void run() 
+				{
+					float new_x = (float) (Math.random() * (320f));
+					int couleur = (int) (Math.random() * 5);
+					AngleSprite sprite;
+					Color color;
+					switch (couleur)
+					{
+						case 0:
+							color = Color.JAUNE;
+							sprite = mGameUI.mPlateformej;
+							break;
+							
+						case 1:
+							color = Color.ROUGE;
+							sprite = mGameUI.mPlateformer;
+							break;
+							
+						case 2:
+							color = Color.VERT;
+							sprite = mGameUI.mPlateformev;
+							break;
+							
+						case 3:
+						default:
+							color = Color.TOUTE;
+							sprite = mGameUI.mPlateformew;
+							break;
+					}
+					if(Math.random()>0.7) { // 30% de chance d'avoir un bonus
+						Bonus bonus = new Bonus(mGameUI);
+						bonus.mPosition.set(new_x+(int) (Math.random() * (Plateforme.SIZE) - (Plateforme.SIZE / 2)),-15);
+						addObject(bonus);
+					}
+					Plateforme newPlateforme = new Plateforme(sprite,color);
+					newPlateforme.mPosition.set(new_x,-1);
+					addObject(newPlateforme);
+				}
+			}.start();
+		}
+				/*float posX;
 				int couleur;
 				Color color;
 				AngleSprite sprite;
@@ -80,7 +136,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					addObject(newPlateforme);
 				}
 			}
-		}.start();
+		}.start();*/
 	}
 	
 	
@@ -189,10 +245,10 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									}
 								}
 							} else if (mChilds[c] instanceof Bonus) {
-								Bonus mChildC = (Bonus) mChilds[c];
-								if (mChildO.collide(mChildC))
+								Bonus bonus = (Bonus) mChilds[c];
+								if (mChildO.collide(bonus))
 								{
-									mChildC.touch();
+									bonus.touch();
 								}
 							}
 							/*else if (!(mChilds[c] instanceof Plateforme) && mChilds[c] instanceof AnglePhysicObject)
