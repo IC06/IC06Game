@@ -10,7 +10,6 @@ public class BallCollider extends AngleCircleCollider {
 		super(x, y, radius);
 	}
 	
-	//TODO des fois la balle passe à travers les segments
 	public boolean test(AngleSegmentCollider segmentCollider)
 	{
 		float CH = segmentCollider.closestDist(this);
