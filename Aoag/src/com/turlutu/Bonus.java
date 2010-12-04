@@ -8,6 +8,7 @@ import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSound;
 import com.android.angle.AngleSprite;
 
+// TODO ADDSCORE,CHANGEPHYSICS
 /**
  * extends AnglePhysicObject
  * 
@@ -17,7 +18,13 @@ import com.android.angle.AngleSprite;
 class Bonus extends AnglePhysicObject
 {
 	protected float mRadius;
-	protected enum TypeBonus {NONE,ADDSCORE, MOREJUMP, LESSJUMP, CHANGEPHYSICS, DISABLECHANGECOLOR, ALLPLATEFORME};
+	protected enum TypeBonus {	NONE, // 0
+															ADDSCORE,// 1
+															MOREJUMP, // 2 => Ball.jump()
+															LESSJUMP, // 3 => Ball.jump()
+															CHANGEPHYSICS, // 4 => 
+															DISABLECHANGECOLOR, // 5 => Ball.changeColorLeft/Tight()
+															ALLPLATEFORME}; // 6 => MyPhysicsEngine.kynetics()
 
 	private GameUI mGame;
 	private AngleSound sndTouch;
@@ -48,7 +55,7 @@ class Bonus extends AnglePhysicObject
 		mGame = game;
 		
 		mType = (int) (Math.random() * (nbtype));
-		mType = 5;
+		mType = 6;
 		sndTouch = mGame.sndBonus[mType];
 		mSprite=new AngleSprite(mGame.mBonusLayout[mType]);
 		

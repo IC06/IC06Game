@@ -11,6 +11,7 @@ import com.android.angle.AngleSprite;
 import com.android.angle.AngleSurfaceView;
 import com.android.angle.AngleVector;
 import com.turlutu.Ball.Color;
+import com.turlutu.Bonus.TypeBonus;
 
 /**
  * L'objet ajouté en premier à cet objet sera dessiné en dernier
@@ -187,7 +188,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									&& mChildO.mVelocity.mY > 0)  // et il est entrain de descendre
 							{
 								Plateforme mChildC = (Plateforme) mChilds[c];
-								if(mChildC.mColor == Color.TOUTE || mChildC.mColor == mChildO.getColor()) // si l'objet est de la même couleure
+								if(mGameUI.mTypeBonus == TypeBonus.ALLPLATEFORME || mChildC.mColor == Color.TOUTE || mChildC.mColor == mChildO.getColor()) // si l'objet est de la même couleure
 								{
 									if (mChildO.collide(mChildC))
 									{
