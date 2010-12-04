@@ -210,6 +210,8 @@ public class GameUI extends AngleUI {
 	public boolean onTouchEvent(MotionEvent event)
 	{
 		mBall.mVelocity.mX = (event.getX()-WIDTH/2)*2;
+		if (mTypeBonus == TypeBonus.CHANGEPHYSICS)
+			mBall.mVelocity.mX = -mBall.mVelocity.mX;
 		
 		return true;
 	}
@@ -282,6 +284,12 @@ public class GameUI extends AngleUI {
 		mTimeEllapsedBonus = 0;
 		mTypeBonus = t;
 		mTimeActionBonus = s;
+		if (t == TypeBonus.ADDSCORE)
+		{
+			mScore += 1000;
+			mString.set(String.valueOf(mScore));
+			lastupdate=0;
+		}
 		Log.i("GameUI", "GameUI setBonus fin");
 	}
 }

@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import com.android.angle.AngleActivity;
 import com.android.angle.FPSCounter;
 //import com.android.angle.FPSCounter;
+import com.turlutu.Bonus.TypeBonus;
 
 
 public class MainActivity extends AngleActivity
@@ -38,6 +39,8 @@ public class MainActivity extends AngleActivity
 			if (loaded & event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
 			{
 				mGame.mBall.mVelocity.mX = (-100*event.values[0]);
+				if (mGame.mTypeBonus == TypeBonus.CHANGEPHYSICS)
+					mGame.mBall.mVelocity.mX = -mGame.mBall.mVelocity.mX;
 				//mDemo.setGravity(-10*event.values[0],10*event.values[1]);
 				//mDemo.setGravity(-4*event.values[0],10);
 			}
