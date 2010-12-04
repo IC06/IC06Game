@@ -40,7 +40,6 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 
 	private void addPlateform(final float decalage)
 	{
-		// TODO réinitialiser la difficultée
 		new_y -= decalage;
 		if (new_y < 0)
 		{
@@ -93,50 +92,6 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				}
 			}.start();
 		}
-				/*float posX;
-				int couleur;
-				Color color;
-				AngleSprite sprite;
-				toNewPlateform-=(int)decalage;
-				if(toNewPlateform<0) {
-				    toNewPlateform = (int) (Math.random() * (80-15) + 15);
-					posX = (float) (Math.random() * (mWorldWidth - Plateforme.SIZE)) + Plateforme.SIZE / 2;
-					couleur = (int) (Math.random() * 5);
-					// TODO les layouts
-					switch (couleur)
-					{
-						case 0:
-							color = Color.JAUNE;
-							sprite = mGameUI.mPlateformej;
-							break;
-							
-						case 1:
-							color = Color.ROUGE;
-							sprite = mGameUI.mPlateformer;
-							break;
-							
-						case 2:
-							color = Color.VERT;
-							sprite = mGameUI.mPlateformev;
-							break;
-							
-						case 3:
-						default:
-							color = Color.TOUTE;
-							sprite = mGameUI.mPlateformew;
-							break;
-					}
-					if(Math.random()>0.7) { // 30% de chance d'avoir un bonus
-						Bonus bonus = new Bonus(mGameUI);
-						bonus.mPosition.set(posX+(int) (Math.random() * (Plateforme.SIZE) - (Plateforme.SIZE / 2)),-15);
-						addObject(bonus);
-					}
-					Plateforme newPlateforme = new Plateforme(sprite,color);
-					newPlateforme.mPosition.set(posX,-1);
-					addObject(newPlateforme);
-				}
-			}
-		}.start();*/
 	}
 	
 	
@@ -199,6 +154,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				// apparement c'est pas dans anglephysicengine ou angle physicobject
 				if (mChildO.mPosition.mY > mWorldHeight)
 				{
+					init();
 					mGameUI.backToMenu();
 					return;
 				}
@@ -291,4 +247,9 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		mChilds[0].draw(gl); // balle dessiné en dernier
 	}
 	
+	public void init()
+	{
+		dy = 30;
+		current_max_dy = 60;
+	}
 }
