@@ -22,7 +22,7 @@ public class GameUI extends AngleUI {
 
 	protected AngleSpriteLayout mBallLayout[], mPlateformeLayout, mBackGroundLayout, mBonusLayout[];
 	protected Ball mBall;
-	protected int mScore,lastupdate;
+	protected int mScore;
 	protected AngleSprite mSpriteLeft, mSpriteRight;
 	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformej;
 	protected AngleSound sndJump, sndBonus[];
@@ -33,7 +33,7 @@ public class GameUI extends AngleUI {
 	private AngleSpriteLayout mBordsLayout[];
 	private AngleString mString;
 	private AngleObject ogDashboard;
-	private float mTimeEllapsedBonus, mTimeActionBonus;
+	private float mTimeEllapsedBonus, mTimeActionBonus, mTimeEllapsedScore;
 	
 	
 	public GameUI(AngleActivity activity)
@@ -215,12 +215,6 @@ public class GameUI extends AngleUI {
 	public void upScore(int value)
 	{
 		mScore += value;
-		lastupdate++;
-		if(lastupdate>7)
-		{
-			mString.set(String.valueOf(mScore));
-			lastupdate=0;
-		}
 	}
 	
 	public void backToMenu()
@@ -233,6 +227,15 @@ public class GameUI extends AngleUI {
 	{
 		if (secondsElapsed > 0.08)
 			secondsElapsed = (float) 0.04;
+		
+		if (mTimeEllapsedScore > 0.5)
+		{
+			mString.set(String.valueOf(mScore));
+			mTimeEllapsedScore = 0;
+		}
+		else
+			mTimeEllapsedScore += secondsElapsed;
+		
 		
 		if (mTypeBonus != TypeBonus.NONE)
 		{
@@ -279,7 +282,6 @@ public class GameUI extends AngleUI {
 		{
 			mScore += 1000;
 			mString.set(String.valueOf(mScore));
-			lastupdate=0;
 		}
 		Log.i("GameUI", "GameUI setBonus fin");
 	}
