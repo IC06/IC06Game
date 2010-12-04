@@ -14,7 +14,6 @@ import android.widget.FrameLayout;
 
 import com.android.angle.AngleActivity;
 import com.android.angle.FPSCounter;
-//import com.android.angle.FPSCounter;
 import com.turlutu.Bonus.TypeBonus;
 
 
@@ -22,9 +21,11 @@ public class MainActivity extends AngleActivity
 {
 	protected GameUI mGame;
 	protected MenuUI mMenu;
+	protected ScoresUI mScores;
 	protected OptionsUI mOptions;
 	protected LoadingUI mLoading;
 	private boolean loaded = false;
+	protected FrameLayout mMainLayout;
 	
    private final SensorEventListener mListener = new SensorEventListener() 
    {
@@ -41,8 +42,6 @@ public class MainActivity extends AngleActivity
 				mGame.mBall.mVelocity.mX = (-100*event.values[0]);
 				if (mGame.mTypeBonus == TypeBonus.CHANGEPHYSICS)
 					mGame.mBall.mVelocity.mX = -mGame.mBall.mVelocity.mX;
-				//mDemo.setGravity(-10*event.values[0],10*event.values[1]);
-				//mDemo.setGravity(-4*event.values[0],10);
 			}
 		}
    };
@@ -61,17 +60,15 @@ public class MainActivity extends AngleActivity
       
         // a commenté dans la version finale (pour voir la fluidité du jeu)      
 		mGLSurfaceView.addObject(new FPSCounter());
-
-		FrameLayout mMainLayout=new FrameLayout(this);
+		
+		
+		mMainLayout=new FrameLayout(this);
 		mMainLayout.addView(mGLSurfaceView);
 		setContentView(mMainLayout);
+
 		
 		mLoading=new LoadingUI(this);
 		setUI(mLoading);
-		
-		/*FrameLayout mainLayout=new FrameLayout(this);
-		mainLayout.addView(mGLSurfaceView);
-		setContentView(mainLayout);*/
 		
 		Log.i("MainActivity", "FIN");
 	}
@@ -81,6 +78,7 @@ public class MainActivity extends AngleActivity
 		Log.i("MainActivity", "Load() start");
 		mMenu=new MenuUI(this);
 		mOptions=new OptionsUI(this);
+		mScores=new ScoresUI(this);
 		mGame=new GameUI(this);
 		mGame.setGravity(0f,10f);
 		setUI(mMenu);

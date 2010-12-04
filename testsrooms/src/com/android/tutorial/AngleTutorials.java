@@ -26,8 +26,6 @@ public class AngleTutorials extends Activity implements OnClickListener
 		findViewById(R.id.tut03).setOnClickListener(this);
 		findViewById(R.id.tut04).setOnClickListener(this);
 		findViewById(R.id.tut05).setOnClickListener(this);
-		findViewById(R.id.game).setOnClickListener(this);
-		findViewById(R.id.gamesteps).setOnClickListener(this);
 		findViewById(R.id.testSprites).setOnClickListener(this);
 		findViewById(R.id.testSon).setOnClickListener(this);
 	}

@@ -16,12 +16,7 @@ public class MenuUI  extends AngleUI
 	
 	private AngleObject ogMenuTexts;
 	
-	private AngleString strPlay;
-	private AngleString strHiScore;
-	private AngleString strExit;
-	private AngleString strOptions;
-
-	private int mHiScore;
+	private AngleString strPlay,  strHiScores, strExit, strOptions;
 
 	public MenuUI(AngleActivity activity)
 	{
@@ -36,7 +31,7 @@ public class MenuUI  extends AngleUI
 		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 0, 0, 0, 255);
 		
 		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Play", 160, 110, AngleString.aLeft));
-		strHiScore = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Hi Score", 160, 210, AngleString.aCenter));
+		strHiScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Hi Score", 160, 210, AngleString.aCenter));
 		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Options", 175, 295, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Exit", 250, 360, AngleString.aCenter));
 		
@@ -52,8 +47,10 @@ public class MenuUI  extends AngleUI
 
 			if (strPlay.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mGame);
-			if (strOptions.test(eX, eY))
+			else if (strOptions.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mOptions);
+			else if (strHiScores.test(eX, eY))
+				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScores);
 			else if (strExit.test(eX, eY))
 				mActivity.finish();
 
@@ -65,9 +62,6 @@ public class MenuUI  extends AngleUI
 	@Override
 	public void onActivate()
 	{
-		if (((MainActivity) mActivity).mGame.mScore>mHiScore)
-				mHiScore=((MainActivity) mActivity).mGame.mScore;
-		strHiScore.set("Hi Score: "+mHiScore);
 		super.onActivate();
 	}
 	

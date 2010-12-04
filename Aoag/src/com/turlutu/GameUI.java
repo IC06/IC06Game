@@ -144,25 +144,15 @@ public class GameUI extends AngleUI {
 				mPhysics.removeObject(i);
 			}
 		}
+		DBScores db = new DBScores(mActivity);
+		db.open();
+		long i = db.insertScore(mScore, "inconnu");
+		Log.i("GameUI", "GameUI onDeactivate insert : " + i);
+		db.close();
 		super.onDeactivate();
 		Log.i("GameUI", "GameUI onDeactivate fin");
 	}
-	/*
-	@Override
-	public void onPause()
-	{
-      mSensorManager.unregisterListener(mListener); 
-      super.onPause();
-	}
-
-
-	@Override
-	public void onResume()
-	{
-      mSensorManager.registerListener(mListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_FASTEST); 		
-		super.onResume();
-	}
-	*/
+	
 	private void init()
 	{
 		mTimeEllapsedBonus = 0;
@@ -221,6 +211,7 @@ public class GameUI extends AngleUI {
 		mPhysics.mGravity.set(x,y);
 	}
 	
+	// TODO rafraichir dans la boucle step
 	public void upScore(int value)
 	{
 		mScore += value;
@@ -234,7 +225,7 @@ public class GameUI extends AngleUI {
 	
 	public void backToMenu()
 	{
-		((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
+		((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScores);
 	}
 	
 	@Override
