@@ -55,7 +55,7 @@ class Bonus extends AnglePhysicObject
 		mGame = game;
 		mUsed = false;
 		
-		mType = (int) (Math.random() * (nbtype));
+		mType = (int) (Math.random() * (nbtype)) + 1;
 		sndTouch = mGame.sndBonus[mType];
 		mSprite=new AngleSprite(mGame.mBonusLayout[mType]);
 		
