@@ -16,22 +16,26 @@ import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
 import com.android.angle.AngleVector;
 import com.turlutu.Ball.Color;
+import com.turlutu.Bonus.TypeBonus;
 
 public class GameUI extends AngleUI {
 
 	protected AngleSpriteLayout mBallLayout[], mPlateformeLayout, mBackGroundLayout;
-	private MyPhysicsEngine mPhysics;
-	private float WIDTH,HEIGHT;
 	protected Ball mBall;
-	private AngleObject ogDashboard;
-	private AngleString mString;
 	protected int mScore,lastupdate;
 	protected AngleSprite mSpriteLeft, mSpriteRight;
 	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformej;
-	private AngleSpriteLayout mBordsLayout[];
-	//protected AngleSound sndJump, sndBonus[], sndBonusDefault;
 	protected AngleSound sndJump, sndBonusDefault;
 	protected AngleSpriteLayout bonusTexture0,bonusTexture1,bonusTexture2,bonusTexture3,bonusTexture4,bonusTexture5;
+	protected TypeBonus mTypeBonus;
+
+	private MyPhysicsEngine mPhysics;
+	private float WIDTH,HEIGHT;
+	private AngleSpriteLayout mBordsLayout[];
+	private AngleString mString;
+	private AngleObject ogDashboard;
+	private float mTimeEllapsedBonus;
+	
 	
 	public GameUI(AngleActivity activity)
 	{
@@ -78,7 +82,7 @@ public class GameUI extends AngleUI {
 		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,64,0,64,256);
 		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,128,0,64,256);
 		// TODO voir quelle image convient le mieu au background
-		mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
+		//mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
 		
 		// on ajoute le background en premier à MyDemo pour qu'il soit dessiné en premier
 		Background mBackGround = new Background(mBackGroundLayout);
@@ -153,6 +157,8 @@ public class GameUI extends AngleUI {
 	*/
 	private void init()
 	{
+		mTimeEllapsedBonus = 0;
+		mTypeBonus = TypeBonus.NONE;
 
 		mBall.mPosition.set(50,300);
 		mBall.mVelocity.mY = -600;
@@ -227,6 +233,17 @@ public class GameUI extends AngleUI {
 		if (secondsElapsed > 0.08)
 			secondsElapsed = (float) 0.04;
 		
+		if (mTypeBonus != TypeBonus.NONE)
+		{
+			if (mTimeEllapsedBonus > 4)
+			{
+				Log.i("GameUI", "GameUI step fin bonus : "+mTypeBonus);
+				mTypeBonus = TypeBonus.NONE;
+			}
+			else
+			mTimeEllapsedBonus += secondsElapsed;
+		}
+		
 		super.step(secondsElapsed);
 	}
 	
@@ -250,4 +267,12 @@ public class GameUI extends AngleUI {
 			mSpriteLeft.setLayout(mBordsLayout[1]);
 	}
 	
+	public void setBonus(TypeBonus t)
+	{
+		Log.i("GameUI", "GameUI setBonus debut");
+		Log.i("GameUI", "bonus : "+t);
+		mTimeEllapsedBonus = 0;
+		mTypeBonus = t;
+		Log.i("GameUI", "GameUI setBonus fin");
+	}
 }

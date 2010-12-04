@@ -106,11 +106,6 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				mChildO.mPosition.add(t);
 				if(mChildO.mPosition.mY > mWorldHeight) 
 				{
-					if(mChildO instanceof Bonus)
-					{
-						Bonus mybonus = (Bonus) mChildO;
-						mybonus.end();
-					}
 					removeObject(mChildO);
 				}
 			}
@@ -204,7 +199,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 								Bonus bonus = (Bonus) mChilds[c];
 								if (mChildO.collide(bonus))
 								{
-									bonus.touch();
+									removeObject(bonus);
 								}
 							}
 							/*else if (!(mChilds[c] instanceof Plateforme) && mChilds[c] instanceof AnglePhysicObject)

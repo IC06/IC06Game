@@ -2,6 +2,8 @@ package com.turlutu;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import android.util.Log;
+
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSound;
 import com.android.angle.AngleSprite;
@@ -14,17 +16,18 @@ import com.android.angle.AngleSprite;
  */
 class Bonus extends AnglePhysicObject
 {
-	private AngleSprite mSprite;
-	//protected enum Type {ADDSCORE, MOREJUMP, LESSJUMP, CHANGEPHYSICS, DISABLECHANGECOLOR, ALLPLATEFORME};
-	//private Type mType[];
-	private int mType;
 	protected float mRadius;
+	protected enum TypeBonus {NONE,ADDSCORE, MOREJUMP, LESSJUMP, CHANGEPHYSICS, DISABLECHANGECOLOR, ALLPLATEFORME};
+
 	private GameUI mGame;
 	private AngleSound sndTouch;
 	private boolean mustdraw = true;
+	private AngleSprite mSprite;
+	private int mType;
 	
 	static int radius = 8;
 	static int nbtype = 6;
+	static TypeBonus[] mapTypeBonus = {TypeBonus.NONE,TypeBonus.ADDSCORE, TypeBonus.MOREJUMP, TypeBonus.LESSJUMP, TypeBonus.CHANGEPHYSICS, TypeBonus.DISABLECHANGECOLOR, TypeBonus.ALLPLATEFORME};
 	
 	public Bonus(GameUI game)
 	{
@@ -50,28 +53,6 @@ class Bonus extends AnglePhysicObject
 
 	}
 	
-	/*
-	 * Le bonus est touché
-	 */
-	public void touch()
-	{
-		if(mustdraw) { // Sinon on a deja touché ce bonus
-			mustdraw = false; // On ne dessine plus le bonus
-			sndTouch.play(1,false); // On joue la music
-			
-			// Position du bonus
-			// Malgrès le fait qu'il n'est plus affiché il translattera quand même et finira par atteindre le bas ou il sera supprimé + juste avant call end()
-			mPosition.set(0,(int) Math.random() * 100 - 50);
-		}
-	}
-	
-	/*
-	 * On arrete d'effectuer l'action du bonus
-	 */
-	public void end()
-	{
-		
-	}
 	
 	/**
 	 * @return surface
@@ -100,6 +81,15 @@ class Bonus extends AnglePhysicObject
 	public BallCollider collider()
 	{
 		return (BallCollider) mCircleColliders[0];
+	}
+
+	protected void onDie()
+	{
+		Log.i("Bonus", "Bonus onDie debut");
+		Log.i("Bonus", "TypeBonus : "+mapTypeBonus[mType]);
+		mGame.setBonus(mapTypeBonus[mType]);
+		sndTouch.play(1,false);
+		Log.i("Bonus", "Bonus onDie fin");
 	}
 	
 };
