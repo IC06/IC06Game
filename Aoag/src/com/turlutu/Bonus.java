@@ -27,28 +27,31 @@ class Bonus extends AnglePhysicObject
 	
 	static int radius = 8;
 	static int nbtype = 6;
-	static TypeBonus[] mapTypeBonus = {TypeBonus.NONE,TypeBonus.ADDSCORE, TypeBonus.MOREJUMP, TypeBonus.LESSJUMP, TypeBonus.CHANGEPHYSICS, TypeBonus.DISABLECHANGECOLOR, TypeBonus.ALLPLATEFORME};
+	static TypeBonus[] mapTypeBonus = {	TypeBonus.NONE, // 0
+																			TypeBonus.ADDSCORE, // 1
+																			TypeBonus.MOREJUMP, // 2
+																			TypeBonus.LESSJUMP, // 3
+																			TypeBonus.CHANGEPHYSICS, // 4
+																			TypeBonus.DISABLECHANGECOLOR, // 5
+																			TypeBonus.ALLPLATEFORME};// 6
+	static float[] timesActionBonus = {	0, // 0
+																	0, // 1
+																	4, // 2
+																	4, // 3
+																	4, // 4
+																	4, // 5
+																	6}; // 6
 	
 	public Bonus(GameUI game)
 	{
 		super(0, 1);
 		mGame = game;
-		mType = (int) (Math.random() * (nbtype));
-
-		sndTouch = mGame.sndBonusDefault;
 		
-		if(mType==0)
-			mSprite=new AngleSprite(mGame.bonusTexture0);
-		else if(mType==1)
-			mSprite=new AngleSprite(mGame.bonusTexture1);
-		else if(mType==2)
-			mSprite=new AngleSprite(mGame.bonusTexture2);
-		else if(mType==3)
-			mSprite=new AngleSprite(mGame.bonusTexture3);
-		else if(mType==4)
-			mSprite=new AngleSprite(mGame.bonusTexture4);
-		else if(mType==5)
-			mSprite=new AngleSprite(mGame.bonusTexture5);
+		mType = (int) (Math.random() * (nbtype));
+		mType = 5;
+		sndTouch = mGame.sndBonus[mType];
+		mSprite=new AngleSprite(mGame.mBonusLayout[mType]);
+		
 		addCircleCollider(new BallCollider(0, 0, radius));
 
 	}
@@ -87,7 +90,7 @@ class Bonus extends AnglePhysicObject
 	{
 		Log.i("Bonus", "Bonus onDie debut");
 		Log.i("Bonus", "TypeBonus : "+mapTypeBonus[mType]);
-		mGame.setBonus(mapTypeBonus[mType]);
+		mGame.setBonus(mapTypeBonus[mType],timesActionBonus[mType]);
 		sndTouch.play(1,false);
 		Log.i("Bonus", "Bonus onDie fin");
 	}

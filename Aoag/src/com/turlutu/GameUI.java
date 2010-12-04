@@ -20,13 +20,12 @@ import com.turlutu.Bonus.TypeBonus;
 
 public class GameUI extends AngleUI {
 
-	protected AngleSpriteLayout mBallLayout[], mPlateformeLayout, mBackGroundLayout;
+	protected AngleSpriteLayout mBallLayout[], mPlateformeLayout, mBackGroundLayout, mBonusLayout[];
 	protected Ball mBall;
 	protected int mScore,lastupdate;
 	protected AngleSprite mSpriteLeft, mSpriteRight;
 	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformej;
-	protected AngleSound sndJump, sndBonusDefault;
-	protected AngleSpriteLayout bonusTexture0,bonusTexture1,bonusTexture2,bonusTexture3,bonusTexture4,bonusTexture5;
+	protected AngleSound sndJump, sndBonus[];
 	protected TypeBonus mTypeBonus;
 
 	private MyPhysicsEngine mPhysics;
@@ -34,7 +33,7 @@ public class GameUI extends AngleUI {
 	private AngleSpriteLayout mBordsLayout[];
 	private AngleString mString;
 	private AngleObject ogDashboard;
-	private float mTimeEllapsedBonus;
+	private float mTimeEllapsedBonus, mTimeActionBonus;
 	
 	
 	public GameUI(AngleActivity activity)
@@ -45,17 +44,26 @@ public class GameUI extends AngleUI {
 		HEIGHT = 480f;
 		mScore = 0;
 		sndJump=new AngleSound(mActivity,R.raw.jump);
+		
 		// BONUS
-		sndBonusDefault=new AngleSound(mActivity,R.raw.bonus);
+		sndBonus  = new AngleSound[7];
+		sndBonus[0] = new AngleSound(mActivity,R.raw.bonus);
+		sndBonus[1] = new AngleSound(mActivity,R.raw.bonus);
+		sndBonus[2] = new AngleSound(mActivity,R.raw.bonus);
+		sndBonus[3] = new AngleSound(mActivity,R.raw.bonus);
+		sndBonus[4] = new AngleSound(mActivity,R.raw.bonus);
+		sndBonus[5] = new AngleSound(mActivity,R.raw.bonus);
+		sndBonus[6] = new AngleSound(mActivity,R.raw.bonus);
 		
-		//sndBonus[0]=new AngleSound(mActivity,R.raw.bonus1);
 		
-		bonusTexture0 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 0, 0, 16, 16);
-		bonusTexture1 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 16, 0, 16, 16);
-		bonusTexture2 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 32, 0, 16, 16);
-		bonusTexture3 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 48, 0, 16, 16);
-		bonusTexture4 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 64, 0, 16, 16);
-		bonusTexture5 = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 80, 0, 16, 16);	
+		mBonusLayout = new AngleSpriteLayout[7];
+		mBonusLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 0, 0, 16, 16);
+		mBonusLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 16, 0, 16, 16);
+		mBonusLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 32, 0, 16, 16);
+		mBonusLayout[3] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 48, 0, 16, 16);
+		mBonusLayout[4] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 64, 0, 16, 16);
+		mBonusLayout[5] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 80, 0, 16, 16);	
+		mBonusLayout[6] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 96, 0, 16, 16);	
 		
 		// PLATEFORME
 		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 1, 64, 30);
@@ -235,7 +243,7 @@ public class GameUI extends AngleUI {
 		
 		if (mTypeBonus != TypeBonus.NONE)
 		{
-			if (mTimeEllapsedBonus > 4)
+			if (mTimeEllapsedBonus > mTimeActionBonus)
 			{
 				Log.i("GameUI", "GameUI step fin bonus : "+mTypeBonus);
 				mTypeBonus = TypeBonus.NONE;
@@ -267,12 +275,13 @@ public class GameUI extends AngleUI {
 			mSpriteLeft.setLayout(mBordsLayout[1]);
 	}
 	
-	public void setBonus(TypeBonus t)
+	public void setBonus(TypeBonus t, float s)
 	{
 		Log.i("GameUI", "GameUI setBonus debut");
 		Log.i("GameUI", "bonus : "+t);
 		mTimeEllapsedBonus = 0;
 		mTypeBonus = t;
+		mTimeActionBonus = s;
 		Log.i("GameUI", "GameUI setBonus fin");
 	}
 }

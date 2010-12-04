@@ -7,6 +7,7 @@ import com.android.angle.AngleSound;
 import com.android.angle.AngleSprite;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleVector;
+import com.turlutu.Bonus.TypeBonus;
 
 /**
  * extends AnglePhysicObject
@@ -58,11 +59,14 @@ class Ball extends AnglePhysicObject
 	 */
 	public void changeColorLeft()
 	{
-		Color temp = mColors[0];
-		mColors[0] = mColors[2];
-		mColors[2] = mColors[1];
-		mColors[1] = temp;
-		setColor(mColors[1]);
+		if (mGame.mTypeBonus != TypeBonus.DISABLECHANGECOLOR)
+		{
+			Color temp = mColors[0];
+			mColors[0] = mColors[2];
+			mColors[2] = mColors[1];
+			mColors[1] = temp;
+			setColor(mColors[1]);
+		}
 	}
 	/**
 	 * si on change de couleur en passant à travers le bord droit de l'écran
@@ -70,11 +74,14 @@ class Ball extends AnglePhysicObject
 	 */
 	public void changeColorRight()
 	{
-		Color temp = mColors[0];
-		mColors[0] = mColors[1];
-		mColors[1] = mColors[2];
-		mColors[2] = temp;
-		setColor(mColors[1]);
+		if (mGame.mTypeBonus != TypeBonus.DISABLECHANGECOLOR)
+		{
+			Color temp = mColors[0];
+			mColors[0] = mColors[1];
+			mColors[1] = mColors[2];
+			mColors[2] = temp;
+			setColor(mColors[1]);
+		}
 	}
 	
 	private void setColor(Color newColor)
@@ -147,7 +154,12 @@ class Ball extends AnglePhysicObject
 	
 	public void jump()
 	{
-		mVelocity.mY = -600;
+		if (mGame.mTypeBonus == TypeBonus.MOREJUMP)
+			mVelocity.mY = -900;
+		else if (mGame.mTypeBonus == TypeBonus.LESSJUMP)
+			mVelocity.mY = -450;
+		else
+			mVelocity.mY = -600;
 		sndJump.play(1,false);
 	}
 	
