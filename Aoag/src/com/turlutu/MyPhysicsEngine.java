@@ -143,40 +143,40 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		{
 			if (mChilds[o] instanceof Ball)
 			{
-				Ball mChildO = (Ball) mChilds[o];
+				Ball ball = (Ball) mChilds[o];
 				
 				// perdu
 				// TODO trouver où Matthieu a mis l'autre suppression de la balle dans le code (surement dans le code de ANGLE)
 				// apparement c'est pas dans anglephysicengine ou angle physicobject
-				if (mChildO.mPosition.mY > mWorldHeight)
+				if (ball.mPosition.mY > mWorldHeight)
 				{
 					init();
 					mGameUI.backToMenu();
 					return;
 				}
 				
-				if ((mChildO.mDelta.mX != 0) || (mChildO.mDelta.mY != 0))
+				if ((ball.mDelta.mX != 0) || (ball.mDelta.mY != 0))
 				{
 					// Changement d'état
-					mChildO.mPosition.mX += mChildO.mDelta.mX;
-					mChildO.mPosition.mY += mChildO.mDelta.mY;
-					if (mChildO.mPosition.mX > mWorldWidth)
+					ball.mPosition.mX += ball.mDelta.mX;
+					ball.mPosition.mY += ball.mDelta.mY;
+					if (ball.mPosition.mX > mWorldWidth)
 					{
-						mChildO.mPosition.mX = 0;
-						mChildO.changeColorRight();
+						ball.mPosition.mX = 0;
+						ball.changeColorRight();
 					}
-					else if  (mChildO.mPosition.mX < 0)
+					else if  (ball.mPosition.mX < 0)
 					{
-						mChildO.mPosition.mX = mWorldWidth;
-						mChildO.changeColorLeft();
+						ball.mPosition.mX = mWorldWidth;
+						ball.changeColorLeft();
 					}
 
 					// translation + score
-					if (mChildO.mPosition.mY < mWorldHeight/3)
+					if (ball.mPosition.mY < mWorldHeight/3)
 					{
-						mCounterScore = (int) (mWorldHeight/3 - mChildO.mPosition.mY);
+						mCounterScore = (int) (mWorldHeight/3 - ball.mPosition.mY);
 						mGameUI.upScore(mCounterScore); // En mettant ça ici, on gagne 2 tests
-						translateAll(new AngleVector(0,mWorldHeight/3 - mChildO.mPosition.mY));
+						translateAll(new AngleVector(0,mWorldHeight/3 - ball.mPosition.mY));
 					}
 					
 					// collisions
@@ -185,31 +185,32 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 						if (c != o)
 						{
 							if (mChilds[c] instanceof Plateforme // l'objet est de type plateforme
-									&& mChildO.mVelocity.mY > 0)  // et il est entrain de descendre
+									&& ball.mVelocity.mY > 0)  // et il est entrain de descendre
 							{
-								Plateforme mChildC = (Plateforme) mChilds[c];
-								if(mGameUI.mTypeBonus == TypeBonus.ALLPLATEFORME || mChildC.mColor == Color.TOUTE || mChildC.mColor == mChildO.getColor()) // si l'objet est de la même couleure
+								Plateforme plateforme = (Plateforme) mChilds[c];
+								if(mGameUI.mTypeBonus == TypeBonus.ALLPLATEFORME || plateforme.mColor == Color.TOUTE || plateforme.mColor == ball.getColor()) // si l'objet est de la même couleure
 								{
-									if (mChildO.collide(mChildC))
+									if (ball.collide(plateforme))
 									{
-										mChildO.jump();
+										ball.jump();
 										break;
 									}
 								}
 							} else if (mChilds[c] instanceof Bonus) {
 								Bonus bonus = (Bonus) mChilds[c];
-								if (mChildO.collide(bonus))
+								if (ball.collide(bonus))
 								{
+									bonus.mUsed = true;
 									removeObject(bonus);
 								}
 							}
 							/*else if (!(mChilds[c] instanceof Plateforme) && mChilds[c] instanceof AnglePhysicObject)
 							{
 								AnglePhysicObject mChildC = (AnglePhysicObject) mChilds[c];
-								if (mChildO.collide(mChildC))
+								if (ball.collide(mChildC))
 								{
-									mChildO.mPosition.mX -= mChildO.mDelta.mX;
-									mChildO.mPosition.mY -= mChildO.mDelta.mY;
+									ball.mPosition.mX -= ball.mDelta.mX;
+									ball.mPosition.mY -= ball.mDelta.mY;
 									mChildC.mDelta.mX = mChildC.mVelocity.mX * secondsElapsed;
 									mChildC.mDelta.mY = mChildC.mVelocity.mY * secondsElapsed;
 									break;

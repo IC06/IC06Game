@@ -16,6 +16,7 @@ import com.android.angle.AngleSprite;
  */
 class Bonus extends AnglePhysicObject
 {
+	protected boolean mUsed;
 	protected float mRadius;
 	protected enum TypeBonus {	NONE, // 0
 															ADDSCORE,// 1=> GameUI.setBonus(..)
@@ -52,6 +53,7 @@ class Bonus extends AnglePhysicObject
 	{
 		super(0, 1);
 		mGame = game;
+		mUsed = false;
 		
 		mType = (int) (Math.random() * (nbtype));
 		sndTouch = mGame.sndBonus[mType];
@@ -93,11 +95,14 @@ class Bonus extends AnglePhysicObject
 
 	protected void onDie()
 	{
-		Log.i("Bonus", "Bonus onDie debut");
-		Log.i("Bonus", "TypeBonus : "+mapTypeBonus[mType]);
-		mGame.setBonus(mapTypeBonus[mType],timesActionBonus[mType]);
-		sndTouch.play(1,false);
-		Log.i("Bonus", "Bonus onDie fin");
+		if (mUsed)
+		{
+			Log.i("Bonus", "Bonus onDie debut");
+			Log.i("Bonus", "TypeBonus : "+mapTypeBonus[mType]);
+			mGame.setBonus(mapTypeBonus[mType],timesActionBonus[mType]);
+			sndTouch.play(1,false);
+			Log.i("Bonus", "Bonus onDie fin");
+		}
 	}
 	
 };
