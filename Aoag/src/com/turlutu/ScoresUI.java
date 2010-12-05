@@ -1,8 +1,15 @@
 package com.turlutu;
 
+import android.app.Dialog;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.os.Looper;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.angle.AngleActivity;
@@ -28,6 +35,7 @@ public class ScoresUI   extends AngleUI
 		strNewScore = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "", 160, 30, AngleString.aCenter));
 		strScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "", 160, 100, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Retour", 160, 390, AngleString.aCenter));
+
 	}
 	
 	@Override
@@ -49,7 +57,29 @@ public class ScoresUI   extends AngleUI
 	@Override
 	public void onActivate()
 	{
-		strNewScore.set("Your Score : " + ((MainActivity)mActivity).mGame.mScore);
+		Log.i("ScoresUI", "ScoresUI onActivate debut "+((MainActivity) mActivity).mGame.mScore);
+
+		if( ((MainActivity) mActivity).mGame.mScore != 0) 
+		{
+			Log.i("ScoresUI", "Dialog show");
+			strNewScore.set("Last Score : " + ((MainActivity)mActivity).mGame.mScore);
+			new Thread() 
+			{
+				@Override 
+				public void run() 
+				{
+					Looper.prepare();
+					askName();
+					Looper.loop();
+				}
+			}.start();
+		} else {
+			getScores();
+		}
+		Log.i("ScoresUI", "ScoresUI onActivate fin");
+	}
+	
+	public void getScores() {
     	String scores = "";
 		DBScores db = new DBScores(mActivity);
 		db.open();
@@ -63,6 +93,49 @@ public class ScoresUI   extends AngleUI
         }
         db.close();
         strScores.set(scores);
+	}
+	
+	public void askName() {
+		Dialog dialog = new Dialog(mActivity);
+        dialog.setContentView(R.layout.name_activity);
+        dialog.setTitle("Entrer votre nom :");
+        Button buttonOK = (Button) dialog.findViewById(R.id.ok);        
+        buttonOK.setOnClickListener(new OKListener(dialog));
+        Button buttonCancel = (Button) dialog.findViewById(R.id.cancel);        
+        buttonCancel.setOnClickListener(new CancelListener(dialog));
+        dialog.show();
+	}
+	protected class OKListener implements OnClickListener {	 
+        private Dialog dialog;
+        public OKListener(Dialog dialog) {
+                this.dialog = dialog;
+        }
+
+        public void onClick(View v) {
+        		TextView input = (TextView) dialog.findViewById(R.id.entry);
+        		CharSequence name = input.getText();
+        		dialog.dismiss(); 
+        		DBScores db = new DBScores(mActivity);
+        		db.open();
+        		long i = db.insertScore( ((MainActivity) mActivity).mGame.mScore, ""+name);
+        		Log.i("ScoresUI", "ScoresUI on click on ok insert : " + i);
+        		db.close();
+        		((MainActivity) mActivity).mGame.mScore = 0;
+        		getScores();
+        }
+	}
+	
+	protected class CancelListener implements OnClickListener {	 
+        private Dialog dialog;
+        public CancelListener(Dialog dialog) {
+                this.dialog = dialog;
+        }
+
+        public void onClick(View v) {
+                dialog.dismiss();    
+        		((MainActivity) mActivity).mGame.mScore = 0;
+        		getScores();
+        }
 	}
 
 	public void DisplayScore(Cursor c)
