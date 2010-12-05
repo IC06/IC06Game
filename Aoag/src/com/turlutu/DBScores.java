@@ -20,7 +20,7 @@ public class DBScores
     
     private static final String DATABASE_NAME = "exitjump";
     private static final String DATABASE_TABLE = "scores";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 6;
 
     private static final String DATABASE_CREATE =
     "create table scores ("+KEY_ID+" integer primary key autoincrement, "
@@ -185,14 +185,24 @@ public class DBScores
     	}
     }
     
-    public Cursor worstScore()
+    public static int getWorstScore(Context ctx)
     {
-    	return db.query(DATABASE_TABLE, new String[] {KEY_SCORE}, 
-            null, 
-            null, 
-            null, 
-            null, 
-            KEY_SCORE + " DESC");
+    	DBScores db = new DBScores(ctx);
+    	db.open();
+    	Cursor c = db.getAllScores();
+    	if (c.moveToLast())
+    	{
+    		int worstScore = c.getInt(1);
+    		Log.i(TAG,"getWorstScore : "+worstScore);
+    		db.close();
+    		return worstScore;
+    	}
+    	else
+    	{
+    		db.close();
+    		Log.w(TAG,"getWorstScore echoue");
+    		return -1;
+    	}
     }
     
 }

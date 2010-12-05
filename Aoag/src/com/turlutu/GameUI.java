@@ -3,15 +3,14 @@ package com.turlutu;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
+import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSound;
 import com.android.angle.AngleSprite;
-import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;

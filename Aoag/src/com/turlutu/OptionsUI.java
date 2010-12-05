@@ -1,8 +1,6 @@
 package com.turlutu;
 
-import android.database.SQLException;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
