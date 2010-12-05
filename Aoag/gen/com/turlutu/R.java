@@ -19,11 +19,21 @@ public final class R {
         public static final int persos=0x7f020005;
         public static final int plateforme=0x7f020006;
     }
+    public static final class id {
+        public static final int cancel=0x7f060003;
+        public static final int entry=0x7f060001;
+        public static final int label=0x7f060000;
+        public static final int ok=0x7f060002;
+    }
+    public static final class layout {
+        public static final int name_activity=0x7f030000;
+    }
     public static final class raw {
-        public static final int bonus=0x7f030000;
-        public static final int jump=0x7f030001;
+        public static final int bonus=0x7f040000;
+        public static final int jump=0x7f040001;
     }
     public static final class string {
-        public static final int app_name=0x7f040000;
+        public static final int app_name=0x7f050000;
+        public static final int ok=0x7f050001;
     }
 }
