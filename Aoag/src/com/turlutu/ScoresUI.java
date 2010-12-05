@@ -95,8 +95,8 @@ public class ScoresUI   extends AngleUI
         {
             do {          
                 //DisplayScore(c);
-            	scores +=  c.getString(0) + "\n";
-            	names += c.getString(1) + "\n";
+            	scores +=  c.getString(1) + "\n";
+            	names += c.getString(2) + "\n";
             } while (c.moveToNext());
         }
         db.close();

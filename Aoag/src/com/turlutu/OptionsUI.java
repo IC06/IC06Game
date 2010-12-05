@@ -1,7 +1,10 @@
 package com.turlutu;
 
+import android.database.SQLException;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleFont;
@@ -16,9 +19,8 @@ public class OptionsUI  extends AngleUI
 	
 	private AngleObject ogMenuTexts;
 	
-	private AngleString strPlay;
 	private AngleString strExit;
-	private AngleString strOptions;
+	private AngleString strResetScores;
 
 
 	public OptionsUI(AngleActivity activity)
@@ -27,15 +29,14 @@ public class OptionsUI  extends AngleUI
 		
 		ogMenuTexts = new AngleObject();
 
-		
+
 		addObject(new AngleSprite(160, 240, new AngleSpriteLayout(mActivity.mGLSurfaceView, 320, 480,  com.turlutu.R.drawable.bg_menu)));
 		
 		addObject(ogMenuTexts);
 
 		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
 
-		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Play", 160, 180, AngleString.aCenter));
-		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Options", 160, 240, AngleString.aCenter));
+		strResetScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Reset Scores", 160, 300, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Retour", 160, 390, AngleString.aCenter));
 
 	}
@@ -48,8 +49,8 @@ public class OptionsUI  extends AngleUI
 			float eX = event.getX();
 			float eY = event.getY();
 
-			if (strPlay.test(eX, eY))
-				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mGame);
+			if (strResetScores.test(eX, eY))
+				resetScores();
 			else if (strExit.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
 
@@ -58,6 +59,17 @@ public class OptionsUI  extends AngleUI
 		return false;
 	}
 
+	private void resetScores()
+	{
+		DBScores db = new DBScores(mActivity);
+		db.open();
+		if (db.reset())
+			Toast.makeText(mActivity, "Score reset", Toast.LENGTH_SHORT).show();
+		else
+			Toast.makeText(mActivity, "Une erreur est survenue", Toast.LENGTH_SHORT).show();
+		db.close();
+	}
+	
 	@Override
 	public void onActivate()
 	{

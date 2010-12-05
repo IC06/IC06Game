@@ -3,6 +3,7 @@ package com.turlutu;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleFont;
@@ -212,7 +213,6 @@ public class GameUI extends AngleUI {
 		mPhysics.mGravity.set(x,y);
 	}
 	
-	// TODO rafraichir dans la boucle step
 	public void upScore(int value)
 	{
 		mScore += value;
