@@ -64,16 +64,21 @@ public class ScoresUI   extends AngleUI
 		{
 			Log.i("ScoresUI", "Dialog show");
 			strNewScore.set("Last Score : " + ((MainActivity)mActivity).mGame.mScore);
-			new Thread() 
-			{
-				@Override 
-				public void run() 
+			int badestscore = 200; // TODO CALL DB methode to get the badest score
+			if( ((MainActivity) mActivity).mGame.mScore > badestscore) {
+				new Thread() 
 				{
-					Looper.prepare();
-					askName();
-					Looper.loop();
-				}
-			}.start();
+					@Override 
+					public void run() 
+					{
+						Looper.prepare();
+						askName();
+						Looper.loop();
+					}
+				}.start();
+			} else {
+				getScores();
+			}
 		} else {
 			getScores();
 		}
