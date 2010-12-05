@@ -1,24 +1,22 @@
 package com.turlutu;
 
 
-import com.android.angle.AngleObject;
 import com.android.angle.AngleSprite;
 import com.android.angle.AngleSpriteLayout;
 
 /** 
 * @author thomas
 */
-public class Background extends AngleObject
+public class Background extends AngleSprite
 {
 	public AngleSprite mGround;
 
 	public Background(AngleSpriteLayout layout)
 	{
-		super(1);
+		super(layout);
 
-		mGround=(AngleSprite)addObject(new AngleSprite(0,0,layout));
-		mGround.mPosition.mX = 160;
-		mGround.mPosition.mY = 240;
+		mPosition.mX = 160;
+		mPosition.mY = 240;
 	}
 
 
