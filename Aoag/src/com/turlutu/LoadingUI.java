@@ -32,18 +32,11 @@ public class LoadingUI  extends AngleUI
 	public void onActivate()
 	{
 		super.onActivate();
-		//new Thread() {
-			//@Override public void run() {
-				//TODO l'écran loading ne sert pas, ce n'est pas la création des UI qui prend du temps, ce doit être le chargement de toutes les options
-				/*
-				while(true)
-				{
-					if (false)
-						break;
-				}*/
+		new Thread() {
+			@Override public void run() {
 				((MainActivity) mActivity).load();
-			//}
-	//	}.start();
+			}
+		}.start();
 		
 	}
 	
