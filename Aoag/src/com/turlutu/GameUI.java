@@ -31,10 +31,10 @@ public class GameUI extends AngleUI {
 	private MyPhysicsEngine mPhysics;
 	private float WIDTH,HEIGHT;
 	private AngleSpriteLayout mBordsLayout[];
-	private AngleString mString;
+	private AngleString mString, mString2;
 	private AngleObject ogDashboard;
-	private float mTimeEllapsedBonus, mTimeActionBonus, mTimeEllapsedScore;
-	
+	private float mTimeEllapsedBonus, mTimeActionBonus;
+	private AngleFont fntCafe25;
 	
 	public GameUI(AngleActivity activity)
 	{
@@ -90,11 +90,10 @@ public class GameUI extends AngleUI {
 		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,64,0,64,256);
 		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,128,0,64,256);
 		// TODO voir quelle image convient le mieu au background
-		mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
-		
-		// on ajoute le background en premier à MyDemo pour qu'il soit dessiné en premier
-		Background mBackGround = new Background(mBackGroundLayout);
-		addObject(mBackGround);
+		//mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
+		// on ajoute le background en premier pour qu'il soit dessiné en premier
+		//Background mBackGround = new Background(mBackGroundLayout);
+		//addObject(mBackGround);
 		mSpriteLeft = new BorderSprite(mActivity, 0,240,mBordsLayout[0]);
 		mSpriteRight = new BorderSprite(mActivity, 320,240,mBordsLayout[1]);
 		addObject(mSpriteLeft);
@@ -110,10 +109,11 @@ public class GameUI extends AngleUI {
 
 		// le score
 		ogDashboard=addObject(new AngleObject());
-		AngleFont fntCafe25 = new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(activity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
+		fntCafe25 = new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(activity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
 		//AngleFont fntBazaronite=new AngleFont(mActivity.mGLSurfaceView, 18, Typeface.createFromAsset(mActivity.getAssets(),"bazaronite.ttf"), 222, 0, 2, 255, 100, 255, 255);
 		mString = (AngleString)ogDashboard.addObject(new AngleString(fntCafe25,"0",50,20,AngleString.aCenter));
-		
+		mString2 = (AngleString)ogDashboard.addObject(new AngleString(fntCafe25,"0",50,20,AngleString.aCenter));
+		mString2.mLength = 0;
 
 		mBall = new Ball (mBallLayout,32,80,1,sndJump,this);
 		mPhysics.addObject(mBall);
@@ -215,6 +215,16 @@ public class GameUI extends AngleUI {
 	public void upScore(int value)
 	{
 		mScore += value;
+		if (mString.mLength > 0)
+		{
+			mString.setAndHide(String.valueOf(mScore));
+			mString2.mLength =mString2.getLength();
+		}
+		else
+		{
+			mString2.setAndHide(String.valueOf(mScore));
+			mString.mLength = mString.getLength();
+		}
 	}
 
 	
@@ -223,15 +233,6 @@ public class GameUI extends AngleUI {
 	{
 		if (secondsElapsed > 0.08)
 			secondsElapsed = (float) 0.04;
-		
-		if (mTimeEllapsedScore > 0.5)
-		{
-			mString.set(String.valueOf(mScore));
-			mTimeEllapsedScore = 0;
-		}
-		else
-			mTimeEllapsedScore += secondsElapsed;
-		
 		
 		if (mTypeBonus != TypeBonus.NONE)
 		{
