@@ -129,10 +129,16 @@ public class GameUI extends AngleUI {
 		mScore=0;
 		mString.set("0");
 		init();
+            
 		super.onActivate();
 		Log.i("GameUI", "GameUI onActivate fin");
 	}
-
+	
+	public void backToMenu()
+	{
+		((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScores);
+	}
+	
 	@Override
 	public void onDeactivate()
 	{
@@ -144,11 +150,6 @@ public class GameUI extends AngleUI {
 				mPhysics.removeObject(i);
 			}
 		}
-		DBScores db = new DBScores(mActivity);
-		db.open();
-		long i = db.insertScore(mScore, "inconnu");
-		Log.i("GameUI", "GameUI onDeactivate insert : " + i);
-		db.close();
 		super.onDeactivate();
 		Log.i("GameUI", "GameUI onDeactivate fin");
 	}
@@ -216,11 +217,7 @@ public class GameUI extends AngleUI {
 	{
 		mScore += value;
 	}
-	
-	public void backToMenu()
-	{
-		((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScores);
-	}
+
 	
 	@Override
 	public void step(float secondsElapsed)
