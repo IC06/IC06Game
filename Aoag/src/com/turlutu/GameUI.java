@@ -277,8 +277,7 @@ public class GameUI extends AngleUI {
 		mTimeActionBonus = s;
 		if (t == TypeBonus.ADDSCORE)
 		{
-			mScore += 1000;
-			mString.set(String.valueOf(mScore));
+			upScore(1000);
 		}
 		Log.i("GameUI", "GameUI setBonus fin");
 	}

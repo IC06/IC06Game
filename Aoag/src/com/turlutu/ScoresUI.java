@@ -18,6 +18,7 @@ import com.android.angle.AngleObject;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
 
+// TODO rajouter un bouton rejouer
 public class ScoresUI   extends AngleUI
 {
 	private AngleObject ogMenuTexts;

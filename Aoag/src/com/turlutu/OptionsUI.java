@@ -1,6 +1,8 @@
 package com.turlutu;
 
 import android.graphics.Typeface;
+import android.os.Looper;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
@@ -17,8 +19,7 @@ public class OptionsUI  extends AngleUI
 	
 	private AngleObject ogMenuTexts;
 	
-	private AngleString strExit;
-	private AngleString strResetScores;
+	private AngleString strExit, strResetScores, strSensibility;
 
 
 	public OptionsUI(AngleActivity activity)
@@ -34,6 +35,7 @@ public class OptionsUI  extends AngleUI
 
 		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
 
+		strSensibility = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Set Sensibility", 160, 200, AngleString.aCenter));
 		strResetScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Reset Scores", 160, 300, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Retour", 160, 390, AngleString.aCenter));
 
@@ -49,6 +51,8 @@ public class OptionsUI  extends AngleUI
 
 			if (strResetScores.test(eX, eY))
 				resetScores();
+			else if (strSensibility.test(eX, eY))
+				setSensibility();
 			else if (strExit.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
 
@@ -66,6 +70,20 @@ public class OptionsUI  extends AngleUI
 		else
 			Toast.makeText(mActivity, "Une erreur est survenue", Toast.LENGTH_SHORT).show();
 		db.close();
+	}
+	
+	private void setSensibility()
+	{
+		new Thread() 
+		{
+			@Override 
+			public void run() 
+			{
+				Looper.prepare();
+				// TODO
+				Looper.loop();
+			}
+		}.start();
 	}
 	
 	@Override
