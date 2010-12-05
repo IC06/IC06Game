@@ -20,7 +20,7 @@
         android:layout_below="@id/entry"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dip"
-        android:text="OK" />
+        android:text="OK !" />
     <Button
     	android:id="@+id/cancel"
         android:layout_width="wrap_content"
