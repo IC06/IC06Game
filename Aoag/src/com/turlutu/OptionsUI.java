@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleFont;
@@ -28,6 +29,7 @@ public class OptionsUI  extends AngleUI
 	
 	private AngleString strExit, strResetScores, strSensibility;
 
+	protected int sensibility = 50;
 
 	public OptionsUI(AngleActivity activity)
 	{
@@ -102,12 +104,20 @@ public class OptionsUI  extends AngleUI
 	
 	public void askParameter() {
 		Dialog dialog = new Dialog(mActivity);
-        dialog.setContentView(R.layout.name_activity);
-        dialog.setTitle("Entrer votre nom :");
-        Button buttonOK = (Button) dialog.findViewById(R.id.ok);        
+        dialog.setContentView(R.layout.options);
+        dialog.setTitle("Parametres :");
+        
+        ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
+        myProgressBar.setProgress(sensibility);
+        
+        Button slideless = (Button) dialog.findViewById(R.id.slider_less);        
+        slideless.setOnClickListener(new SlideLessListener(dialog));
+        
+        Button slidemore = (Button) dialog.findViewById(R.id.slider_more);        
+        slidemore.setOnClickListener(new SlideMoreListener(dialog));
+        
+        Button buttonOK = (Button) dialog.findViewById(R.id.options_ok);        
         buttonOK.setOnClickListener(new OKListener(dialog));
-        Button buttonCancel = (Button) dialog.findViewById(R.id.cancel);        
-        buttonCancel.setOnClickListener(new CancelListener(dialog));
         dialog.show();
 	}
 	protected class OKListener implements OnClickListener {	 
@@ -117,27 +127,35 @@ public class OptionsUI  extends AngleUI
         }
 
         public void onClick(View v) {
-        		TextView input = (TextView) dialog.findViewById(R.id.entry);
-        		CharSequence name = input.getText();
         		dialog.dismiss(); 
-        		DBScores db = new DBScores(mActivity);
-        		db.open();
-        		long i = db.insertScore( ((MainActivity) mActivity).mGame.mScore, ""+name);
-        		Log.i("ScoresUI", "ScoresUI on click on ok insert : " + i);
-        		db.close();
-        		((MainActivity) mActivity).mGame.mScore = 0;
         }
 	}
 	
-	protected class CancelListener implements OnClickListener {	 
+	protected class SlideMoreListener implements OnClickListener {	 
         private Dialog dialog;
-        public CancelListener(Dialog dialog) {
+        public SlideMoreListener(Dialog dialog) {
                 this.dialog = dialog;
         }
 
         public void onClick(View v) {
-                dialog.dismiss();    
-        		((MainActivity) mActivity).mGame.mScore = 0;
+        	if(sensibility < 100)
+        		sensibility++;
+        	ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
+            myProgressBar.setProgress(sensibility);
+        }
+	}
+	
+	protected class SlideLessListener implements OnClickListener {	 
+        private Dialog dialog;
+        public SlideLessListener(Dialog dialog) {
+                this.dialog = dialog;
+        }
+
+        public void onClick(View v) {
+        	if(sensibility > 0)
+        		sensibility--;
+        	ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
+            myProgressBar.setProgress(sensibility);
         }
 	}
 	

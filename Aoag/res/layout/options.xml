@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
+        android:id="@+id/options_titre"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="sensibility"/>
+	<ProgressBar
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    style="?android:attr/progressBarStyleHorizontal"
+	    android:layout_below="@id/options_titre"
+	    android:id="@+id/options_slider"
+	    android:max="100" />
+	 <Button
+        android:id="@+id/slider_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/options_slider"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="200dip"
+        android:text=" + " />
+    <Button
+    	android:id="@+id/slider_less"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/slider_more"
+        android:layout_alignTop="@id/slider_more"
+        android:text=" - " />
+    <Button
+        android:id="@+id/options_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/slider_more"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dip"
+        android:text="OK !" />
+</RelativeLayout>
