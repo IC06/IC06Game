@@ -21,7 +21,7 @@ import com.android.angle.AngleUI;
 public class ScoresUI   extends AngleUI
 {
 	private AngleObject ogMenuTexts;
-	private AngleString strExit, strScores, strNewScore;
+	private AngleString strExit, strScores, strNames, strNewScore;
 	
 	public ScoresUI(AngleActivity activity)
 	{
@@ -33,7 +33,8 @@ public class ScoresUI   extends AngleUI
 		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
 
 		strNewScore = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "", 160, 30, AngleString.aCenter));
-		strScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "", 160, 100, AngleString.aCenter));
+		strScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "", 30, 100, AngleString.aLeft));
+		strNames = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "", 170, 100, AngleString.aLeft));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Retour", 160, 390, AngleString.aCenter));
 
 	}
@@ -81,6 +82,7 @@ public class ScoresUI   extends AngleUI
 	
 	public void getScores() {
     	String scores = "";
+    	String names = "";
 		DBScores db = new DBScores(mActivity);
 		db.open();
         Cursor c = db.getAllScores();
@@ -88,11 +90,13 @@ public class ScoresUI   extends AngleUI
         {
             do {          
                 //DisplayScore(c);
-            	scores +=  c.getString(0) + "    " + c.getString(1) + "\n";
+            	scores +=  c.getString(0) + "\n";
+            	names += c.getString(1) + "\n";
             } while (c.moveToNext());
         }
         db.close();
         strScores.set(scores);
+        strNames.set(names);
 	}
 	
 	public void askName() {
