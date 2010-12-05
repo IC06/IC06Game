@@ -27,9 +27,9 @@ public class GameUI extends AngleUI {
 	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformej;
 	protected AngleSound sndJump, sndBonus[];
 	protected TypeBonus mTypeBonus;
+	protected float WIDTH,HEIGHT;
+	protected MyPhysicsEngine mPhysics;
 
-	private MyPhysicsEngine mPhysics;
-	private float WIDTH,HEIGHT;
 	private AngleSpriteLayout mBordsLayout[];
 	private AngleString mString, mString2;
 	private AngleObject ogDashboard;
@@ -101,7 +101,6 @@ public class GameUI extends AngleUI {
 		
 		
 		
-		// on ajoute la balle au moteur en premier pour qu'il la dessine en dernier, voir la fonction draw surchargé de MyPhysicEngine
 		mPhysics=new MyPhysicsEngine(20,WIDTH,HEIGHT,activity.mGLSurfaceView, this);
 		mPhysics.mViscosity = 1f; // Air viscosity
 		mPhysics.mGravity = new AngleVector(0,10f);
@@ -160,7 +159,7 @@ public class GameUI extends AngleUI {
 		mTypeBonus = TypeBonus.NONE;
 
 		mBall.mPosition.set(50,300);
-		mBall.mVelocity.mY = -600;
+		mBall.jump();
 		
 		// ajoute une plateforme en bas qui prend toute la place pour le debut
 		AnglePhysicObject mWall = new AnglePhysicObject(1, 0);
@@ -168,8 +167,6 @@ public class GameUI extends AngleUI {
 		mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, WIDTH, 0));
 		mWall.mBounce = 1f;
 		mPhysics.addObject(mWall); // Down wall
-		
-		
 
 		// add barre
 		Plateforme Plateforme = new Plateforme(mPlateformew);
@@ -200,7 +197,7 @@ public class GameUI extends AngleUI {
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		mBall.mVelocity.mX = (event.getX()-WIDTH/2)*2;
+		mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
 		if (mTypeBonus == TypeBonus.CHANGEPHYSICS)
 			mBall.mVelocity.mX = -mBall.mVelocity.mX;
 		

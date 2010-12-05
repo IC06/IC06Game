@@ -172,7 +172,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					}
 
 					// translation + score
-					if (ball.mPosition.mY < mWorldHeight/3)
+					if (mGameUI != null && ball.mPosition.mY < mWorldHeight/3)
 					{
 						mCounterScore = (int) (mWorldHeight/3 - ball.mPosition.mY);
 						mGameUI.upScore(mCounterScore); // En mettant ça ici, on gagne 2 tests
@@ -188,7 +188,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									&& ball.mVelocity.mY > 0)  // et il est entrain de descendre
 							{
 								Plateforme plateforme = (Plateforme) mChilds[c];
-								if(mGameUI.mTypeBonus == TypeBonus.ALLPLATEFORME || plateforme.mColor == Color.TOUTE || plateforme.mColor == ball.getColor()) // si l'objet est de la même couleure
+								if((mGameUI != null && mGameUI.mTypeBonus == TypeBonus.ALLPLATEFORME) || plateforme.mColor == Color.TOUTE || plateforme.mColor == ball.getColor()) // si l'objet est de la même couleure
 								{
 									if (ball.collide(plateforme))
 									{
@@ -204,18 +204,15 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 									removeObject(bonus);
 								}
 							}
-							/*else if (!(mChilds[c] instanceof Plateforme) && mChilds[c] instanceof AnglePhysicObject)
+							else if (!(mChilds[c] instanceof Plateforme) && mChilds[c] instanceof AnglePhysicObject)
 							{
 								AnglePhysicObject mChildC = (AnglePhysicObject) mChilds[c];
 								if (ball.collide(mChildC))
 								{
-									ball.mPosition.mX -= ball.mDelta.mX;
-									ball.mPosition.mY -= ball.mDelta.mY;
-									mChildC.mDelta.mX = mChildC.mVelocity.mX * secondsElapsed;
-									mChildC.mDelta.mY = mChildC.mVelocity.mY * secondsElapsed;
+									ball.jump();
 									break;
 								}
-							}*/
+							}
 						}
 					}
 				}

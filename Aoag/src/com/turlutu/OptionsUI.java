@@ -8,37 +8,40 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
-import com.android.angle.AngleSprite;
+import com.android.angle.AnglePhysicObject;
+import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
-import com.turlutu.ScoresUI.CancelListener;
-import com.turlutu.ScoresUI.OKListener;
+import com.android.angle.AngleVector;
 
 public class OptionsUI  extends AngleUI
 {
-	
+
+	protected AngleSpriteLayout mBallLayout[];
+	protected Ball mBall;
+
+	private MyPhysicsEngine mPhysics;
+	private float WIDTH,HEIGHT;
 	private AngleObject ogMenuTexts;
-	
 	private AngleString strExit, strResetScores, strSensibility;
 
-	protected int sensibility = 50;
+	protected int mSensibility = 50;
 
 	public OptionsUI(AngleActivity activity)
 	{
 		super(activity);
+		Log.i("OptionsUI", "constructor debut");
+		WIDTH = 320f;
+		HEIGHT = 480f;
 		
 		ogMenuTexts = new AngleObject();
-
-
-		addObject(new AngleSprite(160, 240, new AngleSpriteLayout(mActivity.mGLSurfaceView, 320, 480,  com.turlutu.R.drawable.bg_menu)));
 		
 		addObject(ogMenuTexts);
 
@@ -48,11 +51,37 @@ public class OptionsUI  extends AngleUI
 		strResetScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Reset Scores", 160, 300, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Retour", 160, 390, AngleString.aCenter));
 
+		mBallLayout = new AngleSpriteLayout[6];
+		mBallLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,0,0,42,64);
+		mBallLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,62,0,42,64);
+		mBallLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,124,0,42,64);
+		mBallLayout[3] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,186,0,42,64);
+		mBallLayout[4] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,248,0,42,64);
+		mBallLayout[5] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,310,0,42,64);
+
+		mPhysics = new MyPhysicsEngine(20,WIDTH,HEIGHT, mActivity.mGLSurfaceView, null);
+		mPhysics.mViscosity = 1f; // Air viscosity
+		mPhysics.mGravity = new AngleVector(0,10f);
+		addObject(mPhysics);
+
+		
+		mBall = new Ball (mBallLayout,32,80,1,null,null);
+		mPhysics.addObject(mBall);
+		
+		// ajoute une plateforme en bas qui prend toute la place pour le debut
+		AnglePhysicObject mWall = new AnglePhysicObject(1, 0);
+		mWall.mPosition.set(0, HEIGHT-15);
+		mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, WIDTH, 0));
+		mWall.mBounce = 1f;
+		mPhysics.addObject(mWall); // Down wall
+		Log.i("OptionsUI", "constructor fin");
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
+		mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
+		
 		if (event.getAction() == MotionEvent.ACTION_DOWN)
 		{
 			float eX = event.getX();
@@ -83,13 +112,6 @@ public class OptionsUI  extends AngleUI
 	
 	private void setSensibility()
 	{
-
-	}
-	
-	@Override
-	public void onActivate()
-	{
-		super.onActivate();
 		new Thread() 
 		{
 			@Override 
@@ -102,13 +124,35 @@ public class OptionsUI  extends AngleUI
 		}.start();
 	}
 	
+	@Override
+	public void onActivate()
+	{
+		Log.i("OptionUI", "onActivate debut");
+		super.onActivate();
+		init();
+		Log.i("OptionUI", "onActivate fin");
+	}
+	
+	public void init()
+	{
+		mBall.mPosition.set(50,300);
+		mBall.jump();
+
+		// ajoute une plateforme en bas qui prend toute la place pour le debut
+		AnglePhysicObject mWall = new AnglePhysicObject(1, 0);
+		mWall.mPosition.set(0, HEIGHT-15);
+		mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, WIDTH, 0));
+		mWall.mBounce = 1f;
+		mPhysics.addObject(mWall); // Down wall
+	}
+	
 	public void askParameter() {
 		Dialog dialog = new Dialog(mActivity);
         dialog.setContentView(R.layout.options);
         dialog.setTitle("Parametres :");
         
         ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
-        myProgressBar.setProgress(sensibility);
+        myProgressBar.setProgress(mSensibility);
         
         Button slideless = (Button) dialog.findViewById(R.id.slider_less);        
         slideless.setOnClickListener(new SlideLessListener(dialog));
@@ -138,10 +182,10 @@ public class OptionsUI  extends AngleUI
         }
 
         public void onClick(View v) {
-        	if(sensibility < 100)
-        		sensibility++;
+        	if(mSensibility < 100)
+        		mSensibility++;
         	ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
-            myProgressBar.setProgress(sensibility);
+            myProgressBar.setProgress(mSensibility);
         }
 	}
 	
@@ -152,16 +196,18 @@ public class OptionsUI  extends AngleUI
         }
 
         public void onClick(View v) {
-        	if(sensibility > 0)
-        		sensibility--;
+        	if(mSensibility > 0)
+        		mSensibility--;
         	ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
-            myProgressBar.setProgress(sensibility);
+            myProgressBar.setProgress(mSensibility);
         }
 	}
 	
 	@Override
 	public void onDeactivate()
 	{
+		Log.i("OptionUI", "onDeactivate debut");
+		Log.i("OptionUI", "onDeactivate fin");
 	}
 	
 }

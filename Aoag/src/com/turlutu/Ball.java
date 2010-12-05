@@ -59,7 +59,7 @@ class Ball extends AnglePhysicObject
 	 */
 	public void changeColorLeft()
 	{
-		if (mGame.mTypeBonus != TypeBonus.DISABLECHANGECOLOR)
+		if (mGame == null || (mGame.mTypeBonus != TypeBonus.DISABLECHANGECOLOR))
 		{
 			Color temp = mColors[0];
 			mColors[0] = mColors[2];
@@ -68,13 +68,14 @@ class Ball extends AnglePhysicObject
 			setColor(mColors[1]);
 		}
 	}
+	
 	/**
 	 * si on change de couleur en passant à travers le bord droit de l'écran
 	 * @author thomas
 	 */
 	public void changeColorRight()
 	{
-		if (mGame.mTypeBonus != TypeBonus.DISABLECHANGECOLOR)
+		if (mGame == null || (mGame.mTypeBonus != TypeBonus.DISABLECHANGECOLOR))
 		{
 			Color temp = mColors[0];
 			mColors[0] = mColors[1];
@@ -86,23 +87,26 @@ class Ball extends AnglePhysicObject
 	
 	private void setColor(Color newColor)
 	{
-		if (newColor == Color.ROUGE)
+		if (mGame != null)
 		{
-			mGame.setSpriteLeft(Color.JAUNE);
-			mSprite.setLayout(mTexture[5]);
-			mGame.setSpriteRight(Color.VERT);
-		}
-		else if(newColor == Color.VERT)
-		{
-			mGame.setSpriteLeft(Color.ROUGE);
-			mSprite.setLayout(mTexture[1]);
-			mGame.setSpriteRight(Color.JAUNE);
-		}
-		else
-		{
-			mGame.setSpriteLeft(Color.VERT);
-			mSprite.setLayout(mTexture[3]);
-			mGame.setSpriteRight(Color.ROUGE);
+			if (newColor == Color.ROUGE)
+			{
+				mGame.setSpriteLeft(Color.JAUNE);
+				mSprite.setLayout(mTexture[5]);
+				mGame.setSpriteRight(Color.VERT);
+			}
+			else if(newColor == Color.VERT)
+			{
+				mGame.setSpriteLeft(Color.ROUGE);
+				mSprite.setLayout(mTexture[1]);
+				mGame.setSpriteRight(Color.JAUNE);
+			}
+			else
+			{
+				mGame.setSpriteLeft(Color.VERT);
+				mSprite.setLayout(mTexture[3]);
+				mGame.setSpriteRight(Color.ROUGE);
+			}
 		}
 	}
 	
@@ -154,13 +158,14 @@ class Ball extends AnglePhysicObject
 	
 	public void jump()
 	{
-		if (mGame.mTypeBonus == TypeBonus.MOREJUMP)
+		if (mGame != null && mGame.mTypeBonus == TypeBonus.MOREJUMP)
 			mVelocity.mY = -900;
-		else if (mGame.mTypeBonus == TypeBonus.LESSJUMP)
+		else if (mGame != null && mGame.mTypeBonus == TypeBonus.LESSJUMP)
 			mVelocity.mY = -450;
 		else
 			mVelocity.mY = -600;
-		sndJump.play(1,false);
+		if (sndJump != null)
+			sndJump.play(1,false);
 	}
 	
 	public void changeSens()

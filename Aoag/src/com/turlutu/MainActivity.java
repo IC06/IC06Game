@@ -26,6 +26,7 @@ public class MainActivity extends AngleActivity
 	protected LoadingUI mLoading;
 	private boolean loaded = false;
 	protected FrameLayout mMainLayout;
+	protected int mSensibility;
 	
    private final SensorEventListener mListener = new SensorEventListener() 
    {
@@ -39,7 +40,7 @@ public class MainActivity extends AngleActivity
 		{
 			if (loaded & event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
 			{
-				mGame.mBall.mVelocity.mX = (-100*event.values[0]);
+				mGame.mBall.mVelocity.mX = (-mOptions.mSensibility*2*event.values[0]);
 				if (mGame.mTypeBonus == TypeBonus.CHANGEPHYSICS)
 					mGame.mBall.mVelocity.mX = -mGame.mBall.mVelocity.mX;
 			}
