@@ -55,7 +55,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				@Override 
 				public void run() 
 				{
-					float new_x = (float) (Math.random() * (320f));
+					float new_x = (float) (Math.random() * (320f - Plateforme.SIZE)) + Plateforme.SIZE/2;
 					int couleur = (int) (Math.random() * 5);
 					AngleSprite sprite;
 					Color color;
