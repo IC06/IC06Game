@@ -23,7 +23,7 @@ public class GameUI extends AngleUI {
 	protected AngleSpriteLayout mBallLayout[], mPlateformeLayout, mBackGroundLayout, mBonusLayout[];
 	protected Ball mBall;
 	protected int mScore;
-	protected AngleSprite mSpriteLeft, mSpriteRight;
+	protected BorderSprite mSpriteLeft, mSpriteRight;
 	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformej;
 	protected AngleSound sndJump, sndBonus[];
 	protected TypeBonus mTypeBonus;
@@ -90,13 +90,13 @@ public class GameUI extends AngleUI {
 		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,64,0,64,256);
 		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,128,0,64,256);
 		// TODO voir quelle image convient le mieu au background
-		//mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
+		mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
 		
 		// on ajoute le background en premier à MyDemo pour qu'il soit dessiné en premier
 		Background mBackGround = new Background(mBackGroundLayout);
 		addObject(mBackGround);
-		mSpriteLeft = new AngleSprite(0,240,mBordsLayout[0]);
-		mSpriteRight = new AngleSprite(320,240,mBordsLayout[1]);
+		mSpriteLeft = new BorderSprite(mActivity, 0,240,mBordsLayout[0]);
+		mSpriteRight = new BorderSprite(mActivity, 320,240,mBordsLayout[1]);
 		addObject(mSpriteLeft);
 		addObject(mSpriteRight);
 		
