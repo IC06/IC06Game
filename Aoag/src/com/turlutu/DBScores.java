@@ -168,12 +168,12 @@ public class DBScores
     	long retour = -1;
     	
     	try {
-    		retour = db.delete(DATABASE_TABLE,"1",null); }
+    		retour = db.delete(DATABASE_TABLE,null,null); }
     	catch (SQLException e) {
     		Log.e(TAG,"error reset : "+e.getMessage());
     		return false;
     	}
-    	if (retour > 0)
+    	if (retour >= 0)
     	{
     		Log.i(TAG,"reset ok");
     		return true;
