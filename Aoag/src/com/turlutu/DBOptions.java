@@ -1,7 +1,5 @@
 package com.turlutu;
 
-
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -11,20 +9,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
-public class DBScores
-{
+public class DBOptions {
     public static final String KEY_ID = "id";
-    public static final String KEY_SCORE = "score";
+    public static final String KEY_SENSIBILITY = "score";
     public static final String KEY_NAME = "name";
-    private static final String TAG = "DBScore";
+    private static final String TAG = "DBOptions";
     
     private static final String DATABASE_NAME = "exitjump";
-    private static final String DATABASE_TABLE = "scores";
-    private static final int DATABASE_VERSION = 6;
+    private static final String DATABASE_TABLE = "options";
+    private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_CREATE =
-     "create table "+DATABASE_TABLE+" ("+KEY_ID+" integer primary key autoincrement, "
-    + KEY_SCORE+" integer not null, "
+    "create table "+DATABASE_TABLE+" ("+KEY_ID+" integer primary key autoincrement, "
+    + KEY_SENSIBILITY+" integer not null, "
     + KEY_NAME+" text not null);";
     
     private final Context context; 
@@ -32,13 +29,13 @@ public class DBScores
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
 
-    public DBScores(Context ctx) 
+    public DBOptions(Context ctx)
     {
         this.context = ctx;
         DBHelper = new DatabaseHelper(context);
     }
         
-    private static class DatabaseHelper extends SQLiteOpenHelper 
+    private static class DatabaseHelper extends SQLiteOpenHelper
     {
         DatabaseHelper(Context context) 
         {
@@ -65,7 +62,7 @@ public class DBScores
     }    
     
     //---opens the database---
-    public DBScores open() throws SQLException 
+    public DBOptions open() throws SQLException 
     {
         db = DBHelper.getWritableDatabase();
         return this;
@@ -77,90 +74,66 @@ public class DBScores
         DBHelper.close();
         db.close();
     }
-    
-    public long insertScore(int score, String nom)
-    {
-    	Cursor c = getAllScores();
-    	if (c.getCount() >= 1)
-    	{
-    		c.moveToLast();
-    		if (c.getInt(1) < score)
-    		{
-    			return replace(c.getInt(0),score,nom);
-    		}
-    		else return -1;
-    	}
-    	else
-    		return insert(score, nom);
-    	
-    }
-    
-    private long insert(int score, String nom)
-    {
-        ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_SCORE , score);
-        initialValues.put(KEY_NAME, nom);
-        long retour = -1;
-        try {
-        	retour = db.insertOrThrow(DATABASE_TABLE, null, initialValues);}
-        catch (SQLException e) {
-        	Log.e(TAG,"error insert ("+score+","+nom+")");
-        	return -1;}
-        if (retour < 0)
-        {
-        	Log.w(TAG,"insert echoue ("+score+","+nom+") retour : "+retour);
-    		return -1;
-        }
-        else
-        {
-        	Log.i(TAG,"insert ("+score+","+nom+") to index : "+retour);
-			return retour;
-        }
-    }
 
-    private long replace(int id, int score, String nom)
+    public long replace(int id, int sensibility, String nom)
     {
     	ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_ID , id);
-        initialValues.put(KEY_SCORE , score);
+        initialValues.put(KEY_SENSIBILITY , sensibility);
         initialValues.put(KEY_NAME, nom);
         long retour = -1;
         try {
         	retour = db.replaceOrThrow(DATABASE_TABLE, null, initialValues);}
         catch (SQLException e) {
-        	Log.e(TAG,"error replace ("+id+","+score+","+nom+")");
+        	Log.e(TAG,"error replace ("+id+","+sensibility+","+nom+")");
         	return -1;}
         if (retour < 0)
         {
-        	Log.w(TAG,"replace echoue ("+id+","+score+","+nom+") retour : "+retour);
+        	Log.w(TAG,"replace echoue ("+id+","+sensibility+","+nom+") retour : "+retour);
     		return -1;
         }
         else
         {
-        	Log.i(TAG,"replace ("+id+","+score+","+nom+") to index : "+retour);
+        	Log.i(TAG,"replace ("+id+","+sensibility+","+nom+") to index : "+retour);
 			return retour;
         }
     }
     
-    //---deletes a particular title---
-    public boolean deleteScore(int score) 
+    public long insert(int sensibility, String nom)
     {
-        return db.delete(DATABASE_TABLE, KEY_SCORE + 
-        		"=" + score, null) > 0;
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(KEY_SENSIBILITY , sensibility);
+        initialValues.put(KEY_NAME, nom);
+        long retour = -1;
+        try {
+        	retour = db.insertOrThrow(DATABASE_TABLE, null, initialValues);}
+        catch (SQLException e) {
+        	Log.e(TAG,"error insert ("+sensibility+","+nom+")");
+        	return -1;}
+        if (retour < 0)
+        {
+        	Log.w(TAG,"insert echoue ("+sensibility+","+nom+") retour : "+retour);
+    		return -1;
+        }
+        else
+        {
+        	Log.i(TAG,"insert ("+sensibility+","+nom+") to index : "+retour);
+			return retour;
+        }
     }
 
     //---retrieves all the scores---
-    public Cursor getAllScores() 
+    public Cursor getOptions() 
     {
         return db.query(DATABASE_TABLE, new String[] {
         		KEY_ID,
-        		KEY_SCORE,
+        		KEY_SENSIBILITY,
         		KEY_NAME}, 
                 null, 
                 null, 
                 null, 
                 null, 
-                KEY_SCORE + " DESC");
+                null);
     }
 
     public boolean reset()
@@ -185,26 +158,8 @@ public class DBScores
     	}
     }
     
-    public static int getWorstScore(Context ctx)
-    {
-    	DBScores db = new DBScores(ctx);
-    	db.open();
-    	Cursor c = db.getAllScores();
-    	if (c.moveToLast())
-    	{
-    		int worstScore = c.getInt(1);
-    		Log.i(TAG,"getWorstScore : "+worstScore);
-    		db.close();
-    		return worstScore;
-    	}
-    	else
-    	{
-    		db.close();
-    		Log.w(TAG,"getWorstScore echoue");
-    		return -1;
-    	}
-    }
     
 }
+
 
 

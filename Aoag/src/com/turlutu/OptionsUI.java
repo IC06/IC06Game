@@ -1,13 +1,13 @@
 package com.turlutu;
 
 import android.app.Dialog;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -33,6 +33,8 @@ public class OptionsUI  extends AngleUI
 	private float WIDTH,HEIGHT;
 	private AngleObject ogMenuTexts;
 	private AngleString strExit, strResetScores, strSensibility;
+	//TODO faire ça mieu
+	private boolean dbEmpty;
 
 	protected int mSensibility = 50;
 
@@ -149,6 +151,22 @@ public class OptionsUI  extends AngleUI
 	}
 	
 	public void askParameter() {
+		DBOptions db = new DBOptions(mActivity);
+		db.open();
+		Cursor c = db.getOptions();
+		if (c.getCount() >= 1)
+    	{
+			dbEmpty = false;
+    		c.moveToFirst();
+    		mSensibility = c.getInt(1);
+    	}
+    	else
+    	{
+    		dbEmpty = true;
+    		mSensibility = 50;
+    	}
+		db.close();
+			
 		Dialog dialog = new Dialog(mActivity);
         dialog.setContentView(R.layout.horizontalslider);
         dialog.setTitle("Parametres :");
@@ -169,6 +187,13 @@ public class OptionsUI  extends AngleUI
         }
 
         public void onClick(View v) {
+	    		DBOptions db = new DBOptions(mActivity);
+	    		db.open();
+	    		if (dbEmpty)
+	    			db.insert(mSensibility,"anonyme");
+	    		else
+	    			db.replace(1, mSensibility, "anonyme");
+	    		db.close();
         		dialog.dismiss(); 
         }
 	}
