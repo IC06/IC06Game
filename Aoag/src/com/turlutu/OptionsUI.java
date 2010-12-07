@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -148,20 +150,16 @@ public class OptionsUI  extends AngleUI
 	
 	public void askParameter() {
 		Dialog dialog = new Dialog(mActivity);
-        dialog.setContentView(R.layout.options);
+        dialog.setContentView(R.layout.horizontalslider);
         dialog.setTitle("Parametres :");
-        
+      
         ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
         myProgressBar.setProgress(mSensibility);
-        
-        Button slideless = (Button) dialog.findViewById(R.id.slider_less);        
-        slideless.setOnClickListener(new SlideLessListener(dialog));
-        
-        Button slidemore = (Button) dialog.findViewById(R.id.slider_more);        
-        slidemore.setOnClickListener(new SlideMoreListener(dialog));
+        myProgressBar.setOnTouchListener(new MyTouchListener(dialog));
         
         Button buttonOK = (Button) dialog.findViewById(R.id.options_ok);        
         buttonOK.setOnClickListener(new OKListener(dialog));
+        
         dialog.show();
 	}
 	protected class OKListener implements OnClickListener {	 
@@ -174,34 +172,26 @@ public class OptionsUI  extends AngleUI
         		dialog.dismiss(); 
         }
 	}
-	
-	protected class SlideMoreListener implements OnClickListener {	 
+
+	protected class MyTouchListener implements OnTouchListener {
         private Dialog dialog;
-        public SlideMoreListener(Dialog dialog) {
+        public MyTouchListener(Dialog dialog) {
                 this.dialog = dialog;
         }
-
-        public void onClick(View v) {
-        	if(mSensibility < 100)
-        		mSensibility++;
-        	ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
-            myProgressBar.setProgress(mSensibility);
+        
+        public boolean onTouch(View v, MotionEvent event)
+        {
+	    	ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
+        	float x_mouse = event.getX();
+			float width = myProgressBar.getWidth();
+	        mSensibility = Math.round((float) myProgressBar.getMax() * (x_mouse / width));
+	        if (mSensibility < 0)
+	        	mSensibility = 0;
+	        myProgressBar.setProgress(mSensibility);
+	        return true;
         }
 	}
 	
-	protected class SlideLessListener implements OnClickListener {	 
-        private Dialog dialog;
-        public SlideLessListener(Dialog dialog) {
-                this.dialog = dialog;
-        }
-
-        public void onClick(View v) {
-        	if(mSensibility > 0)
-        		mSensibility--;
-        	ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
-            myProgressBar.setProgress(mSensibility);
-        }
-	}
 	
 	@Override
 	public void onDeactivate()
