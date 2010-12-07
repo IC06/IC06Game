@@ -56,14 +56,11 @@ public class GameUI extends AngleUI {
 		sndBonus[6] = new AngleSound(mActivity,R.raw.bonus);
 		
 		
-		mBonusLayout = new AngleSpriteLayout[7];
-		mBonusLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 0, 0, 16, 16);
-		mBonusLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 16, 0, 16, 16);
-		mBonusLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 32, 0, 16, 16);
-		mBonusLayout[3] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 48, 0, 16, 16);
-		mBonusLayout[4] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 64, 0, 16, 16);
-		mBonusLayout[5] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 80, 0, 16, 16);	
-		mBonusLayout[6] = new AngleSpriteLayout(activity.mGLSurfaceView, 16, 16, com.turlutu.R.drawable.bonus, 96, 0, 16, 16);	
+		mBonusLayout = new AngleSpriteLayout[8];
+		int i;
+		for(i=0;i<8;i++) {
+			mBonusLayout[i] = new AngleSpriteLayout(activity.mGLSurfaceView, 32, 32, com.turlutu.R.drawable.bonus, i*32, 0, 32, 32);
+		}
 		
 		// PLATEFORME
 		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 1, 64, 30);
@@ -90,10 +87,10 @@ public class GameUI extends AngleUI {
 		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,64,0,64,256);
 		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,128,0,64,256);
 		// TODO voir quelle image convient le mieu au background
-		//mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
+		mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
 		// on ajoute le background en premier pour qu'il soit dessiné en premier
-		//Background mBackGround = new Background(mBackGroundLayout);
-		//addObject(mBackGround);
+		Background mBackGround = new Background(mBackGroundLayout);
+		addObject(mBackGround);
 		mSpriteLeft = new BorderSprite(mActivity, 0,240,mBordsLayout[0]);
 		mSpriteRight = new BorderSprite(mActivity, 320,240,mBordsLayout[1]);
 		addObject(mSpriteLeft);
