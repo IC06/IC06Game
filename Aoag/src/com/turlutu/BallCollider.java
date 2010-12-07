@@ -21,7 +21,7 @@ public class BallCollider extends AngleCircleCollider {
 			float	Ax = segmentCollider.getmObject().mPosition.mX + segmentCollider.getmA().mX,
 						Bx = segmentCollider.getmObject().mPosition.mX + segmentCollider.getmB().mX,
 						Ay = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmA().mY,
-						//By = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmB().mY,
+						By = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmB().mY,
 						X = mObject.mPosition.mX + mCenter.mX,
 						Y = mObject.mPosition.mY + mCenter.mY; // + mRadius  - 15;
 			if (Y < Ay)
@@ -30,10 +30,10 @@ public class BallCollider extends AngleCircleCollider {
 					return true;
 				else if (Ax < Bx && Bx <X && X < Ax)
 					return true;
-				/*else if ((X-Ax)*(X-Ax)+(Y-Ay)*(Y-Ay) < mRadius*mRadius)
+				else if ((X-Ax)*(X-Ax)+(Y-Ay)*(Y-Ay) < mRadius*mRadius)
 					return true;
 				else if ((X-Bx)*(X-Bx)+(Y-By)*(Y-By) < mRadius*mRadius)
-					return true;*/
+					return true;
 				else
 					return false;
 			}
