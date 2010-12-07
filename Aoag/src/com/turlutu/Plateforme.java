@@ -13,7 +13,7 @@ public class Plateforme extends AnglePhysicObject
 	private float mWidth;
 	protected Color mColor;
 	
-	static public float SIZE = 80;
+	static public float SIZE = 60;
 
 	public Plateforme(AngleSprite plateformeblanche)
 	{
