@@ -32,7 +32,7 @@ class Bonus extends AnglePhysicObject
 	private AngleSprite mSprite;
 	private int mType;
 	
-	static int radius = 8;
+	static int radius = 16;
 	static int nbtype = 6;
 	static TypeBonus[] mapTypeBonus = {	TypeBonus.NONE, // 0
 																			TypeBonus.ADDSCORE, // 1
@@ -84,7 +84,7 @@ class Bonus extends AnglePhysicObject
 		if(mustdraw) {
 			mSprite.mPosition.set(mPosition);
 			mSprite.draw(gl);
-			drawColliders(gl,1f,0f,0f);
+			//drawColliders(gl,1f,0f,0f);
 		}
 	}
 	
