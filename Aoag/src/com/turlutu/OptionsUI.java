@@ -35,6 +35,7 @@ public class OptionsUI  extends AngleUI
 	private AngleString strExit, strResetScores, strSensibility;
 
 	protected int mSensibility = 50;
+	protected int mVolume = 100;
 
 	public OptionsUI(AngleActivity activity)
 	{

@@ -165,7 +165,7 @@ class Ball extends AnglePhysicObject
 		else
 			mVelocity.mY = -600;
 		if (sndJump != null)
-			sndJump.play(1,false);
+			sndJump.play( ((MainActivity)mGame.mActivity).mOptions.mVolume / 100 ,false);
 	}
 	
 	public void changeSens()

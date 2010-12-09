@@ -105,7 +105,7 @@ class Bonus extends AnglePhysicObject
 			Log.i("Bonus", "Bonus onDie debut");
 			Log.i("Bonus", "TypeBonus : "+mapTypeBonus[mType]);
 			mGame.setBonus(mapTypeBonus[mType],timesActionBonus[mType]);
-			sndTouch.play(1,false);
+			sndTouch.play(((MainActivity)mGame.mActivity).mOptions.mVolume / 100,false);
 			Log.i("Bonus", "Bonus onDie fin");
 		}
 	}
