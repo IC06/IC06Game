@@ -24,6 +24,7 @@ public class MainActivity extends AngleActivity
 	protected ScoresUI mScores;
 	protected OptionsUI mOptions;
 	protected LoadingUI mLoading;
+	protected OnLineScoresUI mScoresOnLine;
 	private boolean loaded = false;
 	protected FrameLayout mMainLayout;
 	protected int mSensibility;
@@ -81,6 +82,7 @@ public class MainActivity extends AngleActivity
 		mMenu=new MenuUI(this);
 		mOptions=new OptionsUI(this);
 		mScores=new ScoresUI(this);
+		mScoresOnLine = new OnLineScoresUI(this);
 		mGame=new GameUI(this);
 		mGame.setGravity(0f,10f);
 		setUI(mMenu);
