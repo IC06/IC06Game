@@ -88,17 +88,24 @@ public class OnLineScoresUI   extends AngleUI
 	}
 	
 	public void UploadMyScore() {
-		DBScores db = new DBScores(mActivity);
-		db.open();
-        Cursor c = db.getAllScores();
-        if (c.moveToFirst())
-        {
-            do {          
-				postData(""+c.getString(2), ""+c.getString(1));
-            } while (c.moveToNext());
-        }
-        db.close();
-        getScores();
+		new Thread() 
+		{
+			@Override 
+			public void run() 
+			{
+				DBScores db = new DBScores(mActivity);
+				db.open();
+		        Cursor c = db.getAllScores();
+		        if (c.moveToFirst())
+		        {
+		            do {          
+						postData(""+c.getString(2), ""+c.getString(1));
+		            } while (c.moveToNext());
+		        }
+		        db.close();
+		        getScores();
+			}
+		}.start();
 	}
 	
 	
