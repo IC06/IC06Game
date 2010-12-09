@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/99/branches/ANGLE%202.0/src/com/alt90/angle2
+END
+AngleFPSCounter.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/93/branches/ANGLE%202.0/src/com/alt90/angle2/AngleFPSCounter.java
+END
+AngleAbstractSprite.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/99/branches/ANGLE%202.0/src/com/alt90/angle2/AngleAbstractSprite.java
+END
+AngleActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/93/branches/ANGLE%202.0/src/com/alt90/angle2/AngleActivity.java
+END
+AngleRect.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/92/branches/ANGLE%202.0/src/com/alt90/angle2/AngleRect.java
+END
+AngleTexture.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/99/branches/ANGLE%202.0/src/com/alt90/angle2/AngleTexture.java
+END
+TestAngle2.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/99/branches/ANGLE%202.0/src/com/alt90/angle2/TestAngle2.java
+END
+AngleVector.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/92/branches/ANGLE%202.0/src/com/alt90/angle2/AngleVector.java
+END
+AngleSpriteLayout.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/95/branches/ANGLE%202.0/src/com/alt90/angle2/AngleSpriteLayout.java
+END
+AngleString.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/98/branches/ANGLE%202.0/src/com/alt90/angle2/AngleString.java
+END
+AngleSprite.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/99/branches/ANGLE%202.0/src/com/alt90/angle2/AngleSprite.java
+END
+AngleObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/99/branches/ANGLE%202.0/src/com/alt90/angle2/AngleObject.java
+END
+AngleRenderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/99/branches/ANGLE%202.0/src/com/alt90/angle2/AngleRenderer.java
+END
+AngleFont.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/95/branches/ANGLE%202.0/src/com/alt90/angle2/AngleFont.java
+END
+AngleResourceTexture.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/92/branches/ANGLE%202.0/src/com/alt90/angle2/AngleResourceTexture.java
+END
+AngleColor.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/97/branches/ANGLE%202.0/src/com/alt90/angle2/AngleColor.java
+END
+AngleSpriteRotable.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/99/branches/ANGLE%202.0/src/com/alt90/angle2/AngleSpriteRotable.java
+END
+AngleScreenEraser.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/96/branches/ANGLE%202.0/src/com/alt90/angle2/AngleScreenEraser.java
+END
+AngleSpriteBlock.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/99/branches/ANGLE%202.0/src/com/alt90/angle2/AngleSpriteBlock.java
+END
+AngleTextureEngine.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/94/branches/ANGLE%202.0/src/com/alt90/angle2/AngleTextureEngine.java
+END
+AngleFontTexture.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/95/branches/ANGLE%202.0/src/com/alt90/angle2/AngleFontTexture.java
+END
+AngleLine.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/97/branches/ANGLE%202.0/src/com/alt90/angle2/AngleLine.java
+END
