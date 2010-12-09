@@ -1,5 +1,7 @@
 package com.android.angle;
 
+import com.turlutu.R;
+
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;

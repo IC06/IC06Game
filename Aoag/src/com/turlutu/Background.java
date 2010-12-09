@@ -6,6 +6,7 @@ import com.android.angle.AngleSpriteLayout;
 
 /** 
 * @author thomas
+* @author matthieu :) portage de angle 2
 */
 public class Background extends AngleSprite
 {
@@ -13,10 +14,11 @@ public class Background extends AngleSprite
 
 	public Background(AngleSpriteLayout layout)
 	{
-		super(layout);
+		super(160, 240, layout);
 
-		mPosition.mX = 160;
-		mPosition.mY = 240;
+		// Angle 1
+		/*mPosition.mX = 160;
+		mPosition.mY = 240;*/
 	}
 
 
