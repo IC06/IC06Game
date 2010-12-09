@@ -12,7 +12,7 @@ import com.android.angle.AngleObject;
  */
 public class AngleUI extends AngleObject
 {
-	protected AngleActivity mActivity;
+	public AngleActivity mActivity;
 
 	public AngleUI (AngleActivity activity)
 	{
