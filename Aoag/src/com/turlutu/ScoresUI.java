@@ -123,8 +123,10 @@ public class ScoresUI   extends AngleUI
 
         public void onClick(View v) {
         		TextView input = (TextView) dialog.findViewById(R.id.entry);
-        		CharSequence name = input.getText();
-        		((MainActivity)mActivity).mOptions.mName = ""+name;
+        		String name = ""+input.getText();
+        		if (name == "")
+        			name = "anonyme";
+        		((MainActivity)mActivity).mOptions.mName = name;
         		dialog.dismiss(); 
         		DBScores db = new DBScores(mActivity);
         		db.open();

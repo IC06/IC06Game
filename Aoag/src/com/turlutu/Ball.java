@@ -109,13 +109,14 @@ class Ball extends AnglePhysicObject
 	
 	public int getIntTexture()
 	{
-		if ( mColors[1] == Color.VERT ) {
+		if (mActivity.mGame.mTypeBonus == TypeBonus.ALLPLATEFORME)
+			return 6 + sens;
+		else if ( mColors[1] == Color.VERT )
 			return 0 + sens;
-		} else if ( mColors[1] == Color.JAUNE ){
+		else if ( mColors[1] == Color.JAUNE )
 			return 2 + sens;
-		} else {
+		else
 			return 4 + sens;
-		}
 	}
 	
 	/**
@@ -162,11 +163,10 @@ class Ball extends AnglePhysicObject
 	
 	public void changeSens()
 	{
-		if(mVelocity.mX<0) {
+		if(sens == 1 && mVelocity.mX < 0)
 			sens=0;
-		} else if(mVelocity.mX>0) {
+		else if(sens == 0 && mVelocity.mX > 0)
 			sens=1;
-		}
 		mSprite.setLayout(mTexture[getIntTexture()]);
 	}
 	
