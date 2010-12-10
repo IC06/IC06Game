@@ -26,7 +26,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	AngleSurfaceView mGLSurfaceView;
 	GameUI mGameUI;
 	private int mCounterScore;
-	final private float max_dy=120f;
+	final private float max_dy=100f;
 	private float dy,new_y,current_max_dy;
 	
 	public MyPhysicsEngine(int maxObjects, float worldWidth, float worldHeight,AngleSurfaceView SurfaceView, GameUI gameUI)
@@ -37,7 +37,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		mGLSurfaceView = SurfaceView;
 		mGameUI = gameUI;
 		dy = 30;
-		current_max_dy = 60;
+		current_max_dy = 40;
 	}
 
 	/*
@@ -50,7 +50,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		{
 			new_y = max_dy;
 			new_y = dy + (float) (Math.random() * (current_max_dy - dy));
-			float d = 10f/dy;
+			float d = 5f/dy;
 			if (dy < max_dy){dy+=((Math.random()*1.5)+1) * d;}
 			if (current_max_dy < max_dy){current_max_dy+=((Math.random()*2)+1) * d;}
 			Log.i("DY",""+dy+" "+current_max_dy);
@@ -60,7 +60,11 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				public void run() 
 				{
 					float new_x = (float) (Math.random() * (320f - Plateforme.SIZE)) + Plateforme.SIZE/2;
-					int couleur = (int) (Math.random() * 6);
+					int d = (int) ((current_max_dy - 40.f) * 10.f/6.f);
+					int couleur = 3;
+					if( Math.random()*2 < (float) d / 100.f + 1) {
+						couleur = (int) (Math.random() * 3);
+					}
 					AngleSprite sprite;
 					Color color;
 					switch (couleur)
@@ -86,12 +90,25 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 							sprite = mGameUI.mPlateformew;
 							break;
 					}
-					Plateforme newPlateforme = new Plateforme(sprite,color,PlateformeType.REBOND,(int)(Math.random() * 30));
+					int vitesse = 0;
+					if(d > 10 && Math.random()*1.5 < (float) d / 100.f + 0.5  ) {
+						vitesse = (int) (Math.random() * d);
+						Log.i("Strategie", "Vitesse : "+vitesse);
+					}
+					if(vitesse > 5) {
+						if(Math.random() > 0.5) {
+							vitesse = vitesse * -1 ;
+						}
+						Log.i("Strategie", "Vitesse : "+vitesse);
+					} else {
+						vitesse = 0;
+					}
+					Log.i("Strategie", "Vitesse : "+vitesse);
+					Plateforme newPlateforme = new Plateforme(sprite,color,PlateformeType.REBOND,vitesse);
 					newPlateforme.mPosition.set(new_x,-1);
 					addObject(newPlateforme);
-					int d = (int) ((current_max_dy - 60.f) * 10.f/6.f);
 					Log.i("Strategie", "Random bonus > "+(0.9 - (0.4 * ((float) d / 100.f) )));
-					if(Math.random()> (0.8 - (0.2 * ((float) d /100.f ) ))) {
+					if(Math.random()> (0.8 - (0.3 * ((float) d /100.f ) ))) {
 						Bonus bonus = new Bonus(mGameUI, d);
 						Log.i("Strategie", "diifculty /100 "+d);
 						bonus.mPosition.set(new_x+(int) (Math.random() * (Plateforme.SIZE) - (Plateforme.SIZE / 2)),-22);

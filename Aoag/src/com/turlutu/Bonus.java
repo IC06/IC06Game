@@ -54,7 +54,8 @@ class Bonus extends AnglePhysicObject
 		super(0, 1);
 		mGame = game;
 		mUsed = false;
-		mType = (int) (Math.random() * ((float) d / 100.f * nbtype)) + 1;
+		mType = (int) (Math.random() * ( (float) d / 100.f * nbtype)) + 1;
+		Log.i("Strategie", "Bmax : "+ ( (float) d / 100.f * nbtype) + 1);
 		sndTouch = mGame.sndBonus[mType];
 		mSprite=new AngleSprite(mGame.mBonusLayout[mType]);
 		addCircleCollider(new BallCollider(0, 0, radius));
