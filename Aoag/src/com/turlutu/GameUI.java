@@ -199,7 +199,7 @@ public class GameUI extends AngleUI {
 	{
 		float eY = event.getY();
 
-		if(eY < 400) { 
+		if(eY < 100) { 
 			// PAUSE
 			if (event.getAction() == MotionEvent.ACTION_DOWN)
 			{
