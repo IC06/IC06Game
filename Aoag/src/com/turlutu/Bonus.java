@@ -11,7 +11,7 @@ import com.android.angle.AngleSprite;
 /**
  * extends AnglePhysicObject
  * 
- * @author Matthieu
+ * @author Matthieu,Thomas
  *
  */
 class Bonus extends AnglePhysicObject

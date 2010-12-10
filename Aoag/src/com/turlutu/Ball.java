@@ -2,8 +2,6 @@ package com.turlutu;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import android.os.Vibrator;
-
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSound;
 import com.android.angle.AngleSprite;
@@ -19,22 +17,24 @@ import com.turlutu.Bonus.TypeBonus;
  */
 class Ball extends AnglePhysicObject
 {
-	private AngleSprite mSprite;
-	private AngleSpriteLayout mTexture[];
 	protected enum Color {JAUNE, VERT, ROUGE, TOUTE};
-	private Color mColors[];
 	protected float mRadius;
-	private GameUI mGame;
-	private OptionsUI mOptions = null;
 	protected AngleVector mAcceleration;
-	private AngleSound sndJump;
 	public int sens = 1;
 	
+	private MainActivity mActivity;
+	private AngleSound sndJump;
+	private GameUI mGame;
+	private Color mColors[];
+	private AngleSprite mSprite;
+	private AngleSpriteLayout mTexture[];
 	
-	public Ball(AngleSpriteLayout texture[], float radius, float mass, float bounce, AngleSound soundJump, GameUI game, OptionsUI options)
+	
+	public Ball(MainActivity activity, AngleSpriteLayout texture[], float radius, float mass, float bounce, AngleSound soundJump)
 	{
 		super(0, 1);
-		mOptions = options; // Pour utiliser lors de l'optionsUI
+		mActivity = activity;
+		mGame = mActivity.mGame;
 		sndJump = soundJump;
 		mAcceleration = new AngleVector(0f,0f);
 		mColors = new Color[3];
@@ -48,37 +48,11 @@ class Ball extends AnglePhysicObject
 		mMass = mass;
 		mBounce = bounce; // Coefficient of restitution (1 return all the energy)
 		mVelocity.mY = -5;
-		mGame = game;
-	}
-	/**
-	 * 
-	 * @param layout Img to use
-	 * @param radius Radius of the ball
-	 * @param mass Mass of the ball
-	 * @param bounce Coefficient of restitution(1 return all the energy)
-	 */
-	public Ball(AngleSpriteLayout texture[], float radius, float mass, float bounce, AngleSound soundJump, GameUI game)
-	{
-		super(0, 1);
-		sndJump = soundJump;
-		mAcceleration = new AngleVector(0f,0f);
-		mColors = new Color[3];
-		mColors[0] = Color.ROUGE;
-		mColors[1] = Color.VERT;
-		mColors[2] = Color.JAUNE;
-		mSprite=new AngleSprite(texture[0]);
-		mTexture=texture;
-		addCircleCollider(new BallCollider(0, 0, radius));
-		mRadius = radius;
-		mMass = mass;
-		mBounce = bounce; // Coefficient of restitution (1 return all the energy)
-		mVelocity.mY = -5;
-		mGame = game;
 	}
 
 	/**
 	 * si on change de couleur en passant à travers le bord gauche de l'écran
-	 * @author thomas
+	 * @author matthieu, thomas
 	 */
 	public void changeColorLeft()
 	{
@@ -94,7 +68,7 @@ class Ball extends AnglePhysicObject
 	
 	/**
 	 * si on change de couleur en passant à travers le bord droit de l'écran
-	 * @author thomas
+	 * @author matthieu, thomas
 	 */
 	public void changeColorRight()
 	{
@@ -181,18 +155,14 @@ class Ball extends AnglePhysicObject
 	
 	public void jump()
 	{
-		((MainActivity)mGame.mActivity).mVibrator.vibrate(50);
+		mActivity.mVibrator.vibrate(50);
 		if (mGame != null && mGame.mTypeBonus == TypeBonus.MOREJUMP)
 			mVelocity.mY = -900;
 		else if (mGame != null && mGame.mTypeBonus == TypeBonus.LESSJUMP)
 			mVelocity.mY = -450;
 		else
 			mVelocity.mY = -600;
-		if (sndJump != null)
-			if(mGame != null)
-				sndJump.play( ((float) ((MainActivity)mGame.mActivity).mOptions.mVolume) / 100.f ,false);
-			else
-				sndJump.play( ((float) mOptions.mVolume) / 100.f ,false);
+		sndJump.play( ((float) mActivity.mOptions.mVolume) / 100f ,false);
 	}
 	
 	public void changeSens()

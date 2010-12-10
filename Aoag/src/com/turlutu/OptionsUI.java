@@ -22,6 +22,7 @@ import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
 import com.android.angle.AngleVector;
 
+// TODO voir si on ne peut pas utiliser les layouts de GameUI au lieu d'en recréer
 public class OptionsUI  extends AngleUI
 {
 
@@ -29,7 +30,7 @@ public class OptionsUI  extends AngleUI
 	protected Ball mBall;
 
 	private MyPhysicsEngine mPhysics;
-	private float WIDTH,HEIGHT;
+	private final float WIDTH = 320f,HEIGHT = 480f;
 	private AngleObject ogMenuTexts;
 	//TODO faire ça mieu
 	private boolean dbEmpty;
@@ -37,13 +38,12 @@ public class OptionsUI  extends AngleUI
 
 	protected int mSensibility = 50;
 	protected int mVolume = 100;
+	protected int mVibration = 1;
 
 	public OptionsUI(AngleActivity activity)
 	{
 		super(activity);
 		Log.i("OptionsUI", "constructor debut");
-		WIDTH = 320f;
-		HEIGHT = 480f;
 		
 		ogMenuTexts = new AngleObject();
 		
@@ -68,7 +68,7 @@ public class OptionsUI  extends AngleUI
 		addObject(mPhysics);
 
 		AngleSound sndJump = new AngleSound(activity,R.raw.jump);
-		mBall = new Ball (mBallLayout,32,80,1,sndJump,null,this);
+		mBall = new Ball ((MainActivity)mActivity,mBallLayout,32,80,1,sndJump);
 		mPhysics.addObject(mBall);
 		
 		// ajoute une plateforme en bas qui prend toute la place pour le debut
@@ -174,11 +174,15 @@ public class OptionsUI  extends AngleUI
 			dbEmpty = false;
     		c.moveToFirst();
     		mSensibility = c.getInt(1);
+    		mVolume = c.getInt(2);
+    		mVibration = c.getInt(3);
     	}
-    	else
+    	else // par default
     	{
     		dbEmpty = true;
     		mSensibility = 50;
+    		mVolume = 100;
+    		mVibration = 1;
     	}
 		db.close();
 			
@@ -213,9 +217,9 @@ public class OptionsUI  extends AngleUI
 	    		DBOptions db = new DBOptions(mActivity);
 	    		db.open();
 	    		if (dbEmpty)
-	    			db.insert(mSensibility,"anonyme");
+	    			db.insert(mSensibility,mVolume,mVibration,"anonyme");
 	    		else
-	    			db.replace(1, mSensibility, "anonyme");
+	    			db.replace(1, mSensibility,mVolume,mVibration,"anonyme");
 	    		db.close();
         		dialog.dismiss(); 
         }
@@ -236,12 +240,10 @@ public class OptionsUI  extends AngleUI
 		}
 
 		public void onStartTrackingTouch(SeekBar arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void onStopTrackingTouch(SeekBar arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 	}

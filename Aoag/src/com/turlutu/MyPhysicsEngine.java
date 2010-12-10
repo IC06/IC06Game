@@ -238,6 +238,8 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	/**
 	 * @author thomas
 	 * TODO Afficher les bonus apres les plateformes !
+	 * @author matthieu, thomas
+	 * 
 	 */
 	@Override
 	public void draw(GL10 gl)
