@@ -19,7 +19,7 @@ public class DBOptions {
     
     private static final String DATABASE_NAME = "exitjump";
     private static final String DATABASE_TABLE = "options";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 7;
 
     private static final String DATABASE_CREATE =
     "create table "+DATABASE_TABLE+" ("+KEY_ID+" integer primary key autoincrement, "
