@@ -27,7 +27,7 @@ public class GameUI extends AngleUI {
 	protected BorderSprite mSpriteLeft, mSpriteRight;
 	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformej;
 	protected AngleSound sndJump, sndBonus[];
-	protected TypeBonus mTypeBonus;
+	protected TypeBonus mTypeBonus = TypeBonus.NONE;
 	protected float WIDTH,HEIGHT;
 	protected MyPhysicsEngine mPhysics;
 

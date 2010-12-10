@@ -24,7 +24,6 @@ class Ball extends AnglePhysicObject
 	
 	private MainActivity mActivity;
 	private AngleSound sndJump;
-	private GameUI mGame;
 	private Color mColors[];
 	private AngleSprite mSprite;
 	private AngleSpriteLayout mTexture[];
@@ -34,7 +33,6 @@ class Ball extends AnglePhysicObject
 	{
 		super(0, 1);
 		mActivity = activity;
-		mGame = mActivity.mGame;
 		sndJump = soundJump;
 		mAcceleration = new AngleVector(0f,0f);
 		mColors = new Color[3];
@@ -56,7 +54,7 @@ class Ball extends AnglePhysicObject
 	 */
 	public void changeColorLeft()
 	{
-		if (mGame == null || (mGame.mTypeBonus != TypeBonus.DISABLECHANGECOLOR))
+		if (mActivity.mGame.mTypeBonus != TypeBonus.DISABLECHANGECOLOR)
 		{
 			Color temp = mColors[0];
 			mColors[0] = mColors[2];
@@ -72,7 +70,7 @@ class Ball extends AnglePhysicObject
 	 */
 	public void changeColorRight()
 	{
-		if (mGame == null || (mGame.mTypeBonus != TypeBonus.DISABLECHANGECOLOR))
+		if (mActivity.mGame.mTypeBonus != TypeBonus.DISABLECHANGECOLOR)
 		{
 			Color temp = mColors[0];
 			mColors[0] = mColors[1];
@@ -84,26 +82,23 @@ class Ball extends AnglePhysicObject
 	
 	private void setColor(Color newColor)
 	{
-		if (mGame != null)
+		if (newColor == Color.ROUGE)
 		{
-			if (newColor == Color.ROUGE)
-			{
-				mGame.setSpriteLeft(Color.JAUNE);
-				mSprite.setLayout(mTexture[5]);
-				mGame.setSpriteRight(Color.VERT);
-			}
-			else if(newColor == Color.VERT)
-			{
-				mGame.setSpriteLeft(Color.ROUGE);
-				mSprite.setLayout(mTexture[1]);
-				mGame.setSpriteRight(Color.JAUNE);
-			}
-			else
-			{
-				mGame.setSpriteLeft(Color.VERT);
-				mSprite.setLayout(mTexture[3]);
-				mGame.setSpriteRight(Color.ROUGE);
-			}
+			mActivity.mGame.setSpriteLeft(Color.JAUNE);
+			mSprite.setLayout(mTexture[5]);
+			mActivity.mGame.setSpriteRight(Color.VERT);
+		}
+		else if(newColor == Color.VERT)
+		{
+			mActivity.mGame.setSpriteLeft(Color.ROUGE);
+			mSprite.setLayout(mTexture[1]);
+			mActivity.mGame.setSpriteRight(Color.JAUNE);
+		}
+		else
+		{
+			mActivity.mGame.setSpriteLeft(Color.VERT);
+			mSprite.setLayout(mTexture[3]);
+			mActivity.mGame.setSpriteRight(Color.ROUGE);
 		}
 	}
 	
@@ -156,9 +151,9 @@ class Ball extends AnglePhysicObject
 	public void jump()
 	{
 		mActivity.mVibrator.vibrate(50);
-		if (mGame != null && mGame.mTypeBonus == TypeBonus.MOREJUMP)
+		if (mActivity.mGame.mTypeBonus == TypeBonus.MOREJUMP)
 			mVelocity.mY = -900;
-		else if (mGame != null && mGame.mTypeBonus == TypeBonus.LESSJUMP)
+		else if (mActivity.mGame.mTypeBonus == TypeBonus.LESSJUMP)
 			mVelocity.mY = -450;
 		else
 			mVelocity.mY = -600;
@@ -198,14 +193,6 @@ class Ball extends AnglePhysicObject
 	
 	private void gererCollision(PlateformeCollider segmentCollider)
 	{
-		/*float	Ax = segmentCollider.getmObject().mPosition.mX + segmentCollider.getmA().mX,
-					Bx = segmentCollider.getmObject().mPosition.mX + segmentCollider.getmB().mX,
-					Ay = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmA().mY,
-					X = mObject.mPosition.mX + mCenter.mX,
-					Y = mObject.mPosition.mY + mCenter.mY + mRadius - 20;
-		
-		if ((Ax < Bx && Ax < X && X < Bx)
-			or(Ax < Bx && Bx <X && X < Ax))*/
 		mPosition.mY = segmentCollider.getmObject().mPosition.mY + segmentCollider.getmA().mY - mRadius - 1;
 	}
 	
