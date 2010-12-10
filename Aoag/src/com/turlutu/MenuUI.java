@@ -1,10 +1,8 @@
 package com.turlutu;
 
-import android.graphics.Typeface;
 import android.view.MotionEvent;
 
 import com.android.angle.AngleActivity;
-import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
 import com.android.angle.AngleSprite;
 import com.android.angle.AngleSpriteLayout;
@@ -28,13 +26,11 @@ public class MenuUI  extends AngleUI
 		
 		addObject(ogMenuTexts);
 
-		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 0, 0, 0, 255);
-		
-		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Play", 160, 110, AngleString.aLeft));
-		strHiScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Hi Score", 160, 210, AngleString.aCenter));
-		strHiScoresOnLine = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "On line Score", 50, 50, AngleString.aLeft));
-		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Options", 175, 295, AngleString.aCenter));
-		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Exit", 250, 360, AngleString.aCenter));
+		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Play", 160, 110, AngleString.aLeft));
+		strHiScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Hi Score", 160, 210, AngleString.aCenter));
+		strHiScoresOnLine = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "On line Score", 50, 50, AngleString.aLeft));
+		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Options", 175, 295, AngleString.aCenter));
+		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Exit", 250, 360, AngleString.aCenter));
 		
 	}
 

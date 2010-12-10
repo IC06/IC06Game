@@ -2,7 +2,6 @@ package com.turlutu;
 
 import android.app.Dialog;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.android.angle.AngleActivity;
-import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSegmentCollider;
@@ -51,12 +49,10 @@ public class OptionsUI  extends AngleUI
 		
 		addObject(ogMenuTexts);
 
-		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
-
-		strSensibility = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Set Sensibility", 160, 200, AngleString.aCenter));
-		strVolume = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Set Volume", 160, 250, AngleString.aCenter));
-		strResetScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Reset Scores", 160, 300, AngleString.aCenter));
-		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Retour", 160, 390, AngleString.aCenter));
+		strSensibility = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Set Sensibility", 160, 200, AngleString.aCenter));
+		strVolume = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Set Volume", 160, 250, AngleString.aCenter));
+		strResetScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Reset Scores", 160, 300, AngleString.aCenter));
+		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Retour", 160, 390, AngleString.aCenter));
 
 		mBallLayout = new AngleSpriteLayout[6];
 		mBallLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,0,0,42,64);
@@ -206,6 +202,7 @@ public class OptionsUI  extends AngleUI
         
         dialog.show();
 	}
+	
 	protected class OKListener implements OnClickListener {	 
         private Dialog dialog;
         public OKListener(Dialog dialog) {
