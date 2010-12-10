@@ -28,13 +28,14 @@ public class MainActivity extends AngleActivity
 	protected MenuUI mMenu;
 	protected ScoresUI mScores;
 	protected OptionsUI mOptions;
+	protected InstructionsUI mInstructions;
 	protected OnLineScoresUI mScoresOnLine;
 	private boolean loaded = false;
 	protected FrameLayout mMainLayout;
 	protected int mSensibility;
 	protected MainActivity mActivity;
 	protected ProgressDialog  dialog;
-	protected AngleFont fntGlobal;
+	protected AngleFont fntGlobal, fntGlobal1;
 	protected Vibrator mVibrator;
 	private final SensorEventListener mListener = new SensorEventListener() 
 	{
@@ -89,6 +90,8 @@ public class MainActivity extends AngleActivity
 		mGLSurfaceView.addObject(new FPSCounter());
 		
 		fntGlobal = new AngleFont(this.mGLSurfaceView, 25, Typeface.createFromAsset(this.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 30, 30, 255);
+		// Text of instructions
+		fntGlobal1 = new AngleFont(this.mGLSurfaceView, 17, Typeface.createFromAsset(this.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 30, 30, 255);
 		mMainLayout=new FrameLayout(this);
 		mMainLayout.addView(mGLSurfaceView);
 		setContentView(mMainLayout);
@@ -110,6 +113,7 @@ public class MainActivity extends AngleActivity
 	{
 		Log.i("MainActivity", "Load() start");
 		mOptions=new OptionsUI(this);
+		mInstructions= new InstructionsUI(this);
 		mScores=new ScoresUI(this);
 		mScoresOnLine = new OnLineScoresUI(this);
 		mGame=new GameUI(this);
