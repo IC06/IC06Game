@@ -39,9 +39,11 @@ public class OnLineScoresUI   extends AngleUI
 	private AngleObject ogMenuTexts;
 	private AngleString strExit, strScores, strNames, strPushScore;
 	
-	public OnLineScoresUI(AngleActivity activity)
+	public OnLineScoresUI(AngleActivity activity, Background mBackGround)
 	{
 		super(activity);
+		if(mBackGround != null)
+			addObject(mBackGround);
 		ogMenuTexts = new AngleObject();
 		
 		addObject(ogMenuTexts);

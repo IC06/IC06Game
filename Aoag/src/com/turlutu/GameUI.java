@@ -36,10 +36,12 @@ public class GameUI extends AngleUI {
 	private AngleObject ogDashboard;
 	private float mTimeEllapsedBonus, mTimeActionBonus;
 	
-	public GameUI(AngleActivity activity)
+	public GameUI(AngleActivity activity, Background mBackGround)
 	{
 		super(activity);
 		Log.i("GameUI", "GameUI constructor debut");
+		if(mBackGround != null)
+			addObject(mBackGround);
 		WIDTH = 320f;
 		HEIGHT = 480f;
 		mScore = 0;
@@ -81,11 +83,7 @@ public class GameUI extends AngleUI {
 		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,0,0,64,256);
 		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,64,0,64,256);
 		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,128,0,64,256);
-		// TODO voir quelle image convient le mieu au background
-		//mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
-		// on ajoute le background en premier pour qu'il soit dessiné en premier
-		Background mBackGround = new Background(mBackGroundLayout);
-		addObject(mBackGround);
+		
 		mSpriteLeft = new BorderSprite(mActivity, 0,240,mBordsLayout[0]);
 		mSpriteRight = new BorderSprite(mActivity, 320,240,mBordsLayout[1]);
 		addObject(mSpriteLeft);

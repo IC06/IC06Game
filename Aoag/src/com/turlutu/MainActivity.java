@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleFont;
+import com.android.angle.AngleSpriteLayout;
 import com.android.angle.FPSCounter;
 import com.turlutu.Bonus.TypeBonus;
 
@@ -112,13 +113,24 @@ public class MainActivity extends AngleActivity
 	public void load()
 	{
 		Log.i("MainActivity", "Load() start");
-		mOptions=new OptionsUI(this);
-		mInstructions= new InstructionsUI(this);
-		mScores=new ScoresUI(this);
-		mScoresOnLine = new OnLineScoresUI(this);
-		mGame=new GameUI(this);
+		
+		// TODO voir quelle image convient le mieu au background
+		AngleSpriteLayout mBackGroundLayout = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
+		// on ajoute le background en premier pour qu'il soit dessiné en premier
+		Background mBackGround = null;
+		
+		// a decommenter pour avoir des background dans les differentes UI (autre que le menu)
+		//mBackGround= new Background(mBackGroundLayout);
+		
+		mOptions=new OptionsUI(this,mBackGround);
+		mInstructions= new InstructionsUI(this,mBackGround);
+		mScores=new ScoresUI(this,mBackGround);
+		mScoresOnLine = new OnLineScoresUI(this,mBackGround);
+		mGame=new GameUI(this,mBackGround);
 		mGame.setGravity(0f,10f);
 		mMenu=new MenuUI(this);
+		
+		
 		setUI(mMenu);
 		Log.i("MainActivity", "Load() fin");
 		loaded = true;

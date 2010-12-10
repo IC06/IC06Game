@@ -43,10 +43,12 @@ public class OptionsUI  extends AngleUI
 	protected int mVibrations;
 	protected String mName;
 
-	public OptionsUI(AngleActivity activity)
+	public OptionsUI(AngleActivity activity, Background mBackGround)
 	{
 		super(activity);
 		Log.i("OptionsUI", "constructor debut");
+		if(mBackGround != null)
+			addObject(mBackGround);
 		DBOptions db = new DBOptions(mActivity);
 		db.open();
 		Cursor c = db.getOptions();

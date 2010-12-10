@@ -25,10 +25,12 @@ public class InstructionsUI  extends AngleUI
 	protected int mVibrations;
 	protected String mName;
 
-	public InstructionsUI(AngleActivity activity)
+	public InstructionsUI(AngleActivity activity, Background mBackGround)
 	{
 		super(activity);
 		Log.i("InstructionsUI", "constructor debut");
+		if(mBackGround != null)
+			addObject(mBackGround);
 		ogMenuTexts = new AngleObject();
 		addObject(ogMenuTexts);
 

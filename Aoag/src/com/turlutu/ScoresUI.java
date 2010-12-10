@@ -22,9 +22,11 @@ public class ScoresUI   extends AngleUI
 	private AngleObject ogMenuTexts;
 	private AngleString strExit, strScores, strNames, strNewScore;
 	
-	public ScoresUI(AngleActivity activity)
+	public ScoresUI(AngleActivity activity, Background mBackGround)
 	{
 		super(activity);
+		if(mBackGround != null)
+			addObject(mBackGround);
 		ogMenuTexts = new AngleObject();
 		
 		addObject(ogMenuTexts);
