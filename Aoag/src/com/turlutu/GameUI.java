@@ -1,5 +1,9 @@
 package com.turlutu;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -193,10 +197,40 @@ public class GameUI extends AngleUI {
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
-		if (mTypeBonus == TypeBonus.CHANGEPHYSICS)
-			mBall.mVelocity.mX = -mBall.mVelocity.mX;
-		
+		float eY = event.getY();
+
+		if(eY < 400) { 
+			// PAUSE
+			if (event.getAction() == MotionEvent.ACTION_DOWN)
+			{
+				new Thread() 
+				{
+					@Override 
+					public void run() 
+					{
+						Looper.prepare();
+						AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+						builder.setMessage("  --- Pause ! ---  ")
+						       .setCancelable(false)
+						       .setNeutralButton("Retour au jeu", new DialogInterface.OnClickListener() {
+						           public void onClick(DialogInterface dialog, int id) {
+						        	   ((MainActivity)mActivity).onResume();
+						           }
+						       });
+						AlertDialog alert = builder.create();
+						alert.show();
+						Looper.loop();
+					}
+				}.start();
+				((MainActivity)mActivity).onPause();
+			}
+			// FIN PAUSE
+			// TODO Supprimer tout ce qui n'est pas entre PAUSE et FIN PAUSE dans la fonction pour les versions mobiles
+		} else {
+			mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
+			if (mTypeBonus == TypeBonus.CHANGEPHYSICS)
+				mBall.mVelocity.mX = -mBall.mVelocity.mX;
+		}
 		return true;
 	}
 	
