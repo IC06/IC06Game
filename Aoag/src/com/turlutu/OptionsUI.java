@@ -18,11 +18,9 @@ import com.android.angle.AngleActivity;
 import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSegmentCollider;
-import com.android.angle.AngleSound;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
-import com.android.angle.AngleVector;
 
 // TODO voir si on ne peut pas utiliser les layouts de GameUI au lieu d'en recréer
 public class OptionsUI  extends AngleUI
