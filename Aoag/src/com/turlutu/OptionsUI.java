@@ -78,7 +78,7 @@ public class OptionsUI  extends AngleUI
 			sVibrations = "Put vibrations OFF";
 		strVibrations = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, sVibrations, 160, 210, AngleString.aCenter));
 		strResetScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Reset Scores", 160, 280, AngleString.aCenter));
-		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Retour", 160, 390, AngleString.aCenter));
+		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Back home", 160, 390, AngleString.aCenter));
 		Log.i("OptionsUI", "constructor fin");
 	}
 
