@@ -190,10 +190,11 @@ public class GameUI extends AngleUI {
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		float eY = event.getY();
+		// /* 
+		  float eY = event.getY();
 
 		if(eY < 100) { 
-			// PAUSE
+			 // */ // PAUSE
 			if (event.getAction() == MotionEvent.ACTION_DOWN)
 			{
 				new Thread() 
@@ -217,13 +218,14 @@ public class GameUI extends AngleUI {
 				}.start();
 				((MainActivity)mActivity).onPause();
 			}
-			// FIN PAUSE
-			// TODO Supprimer tout ce qui n'est pas entre PAUSE et FIN PAUSE dans la fonction pour les versions mobiles
+			// FIN PAUSE 
+			// /*
+			// TODO RELEASE Supprimer (ou commenter) tout ce qui n'est pas entre PAUSE et FIN PAUSE dans la fonction pour les versions mobiles
 		} else {
 			mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
 			if (mTypeBonus == TypeBonus.CHANGEPHYSICS)
 				mBall.mVelocity.mX = -mBall.mVelocity.mX;
-		}
+		} // */
 		return true;
 	}
 	

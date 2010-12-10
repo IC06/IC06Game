@@ -114,12 +114,11 @@ public class MainActivity extends AngleActivity
 	{
 		Log.i("MainActivity", "Load() start");
 		
-		// TODO voir quelle image convient le mieu au background
 		AngleSpriteLayout mBackGroundLayout = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
 		// on ajoute le background en premier pour qu'il soit dessiné en premier
 		Background mBackGround = null;
 		
-		// a decommenter pour avoir des background dans les differentes UI (autre que le menu)
+		// TODO RELEASE a decommenter pour avoir des background dans les differentes UI (autre que le menu)
 		//mBackGround= new Background(mBackGroundLayout);
 		
 		mOptions=new OptionsUI(this,mBackGround);

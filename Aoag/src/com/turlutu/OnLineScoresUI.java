@@ -34,7 +34,6 @@ import com.android.angle.AngleObject;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
 
-// TODO rajouter un bouton rejouer
 public class OnLineScoresUI   extends AngleUI
 {
 	private AngleObject ogMenuTexts;
@@ -145,14 +144,10 @@ public class OnLineScoresUI   extends AngleUI
 		try {
 			ResponseHandler<String> responseHandler=new BasicResponseHandler();
 			String responseBody=client.execute(post, responseHandler);
-			
-			//HttpResponse response = client.execute(post);
 			Log.e("http",responseBody );
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

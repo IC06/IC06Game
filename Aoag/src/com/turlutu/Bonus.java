@@ -108,7 +108,6 @@ class Bonus extends AnglePhysicObject
 		return (BallCollider) mCircleColliders[0];
 	}
 
-	// TODO faire gagner des points à chaque prise de bonus/malus
 	protected void onDie()
 	{
 		if (mUsed)

@@ -220,9 +220,6 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	
 	private void kyneticsBall(Ball ball)
 	{
-		// perdu
-		// TODO trouver où Matthieu a mis l'autre suppression de la balle dans le code (surement dans le code de ANGLE)
-		// apparement c'est pas dans anglephysicengine ou angle physicobject
 		if (ball.mPosition.mY > mWorldHeight)
 		{
 			mGameUI.backToMenu();
