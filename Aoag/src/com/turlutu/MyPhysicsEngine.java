@@ -233,7 +233,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	}
 
 	/**
-	 * @author thomas
+	 * @author matthieu, thomas
 	 * 
 	 */
 	@Override

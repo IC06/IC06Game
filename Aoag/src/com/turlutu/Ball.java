@@ -52,7 +52,7 @@ class Ball extends AnglePhysicObject
 
 	/**
 	 * si on change de couleur en passant à travers le bord gauche de l'écran
-	 * @author thomas
+	 * @author matthieu, thomas
 	 */
 	public void changeColorLeft()
 	{
@@ -68,7 +68,7 @@ class Ball extends AnglePhysicObject
 	
 	/**
 	 * si on change de couleur en passant à travers le bord droit de l'écran
-	 * @author thomas
+	 * @author matthieu, thomas
 	 */
 	public void changeColorRight()
 	{
