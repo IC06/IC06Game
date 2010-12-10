@@ -3,7 +3,7 @@ package com.turlutu;
 
 
 
-import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.hardware.Sensor;
@@ -32,7 +32,7 @@ public class MainActivity extends AngleActivity
 	protected FrameLayout mMainLayout;
 	protected int mSensibility;
 	protected MainActivity mActivity;
-	protected Dialog dialog;
+	protected ProgressDialog  dialog;
 	protected AngleFont fntGlobal;
 	
    private final SensorEventListener mListener = new SensorEventListener() 
@@ -63,7 +63,7 @@ public class MainActivity extends AngleActivity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		Log.i("MainActivity", "START");
-		super.onCreate(savedInstanceState);
+		
 		mActivity = this;
 		new Thread() 
 		{
@@ -71,16 +71,12 @@ public class MainActivity extends AngleActivity
 			public void run() 
 			{
 				Looper.prepare();
-				dialog = new Dialog(mActivity);
-		        dialog.setContentView(R.layout.loading);
-
-		        dialog.setTitle("Chargement en cours !");
-		        
-		        dialog.show();
+		        dialog = ProgressDialog.show(mActivity, "", 
+                        "Chargement en cours, veuillez patienter...", true);
 				Looper.loop();
 			}
 		}.start();
-		
+		super.onCreate(savedInstanceState);
 		
 		mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE); 
       
@@ -132,7 +128,6 @@ public class MainActivity extends AngleActivity
 		
 
 	}
-
 
 	//Overload onPause and onResume to enable and disable the accelerometer
 	//Sobrecargamos onPause y onResume para activar y desactivar el aceler�metro
