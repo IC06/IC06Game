@@ -132,7 +132,12 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				ball.mDelta.mX = ball.mVelocity.mX * secondsElapsed;
 				ball.mDelta.mY = ball.mVelocity.mY * secondsElapsed;
 				ball.changeSens();
-
+			}
+			else if (mChilds[o] instanceof Plateforme)
+			{
+				Plateforme plateforme = (Plateforme) mChilds[o];
+				
+				plateforme.mDelta.mX = plateforme.mVelocity.mX * secondsElapsed;
 			}
 		}
 	}
@@ -144,7 +149,23 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		
 		for (int o = 0; o < mChildsCount; o++)
 		{
-			if (mChilds[o] instanceof Ball)
+			if (mChilds[o] instanceof Plateforme)
+			{
+				Plateforme plateforme = (Plateforme) mChilds[o];
+				
+				plateforme.mPosition.mX += plateforme.mDelta.mX;
+				if (plateforme.mPosition.mX < 0)
+				{
+					plateforme.mPosition.mX = 0;
+					plateforme.mVelocity.mX = -plateforme.mVelocity.mX;
+				}
+				else if (plateforme.mPosition.mX > mWorldWidth)
+				{
+					plateforme.mPosition.mX = mWorldWidth;
+					plateforme.mVelocity.mX = -plateforme.mVelocity.mX;
+				}
+			}
+			else if (mChilds[o] instanceof Ball)
 			{
 				Ball ball = (Ball) mChilds[o];
 				

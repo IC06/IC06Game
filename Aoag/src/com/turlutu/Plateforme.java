@@ -36,6 +36,7 @@ public class Plateforme extends AnglePhysicObject
 		mMass = mass;
 		mBounce = bounce;
 		mColor = color;
+		mVelocity.mX = 20;
 	}
 
 	/**
