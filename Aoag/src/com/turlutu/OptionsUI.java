@@ -79,30 +79,6 @@ public class OptionsUI  extends AngleUI
 		strVibrations = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, sVibrations, 160, 210, AngleString.aCenter));
 		strResetScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Reset Scores", 160, 280, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Retour", 160, 390, AngleString.aCenter));
-
-		mBallLayout = new AngleSpriteLayout[6];
-		mBallLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,0,0,42,64);
-		mBallLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,62,0,42,64);
-		mBallLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,124,0,42,64);
-		mBallLayout[3] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,186,0,42,64);
-		mBallLayout[4] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,248,0,42,64);
-		mBallLayout[5] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,310,0,42,64);
-
-		mPhysics = new MyPhysicsEngine(20,WIDTH,HEIGHT, mActivity.mGLSurfaceView, null);
-		mPhysics.mViscosity = 1f; // Air viscosity
-		mPhysics.mGravity = new AngleVector(0,10f);
-		addObject(mPhysics);
-
-		AngleSound sndJump = new AngleSound(activity,R.raw.jump);
-		mBall = new Ball ((MainActivity)mActivity,mBallLayout,32,80,1,sndJump);
-		mPhysics.addObject(mBall);
-		
-		// ajoute une plateforme en bas qui prend toute la place pour le debut
-		AnglePhysicObject mWall = new AnglePhysicObject(1, 0);
-		mWall.mPosition.set(0, HEIGHT-15);
-		mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, WIDTH, 0));
-		mWall.mBounce = 1f;
-		mPhysics.addObject(mWall); // Down wall
 		Log.i("OptionsUI", "constructor fin");
 	}
 
@@ -215,6 +191,12 @@ public class OptionsUI  extends AngleUI
 	
 	public void init()
 	{
+		mPhysics = ((MainActivity)mActivity).mGame.mPhysics;
+		addObject(mPhysics);
+		mBallLayout = ((MainActivity)mActivity).mGame.mBallLayout;
+		mBall = ((MainActivity)mActivity).mGame.mBall;
+		mPhysics.addObject(mBall);
+		
 		mBall.mPosition.set(50,300);
 		mBall.jump();
 
@@ -314,6 +296,7 @@ public class OptionsUI  extends AngleUI
 	public void onDeactivate()
 	{
 		Log.i("OptionUI", "onDeactivate debut");
+		// sauvegarde des options
 		DBOptions db = new DBOptions(mActivity);
 		db.open();
 		if (dbEmpty)
@@ -324,6 +307,14 @@ public class OptionsUI  extends AngleUI
 		else
 			db.replace(1, mSensibility,mVolume,mVibrations,"anonyme");
 		db.close();
+		// suppression du mur en bas
+		for (int i=1; i<20; i++)
+		{
+			if (mPhysics.childAt(i) instanceof AnglePhysicObject)
+			{
+				mPhysics.removeObject(i);
+			}
+		}
 		Log.i("OptionUI", "onDeactivate fin");
 	}
 	
