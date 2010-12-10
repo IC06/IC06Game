@@ -1,6 +1,8 @@
 package com.turlutu;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Looper;
 import android.util.Log;
@@ -36,14 +38,33 @@ public class OptionsUI  extends AngleUI
 	private boolean dbEmpty;
 	private AngleString strExit, strResetScores, strSensibility, strVolume;
 
-	protected int mSensibility = 50;
-	protected int mVolume = 100;
-	protected int mVibration = 1;
+	protected int mSensibility;
+	protected int mVolume;
+	protected int mVibration;
 
 	public OptionsUI(AngleActivity activity)
 	{
 		super(activity);
 		Log.i("OptionsUI", "constructor debut");
+		DBOptions db = new DBOptions(mActivity);
+		db.open();
+		Cursor c = db.getOptions();
+		if (c.getCount() >= 1)
+    	{
+			dbEmpty = false;
+    		c.moveToFirst();
+    		mSensibility = c.getInt(1);
+    		mVolume = c.getInt(2);
+    		mVibration = c.getInt(3);
+    	}
+    	else // par default
+    	{
+    		dbEmpty = true;
+    		mSensibility = 50;
+    		mVolume = 100;
+    		mVibration = 1;
+    	}
+		db.close();
 		
 		ogMenuTexts = new AngleObject();
 		
@@ -91,7 +112,7 @@ public class OptionsUI  extends AngleUI
 			float eY = event.getY();
 
 			if (strResetScores.test(eX, eY))
-				resetScores();
+				askResetScores();
 			else if (strSensibility.test(eX, eY))
 				setSensibility();
 			else if (strVolume.test(eX, eY))
@@ -165,26 +186,36 @@ public class OptionsUI  extends AngleUI
 		mPhysics.addObject(mWall); // Down wall
 	}
 	
-	public void askParameter(int type) {
+	public void askResetScores()
+	{
+		new Thread() 
+		{
+			@Override 
+			public void run() 
+			{
+				Looper.prepare();
+				AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+				builder.setMessage(" reset scores ? ")
+				       .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				        	   dialog.cancel();
+				           }
+				       })
+				       .setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				        	   resetScores();
+				           }
+				       });
+				AlertDialog alert = builder.create();
+				alert.show();
+				Looper.loop();
+			}
+		}.start();
+	}
+	
+	public void askParameter(int type)
+	{
 		DBOptions db = new DBOptions(mActivity);
-		db.open();
-		Cursor c = db.getOptions();
-		if (c.getCount() >= 1)
-    	{
-			dbEmpty = false;
-    		c.moveToFirst();
-    		mSensibility = c.getInt(1);
-    		mVolume = c.getInt(2);
-    		mVibration = c.getInt(3);
-    	}
-    	else // par default
-    	{
-    		dbEmpty = true;
-    		mSensibility = 50;
-    		mVolume = 100;
-    		mVibration = 1;
-    	}
-		db.close();
 			
 		Dialog dialog = new Dialog(mActivity);
         dialog.setContentView(R.layout.horizontalslider);
@@ -217,7 +248,10 @@ public class OptionsUI  extends AngleUI
 	    		DBOptions db = new DBOptions(mActivity);
 	    		db.open();
 	    		if (dbEmpty)
+	    		{
 	    			db.insert(mSensibility,mVolume,mVibration,"anonyme");
+	    			dbEmpty = false;
+	    		}
 	    		else
 	    			db.replace(1, mSensibility,mVolume,mVibration,"anonyme");
 	    		db.close();
