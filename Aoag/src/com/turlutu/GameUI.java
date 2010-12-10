@@ -114,7 +114,7 @@ public class GameUI extends AngleUI {
 		mString2 = (AngleString)ogDashboard.addObject(new AngleString(((MainActivity)mActivity).fntGlobal,"0",50,20,AngleString.aCenter));
 		mString2.mLength = 0;
 
-		mBall = new Ball (mBallLayout,32,80,1,sndJump,this);
+		mBall = new Ball ((MainActivity)mActivity,mBallLayout,32,80,1,sndJump);
 		mPhysics.addObject(mBall);
 
 		//init();
