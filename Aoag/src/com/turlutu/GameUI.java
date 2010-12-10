@@ -57,33 +57,24 @@ public class GameUI extends AngleUI {
 		
 		
 		mBonusLayout = new AngleSpriteLayout[8];
-		int i;
-		for(i=0;i<8;i++) {
+		for(int i=0;i<8;i++) {
 			mBonusLayout[i] = new AngleSpriteLayout(activity.mGLSurfaceView, 32, 32, com.turlutu.R.drawable.bonus, i*32, 0, 32, 32);
 		}
 		
 		// PLATEFORMES
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 1, 64, 30);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateformes, 0, 1, 64, 30);
 		mPlateformer = new AngleSprite(mPlateformeLayout);
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 34, 64, 30);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateformes, 0, 34, 64, 30);
 		mPlateformej = new AngleSprite(mPlateformeLayout);
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 66, 64, 30);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateformes, 0, 66, 64, 30);
 		mPlateformev = new AngleSprite(mPlateformeLayout);
-		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 98, 64, 30);
+		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateformes, 0, 98, 64, 30);
 		mPlateformew = new AngleSprite(mPlateformeLayout);
 
 		// BALL
 		mBallLayout = new AngleSpriteLayout[8];
-		mBallLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,0,0,42,64);
-		mBallLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,62,0,42,64);
-		mBallLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,124,0,42,64);
-		mBallLayout[3] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,186,0,42,64);
-		mBallLayout[4] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,248,0,42,64);
-		mBallLayout[5] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,310,0,42,64);	
-		
-		// Bonus toutes plateformes
-		mBallLayout[6] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,372,0,42,64); 
-		mBallLayout[7] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,434,0,42,64);
+		for (int i=0;i<8;++i)
+			mBallLayout[i] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 64, com.turlutu.R.drawable.persos2,64*i,0,64,64);
 		
 		
 		mBordsLayout = new AngleSpriteLayout[3];
