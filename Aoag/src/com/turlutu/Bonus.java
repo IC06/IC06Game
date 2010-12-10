@@ -49,13 +49,17 @@ class Bonus extends AnglePhysicObject
 																	4, // 5
 																	6}; // 6
 	
-	public Bonus(GameUI game)
+	public Bonus(GameUI game, float d) // d compris entre 0 et 70 (difficulté croissante)
 	{
 		super(0, 1);
 		mGame = game;
 		mUsed = false;
-		
-		mType = (int) (Math.random() * (nbtype)) + 1;
+		int n = (int) (Math.random() * (d/35 * nbtype)) + 1;
+		if(n>nbtype) {
+			mType = nbtype;
+		} else {
+			mType = n;
+		}
 		sndTouch = mGame.sndBonus[mType];
 		mSprite=new AngleSprite(mGame.mBonusLayout[mType]);
 		
@@ -101,7 +105,7 @@ class Bonus extends AnglePhysicObject
 			Log.i("Bonus", "Bonus onDie debut");
 			Log.i("Bonus", "TypeBonus : "+mapTypeBonus[mType]);
 			mGame.setBonus(mapTypeBonus[mType],timesActionBonus[mType]);
-			sndTouch.play(1,false);
+			sndTouch.play(((MainActivity)mGame.mActivity).mOptions.mVolume / 100,false);
 			Log.i("Bonus", "Bonus onDie fin");
 		}
 	}

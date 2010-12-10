@@ -23,10 +23,31 @@ class Ball extends AnglePhysicObject
 	private Color mColors[];
 	protected float mRadius;
 	private GameUI mGame;
+	private OptionsUI mOptions = null;
 	protected AngleVector mAcceleration;
 	private AngleSound sndJump;
 	public int sens = 1;
 	
+	
+	public Ball(AngleSpriteLayout texture[], float radius, float mass, float bounce, AngleSound soundJump, GameUI game, OptionsUI options)
+	{
+		super(0, 1);
+		mOptions = options; // Pour utiliser lors de l'optionsUI
+		sndJump = soundJump;
+		mAcceleration = new AngleVector(0f,0f);
+		mColors = new Color[3];
+		mColors[0] = Color.ROUGE;
+		mColors[1] = Color.VERT;
+		mColors[2] = Color.JAUNE;
+		mSprite=new AngleSprite(texture[0]);
+		mTexture=texture;
+		addCircleCollider(new BallCollider(0, 0, radius));
+		mRadius = radius;
+		mMass = mass;
+		mBounce = bounce; // Coefficient of restitution (1 return all the energy)
+		mVelocity.mY = -5;
+		mGame = game;
+	}
 	/**
 	 * 
 	 * @param layout Img to use
@@ -165,7 +186,10 @@ class Ball extends AnglePhysicObject
 		else
 			mVelocity.mY = -600;
 		if (sndJump != null)
-			sndJump.play(1,false);
+			if(mGame != null)
+				sndJump.play( ((float) ((MainActivity)mGame.mActivity).mOptions.mVolume) / 100.f ,false);
+			else
+				sndJump.play( ((float) mOptions.mVolume) / 100.f ,false);
 	}
 	
 	public void changeSens()

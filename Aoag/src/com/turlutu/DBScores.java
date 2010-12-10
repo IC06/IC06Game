@@ -81,7 +81,7 @@ public class DBScores
     public long insertScore(int score, String nom)
     {
     	Cursor c = getAllScores();
-    	if (c.getCount() >= 1)
+    	if (c.getCount() >= 8)
     	{
     		c.moveToLast();
     		if (c.getInt(1) < score)

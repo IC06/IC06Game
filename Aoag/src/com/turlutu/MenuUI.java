@@ -16,7 +16,7 @@ public class MenuUI  extends AngleUI
 	
 	private AngleObject ogMenuTexts;
 	
-	private AngleString strPlay,  strHiScores, strExit, strOptions;
+	private AngleString strPlay,  strHiScores, strHiScoresOnLine, strExit, strOptions;
 
 	public MenuUI(AngleActivity activity)
 	{
@@ -32,6 +32,7 @@ public class MenuUI  extends AngleUI
 		
 		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Play", 160, 110, AngleString.aLeft));
 		strHiScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Hi Score", 160, 210, AngleString.aCenter));
+		strHiScoresOnLine = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "On line Score", 50, 50, AngleString.aLeft));
 		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Options", 175, 295, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Exit", 250, 360, AngleString.aCenter));
 		
@@ -51,6 +52,8 @@ public class MenuUI  extends AngleUI
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mOptions);
 			else if (strHiScores.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScores);
+			else if (strHiScoresOnLine.test(eX, eY))
+				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScoresOnLine);
 			else if (strExit.test(eX, eY))
 				mActivity.finish();
 

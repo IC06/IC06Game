@@ -48,8 +48,8 @@ public class GameUI extends AngleUI {
 		// BONUS
 		sndBonus  = new AngleSound[7];
 		sndBonus[0] = new AngleSound(mActivity,R.raw.bonus);
-		sndBonus[1] = new AngleSound(mActivity,R.raw.bonus);
-		sndBonus[2] = new AngleSound(mActivity,R.raw.bonus);
+		sndBonus[1] = new AngleSound(mActivity,R.raw.bonus1);
+		sndBonus[2] = new AngleSound(mActivity,R.raw.bonus2);
 		sndBonus[3] = new AngleSound(mActivity,R.raw.bonus);
 		sndBonus[4] = new AngleSound(mActivity,R.raw.bonus);
 		sndBonus[5] = new AngleSound(mActivity,R.raw.bonus);

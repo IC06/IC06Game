@@ -46,9 +46,9 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		{
 			new_y = max_dy;
 			new_y = dy + (float) (Math.random() * (current_max_dy - dy));
-			float d = 10f/dy;
-			if (dy < max_dy){dy+=d;}
-			if (current_max_dy < max_dy){current_max_dy+=d;}
+			float d = 5f/dy;
+			if (dy < max_dy){dy+=((Math.random()*1.5)+1) * d;}
+			if (current_max_dy < max_dy){current_max_dy+=((Math.random()*2)+1) * d;}
 			Log.i("DY",""+dy+" "+current_max_dy);
 			new Thread() 
 			{
@@ -56,7 +56,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 				public void run() 
 				{
 					float new_x = (float) (Math.random() * (320f - Plateforme.SIZE)) + Plateforme.SIZE/2;
-					int couleur = (int) (Math.random() * 5);
+					int couleur = (int) (Math.random() * 6);
 					AngleSprite sprite;
 					Color color;
 					switch (couleur)
@@ -85,8 +85,8 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					Plateforme newPlateforme = new Plateforme(sprite,color);
 					newPlateforme.mPosition.set(new_x,-1);
 					addObject(newPlateforme);
-					if(Math.random()>0.7) { // 30% de chance d'avoir un bonus
-						Bonus bonus = new Bonus(mGameUI);
+					if(Math.random()>0.6) { // 30% de chance d'avoir un bonus
+						Bonus bonus = new Bonus(mGameUI, current_max_dy - 60);
 						bonus.mPosition.set(new_x+(int) (Math.random() * (Plateforme.SIZE) - (Plateforme.SIZE / 2)),-22);
 						addObject(bonus);
 					}
