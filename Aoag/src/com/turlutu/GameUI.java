@@ -62,7 +62,7 @@ public class GameUI extends AngleUI {
 			mBonusLayout[i] = new AngleSpriteLayout(activity.mGLSurfaceView, 32, 32, com.turlutu.R.drawable.bonus, i*32, 0, 32, 32);
 		}
 		
-		// PLATEFORME
+		// PLATEFORMES
 		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 1, 64, 30);
 		mPlateformer = new AngleSprite(mPlateformeLayout);
 		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 34, 64, 30);
@@ -72,7 +72,7 @@ public class GameUI extends AngleUI {
 		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateforme, 0, 98, 64, 30);
 		mPlateformew = new AngleSprite(mPlateformeLayout);
 
-		
+		// BALL
 		mBallLayout = new AngleSpriteLayout[8];
 		mBallLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,0,0,42,64);
 		mBallLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,62,0,42,64);
@@ -307,9 +307,9 @@ public class GameUI extends AngleUI {
 		mTypeBonus = t;
 		mTimeActionBonus = s;
 		if (t == TypeBonus.ADDSCORE)
-		{
-			upScore(1000);
-		}
+			upScore(600);
+		else
+			upScore(200);
 		Log.i("GameUI", "GameUI setBonus fin");
 	}
 }
