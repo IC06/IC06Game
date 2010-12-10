@@ -33,21 +33,33 @@ class Bonus extends AnglePhysicObject
 	private int mType = 0;
 	
 	static int radius = 16;
-	static int nbtype = 6;
+	static int nbtype = 10;
 	static TypeBonus[] mapTypeBonus = {	TypeBonus.NONE, // 0
-		TypeBonus.LESSJUMP, // 3
 		TypeBonus.ADDSCORE, // 1
 		TypeBonus.MOREJUMP, // 2
-		TypeBonus.DISABLECHANGECOLOR, // 5
+		TypeBonus.LESSJUMP, // 3
 		TypeBonus.CHANGEPHYSICS, // 4
+		TypeBonus.DISABLECHANGECOLOR, // 5
 		TypeBonus.ALLPLATEFORME};// 6
 	static float[] timesActionBonus = {	0, // 0
-		4, // 3
 		0, // 1
 		4, // 2
-		4, // 5
+		4, // 3
 		4, // 4
+		4, // 5
 		6}; // 6
+	static int[] bonusOrder = { 0,
+		1,
+		3,
+		2,
+		5,
+		4,
+		6,
+		6,
+		4,
+		5,
+		6
+	};
 	
 	public Bonus(GameUI game, int d) // d compris entre 0 et 100 (difficulté croissante)
 	{
@@ -58,7 +70,7 @@ class Bonus extends AnglePhysicObject
 		if(range>nbtype) {
 			range = nbtype;
 		}
-		mType = (int) (Math.random() * range) + 1;
+		mType = bonusOrder[(int) (Math.random() * range) + 1];
 		Log.i("Strategie", "Bmax : "+ ( (float) d / 100.f * nbtype) + 1);
 		sndTouch = mGame.sndBonus[mType];
 		mSprite=new AngleSprite(mGame.mBonusLayout[mType]);
