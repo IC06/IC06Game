@@ -12,16 +12,20 @@ import android.util.Log;
 public class DBOptions {
     public static final String KEY_ID = "id";
     public static final String KEY_SENSIBILITY = "score";
+    public static final String KEY_VOLUME = "volume";
+    public static final String KEY_VIBRATION = "vibration";
     public static final String KEY_NAME = "name";
     private static final String TAG = "DBOptions";
     
     private static final String DATABASE_NAME = "exitjump";
     private static final String DATABASE_TABLE = "options";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String DATABASE_CREATE =
     "create table "+DATABASE_TABLE+" ("+KEY_ID+" integer primary key autoincrement, "
     + KEY_SENSIBILITY+" integer not null, "
+    + KEY_VOLUME+" integer not null, "
+    + KEY_VIBRATION+" integer not null, "
     + KEY_NAME+" text not null);";
     
     private final Context context; 
@@ -75,44 +79,48 @@ public class DBOptions {
         db.close();
     }
 
-    public long replace(int id, int sensibility, String nom)
+    public long replace(int id, int sensibility, int volume, int vibration, String nom)
     {
     	ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_ID , id);
         initialValues.put(KEY_SENSIBILITY , sensibility);
+        initialValues.put(KEY_VOLUME , volume);
+        initialValues.put(KEY_VIBRATION , vibration);
         initialValues.put(KEY_NAME, nom);
         long retour = -1;
         try {
         	retour = db.replaceOrThrow(DATABASE_TABLE, null, initialValues);}
         catch (SQLException e) {
-        	Log.e(TAG,"error replace ("+id+","+sensibility+","+nom+")");
+        	Log.e(TAG,"error replace ("+id+","+sensibility+","+volume+","+vibration+","+nom+")");
         	return -1;}
         if (retour < 0)
         {
-        	Log.w(TAG,"replace echoue ("+id+","+sensibility+","+nom+") retour : "+retour);
+        	Log.w(TAG,"replace echoue ("+id+","+sensibility+","+volume+","+vibration+","+nom+") retour : "+retour);
     		return -1;
         }
         else
         {
-        	Log.i(TAG,"replace ("+id+","+sensibility+","+nom+") to index : "+retour);
+        	Log.i(TAG,"replace ("+id+","+sensibility+","+volume+","+vibration+","+nom+") to index : "+retour);
 			return retour;
         }
     }
     
-    public long insert(int sensibility, String nom)
+    public long insert(int sensibility, int volume, int vibration, String nom)
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_SENSIBILITY , sensibility);
+        initialValues.put(KEY_VOLUME , volume);
+        initialValues.put(KEY_VIBRATION , vibration);
         initialValues.put(KEY_NAME, nom);
         long retour = -1;
         try {
         	retour = db.insertOrThrow(DATABASE_TABLE, null, initialValues);}
         catch (SQLException e) {
-        	Log.e(TAG,"error insert ("+sensibility+","+nom+")");
+        	Log.e(TAG,"error insert ("+sensibility+","+volume+","+vibration+","+nom+")");
         	return -1;}
         if (retour < 0)
         {
-        	Log.w(TAG,"insert echoue ("+sensibility+","+nom+") retour : "+retour);
+        	Log.w(TAG,"insert echoue ("+sensibility+","+volume+","+vibration+","+nom+") retour : "+retour);
     		return -1;
         }
         else
@@ -128,6 +136,8 @@ public class DBOptions {
         return db.query(DATABASE_TABLE, new String[] {
         		KEY_ID,
         		KEY_SENSIBILITY,
+        		KEY_VOLUME,
+        		KEY_VIBRATION,
         		KEY_NAME}, 
                 null, 
                 null, 
