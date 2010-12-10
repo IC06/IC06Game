@@ -35,13 +35,13 @@ public class MainActivity extends AngleActivity
 	protected ProgressDialog  dialog;
 	protected AngleFont fntGlobal;
 	
-   private final SensorEventListener mListener = new SensorEventListener() 
-   {
+	private final SensorEventListener mListener = new SensorEventListener() 
+	{
 		//@Override
 		public void onAccuracyChanged(Sensor sensor, int accuracy)
 		{
 		}
-
+		
 		//@Override
 		public void onSensorChanged(SensorEvent event)
 		{
@@ -53,11 +53,14 @@ public class MainActivity extends AngleActivity
 					mGame.mBall.mVelocity.mX = -mGame.mBall.mVelocity.mX;
 			}
 		}
-   };
+	};
 	private SensorManager mSensorManager; 	
 
 	   
-
+	public MainActivity()
+	{
+		
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -83,14 +86,16 @@ public class MainActivity extends AngleActivity
         // a commenté dans la version finale (pour voir la fluidité du jeu)      
 		mGLSurfaceView.addObject(new FPSCounter());
 		
-		fntGlobal = new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(this.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 30, 30, 255);
+		fntGlobal = new AngleFont(this.mGLSurfaceView, 25, Typeface.createFromAsset(this.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 30, 30, 255);
 		mMainLayout=new FrameLayout(this);
 		mMainLayout.addView(mGLSurfaceView);
 		setContentView(mMainLayout);
 
-		new Thread() {
+		new Thread() 
+		{
 			@Override 
-			public void run() {
+			public void run() 
+			{
 				load();
 			}
 		}.start();
@@ -102,31 +107,15 @@ public class MainActivity extends AngleActivity
 	public void load()
 	{
 		Log.i("MainActivity", "Load() start");
-		mMenu=new MenuUI(this);
 		mOptions=new OptionsUI(this);
 		mScores=new ScoresUI(this);
 		mScoresOnLine = new OnLineScoresUI(this);
 		mGame=new GameUI(this);
 		mGame.setGravity(0f,10f);
+		mMenu=new MenuUI(this);
 		setUI(mMenu);
 		Log.i("MainActivity", "Load() fin");
 		loaded = true;
-		
-		Thread endLoading = new Thread() {
-			@Override 
-			public void run() {
-				dialog.dismiss();
-			}
-		};
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		endLoading.start();
-		
-
 	}
 
 	//Overload onPause and onResume to enable and disable the accelerometer
