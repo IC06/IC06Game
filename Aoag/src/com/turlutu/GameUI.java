@@ -154,6 +154,7 @@ public class GameUI extends AngleUI {
 	
 	private void init()
 	{
+		mPhysics.init();
 		mTimeEllapsedBonus = 0;
 		mTypeBonus = TypeBonus.NONE;
 
@@ -166,7 +167,7 @@ public class GameUI extends AngleUI {
 		mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, WIDTH, 0));
 		mWall.mBounce = 1f;
 		mPhysics.addObject(mWall); // Down wall
-
+		
 		// add barre
 		Plateforme Plateforme = new Plateforme(mPlateformew);
 		Plateforme.mPosition.set(140,420);

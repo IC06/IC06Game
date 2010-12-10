@@ -36,8 +36,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		mWorldHeight = worldHeight;
 		mGLSurfaceView = SurfaceView;
 		mGameUI = gameUI;
-		dy = 30;
-		current_max_dy = 40;
+		init();
 	}
 
 	/*
@@ -216,7 +215,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	public void init()
 	{
 		dy = 30;
-		current_max_dy = 60;
+		current_max_dy = 40;
 	}
 	
 	private void kyneticsBall(Ball ball)
@@ -226,7 +225,6 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		// apparement c'est pas dans anglephysicengine ou angle physicobject
 		if (ball.mPosition.mY > mWorldHeight)
 		{
-			init();
 			mGameUI.backToMenu();
 			return;
 		}
