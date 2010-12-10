@@ -180,7 +180,7 @@ public class AngleString extends AngleObject
 						}
 						if (lineWidth <= mDisplayWidth)
 							break;
-						while ((mStep1.charAt(llc) != ' ') && (llc > flc)) // Quita la última palabra
+						while ((mStep1.charAt(llc) != ' ') && (llc > flc)) // Quita la ï¿½ltima palabra
 						{
 							lineWidth -= mFont.charWidth(mStep1.charAt(llc));
 							llc--;
@@ -266,10 +266,12 @@ public class AngleString extends AngleObject
 		else if (mAlignment == aCenter)
 			left=mPosition.mX - mWidth / 2;
 
+		left -= 10;
+		
 		if (x >= left)
-			if (y >= mPosition.mY + mFont.mLineat)
-				if (x < left + mWidth)
-					if (y < mPosition.mY + mFont.mLineat + getHeight())
+			if (y >= mPosition.mY + mFont.mLineat - 10)
+				if (x < left + mWidth + 20)
+					if (y < mPosition.mY + mFont.mLineat + getHeight() + 20)
 						return true;
 		return false;
 	}
