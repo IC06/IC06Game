@@ -115,7 +115,7 @@ public class RenderThread extends Thread
 			{
 				gl = (GL10) mEglHelper.createSurface(mView.getHolder());
 				isSizeChanged = true;
-				sleep(100); //Esa pedazo de chapuza para esperar a las EGL
+				sleep(20); //Esa pedazo de chapuza para esperar a las EGL
 			}
 			
 			if (isSurfaceCreated)

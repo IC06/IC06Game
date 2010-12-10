@@ -29,7 +29,7 @@ public class AngleActivity extends Activity
 		super.onCreate(savedInstanceState);
 		try
 		{
-			Thread.sleep(100);
+			Thread.sleep(16);
 			mGLSurfaceView = new AngleSurfaceView(this);
 			mGLSurfaceView.setAwake(true);
 			mGLSurfaceView.start();
