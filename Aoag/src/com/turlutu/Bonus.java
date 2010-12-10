@@ -30,7 +30,7 @@ class Bonus extends AnglePhysicObject
 	private AngleSound sndTouch;
 	private boolean mustdraw = true;
 	private AngleSprite mSprite;
-	private int mType;
+	private int mType = 0;
 	
 	static int radius = 16;
 	static int nbtype = 6;
@@ -49,20 +49,14 @@ class Bonus extends AnglePhysicObject
 																	4, // 5
 																	6}; // 6
 	
-	public Bonus(GameUI game, float d) // d compris entre 0 et 70 (difficulté croissante)
+	public Bonus(GameUI game, int d) // d compris entre 0 et 100 (difficulté croissante)
 	{
 		super(0, 1);
 		mGame = game;
 		mUsed = false;
-		int n = (int) (Math.random() * (d/35 * nbtype)) + 1;
-		if(n>nbtype) {
-			mType = nbtype;
-		} else {
-			mType = n;
-		}
+		mType = (int) (Math.random() * ((float) d / 100.f * nbtype)) + 1;
 		sndTouch = mGame.sndBonus[mType];
 		mSprite=new AngleSprite(mGame.mBonusLayout[mType]);
-		
 		addCircleCollider(new BallCollider(0, 0, radius));
 
 	}
@@ -103,7 +97,7 @@ class Bonus extends AnglePhysicObject
 		if (mUsed)
 		{
 			Log.i("Bonus", "Bonus onDie debut");
-			Log.i("Bonus", "TypeBonus : "+mapTypeBonus[mType]);
+			Log.i("Bonus", "TypeBonus : "+mapTypeBonus[mType]+" "+mType);
 			mGame.setBonus(mapTypeBonus[mType],timesActionBonus[mType]);
 			sndTouch.play(((MainActivity)mGame.mActivity).mOptions.mVolume / 100,false);
 			Log.i("Bonus", "Bonus onDie fin");

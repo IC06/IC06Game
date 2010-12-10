@@ -25,7 +25,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	AngleSurfaceView mGLSurfaceView;
 	GameUI mGameUI;
 	private int mCounterScore;
-	final private float max_dy=130f;
+	final private float max_dy=120f;
 	private float dy,new_y,current_max_dy;
 	
 	public MyPhysicsEngine(int maxObjects, float worldWidth, float worldHeight,AngleSurfaceView SurfaceView, GameUI gameUI)
@@ -49,7 +49,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		{
 			new_y = max_dy;
 			new_y = dy + (float) (Math.random() * (current_max_dy - dy));
-			float d = 5f/dy;
+			float d = 10f/dy;
 			if (dy < max_dy){dy+=((Math.random()*1.5)+1) * d;}
 			if (current_max_dy < max_dy){current_max_dy+=((Math.random()*2)+1) * d;}
 			Log.i("DY",""+dy+" "+current_max_dy);
@@ -88,8 +88,11 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					Plateforme newPlateforme = new Plateforme(sprite,color);
 					newPlateforme.mPosition.set(new_x,-1);
 					addObject(newPlateforme);
-					if(Math.random()>0.6) { // 30% de chance d'avoir un bonus
-						Bonus bonus = new Bonus(mGameUI, current_max_dy - 60);
+					int d = (int) ((current_max_dy - 60.f) * 10.f/6.f);
+					Log.i("Strategie", "Random bonus > "+(0.9 - (0.4 * ((float) d / 100.f) )));
+					if(Math.random()> (0.8 - (0.2 * ((float) d /100.f ) ))) {
+						Bonus bonus = new Bonus(mGameUI, d);
+						Log.i("Strategie", "diifculty /100 "+d);
 						bonus.mPosition.set(new_x+(int) (Math.random() * (Plateforme.SIZE) - (Plateforme.SIZE / 2)),-22);
 						addObject(bonus);
 					}
@@ -234,7 +237,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 
 	/**
 	 * @author thomas
-	 * 
+	 * TODO Afficher les bonus apres les plateformes !
 	 */
 	@Override
 	public void draw(GL10 gl)
