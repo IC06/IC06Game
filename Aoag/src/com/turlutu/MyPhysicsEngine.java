@@ -39,6 +39,9 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		current_max_dy = 60;
 	}
 
+	/*
+	 *  TODO Faire bouger les plateformes (voir bonus (faire bouger aussi (avec ou non)))
+	 */
 	private void addPlateform(final float decalage)
 	{
 		new_y -= decalage;
