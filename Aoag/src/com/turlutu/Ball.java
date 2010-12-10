@@ -2,6 +2,8 @@ package com.turlutu;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import android.os.Vibrator;
+
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSound;
 import com.android.angle.AngleSprite;
@@ -179,6 +181,8 @@ class Ball extends AnglePhysicObject
 	
 	public void jump()
 	{
+		((MainActivity)mGame.mActivity).mVibrator.vibrate(300);
+		
 		if (mGame != null && mGame.mTypeBonus == TypeBonus.MOREJUMP)
 			mVelocity.mY = -900;
 		else if (mGame != null && mGame.mTypeBonus == TypeBonus.LESSJUMP)
