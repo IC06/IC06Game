@@ -14,7 +14,7 @@ public class MenuUI  extends AngleUI
 	
 	private AngleObject ogMenuTexts;
 	
-	private AngleString strPlay,  strHiScores, strHiScoresOnLine, strExit, strOptions;
+	private AngleString strPlay,  strHiScores, strHiScoresOnLine, strExit, strOptions, strInstructions;
 
 	public MenuUI(AngleActivity activity)
 	{
@@ -28,8 +28,9 @@ public class MenuUI  extends AngleUI
 
 		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Play", 240, 120, AngleString.aLeft));
 		strHiScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Hi Score", 210, 215, AngleString.aCenter));
-		strHiScoresOnLine = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "On line Score", 50, 50, AngleString.aLeft));
-		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Options", 175, 295, AngleString.aCenter));
+		strHiScoresOnLine = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "On line Score", 25, 40, AngleString.aLeft));
+		strInstructions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Instructions", 25, 80, AngleString.aLeft));
+		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Settings", 175, 295, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Exit", 250, 360, AngleString.aCenter));
 		
 	}
@@ -50,6 +51,8 @@ public class MenuUI  extends AngleUI
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScores);
 			else if (strHiScoresOnLine.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScoresOnLine);
+			else if (strInstructions.test(eX, eY))
+				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mInstructions);
 			else if (strExit.test(eX, eY))
 				mActivity.finish();
 
