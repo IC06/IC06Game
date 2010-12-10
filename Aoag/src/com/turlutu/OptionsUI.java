@@ -7,17 +7,17 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.Toast;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSegmentCollider;
+import com.android.angle.AngleSound;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
@@ -32,7 +32,7 @@ public class OptionsUI  extends AngleUI
 	private MyPhysicsEngine mPhysics;
 	private float WIDTH,HEIGHT;
 	private AngleObject ogMenuTexts;
-	private AngleString strExit, strResetScores, strSensibility;
+	private AngleString strExit, strResetScores, strSensibility, strVolume;
 
 	protected int mSensibility = 50;
 	protected int mVolume = 100;
@@ -51,6 +51,7 @@ public class OptionsUI  extends AngleUI
 		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
 
 		strSensibility = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Set Sensibility", 160, 200, AngleString.aCenter));
+		strVolume = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Set Volume", 160, 250, AngleString.aCenter));
 		strResetScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Reset Scores", 160, 300, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Retour", 160, 390, AngleString.aCenter));
 
@@ -67,8 +68,8 @@ public class OptionsUI  extends AngleUI
 		mPhysics.mGravity = new AngleVector(0,10f);
 		addObject(mPhysics);
 
-		
-		mBall = new Ball (mBallLayout,32,80,1,null,null);
+		AngleSound sndJump = new AngleSound(activity,R.raw.jump);
+		mBall = new Ball (mBallLayout,32,80,1,sndJump,null,this);
 		mPhysics.addObject(mBall);
 		
 		// ajoute une plateforme en bas qui prend toute la place pour le debut
@@ -94,6 +95,8 @@ public class OptionsUI  extends AngleUI
 				resetScores();
 			else if (strSensibility.test(eX, eY))
 				setSensibility();
+			else if (strVolume.test(eX, eY))
+				setVolume();
 			else if (strExit.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
 
@@ -121,7 +124,21 @@ public class OptionsUI  extends AngleUI
 			public void run() 
 			{
 				Looper.prepare();
-				askParameter();
+				askParameter(1);
+				Looper.loop();
+			}
+		}.start();
+	}
+	
+	private void setVolume()
+	{
+		new Thread() 
+		{
+			@Override 
+			public void run() 
+			{
+				Looper.prepare();
+				askParameter(2);
 				Looper.loop();
 			}
 		}.start();
@@ -149,14 +166,21 @@ public class OptionsUI  extends AngleUI
 		mPhysics.addObject(mWall); // Down wall
 	}
 	
-	public void askParameter() {
+	public void askParameter(int type) {
 		Dialog dialog = new Dialog(mActivity);
         dialog.setContentView(R.layout.horizontalslider);
-        dialog.setTitle("Parametres :");
-      
-        ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
-        myProgressBar.setProgress(mSensibility);
-        myProgressBar.setOnTouchListener(new MyTouchListener(dialog));
+        
+        SeekBar mySeekBar=(SeekBar) dialog.findViewById(R.id.options_slider);
+        
+        if(type == 1) {
+        	dialog.setTitle("Sensibilité :");
+            mySeekBar.setProgress(mSensibility);
+        } else if(type == 2) {
+        	dialog.setTitle("Volume :");
+            mySeekBar.setProgress(mVolume);
+        }
+
+        mySeekBar.setOnSeekBarChangeListener(new MySeekBarListener(type));
         
         Button buttonOK = (Button) dialog.findViewById(R.id.options_ok);        
         buttonOK.setOnClickListener(new OKListener(dialog));
@@ -174,23 +198,29 @@ public class OptionsUI  extends AngleUI
         }
 	}
 
-	protected class MyTouchListener implements OnTouchListener {
-        private Dialog dialog;
-        public MyTouchListener(Dialog dialog) {
-                this.dialog = dialog;
-        }
-        
-        public boolean onTouch(View v, MotionEvent event)
-        {
-	    	ProgressBar myProgressBar=(ProgressBar) dialog.findViewById(R.id.options_slider);
-        	float x_mouse = event.getX();
-			float width = myProgressBar.getWidth();
-	        mSensibility = Math.round((float) myProgressBar.getMax() * (x_mouse / width));
-	        if (mSensibility < 0)
-	        	mSensibility = 0;
-	        myProgressBar.setProgress(mSensibility);
-	        return true;
-        }
+	protected class MySeekBarListener implements OnSeekBarChangeListener {
+		private int mType;
+
+		public MySeekBarListener(int type) {
+			mType = type;
+		}
+		
+		public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
+			if(mType==1)
+				mSensibility = arg1;
+			else if(mType==2)
+				mVolume = arg1;
+		}
+
+		public void onStartTrackingTouch(SeekBar arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void onStopTrackingTouch(SeekBar arg0) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 	
 	
