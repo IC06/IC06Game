@@ -83,8 +83,7 @@ public class MainActivity extends AngleActivity
 		super.onCreate(savedInstanceState);
 		
 		mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE); 
-		mVibrator =(Vibrator)getSystemService(Context.VIBRATOR_SERVICE); 
-		mVibrator.vibrate(10);   
+		mVibrator =(Vibrator)getSystemService(Context.VIBRATOR_SERVICE);   
 		
         // a commenté dans la version finale (pour voir la fluidité du jeu)      
 		mGLSurfaceView.addObject(new FPSCounter());
