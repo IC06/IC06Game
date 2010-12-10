@@ -29,7 +29,7 @@ public class MenuUI  extends AngleUI
 		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Play", 240, 120, AngleString.aLeft));
 		strHiScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Hi Score", 210, 215, AngleString.aCenter));
 		strHiScoresOnLine = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "On line Score", 25, 40, AngleString.aLeft));
-		strInstructions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Instructions", 25, 80, AngleString.aLeft));
+		strInstructions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Instructions", 25, 100, AngleString.aLeft));
 		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Settings", 175, 295, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Exit", 250, 360, AngleString.aCenter));
 		
