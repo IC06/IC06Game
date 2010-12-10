@@ -12,6 +12,7 @@ import com.android.angle.AngleSurfaceView;
 import com.android.angle.AngleVector;
 import com.turlutu.Ball.Color;
 import com.turlutu.Bonus.TypeBonus;
+import com.turlutu.Plateforme.PlateformeType;
 
 /**
  * L'objet ajouté en premier à cet objet sera dessiné en dernier
@@ -85,7 +86,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 							sprite = mGameUI.mPlateformew;
 							break;
 					}
-					Plateforme newPlateforme = new Plateforme(sprite,color);
+					Plateforme newPlateforme = new Plateforme(sprite,color,PlateformeType.REBOND,(int)(Math.random() * 30));
 					newPlateforme.mPosition.set(new_x,-1);
 					addObject(newPlateforme);
 					if(Math.random()>0.6) { // 30% de chance d'avoir un bonus
@@ -151,95 +152,11 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		{
 			if (mChilds[o] instanceof Plateforme)
 			{
-				Plateforme plateforme = (Plateforme) mChilds[o];
-				
-				plateforme.mPosition.mX += plateforme.mDelta.mX;
-				if (plateforme.mPosition.mX < 0)
-				{
-					plateforme.mPosition.mX = 0;
-					plateforme.mVelocity.mX = -plateforme.mVelocity.mX;
-				}
-				else if (plateforme.mPosition.mX > mWorldWidth)
-				{
-					plateforme.mPosition.mX = mWorldWidth;
-					plateforme.mVelocity.mX = -plateforme.mVelocity.mX;
-				}
+				kyneticsPlateforme((Plateforme) mChilds[o]);
 			}
 			else if (mChilds[o] instanceof Ball)
 			{
-				Ball ball = (Ball) mChilds[o];
-				
-				// perdu
-				// TODO trouver où Matthieu a mis l'autre suppression de la balle dans le code (surement dans le code de ANGLE)
-				// apparement c'est pas dans anglephysicengine ou angle physicobject
-				if (ball.mPosition.mY > mWorldHeight)
-				{
-					init();
-					mGameUI.backToMenu();
-					return;
-				}
-				
-				if ((ball.mDelta.mX != 0) || (ball.mDelta.mY != 0))
-				{
-					// Changement d'état
-					ball.mPosition.mX += ball.mDelta.mX;
-					ball.mPosition.mY += ball.mDelta.mY;
-					if (ball.mPosition.mX > mWorldWidth)
-					{
-						ball.mPosition.mX = 0;
-						ball.changeColorRight();
-					}
-					else if  (ball.mPosition.mX < 0)
-					{
-						ball.mPosition.mX = mWorldWidth;
-						ball.changeColorLeft();
-					}
-
-					// translation + score
-					if (mGameUI != null && ball.mPosition.mY < mWorldHeight/3)
-					{
-						mCounterScore = (int) (mWorldHeight/3 - ball.mPosition.mY);
-						mGameUI.upScore(mCounterScore); // En mettant ça ici, on gagne 2 tests
-						translateAll(new AngleVector(0,mWorldHeight/3 - ball.mPosition.mY));
-					}
-					
-					// collisions
-					for (int c = 0; c < mChildsCount; c++)
-					{
-						if (c != o)
-						{
-							if (mChilds[c] instanceof Plateforme // l'objet est de type plateforme
-									&& ball.mVelocity.mY > 0)  // et il est entrain de descendre
-							{
-								Plateforme plateforme = (Plateforme) mChilds[c];
-								if((mGameUI != null && mGameUI.mTypeBonus == TypeBonus.ALLPLATEFORME) || plateforme.mColor == Color.TOUTE || plateforme.mColor == ball.getColor()) // si l'objet est de la même couleure
-								{
-									if (ball.collide(plateforme))
-									{
-										ball.jump();
-										break;
-									}
-								}
-							} else if (mChilds[c] instanceof Bonus) {
-								Bonus bonus = (Bonus) mChilds[c];
-								if (ball.collide(bonus))
-								{
-									bonus.mUsed = true;
-									removeObject(bonus);
-								}
-							}
-							else if (!(mChilds[c] instanceof Plateforme) && mChilds[c] instanceof AnglePhysicObject)
-							{
-								AnglePhysicObject mChildC = (AnglePhysicObject) mChilds[c];
-								if (ball.collide(mChildC))
-								{
-									ball.jump();
-									break;
-								}
-							}
-						}
-					}
-				}
+				kyneticsBall((Ball) mChilds[o]);
 			}
 		}
 	}
@@ -269,5 +186,98 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	{
 		dy = 30;
 		current_max_dy = 60;
+	}
+	
+	private void kyneticsBall(Ball ball)
+	{
+		// perdu
+		// TODO trouver où Matthieu a mis l'autre suppression de la balle dans le code (surement dans le code de ANGLE)
+		// apparement c'est pas dans anglephysicengine ou angle physicobject
+		if (ball.mPosition.mY > mWorldHeight)
+		{
+			init();
+			mGameUI.backToMenu();
+			return;
+		}
+		
+		if ((ball.mDelta.mX != 0) || (ball.mDelta.mY != 0))
+		{
+			// Changement d'état
+			ball.mPosition.mX += ball.mDelta.mX;
+			ball.mPosition.mY += ball.mDelta.mY;
+			if (ball.mPosition.mX > mWorldWidth)
+			{
+				ball.mPosition.mX = 0;
+				ball.changeColorRight();
+			}
+			else if  (ball.mPosition.mX < 0)
+			{
+				ball.mPosition.mX = mWorldWidth;
+				ball.changeColorLeft();
+			}
+
+			// translation + score
+			if (mGameUI != null && ball.mPosition.mY < mWorldHeight/3)
+			{
+				mCounterScore = (int) (mWorldHeight/3 - ball.mPosition.mY);
+				mGameUI.upScore(mCounterScore); // En mettant ça ici, on gagne 2 tests
+				translateAll(new AngleVector(0,mWorldHeight/3 - ball.mPosition.mY));
+			}
+			
+			// collisions
+			for (int c = 0; c < mChildsCount; c++)
+			{
+				if (mChilds[c] instanceof Plateforme // l'objet est de type plateforme
+							&& ball.mVelocity.mY > 0)  // et il est entrain de descendre
+				{
+					Plateforme plateforme = (Plateforme) mChilds[c];
+					if((mGameUI != null && mGameUI.mTypeBonus == TypeBonus.ALLPLATEFORME) || plateforme.mColor == Color.TOUTE || plateforme.mColor == ball.getColor()) // si l'objet est de la même couleure
+					{
+						if (ball.collide(plateforme))
+						{
+							ball.jump();
+							break;
+						}
+					}
+				} else if (mChilds[c] instanceof Bonus) {
+					Bonus bonus = (Bonus) mChilds[c];
+					if (ball.collide(bonus))
+					{
+						bonus.mUsed = true;
+						removeObject(bonus);
+					}
+				}
+				else if (!(mChilds[c] instanceof Ball) && 
+						!(mChilds[c] instanceof Plateforme) && 
+						!(mChilds[c] instanceof Bonus) && 
+						mChilds[c] instanceof AnglePhysicObject)
+				{
+					AnglePhysicObject mChildC = (AnglePhysicObject) mChilds[c];
+					if (ball.collide(mChildC))
+					{
+						ball.jump();
+						break;
+					}
+				}
+			}
+		}
+	}
+	
+	private void kyneticsPlateforme(Plateforme plateforme)
+	{
+		plateforme.mPosition.mX += plateforme.mDelta.mX;
+		if (plateforme.mType == PlateformeType.REBOND)
+		{
+			if (plateforme.mPosition.mX < Plateforme.SIZE/2)
+			{
+					plateforme.mPosition.mX = Plateforme.SIZE/2;
+					plateforme.mVelocity.mX = -plateforme.mVelocity.mX;
+			}
+			else if (plateforme.mPosition.mX > mWorldWidth-Plateforme.SIZE/2)
+			{
+					plateforme.mPosition.mX = mWorldWidth-Plateforme.SIZE/2;
+					plateforme.mVelocity.mX = -plateforme.mVelocity.mX;
+			}
+		}
 	}
 }

@@ -9,25 +9,29 @@ import com.turlutu.Ball.Color;
 
 public class Plateforme extends AnglePhysicObject
 {
+	enum PlateformeType { REBOND, TRAVERSE };
+	static public final float SIZE = 60;
+	
+	protected Color mColor;
+	protected PlateformeType mType;
+	
 	private AngleSprite mSprite;
 	private float mWidth;
-	protected Color mColor;
 	
-	static public float SIZE = 60;
 
 	public Plateforme(AngleSprite plateformeblanche)
 	{
 		super(1,0);
-		init(plateformeblanche,SIZE,0,1,Color.TOUTE); 
+		init(plateformeblanche,SIZE,0,1,Color.TOUTE, PlateformeType.REBOND, 0); 
 	}
 	
-	public Plateforme(AngleSprite plateforme, Color color)
+	public Plateforme(AngleSprite plateforme, Color color, PlateformeType type, int velocity)
 	{
 		super(1, 0); // Note : super (nb_segment, nb_circle);
-		init(plateforme,SIZE,0,1,color); 
+		init(plateforme,SIZE,0,1,color, type, velocity);
 	}
 
-	public void init(AngleSprite plateforme, float width, float mass, float bounce, Color color)
+	public void init(AngleSprite plateforme, float width, float mass, float bounce, Color color, PlateformeType type, int velocity)
 	{
 		mSprite=plateforme;
 		mWidth = width;
@@ -36,7 +40,8 @@ public class Plateforme extends AnglePhysicObject
 		mMass = mass;
 		mBounce = bounce;
 		mColor = color;
-		mVelocity.mX = 20;
+		mType = type;
+		mVelocity.mX = velocity;
 	}
 
 	/**
