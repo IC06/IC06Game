@@ -5,6 +5,7 @@ package com.turlutu;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.android.angle.AngleActivity;
+import com.android.angle.AngleFont;
 import com.android.angle.FPSCounter;
 import com.turlutu.Bonus.TypeBonus;
 
@@ -31,6 +33,7 @@ public class MainActivity extends AngleActivity
 	protected int mSensibility;
 	protected MainActivity mActivity;
 	protected Dialog dialog;
+	protected AngleFont fntGlobal;
 	
    private final SensorEventListener mListener = new SensorEventListener() 
    {
@@ -84,7 +87,7 @@ public class MainActivity extends AngleActivity
         // a commenté dans la version finale (pour voir la fluidité du jeu)      
 		mGLSurfaceView.addObject(new FPSCounter());
 		
-		
+		fntGlobal = new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(this.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 30, 30, 255);
 		mMainLayout=new FrameLayout(this);
 		mMainLayout.addView(mGLSurfaceView);
 		setContentView(mMainLayout);

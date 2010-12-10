@@ -2,7 +2,6 @@ package com.turlutu;
 
 import android.app.Dialog;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.angle.AngleActivity;
-import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
@@ -31,12 +29,10 @@ public class ScoresUI   extends AngleUI
 		
 		addObject(ogMenuTexts);
 
-		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
-
-		strNewScore = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "", 160, 30, AngleString.aCenter));
-		strScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "", 30, 100, AngleString.aLeft));
-		strNames = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "", 170, 100, AngleString.aLeft));
-		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Retour", 160, 390, AngleString.aCenter));
+		strNewScore = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 160, 30, AngleString.aCenter));
+		strScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 30, 100, AngleString.aLeft));
+		strNames = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 170, 100, AngleString.aLeft));
+		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Retour", 160, 390, AngleString.aCenter));
 
 	}
 	

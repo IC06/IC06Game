@@ -1,7 +1,7 @@
 package com.turlutu;
 
 import android.app.Dialog;
-import android.graphics.Typeface;
+import android.database.Cursor;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,7 +13,6 @@ import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.android.angle.AngleActivity;
-import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSegmentCollider;
@@ -32,6 +31,8 @@ public class OptionsUI  extends AngleUI
 	private MyPhysicsEngine mPhysics;
 	private float WIDTH,HEIGHT;
 	private AngleObject ogMenuTexts;
+	//TODO faire ça mieu
+	private boolean dbEmpty;
 	private AngleString strExit, strResetScores, strSensibility, strVolume;
 
 	protected int mSensibility = 50;
@@ -48,12 +49,10 @@ public class OptionsUI  extends AngleUI
 		
 		addObject(ogMenuTexts);
 
-		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
-
-		strSensibility = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Set Sensibility", 160, 200, AngleString.aCenter));
-		strVolume = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Set Volume", 160, 250, AngleString.aCenter));
-		strResetScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Reset Scores", 160, 300, AngleString.aCenter));
-		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Retour", 160, 390, AngleString.aCenter));
+		strSensibility = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Set Sensibility", 160, 200, AngleString.aCenter));
+		strVolume = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Set Volume", 160, 250, AngleString.aCenter));
+		strResetScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Reset Scores", 160, 300, AngleString.aCenter));
+		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Retour", 160, 390, AngleString.aCenter));
 
 		mBallLayout = new AngleSpriteLayout[6];
 		mBallLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 42, 64, com.turlutu.R.drawable.persos,0,0,42,64);
@@ -167,6 +166,22 @@ public class OptionsUI  extends AngleUI
 	}
 	
 	public void askParameter(int type) {
+		DBOptions db = new DBOptions(mActivity);
+		db.open();
+		Cursor c = db.getOptions();
+		if (c.getCount() >= 1)
+    	{
+			dbEmpty = false;
+    		c.moveToFirst();
+    		mSensibility = c.getInt(1);
+    	}
+    	else
+    	{
+    		dbEmpty = true;
+    		mSensibility = 50;
+    	}
+		db.close();
+			
 		Dialog dialog = new Dialog(mActivity);
         dialog.setContentView(R.layout.horizontalslider);
         
@@ -187,6 +202,7 @@ public class OptionsUI  extends AngleUI
         
         dialog.show();
 	}
+	
 	protected class OKListener implements OnClickListener {	 
         private Dialog dialog;
         public OKListener(Dialog dialog) {
@@ -194,6 +210,13 @@ public class OptionsUI  extends AngleUI
         }
 
         public void onClick(View v) {
+	    		DBOptions db = new DBOptions(mActivity);
+	    		db.open();
+	    		if (dbEmpty)
+	    			db.insert(mSensibility,"anonyme");
+	    		else
+	    			db.replace(1, mSensibility, "anonyme");
+	    		db.close();
         		dialog.dismiss(); 
         }
 	}

@@ -1,11 +1,9 @@
 package com.turlutu;
 
-import android.graphics.Typeface;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import com.android.angle.AngleActivity;
-import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSegmentCollider;
@@ -34,7 +32,6 @@ public class GameUI extends AngleUI {
 	private AngleString mString, mString2;
 	private AngleObject ogDashboard;
 	private float mTimeEllapsedBonus, mTimeActionBonus;
-	private AngleFont fntCafe25;
 	
 	public GameUI(AngleActivity activity)
 	{
@@ -91,7 +88,7 @@ public class GameUI extends AngleUI {
 		mBordsLayout[1] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,64,0,64,256);
 		mBordsLayout[2] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,128,0,64,256);
 		// TODO voir quelle image convient le mieu au background
-		mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
+		//mBackGroundLayout =new AngleSpriteLayout(activity.mGLSurfaceView,320,480,com.turlutu.R.drawable.fond);
 		// on ajoute le background en premier pour qu'il soit dessiné en premier
 		Background mBackGround = new Background(mBackGroundLayout);
 		addObject(mBackGround);
@@ -109,10 +106,8 @@ public class GameUI extends AngleUI {
 
 		// le score
 		ogDashboard=addObject(new AngleObject());
-		fntCafe25 = new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(activity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 30, 30, 255);
-		//AngleFont fntBazaronite=new AngleFont(mActivity.mGLSurfaceView, 18, Typeface.createFromAsset(mActivity.getAssets(),"bazaronite.ttf"), 222, 0, 2, 255, 100, 255, 255);
-		mString = (AngleString)ogDashboard.addObject(new AngleString(fntCafe25,"0",50,20,AngleString.aCenter));
-		mString2 = (AngleString)ogDashboard.addObject(new AngleString(fntCafe25,"0",50,20,AngleString.aCenter));
+		mString = (AngleString)ogDashboard.addObject(new AngleString(((MainActivity)mActivity).fntGlobal,"0",50,20,AngleString.aCenter));
+		mString2 = (AngleString)ogDashboard.addObject(new AngleString(((MainActivity)mActivity).fntGlobal,"0",50,20,AngleString.aCenter));
 		mString2.mLength = 0;
 
 		mBall = new Ball (mBallLayout,32,80,1,sndJump,this);

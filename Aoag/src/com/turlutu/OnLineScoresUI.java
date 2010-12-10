@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -21,8 +20,6 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Dialog;
 import android.database.Cursor;
-import android.graphics.Typeface;
-import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,10 +27,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.net.http.*;
 
 import com.android.angle.AngleActivity;
-import com.android.angle.AngleFont;
 import com.android.angle.AngleObject;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
@@ -51,12 +46,10 @@ public class OnLineScoresUI   extends AngleUI
 		
 		addObject(ogMenuTexts);
 
-		AngleFont fntCafe=new AngleFont(mActivity.mGLSurfaceView, 25, Typeface.createFromAsset(mActivity.getAssets(),"cafe.ttf"), 222, 0, 0, 30, 200, 255, 255);
-
-		strPushScore = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Envoyer mes scores", 160, 30, AngleString.aCenter));
-		strScores = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "", 30, 100, AngleString.aLeft));
-		strNames = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "", 170, 100, AngleString.aLeft));
-		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(fntCafe, "Retour", 160, 390, AngleString.aCenter));
+		strPushScore = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Envoyer mes scores", 160, 30, AngleString.aCenter));
+		strScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 30, 100, AngleString.aLeft));
+		strNames = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 170, 100, AngleString.aLeft));
+		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Retour", 160, 390, AngleString.aCenter));
 
 	}
 	
