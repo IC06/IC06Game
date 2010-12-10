@@ -189,7 +189,11 @@ public class GameUI extends AngleUI {
 		mPhysics.addObject(Plateforme);
 		
 		Plateforme = new Plateforme(mPlateformew);
-		Plateforme.mPosition.set(300,100);
+		Plateforme.mPosition.set(120,100);
+		mPhysics.addObject(Plateforme);
+		
+		Plateforme = new Plateforme(mPlateformew);
+		Plateforme.mPosition.set(200,50);
 		mPhysics.addObject(Plateforme);
 	}
 
