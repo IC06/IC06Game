@@ -192,7 +192,6 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 
 	/**
 	 * @author thomas
-	 * TODO Afficher les bonus apres les plateformes !
 	 * @author matthieu, thomas
 	 * 
 	 */
@@ -200,7 +199,17 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 	public void draw(GL10 gl)
 	{
 		for (int t=1;t<mChildsCount;t++)
-			mChilds[t].draw(gl);
+			if (!(mChilds[t] instanceof Bonus))
+			{
+				mChilds[t].draw(gl);
+			}
+		
+		for (int t=1;t<mChildsCount;t++)
+			if (mChilds[t] instanceof Bonus)
+			{
+				mChilds[t].draw(gl);
+			}
+		
 		mChilds[0].draw(gl); // balle dessiné en dernier
 	}
 	
