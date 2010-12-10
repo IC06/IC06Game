@@ -19,12 +19,12 @@ class Bonus extends AnglePhysicObject
 	protected boolean mUsed;
 	protected float mRadius;
 	protected enum TypeBonus {	NONE, // 0
-															ADDSCORE,// 1=> GameUI.setBonus(..)
-															MOREJUMP, // 2 => Ball.jump()
-															LESSJUMP, // 3 => Ball.jump()
-															CHANGEPHYSICS, // 4 => MainActivity.onSensorChange() & GameUI.onTcouhEvent
-															DISABLECHANGECOLOR, // 5 => Ball.changeColorLeft/Right()
-															ALLPLATEFORME}; // 6 => MyPhysicsEngine.kynetics()
+		LESSJUMP, // 3 => Ball.jump()
+		ADDSCORE,// 1=> GameUI.setBonus(..)
+		MOREJUMP, // 2 => Ball.jump()
+		DISABLECHANGECOLOR, // 5 => Ball.changeColorLeft/Right()
+		CHANGEPHYSICS, // 4 => MainActivity.onSensorChange() & GameUI.onTcouhEvent															
+		ALLPLATEFORME}; // 6 => MyPhysicsEngine.kynetics()
 
 	private GameUI mGame;
 	private AngleSound sndTouch;
@@ -35,19 +35,19 @@ class Bonus extends AnglePhysicObject
 	static int radius = 16;
 	static int nbtype = 6;
 	static TypeBonus[] mapTypeBonus = {	TypeBonus.NONE, // 0
-																			TypeBonus.ADDSCORE, // 1
-																			TypeBonus.MOREJUMP, // 2
-																			TypeBonus.LESSJUMP, // 3
-																			TypeBonus.CHANGEPHYSICS, // 4
-																			TypeBonus.DISABLECHANGECOLOR, // 5
-																			TypeBonus.ALLPLATEFORME};// 6
+		TypeBonus.LESSJUMP, // 3
+		TypeBonus.ADDSCORE, // 1
+		TypeBonus.MOREJUMP, // 2
+		TypeBonus.DISABLECHANGECOLOR, // 5
+		TypeBonus.CHANGEPHYSICS, // 4
+		TypeBonus.ALLPLATEFORME};// 6
 	static float[] timesActionBonus = {	0, // 0
-																	0, // 1
-																	4, // 2
-																	4, // 3
-																	4, // 4
-																	4, // 5
-																	6}; // 6
+		4, // 3
+		0, // 1
+		4, // 2
+		4, // 5
+		4, // 4
+		6}; // 6
 	
 	public Bonus(GameUI game, int d) // d compris entre 0 et 100 (difficulté croissante)
 	{
