@@ -26,14 +26,14 @@ public class MenuUI  extends AngleUI
 		
 		addObject(ogMenuTexts);
 
-		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Play", 160, 110, AngleString.aLeft));
-		strHiScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Hi Score", 160, 210, AngleString.aCenter));
+		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Play", 240, 120, AngleString.aLeft));
+		strHiScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Hi Score", 210, 215, AngleString.aCenter));
 		strHiScoresOnLine = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "On line Score", 50, 50, AngleString.aLeft));
 		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Options", 175, 295, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Exit", 250, 360, AngleString.aCenter));
 		
 	}
-
+	
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
@@ -62,6 +62,7 @@ public class MenuUI  extends AngleUI
 	public void onActivate()
 	{
 		super.onActivate();
+		((MainActivity)mActivity).dialog.dismiss();
 	}
 	
 }
