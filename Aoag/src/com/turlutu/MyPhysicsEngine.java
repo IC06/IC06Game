@@ -62,7 +62,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					float new_x = (float) (Math.random() * (320f - Plateforme.SIZE)) + Plateforme.SIZE/2;
 					int d = (int) ((current_max_dy - 40.f) * 10.f/6.f);
 					int couleur = 3;
-					if( Math.random()*2 < (float) d / 100.f + 1) {
+					if( Math.random()*1.8 < (float) d / 100.f + 0.9) {
 						couleur = (int) (Math.random() * 3);
 					}
 					AngleSprite sprite;

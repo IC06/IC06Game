@@ -54,7 +54,11 @@ class Bonus extends AnglePhysicObject
 		super(0, 1);
 		mGame = game;
 		mUsed = false;
-		mType = (int) (Math.random() * ( (float) d / 100.f * nbtype)) + 1;
+		int range = (int) ((float) d / 100.f * 2.f * nbtype);
+		if(range>nbtype) {
+			range = nbtype;
+		}
+		mType = (int) (Math.random() * range) + 1;
 		Log.i("Strategie", "Bmax : "+ ( (float) d / 100.f * nbtype) + 1);
 		sndTouch = mGame.sndBonus[mType];
 		mSprite=new AngleSprite(mGame.mBonusLayout[mType]);
