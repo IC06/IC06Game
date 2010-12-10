@@ -130,7 +130,7 @@ public class ScoresUI   extends AngleUI
         		dialog.dismiss(); 
         		DBScores db = new DBScores(mActivity);
         		db.open();
-        		long i = db.insertScore( ((MainActivity) mActivity).mGame.mScore, ""+name);
+        		long i = db.insertScore( ((MainActivity) mActivity).mGame.mScore, name);
         		Log.i("ScoresUI", "ScoresUI on click on ok insert : " + i);
         		db.close();
         		((MainActivity) mActivity).mGame.mScore = 0;
