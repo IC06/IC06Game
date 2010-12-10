@@ -20,6 +20,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Dialog;
 import android.database.Cursor;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -88,6 +89,7 @@ public class OnLineScoresUI   extends AngleUI
 			@Override 
 			public void run() 
 			{
+				Looper.prepare();
 				DBScores db = new DBScores(mActivity);
 				db.open();
 		        Cursor c = db.getAllScores();
@@ -99,6 +101,7 @@ public class OnLineScoresUI   extends AngleUI
 		        }
 		        db.close();
 		        getScores();
+		        Looper.loop();
 			}
 		}.start();
 	}
@@ -166,6 +169,9 @@ public class OnLineScoresUI   extends AngleUI
 			return responseBody;
 		}
 		catch (Throwable t) {
+	        Toast.makeText(mActivity, 
+	                "An error was catched are you sure to be connected ?" ,
+	                Toast.LENGTH_SHORT).show();
 			Log.e("Exitjump","Exception in getData()", t);
 			return "error";
 		}
