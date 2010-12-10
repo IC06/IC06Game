@@ -74,7 +74,7 @@ public class GameUI extends AngleUI {
 		// BALL
 		mBallLayout = new AngleSpriteLayout[8];
 		for (int i=0;i<8;++i)
-			mBallLayout[i] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 64, com.turlutu.R.drawable.persos2,64*i,0,64,64);
+			mBallLayout[i] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 64, com.turlutu.R.drawable.persos,64*i,0,64,64);
 		
 		
 		mBordsLayout = new AngleSpriteLayout[3];
