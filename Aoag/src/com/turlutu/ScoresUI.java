@@ -56,7 +56,9 @@ public class ScoresUI   extends AngleUI
 	public void onActivate()
 	{
 		Log.i("ScoresUI", "ScoresUI onActivate debut "+((MainActivity) mActivity).mGame.mScore);
-
+		
+		showScores();
+		
 		if( ((MainActivity) mActivity).mGame.mScore != 0) 
 		{
 			Log.i("ScoresUI", "Dialog show");
@@ -67,26 +69,13 @@ public class ScoresUI   extends AngleUI
 			int nbScore = db.nbScore();
 			db.close();
 			if( ((MainActivity) mActivity).mGame.mScore > worstscore || nbScore <= 8) {
-				new Thread() 
-				{
-					@Override 
-					public void run() 
-					{
-						Looper.prepare();
-						askName();
-						Looper.loop();
-					}
-				}.start();
-			} else {
-				getScores();
+				askName();
 			}
-		} else {
-			getScores();
 		}
 		Log.i("ScoresUI", "ScoresUI onActivate fin");
 	}
 	
-	public void getScores() {
+	public void showScores() {
     	String scores = "";
     	String names = "";
 		DBScores db = new DBScores(mActivity);
@@ -106,14 +95,25 @@ public class ScoresUI   extends AngleUI
 	}
 	
 	public void askName() {
-		Dialog dialog = new Dialog(mActivity);
-        dialog.setContentView(R.layout.name_activity);
-        dialog.setTitle("Entrer votre nom :");
-        Button buttonOK = (Button) dialog.findViewById(R.id.ok);        
-        buttonOK.setOnClickListener(new OKListener(dialog));
-        Button buttonCancel = (Button) dialog.findViewById(R.id.cancel);        
-        buttonCancel.setOnClickListener(new CancelListener(dialog));
-        dialog.show();
+		new Thread() 
+		{
+			@Override 
+			public void run() 
+			{
+				Looper.prepare();
+				Dialog dialog = new Dialog(mActivity);
+		        dialog.setContentView(R.layout.name_activity);
+		        //dialog.setTitle("Entrer votre nom :");
+		        TextView inputText = (TextView) dialog.findViewById(R.id.entry);
+		        inputText.setText(((MainActivity)mActivity).mOptions.mName);
+		        Button buttonOK = (Button) dialog.findViewById(R.id.ok);        
+		        buttonOK.setOnClickListener(new OKListener(dialog));
+		        Button buttonCancel = (Button) dialog.findViewById(R.id.cancel);        
+		        buttonCancel.setOnClickListener(new CancelListener(dialog));
+		        dialog.show();
+				Looper.loop();
+			}
+		}.start();
 	}
 	protected class OKListener implements OnClickListener {	 
         private Dialog dialog;
@@ -124,6 +124,7 @@ public class ScoresUI   extends AngleUI
         public void onClick(View v) {
         		TextView input = (TextView) dialog.findViewById(R.id.entry);
         		CharSequence name = input.getText();
+        		((MainActivity)mActivity).mOptions.mName = ""+name;
         		dialog.dismiss(); 
         		DBScores db = new DBScores(mActivity);
         		db.open();
@@ -131,7 +132,7 @@ public class ScoresUI   extends AngleUI
         		Log.i("ScoresUI", "ScoresUI on click on ok insert : " + i);
         		db.close();
         		((MainActivity) mActivity).mGame.mScore = 0;
-        		getScores();
+        		showScores();
         }
 	}
 	
@@ -144,7 +145,6 @@ public class ScoresUI   extends AngleUI
         public void onClick(View v) {
                 dialog.dismiss();    
         		((MainActivity) mActivity).mGame.mScore = 0;
-        		getScores();
         }
 	}
 

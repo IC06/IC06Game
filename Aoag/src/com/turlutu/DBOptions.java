@@ -19,7 +19,7 @@ public class DBOptions {
     
     private static final String DATABASE_NAME = "exitjump";
     private static final String DATABASE_TABLE = "options";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 6;
 
     private static final String DATABASE_CREATE =
     "create table "+DATABASE_TABLE+" ("+KEY_ID+" integer primary key autoincrement, "
@@ -125,7 +125,7 @@ public class DBOptions {
         }
         else
         {
-        	Log.i(TAG,"insert ("+sensibility+","+nom+") to index : "+retour);
+        	Log.i(TAG,"insert ("+sensibility+","+volume+","+vibration+","+nom+") to index : "+retour);
 			return retour;
         }
     }
