@@ -12,6 +12,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.FrameLayout;
 
@@ -34,7 +35,7 @@ public class MainActivity extends AngleActivity
 	protected MainActivity mActivity;
 	protected ProgressDialog  dialog;
 	protected AngleFont fntGlobal;
-	
+	protected Vibrator mVibrator;
 	private final SensorEventListener mListener = new SensorEventListener() 
 	{
 		//@Override
@@ -82,7 +83,9 @@ public class MainActivity extends AngleActivity
 		super.onCreate(savedInstanceState);
 		
 		mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE); 
-      
+		mVibrator =(Vibrator)getSystemService(Context.VIBRATOR_SERVICE); 
+		mVibrator.vibrate(10);   
+		
         // a commenté dans la version finale (pour voir la fluidité du jeu)      
 		mGLSurfaceView.addObject(new FPSCounter());
 		
