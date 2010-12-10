@@ -94,6 +94,15 @@ public class DBScores
     		return insert(score, nom);
     	
     }
+    /*
+     *  Renvoit le nombre de score enregistré dans la db
+     *  @author Matthieu
+     */
+    public int nbScore()
+    {
+    	Cursor c = getAllScores();
+    	return c.getCount();
+    }
     
     private long insert(int score, String nom)
     {
@@ -185,21 +194,17 @@ public class DBScores
     	}
     }
     
-    public static int getWorstScore(Context ctx)
+    public int getWorstScore()
     {
-    	DBScores db = new DBScores(ctx);
-    	db.open();
-    	Cursor c = db.getAllScores();
+    	Cursor c = getAllScores();
     	if (c.moveToLast())
     	{
     		int worstScore = c.getInt(1);
     		Log.i(TAG,"getWorstScore : "+worstScore);
-    		db.close();
     		return worstScore;
     	}
     	else
     	{
-    		db.close();
     		Log.w(TAG,"getWorstScore echoue");
     		return -1;
     	}

@@ -61,8 +61,12 @@ public class ScoresUI   extends AngleUI
 		{
 			Log.i("ScoresUI", "Dialog show");
 			strNewScore.set("Last Score : " + ((MainActivity)mActivity).mGame.mScore);
-			int worstscore = DBScores.getWorstScore(mActivity);
-			if( ((MainActivity) mActivity).mGame.mScore > worstscore) {
+			DBScores db = new DBScores(mActivity);
+			db.open();
+			int worstscore = db.getWorstScore();
+			int nbScore = db.nbScore();
+			db.close();
+			if( ((MainActivity) mActivity).mGame.mScore > worstscore || nbScore <= 8) {
 				new Thread() 
 				{
 					@Override 
