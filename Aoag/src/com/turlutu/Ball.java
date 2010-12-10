@@ -151,7 +151,8 @@ class Ball extends AnglePhysicObject
 	
 	public void jump()
 	{
-		mActivity.mVibrator.vibrate(50);
+		if (mActivity.mOptions.mVibrations == 1)
+			mActivity.mVibrator.vibrate(50);
 		if (mActivity.mGame.mTypeBonus == TypeBonus.MOREJUMP)
 			mVelocity.mY = -900;
 		else if (mActivity.mGame.mTypeBonus == TypeBonus.LESSJUMP)
