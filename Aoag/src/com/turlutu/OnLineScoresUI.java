@@ -65,8 +65,12 @@ public class OnLineScoresUI   extends AngleUI
 
 			if (strExit.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
-			else if (strPushScore.test(eX, eY))
+			else if (strPushScore.test(eX, eY)) {
+				Toast.makeText(mActivity, 
+		                "You're score are beeing send please wait !" ,
+		                Toast.LENGTH_SHORT).show();
 				UploadMyScore();
+			}
 
 			return true;
 		}
@@ -173,6 +177,9 @@ public class OnLineScoresUI   extends AngleUI
 	}
 	
 	public void getScores() {
+		Toast.makeText(mActivity, 
+                "Retrieving the score list on server..." ,
+                Toast.LENGTH_SHORT).show();
     	String scores = getData("scores");
     	String names = getData("names");
         strScores.set(scores);
