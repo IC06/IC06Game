@@ -18,7 +18,7 @@ public class DBScores
     public static final String KEY_NAME = "name";
     private static final String TAG = "DBScore";
     
-    private static final String DATABASE_NAME = "exitjump";
+    private static final String DATABASE_NAME = "exitjump_score";
     private static final String DATABASE_TABLE = "scores";
     private static final int DATABASE_VERSION = 8;
 
