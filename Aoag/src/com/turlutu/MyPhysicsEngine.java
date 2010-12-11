@@ -49,7 +49,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		{
 			new_y = max_dy;
 			new_y = dy + (float) (Math.random() * (current_max_dy - dy));
-			float d = 2f/dy;
+			float d = 3f/dy;
 			if (dy < max_dy){dy+=((Math.random()*1.5)+1) * d;}
 			if (current_max_dy < max_dy){current_max_dy+=((Math.random()*2)+1) * d;}
 			Log.i("DY",""+dy+" "+current_max_dy);

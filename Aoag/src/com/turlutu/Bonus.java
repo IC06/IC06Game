@@ -19,11 +19,11 @@ class Bonus extends AnglePhysicObject
 	protected boolean mUsed;
 	protected float mRadius;
 	protected enum TypeBonus {	NONE, // 0
-		LESSJUMP, // 3 => Ball.jump()
 		ADDSCORE,// 1=> GameUI.setBonus(..)
 		MOREJUMP, // 2 => Ball.jump()
-		DISABLECHANGECOLOR, // 5 => Ball.changeColorLeft/Right()
-		CHANGEPHYSICS, // 4 => MainActivity.onSensorChange() & GameUI.onTcouhEvent															
+		LESSJUMP, // 3 => Ball.jump()
+		CHANGEPHYSICS, // 4 => MainActivity.onSensorChange() & GameUI.onTcouhEvent
+		DISABLECHANGECOLOR, // 5 => Ball.changeColorLeft/Right()									
 		ALLPLATEFORME}; // 6 => MyPhysicsEngine.kynetics()
 
 	private GameUI mGame;
@@ -69,7 +69,7 @@ class Bonus extends AnglePhysicObject
 		super(0, 1);
 		mGame = game;
 		mUsed = false;
-		int range = (int) ((float) d / 100.f * 1.4 * nbtype);
+		int range = (int) ((float) d / 100.f * 1.8 * nbtype);
 		if(range>nbtype) {
 			range = nbtype;
 		}
