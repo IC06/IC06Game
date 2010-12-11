@@ -70,7 +70,10 @@ public class ScoresUI   extends AngleUI
 			int worstscore = db.getWorstScore();
 			int nbScore = db.nbScore();
 			db.close();
-			if( ((MainActivity) mActivity).mGame.mScore > worstscore || nbScore <= 8) {
+			Toast.makeText(mActivity, 
+	                "Worst = "+worstscore+" nbScore="+nbScore ,
+	                Toast.LENGTH_SHORT).show();
+			if( ((MainActivity) mActivity).mGame.mScore > worstscore || nbScore < 8) {
 				askName();
 			}
 		}
