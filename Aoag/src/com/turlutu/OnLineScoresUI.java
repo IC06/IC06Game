@@ -63,7 +63,7 @@ public class OnLineScoresUI   extends AngleUI
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
 			else if (strPushScore.test(eX, eY)) {
 				Toast.makeText(mActivity, 
-		                "You're score are beeing send please wait !" ,
+		                "You're score are being send please wait !" ,
 		                Toast.LENGTH_SHORT).show();
 				UploadMyScore();
 			}
