@@ -33,7 +33,7 @@ class Bonus extends AnglePhysicObject
 	private int mType = 0;
 	
 	static int radius = 16;
-	static int nbtype = 10;
+	static int nbtype = 13;
 	static TypeBonus[] mapTypeBonus = {	TypeBonus.NONE, // 0
 		TypeBonus.ADDSCORE, // 1
 		TypeBonus.MOREJUMP, // 2
@@ -53,11 +53,14 @@ class Bonus extends AnglePhysicObject
 		3,
 		2,
 		5,
-		4,
-		6,
-		6,
-		4,
 		5,
+		1,
+		4,
+		4,
+		3,
+		6,
+		6,
+		2,
 		6
 	};
 	
@@ -66,7 +69,7 @@ class Bonus extends AnglePhysicObject
 		super(0, 1);
 		mGame = game;
 		mUsed = false;
-		int range = (int) ((float) d / 100.f * 2.f * nbtype);
+		int range = (int) ((float) d / 100.f * 1.4 * nbtype);
 		if(range>nbtype) {
 			range = nbtype;
 		}
