@@ -250,7 +250,7 @@ public class AngleSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 	}
 
 	//---------------------------------------------
-	//-- Problemas de no tener herencia múltiple --
+	//-- Problemas de no tener herencia mï¿½ltiple --
 	//---------------------------------------------
 	/**
 	 * Used by the engine to put the new objects in the childs list. Do not use after engine is running.
@@ -353,6 +353,7 @@ public class AngleSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 	 */
 	public void delete()
 	{
+		mGLThread.requestExitAndWait();
 		for (int t=0;t<mChildsCount;t++)
 			mChilds[t].delete();
 	}
