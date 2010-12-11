@@ -45,13 +45,14 @@ public class MainActivity extends AngleActivity
 		{
 		}
 		
-		//@Override
+		// @Override
 		public void onSensorChanged(SensorEvent event)
 		{
 			if (loaded & event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
 			{
 				mGame.mBall.mVelocity.mX = (-mOptions.mSensibility*2*event.values[0]);
-				mOptions.mBall.mVelocity.mX = (-mOptions.mSensibility*2*event.values[0]);
+				if(mOptions.mBall != null)
+					mOptions.mBall.mVelocity.mX = (-mOptions.mSensibility*2*event.values[0]);
 				if (mGame.mTypeBonus == TypeBonus.CHANGEPHYSICS)
 					mGame.mBall.mVelocity.mX = -mGame.mBall.mVelocity.mX;
 			}
@@ -71,6 +72,8 @@ public class MainActivity extends AngleActivity
 		Log.i("MainActivity", "START");
 		
 		mActivity = this;
+		super.onCreate(savedInstanceState);
+		
 		new Thread() 
 		{
 			@Override 
@@ -82,7 +85,6 @@ public class MainActivity extends AngleActivity
 				Looper.loop();
 			}
 		}.start();
-		super.onCreate(savedInstanceState);
 		
 		mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE); 
 		mVibrator =(Vibrator)getSystemService(Context.VIBRATOR_SERVICE);   
@@ -119,7 +121,7 @@ public class MainActivity extends AngleActivity
 		Background mBackGround = null;
 		
 		// TODO RELEASE a decommenter pour avoir des background dans les differentes UI (autre que le menu)
-		//mBackGround= new Background(mBackGroundLayout);
+		mBackGround= new Background(mBackGroundLayout);
 		
 		mOptions=new OptionsUI(this,mBackGround);
 		mInstructions= new InstructionsUI(this,mBackGround);
