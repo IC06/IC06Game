@@ -79,6 +79,7 @@ public class OnLineScoresUI   extends AngleUI
 		Log.i("ScoresUI", "OnlineScoresUI onActivate debut "+((MainActivity) mActivity).mGame.mScore);
 
 		getScores();
+		checkVersion();
 		Log.i("ScoresUI", "OnlineScoresUI onActivate fin");
 	}
 	
@@ -174,6 +175,25 @@ public class OnLineScoresUI   extends AngleUI
 	                Toast.LENGTH_SHORT).show();
 			Log.e("Exitjump","Exception in getData()", t);
 			return "error";
+		}
+	}
+	
+	public void checkVersion() {
+		DefaultHttpClient client = new DefaultHttpClient();
+		String version =  mActivity.getString(R.string.app_version);
+		HttpGet getMethod=new HttpGet("http://wwwetu.utc.fr/~mguffroy/Score.php?page=check&version="+version);
+
+		try {
+			ResponseHandler<String> responseHandler=new BasicResponseHandler();
+			String responseBody=client.execute(getMethod, responseHandler);
+			if(responseBody.length() > 5) {
+				Toast.makeText(mActivity, 
+	                responseBody ,
+	                Toast.LENGTH_LONG).show();
+			}
+		}
+		catch (Throwable t) {
+			Log.e("Exitjump","Exception in getData()", t);
 		}
 	}
 	
