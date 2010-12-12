@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.turlutu"
       android:versionCode="42" android:versionName="@string/app_version">
+	<supports-screens android:smallScreens="false"
+                  android:normalScreens="true"
+                  android:largeScreens="false" 
+                  android:anyDensity="false" />
+
     <application 
     		android:icon="@drawable/icon" 
     		android:label="@string/app_name"  >
