@@ -18,6 +18,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Looper;
 import android.util.Log;
@@ -91,41 +92,17 @@ public class OnLineScoresUI   extends AngleUI
 		Log.i("ScoresUI", "OnlineScoresUI onActivate fin");
 	}
 	
-	public void UploadMyScore() {
-		new Thread() 
-		{
-			@Override 
-			public void run() 
-			{
-				Looper.prepare();
-				DBScores db = new DBScores(mActivity);
-				db.open();
-		        Cursor c = db.getAllScores();
-		        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-		        String version =  mActivity.getString(R.string.app_version);
-				pairs.add(new BasicNameValuePair("version", version));
-		        if (c.moveToFirst())
-		        {
-		        	int i = 0;
-		            do {
-		        		pairs.add(new BasicNameValuePair("name"+i, c.getString(2)));
-		        		pairs.add(new BasicNameValuePair("score"+i, c.getString(1)));
-		        		i++;
-		            } while (c.moveToNext());
-		        }
-		        db.close();
-				postData(pairs);
-		        getScores();
-		        Looper.loop();
-			}
-		}.start();
-	}
 	
 	
-	public static String md5(String key) throws NoSuchAlgorithmException {
+	public static String md5(String key) {
 		byte[] uniqueKey = key.getBytes();
 		byte[] hash = null;
-		hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
+		try {
+			hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		StringBuffer hashString = new StringBuffer();
 		for ( int i = 0; i < hash.length; ++i ) {
 			String hex = Integer.toHexString(hash[i]);
@@ -139,16 +116,53 @@ public class OnLineScoresUI   extends AngleUI
 		return hashString.toString();
 	}
 	
+	public void UploadMyScore() {
+		new Thread() 
+		{
+			@Override 
+			public void run() 
+			{
+				Looper.prepare();
+				DBScores db = new DBScores(mActivity);
+				db.open();
+		        Cursor c = db.getAllScores();
+		        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		        String version =  mActivity.getString(R.string.app_version);
+                String key =  mActivity.getString(R.string.key);
+				pairs.add(new BasicNameValuePair("version", version));
+		        if (c.moveToFirst())
+		        {
+		        	int i = 0;
+		            do {
+
+		                String hash = md5(c.getString(1)+c.getString(2)+key+version);
+		                if(hash.equals(c.getString(3))) {
+		                	pairs.add(new BasicNameValuePair("name"+i, c.getString(2)));
+		                	pairs.add(new BasicNameValuePair("score"+i, c.getString(1)));
+		                	i++;
+		                } else {
+		        	        Toast.makeText(mActivity, 
+		        	                "Tricheur va je t'ai eu ! :)" ,
+		        	                Toast.LENGTH_LONG).show();
+		                }
+		            } while (c.moveToNext());
+		        }
+		        db.close();
+				postData(pairs);
+		        getScores();
+		        Looper.loop();
+			}
+		}.start();
+	}
+	
+
+	
 	
 	public void postData(List<NameValuePair> pairs) {
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost("http://wwwetu.utc.fr/~mguffroy/Score.php?page=add");
 		
-		try {
-			pairs.add(new BasicNameValuePair("sign", md5(pairs.toString()+"I am the best")));
-		} catch (NoSuchAlgorithmException e1) {
-			Log.e("POST", "Error");
-		}
+		pairs.add(new BasicNameValuePair("sign", md5(pairs.toString()+mActivity.getString(R.string.key))));
 		try {
 			post.setEntity(new UrlEncodedFormEntity(pairs));
 		} catch (UnsupportedEncodingException e) {

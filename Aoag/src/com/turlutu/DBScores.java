@@ -2,8 +2,12 @@ package com.turlutu;
 
 
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,16 +20,18 @@ public class DBScores
     public static final String KEY_ID = "id";
     public static final String KEY_SCORE = "score";
     public static final String KEY_NAME = "name";
+    public static final String KEY_HASH = "hash";
     private static final String TAG = "DBScore";
     
     private static final String DATABASE_NAME = "exitjump_score";
     private static final String DATABASE_TABLE = "scores";
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
     private static final String DATABASE_CREATE =
      "create table "+DATABASE_TABLE+" ("+KEY_ID+" integer primary key autoincrement, "
     + KEY_SCORE+" integer not null, "
-    + KEY_NAME+" text not null);";
+    + KEY_NAME+" text not null, " 
+    + KEY_HASH+" text not null);";
     
     private final Context context; 
     
@@ -104,11 +110,39 @@ public class DBScores
     	return c.getCount();
     }
     
+	public static String md5(String key) {
+		byte[] uniqueKey = key.getBytes();
+		byte[] hash = null;
+		try {
+			hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		StringBuffer hashString = new StringBuffer();
+		for ( int i = 0; i < hash.length; ++i ) {
+			String hex = Integer.toHexString(hash[i]);
+			if ( hex.length() == 1 ) {
+				hashString.append('0');
+				hashString.append(hex.charAt(hex.length()-1));
+			} else {
+				hashString.append(hex.substring(hex.length()-2));
+			}
+		}
+		return hashString.toString();
+	}
+    
+    
     private long insert(int score, String nom)
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_SCORE , score);
         initialValues.put(KEY_NAME, nom);
+        Resources Res = context.getResources();
+        String version =  Res.getString(R.string.app_version);
+        String key =  Res.getString(R.string.key);
+        String hash = md5(score+nom+key+version);
+        initialValues.put(KEY_HASH, hash);
         long retour = -1;
         try {
         	retour = db.insertOrThrow(DATABASE_TABLE, null, initialValues);}
@@ -133,6 +167,11 @@ public class DBScores
         initialValues.put(KEY_ID , id);
         initialValues.put(KEY_SCORE , score);
         initialValues.put(KEY_NAME, nom);
+        Resources Res = context.getResources();
+        String version =  Res.getString(R.string.app_version);
+        String key =  Res.getString(R.string.key);
+        String hash = md5(score+nom+key+version);
+        initialValues.put(KEY_HASH, hash);
         long retour = -1;
         try {
         	retour = db.replaceOrThrow(DATABASE_TABLE, null, initialValues);}
@@ -164,7 +203,8 @@ public class DBScores
         return db.query(DATABASE_TABLE, new String[] {
         		KEY_ID,
         		KEY_SCORE,
-        		KEY_NAME}, 
+        		KEY_NAME,
+        		KEY_HASH}, 
                 null, 
                 null, 
                 null, 
