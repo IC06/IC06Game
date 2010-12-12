@@ -77,9 +77,17 @@ public class OnLineScoresUI   extends AngleUI
 	public void onActivate()
 	{
 		Log.i("ScoresUI", "OnlineScoresUI onActivate debut "+((MainActivity) mActivity).mGame.mScore);
-
-		getScores();
-		checkVersion();
+		new Thread() 
+		{
+			@Override 
+			public void run() 
+			{
+				Looper.prepare();
+				getScores();
+				checkVersion();
+		        Looper.loop();
+			}
+		}.start();
 		Log.i("ScoresUI", "OnlineScoresUI onActivate fin");
 	}
 	
