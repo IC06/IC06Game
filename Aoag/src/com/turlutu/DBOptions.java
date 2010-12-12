@@ -17,9 +17,9 @@ public class DBOptions {
     public static final String KEY_NAME = "name";
     private static final String TAG = "DBOptions";
     
-    private static final String DATABASE_NAME = "exitjump";
+    private static final String DATABASE_NAME = "exitjump_option";
     private static final String DATABASE_TABLE = "options";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 8;
 
     private static final String DATABASE_CREATE =
     "create table "+DATABASE_TABLE+" ("+KEY_ID+" integer primary key autoincrement, "

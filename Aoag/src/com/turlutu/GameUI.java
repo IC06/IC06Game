@@ -45,17 +45,17 @@ public class GameUI extends AngleUI {
 		WIDTH = 320f;
 		HEIGHT = 480f;
 		mScore = 0;
-		sndJump=new AngleSound(mActivity,R.raw.jump);
+		sndJump=new AngleSound(mActivity,R.raw.rebond);
 		
 		// BONUS
 		sndBonus  = new AngleSound[7];
-		sndBonus[0] = new AngleSound(mActivity,R.raw.bonus);
-		sndBonus[1] = new AngleSound(mActivity,R.raw.bonus1);
-		sndBonus[2] = new AngleSound(mActivity,R.raw.bonus2);
-		sndBonus[3] = new AngleSound(mActivity,R.raw.bonus);
-		sndBonus[4] = new AngleSound(mActivity,R.raw.bonus);
-		sndBonus[5] = new AngleSound(mActivity,R.raw.bonus);
-		sndBonus[6] = new AngleSound(mActivity,R.raw.bonus);
+		sndBonus[0] = new AngleSound(mActivity,R.raw.bonus); // On s'en fout (no bonus)
+		sndBonus[1] = new AngleSound(mActivity,R.raw.earnmoney); // ADDSCORE
+		sndBonus[2] = new AngleSound(mActivity,R.raw.bonus2); //MORE JUMP
+		sndBonus[3] = new AngleSound(mActivity,R.raw.bonus1); // LESS JUMP
+		sndBonus[4] = new AngleSound(mActivity,R.raw.changephysic); // PHYSIC
+		sndBonus[5] = new AngleSound(mActivity,R.raw.nochangecolor); // DISABLE CHANGE COLOR
+		sndBonus[6] = new AngleSound(mActivity,R.raw.jump); // ALL PLATEFORME
 		
 		
 		mBonusLayout = new AngleSpriteLayout[8];
@@ -190,7 +190,8 @@ public class GameUI extends AngleUI {
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		// /* 
+		// TODO RELEASE Supprimer (ou commenter) tout ce qui n'est pas entre PAUSE et FIN PAUSE dans la fonction pour les versions mobiles
+		   /* 
 		  float eY = event.getY();
 
 		if(eY < 100) { 
@@ -219,8 +220,7 @@ public class GameUI extends AngleUI {
 				((MainActivity)mActivity).onPause();
 			}
 			// FIN PAUSE 
-			// /*
-			// TODO RELEASE Supprimer (ou commenter) tout ce qui n'est pas entre PAUSE et FIN PAUSE dans la fonction pour les versions mobiles
+			 /*
 		} else {
 			mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
 			if (mTypeBonus == TypeBonus.CHANGEPHYSICS)

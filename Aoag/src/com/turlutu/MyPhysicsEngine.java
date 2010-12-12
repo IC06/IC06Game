@@ -49,7 +49,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		{
 			new_y = max_dy;
 			new_y = dy + (float) (Math.random() * (current_max_dy - dy));
-			float d = 5f/dy;
+			float d = 3f/dy;
 			if (dy < max_dy){dy+=((Math.random()*1.5)+1) * d;}
 			if (current_max_dy < max_dy){current_max_dy+=((Math.random()*2)+1) * d;}
 			Log.i("DY",""+dy+" "+current_max_dy);
@@ -90,8 +90,8 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 							break;
 					}
 					int vitesse = 0;
-					if(d > 10 && Math.random()*1.5 < (float) d / 100.f + 0.5  ) {
-						vitesse = (int) (Math.random() * d);
+					if(d > 15 && Math.random()*1.5 < (float) d / 100.f + 0.5  ) {
+						vitesse = (int) (Math.random() * 1.5 * d);
 						Log.i("Strategie", "Vitesse : "+vitesse);
 					}
 					if(vitesse > 5) {
@@ -107,7 +107,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					newPlateforme.mPosition.set(new_x,-1);
 					addObject(newPlateforme);
 					Log.i("Strategie", "Random bonus > "+(0.9 - (0.4 * ((float) d / 100.f) )));
-					if(Math.random()> (0.8 - (0.3 * ((float) d /100.f ) ))) {
+					if(Math.random()> (0.9 - (0.2 * ((float) d /100.f ) ))) {
 						Bonus bonus = new Bonus(mGameUI, d);
 						Log.i("Strategie", "diifculty /100 "+d);
 						bonus.mPosition.set(new_x+(int) (Math.random() * (Plateforme.SIZE) - (Plateforme.SIZE / 2)),-22);

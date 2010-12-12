@@ -70,7 +70,7 @@ public class ScoresUI   extends AngleUI
 			int worstscore = db.getWorstScore();
 			int nbScore = db.nbScore();
 			db.close();
-			if( ((MainActivity) mActivity).mGame.mScore > worstscore || nbScore <= 8) {
+			if( ((MainActivity) mActivity).mGame.mScore > worstscore || nbScore < 8) {
 				askName();
 			}
 		}
@@ -105,7 +105,7 @@ public class ScoresUI   extends AngleUI
 				Looper.prepare();
 				Dialog dialog = new Dialog(mActivity);
 		        dialog.setContentView(R.layout.name_activity);
-		        //dialog.setTitle("Entrer votre nom :");
+		        dialog.setTitle("Enter your name :");
 		        TextView inputText = (TextView) dialog.findViewById(R.id.entry);
 		        inputText.setText(((MainActivity)mActivity).mOptions.mName);
 		        Button buttonOK = (Button) dialog.findViewById(R.id.ok);        

@@ -18,15 +18,11 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.app.Dialog;
 import android.database.Cursor;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.android.angle.AngleActivity;
@@ -67,7 +63,7 @@ public class OnLineScoresUI   extends AngleUI
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
 			else if (strPushScore.test(eX, eY)) {
 				Toast.makeText(mActivity, 
-		                "You're score are beeing send please wait !" ,
+		                "You're score are being send please wait !" ,
 		                Toast.LENGTH_SHORT).show();
 				UploadMyScore();
 			}
@@ -81,8 +77,17 @@ public class OnLineScoresUI   extends AngleUI
 	public void onActivate()
 	{
 		Log.i("ScoresUI", "OnlineScoresUI onActivate debut "+((MainActivity) mActivity).mGame.mScore);
-
-		getScores();
+		new Thread() 
+		{
+			@Override 
+			public void run() 
+			{
+				Looper.prepare();
+				getScores();
+				checkVersion();
+		        Looper.loop();
+			}
+		}.start();
 		Log.i("ScoresUI", "OnlineScoresUI onActivate fin");
 	}
 	
@@ -96,13 +101,20 @@ public class OnLineScoresUI   extends AngleUI
 				DBScores db = new DBScores(mActivity);
 				db.open();
 		        Cursor c = db.getAllScores();
+		        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		        String version =  mActivity.getString(R.string.app_version);
+				pairs.add(new BasicNameValuePair("version", version));
 		        if (c.moveToFirst())
 		        {
-		            do {          
-						postData(""+c.getString(2), ""+c.getString(1));
+		        	int i = 0;
+		            do {
+		        		pairs.add(new BasicNameValuePair("name"+i, c.getString(2)));
+		        		pairs.add(new BasicNameValuePair("score"+i, c.getString(1)));
+		        		i++;
 		            } while (c.moveToNext());
 		        }
 		        db.close();
+				postData(pairs);
 		        getScores();
 		        Looper.loop();
 			}
@@ -128,15 +140,12 @@ public class OnLineScoresUI   extends AngleUI
 	}
 	
 	
-	public void postData(String name, String score) {
+	public void postData(List<NameValuePair> pairs) {
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost("http://wwwetu.utc.fr/~mguffroy/Score.php?page=add");
 		
-		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-		pairs.add(new BasicNameValuePair("name", name));
-		pairs.add(new BasicNameValuePair("score", score));
 		try {
-			pairs.add(new BasicNameValuePair("sign", md5(name+score+"I am the best")));
+			pairs.add(new BasicNameValuePair("sign", md5(pairs.toString()+"I am the best")));
 		} catch (NoSuchAlgorithmException e1) {
 			Log.e("POST", "Error");
 		}
@@ -160,7 +169,8 @@ public class OnLineScoresUI   extends AngleUI
 	
 	public String getData(String info) {
 		DefaultHttpClient client = new DefaultHttpClient();
-		HttpGet getMethod=new HttpGet("http://wwwetu.utc.fr/~mguffroy/Score.php?page=get&info="+info);
+		String version =  mActivity.getString(R.string.app_version);
+		HttpGet getMethod=new HttpGet("http://wwwetu.utc.fr/~mguffroy/Score.php?page=get&info="+info+"&version="+version);
 
 		try {
 			ResponseHandler<String> responseHandler=new BasicResponseHandler();
@@ -176,67 +186,35 @@ public class OnLineScoresUI   extends AngleUI
 		}
 	}
 	
+	public void checkVersion() {
+		DefaultHttpClient client = new DefaultHttpClient();
+		String version =  mActivity.getString(R.string.app_version);
+		HttpGet getMethod=new HttpGet("http://wwwetu.utc.fr/~mguffroy/Score.php?page=check&version="+version);
+
+		try {
+			ResponseHandler<String> responseHandler=new BasicResponseHandler();
+			String responseBody=client.execute(getMethod, responseHandler);
+			if(responseBody.length() > 5) {
+				Toast.makeText(mActivity, 
+	                responseBody ,
+	                Toast.LENGTH_LONG).show();
+			}
+		}
+		catch (Throwable t) {
+			Log.e("Exitjump","Exception in getData()", t);
+		}
+	}
+	
 	public void getScores() {
 		Toast.makeText(mActivity, 
                 "Retrieving the score list on server..." ,
                 Toast.LENGTH_SHORT).show();
-    	String scores = getData("scores");
-    	String names = getData("names");
+    	String scores = getData("score");
+    	String names = getData("name");
         strScores.set(scores);
         strNames.set(names);
 	}
 	
-	public void askName() {
-		Dialog dialog = new Dialog(mActivity);
-        dialog.setContentView(R.layout.name_activity);
-        dialog.setTitle("Entrer votre nom :");
-        Button buttonOK = (Button) dialog.findViewById(R.id.ok);        
-        buttonOK.setOnClickListener(new OKListener(dialog));
-        Button buttonCancel = (Button) dialog.findViewById(R.id.cancel);        
-        buttonCancel.setOnClickListener(new CancelListener(dialog));
-        dialog.show();
-	}
-	protected class OKListener implements OnClickListener {	 
-        private Dialog dialog;
-        public OKListener(Dialog dialog) {
-                this.dialog = dialog;
-        }
-
-        public void onClick(View v) {
-        		TextView input = (TextView) dialog.findViewById(R.id.entry);
-        		CharSequence name = input.getText();
-        		dialog.dismiss(); 
-        		DBScores db = new DBScores(mActivity);
-        		db.open();
-        		long i = db.insertScore( ((MainActivity) mActivity).mGame.mScore, ""+name);
-        		postData(""+name, ""+((MainActivity) mActivity).mGame.mScore);
-        		Log.i("ScoresUI", "ScoresUI on click on ok insert : " + i);
-        		db.close();
-        		((MainActivity) mActivity).mGame.mScore = 0;
-        		getScores();
-        }
-	}
-	
-	protected class CancelListener implements OnClickListener {	 
-        private Dialog dialog;
-        public CancelListener(Dialog dialog) {
-                this.dialog = dialog;
-        }
-
-        public void onClick(View v) {
-                dialog.dismiss();    
-        		((MainActivity) mActivity).mGame.mScore = 0;
-        		getScores();
-        }
-	}
-
-	public void DisplayScore(Cursor c)
-    {
-        Toast.makeText(mActivity, 
-                "score : " + c.getString(0) + "\n" +
-                "name: " + c.getString(1) ,
-                Toast.LENGTH_LONG).show();
-    } 
 	
 	@Override
 	public void onDeactivate()

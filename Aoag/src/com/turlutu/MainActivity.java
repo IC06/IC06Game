@@ -3,8 +3,10 @@ package com.turlutu;
 
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.FrameLayout;
 
 import com.android.angle.AngleActivity;
@@ -61,10 +64,40 @@ public class MainActivity extends AngleActivity
 	private SensorManager mSensorManager; 	
 
 	   
-	public MainActivity()
-	{
-		
-	}
+	 @Override
+	    public boolean onKeyDown(int keyCode, KeyEvent event) 
+	    {
+	               
+	        if (keyCode == KeyEvent.KEYCODE_BACK) {
+				new Thread() 
+				{
+					@Override 
+					public void run() 
+					{
+						Looper.prepare();
+						AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+						builder.setMessage("Do you really want to exit ?")
+						       .setCancelable(false)
+						       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+						           public void onClick(DialogInterface dialog, int id) {
+						        	  finish();
+						           }})
+							    .setNeutralButton("No", new DialogInterface.OnClickListener() {
+							           public void onClick(DialogInterface dialog, int id) {
+							        	   onResume();
+							           }
+						       });
+						AlertDialog alert = builder.create();
+						alert.show();
+						Looper.loop();
+					}
+				}.start();
+				onPause();
+	        	return true;
+	        }
+	           return false;
+	     }
+
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
