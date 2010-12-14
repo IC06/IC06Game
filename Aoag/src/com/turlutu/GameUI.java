@@ -166,7 +166,7 @@ public class GameUI extends AngleUI {
 		mLife = new LifePlateforme(this);
 		mPhysics.addObject(mLife); // Down wall
 		
-		mLife.setLife(3);
+		mLife.setLife(1);
 		setLife();
 
 		
