@@ -16,14 +16,13 @@ public class MenuUI  extends AngleUI
 	
 	private AngleString strPlay,  strHiScores, strHiScoresOnLine, strExit, strOptions, strInstructions;
 
-	public MenuUI(AngleActivity activity)
+	public MenuUI(AngleActivity activity, Background mBackground)
 	{
 		super(activity);
 		ogMenuTexts = new AngleObject();
 
 		
-		addObject(new AngleSprite(160, 240, new AngleSpriteLayout(mActivity.mGLSurfaceView, 320, 480,  com.turlutu.R.drawable.bg_menu)));
-		
+		addObject(mBackground);
 		addObject(ogMenuTexts);
 
 		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Play", 240, 120, AngleString.aLeft));
