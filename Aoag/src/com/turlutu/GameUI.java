@@ -57,8 +57,8 @@ public class GameUI extends AngleUI {
 		sndBonus[6] = new AngleSound(mActivity,R.raw.jump); // ALL PLATEFORME
 		
 		
-		mBonusLayout = new AngleSpriteLayout[9];
-		for(int i=0;i<9;i++) {
+		mBonusLayout = new AngleSpriteLayout[10];
+		for(int i=0;i<10;i++) {
 			mBonusLayout[i] = new AngleSpriteLayout(activity.mGLSurfaceView, 32, 32, com.turlutu.R.drawable.bonus, i*40, 0, 32, 32);
 		}
 		
