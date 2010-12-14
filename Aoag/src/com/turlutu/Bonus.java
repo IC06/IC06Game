@@ -127,8 +127,16 @@ class Bonus extends AnglePhysicObject
 		{
 			Log.i("Bonus", "Bonus onDie debut");
 			Log.i("Bonus", "TypeBonus : "+mapTypeBonus[mType]+" "+mType);
-			mGame.setBonus(mapTypeBonus[mType],timesActionBonus[mType]);
 			sndTouch.play(((MainActivity)mGame.mActivity).mOptions.mVolume / 100,false);
+			if(mapTypeBonus[mType] == TypeBonus.LIFE) {
+				// Ajout d'une vie
+				mGame.mLife.add();
+			} else if (mapTypeBonus[mType] == TypeBonus.ADDSCORE) {
+				// Ajout de score
+				mGame.mScore += 600;
+			} else {
+				mGame.setBonus(mapTypeBonus[mType],timesActionBonus[mType]);
+			}
 			Log.i("Bonus", "Bonus onDie fin");
 		}
 	}

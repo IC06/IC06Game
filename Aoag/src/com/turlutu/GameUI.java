@@ -33,7 +33,7 @@ public class GameUI extends AngleUI {
 	private AngleSpriteLayout mBordsLayout[];
 	private AngleString mString, mString2, mStringLife;
 	private AngleObject ogDashboard;
-	private LifePlateforme mLife;
+	protected LifePlateforme mLife;
 	private float mTimeEllapsedBonus, mTimeActionBonus;
 	
 	public GameUI(AngleActivity activity, Background mBackGround)
@@ -313,10 +313,7 @@ public class GameUI extends AngleUI {
 		mTimeEllapsedBonus = 0;
 		mTypeBonus = t;
 		mTimeActionBonus = s;
-		if (t == TypeBonus.ADDSCORE)
-			upScore(600);
-		else
-			upScore(200);
+		upScore(200);
 		Log.i("GameUI", "GameUI setBonus fin");
 	}
 }
