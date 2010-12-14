@@ -74,9 +74,10 @@ public class GameUI extends AngleUI {
 		mPlateformew = new AngleSprite(mPlateformeLayout);
 
 		// BALL
-		mBallLayout = new AngleSpriteLayout[20];
-		for (int i=0;i<20;++i)
-			mBallLayout[i] = new AngleSpriteLayout(activity.mGLSurfaceView, 60, 64, com.turlutu.R.drawable.persos,60*i,0,60,64);
+		mBallLayout = new AngleSpriteLayout[34];
+		for (int j=0;j<2;j++)
+			for (int i=0;i<17;++i)
+				mBallLayout[i+j*17] = new AngleSpriteLayout(activity.mGLSurfaceView, 60, 64, com.turlutu.R.drawable.persos,60*i,64*j,60,64);
 		
 		
 		mBordsLayout = new AngleSpriteLayout[3];
@@ -127,7 +128,7 @@ public class GameUI extends AngleUI {
 	
 	public void backToMenu()
 	{
-		((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScores);
+		((MainActivity) mActivity).setUI(((MainActivity) mActivity).mGameOver);
 	}
 	
 	@Override
@@ -203,7 +204,7 @@ public class GameUI extends AngleUI {
 	public boolean onTouchEvent(MotionEvent event)
 	{
 		// TODO RELEASE Supprimer (ou commenter) tout ce qui n'est pas entre PAUSE et FIN PAUSE dans la fonction pour les versions mobiles
-		  // /* 
+		   /* 
 		  float eY = event.getY();
 
 		if(eY < 100) { 
@@ -232,7 +233,7 @@ public class GameUI extends AngleUI {
 				((MainActivity)mActivity).onPause();
 			}
 			// FIN PAUSE 
-			// /*
+			 /*
 		} else {
 			mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
 			if (mTypeBonus == TypeBonus.CHANGEPHYSICS)
