@@ -1,7 +1,6 @@
 package com.turlutu;
 
 import android.app.Dialog;
-import android.database.Cursor;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleObject;
@@ -20,7 +18,7 @@ import com.android.angle.AngleUI;
 public class GameOverUI   extends AngleUI
 {
 	private AngleObject ogMenuTexts;
-	private AngleString strExit, strScores, strNames, strNewScore;
+	private AngleString strExit, strNewScore;
 	
 	public GameOverUI(AngleActivity activity, Background mBackGround)
 	{
@@ -32,8 +30,6 @@ public class GameOverUI   extends AngleUI
 		addObject(ogMenuTexts);
 
 		strNewScore = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 160, 30, AngleString.aCenter));
-		strScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 30, 100, AngleString.aLeft));
-		strNames = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 170, 100, AngleString.aLeft));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Back home", 160, 390, AngleString.aCenter));
 
 	}
@@ -57,13 +53,11 @@ public class GameOverUI   extends AngleUI
 	@Override
 	public void onActivate()
 	{
-		Log.i("ScoresUI", "ScoresUI onActivate debut "+((MainActivity) mActivity).mGame.mScore);
-		
-		showScores();
+		Log.i("GameoverUI", "gameoverUI onActivate debut "+((MainActivity) mActivity).mGame.mScore);
 		
 		if( ((MainActivity) mActivity).mGame.mScore != 0) 
 		{
-			Log.i("ScoresUI", "Dialog show");
+			Log.i("GameoverUI", "Dialog show");
 			strNewScore.set("Last Score : " + ((MainActivity)mActivity).mGame.mScore);
 			DBScores db = new DBScores(mActivity);
 			db.open();
@@ -74,26 +68,7 @@ public class GameOverUI   extends AngleUI
 				askName();
 			}
 		}
-		Log.i("ScoresUI", "ScoresUI onActivate fin");
-	}
-	
-	public void showScores() {
-    	String scores = "";
-    	String names = "";
-		DBScores db = new DBScores(mActivity);
-		db.open();
-        Cursor c = db.getAllScores();
-        if (c.moveToFirst())
-        {
-            do {          
-                //DisplayScore(c);
-            	scores +=  c.getString(1) + "\n";
-            	names += c.getString(2) + "\n";
-            } while (c.moveToNext());
-        }
-        db.close();
-        strScores.set(scores);
-        strNames.set(names);
+		Log.i("GameoverUI", "Gameover activate fin");
 	}
 	
 	public void askName() {
@@ -136,7 +111,6 @@ public class GameOverUI   extends AngleUI
         		Log.i("ScoresUI", "ScoresUI on click on ok insert : " + i);
         		db.close();
         		((MainActivity) mActivity).mGame.mScore = 0;
-        		showScores();
         }
 	}
 	
@@ -151,14 +125,6 @@ public class GameOverUI   extends AngleUI
         		((MainActivity) mActivity).mGame.mScore = 0;
         }
 	}
-
-	public void DisplayScore(Cursor c)
-    {
-        Toast.makeText(mActivity, 
-                "score : " + c.getString(0) + "\n" +
-                "name: " + c.getString(1) ,
-                Toast.LENGTH_LONG).show();
-    } 
 	
 	@Override
 	public void onDeactivate()
