@@ -9,7 +9,6 @@ import android.view.MotionEvent;
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
-import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSound;
 import com.android.angle.AngleSprite;
 import com.android.angle.AngleSpriteLayout;
@@ -58,10 +57,11 @@ public class GameUI extends AngleUI {
 		sndBonus[6] = new AngleSound(mActivity,R.raw.jump); // ALL PLATEFORME
 		
 		
-		mBonusLayout = new AngleSpriteLayout[8];
+		mBonusLayout = new AngleSpriteLayout[9];
 		for(int i=0;i<8;i++) {
-			mBonusLayout[i] = new AngleSpriteLayout(activity.mGLSurfaceView, 32, 32, com.turlutu.R.drawable.bonus, i*32, 0, 32, 32);
+			mBonusLayout[i] = new AngleSpriteLayout(activity.mGLSurfaceView, 32, 32, com.turlutu.R.drawable.bonus, i*40, 0, 32, 32);
 		}
+		
 		
 		// PLATEFORMES
 		mPlateformeLayout = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 30, com.turlutu.R.drawable.plateformes, 0, 1, 64, 30);
