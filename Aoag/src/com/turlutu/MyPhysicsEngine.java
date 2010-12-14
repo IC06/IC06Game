@@ -124,13 +124,15 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 		addPlateform(t.mY);
 		for (int o = 0; o < mChildsCount; o++)
 		{
-			if (mChilds[o] instanceof AnglePhysicObject)
-			{
-				AnglePhysicObject mChildO = (AnglePhysicObject) mChilds[o];
-				mChildO.mPosition.add(t);
-				if(mChildO.mPosition.mY > mWorldHeight) 
+			if (!(mChilds[o] instanceof LifePlateforme)) {
+				if (mChilds[o] instanceof AnglePhysicObject)
 				{
-					removeObject(mChildO);
+					AnglePhysicObject mChildO = (AnglePhysicObject) mChilds[o];
+					mChildO.mPosition.add(t);
+					if(mChildO.mPosition.mY > mWorldHeight) 
+					{
+						removeObject(mChildO);
+					}
 				}
 			}
 		}
@@ -272,17 +274,14 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 						bonus.mUsed = true;
 						removeObject(bonus);
 					}
-				}
-				else if (!(mChilds[c] instanceof Ball) && 
-						!(mChilds[c] instanceof Plateforme) && 
-						!(mChilds[c] instanceof Bonus) && 
-						mChilds[c] instanceof AnglePhysicObject)
-				{
-					AnglePhysicObject mChildC = (AnglePhysicObject) mChilds[c];
-					if (ball.collide(mChildC))
-					{
-						ball.jump();
-						break;
+				} else if (mChilds[c] instanceof LifePlateforme) {
+					LifePlateforme life = (LifePlateforme) mChilds[c];
+					if(life.alive()) {
+						if (ball.collide(life))
+						{
+							life.less();
+							ball.jump();
+						}
 					}
 				}
 			}
