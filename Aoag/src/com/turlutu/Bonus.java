@@ -37,7 +37,7 @@ class Bonus extends AnglePhysicObject
 	private int mType = 0;
 	
 	static int radius = 16;
-	static int nbtype = 15;
+	static int nbtype = 49;
 	static TypeBonus[] mapTypeBonus = {	
 		TypeBonus.MOREJUMP, // 0
 		TypeBonus.LESSJUMP, // 1
@@ -49,29 +49,51 @@ class Bonus extends AnglePhysicObject
 		TypeBonus.BONUSINTERO, // 7
 		TypeBonus.LIFE, //8
 		TypeBonus.NONE};// 9
-	static float[] timesActionBonus = {	0, // 0
-		0, // 1
-		4, // 2
-		4, // 3
-		4, // 4
-		4, // 5
-		6}; // 6
-	static int[] bonusOrder = { 0,
-		1,
-		3,
-		2,
-		5,
-		5,
-		1,
-		4,
-		6,
-		4,
-		3,
-		6,
-		5,
-		6,
-		2,
-		6
+	static float[] timesActionBonus = {	4, // 0 MORE JUMP
+		4, // LESSJUMP
+		4, // DISABLE CHANGE COLOR
+		6, // ALL PLATEFORME
+		6, // CHANGE PHYSICS
+		0, // ADDSCORE
+		0, // INACTIF
+		0, // INACTIF
+		0, // ADDLIFE
+		0}; // NONE 
+	static int[] bonusOrder = { 
+		0, 						// MOREJUMP
+			1,					// LESSJUMP
+			1,
+		0,
+				5,				// ADDSCORE
+				5,
+				5,
+		0,	1,
+					2,			// DISABLE CHANGE COLOR
+					2,
+					2,
+					2,
+		0,	1,	5,
+						3,		// ALL PLATEFORME
+						3,
+						3,
+						3,
+						3,
+		0,	1,	5,	2,
+							4,	//CHANGEPHYSICS
+							4,
+							4,
+							4,
+							4,
+							4,
+		0,	1,	5,	2,	3,
+								8, //LIFE
+								8,
+								8,
+								8,
+								8,
+								8,
+								8,
+		0,	1,	5,	2,	3,	4
 	};
 	
 	public Bonus(GameUI game, int d) // d compris entre 0 et 100 (difficulté croissante)
@@ -79,12 +101,12 @@ class Bonus extends AnglePhysicObject
 		super(0, 1);
 		mGame = game;
 		mUsed = false;
-		int range = (int) ((float) d / 100.f * 2 * nbtype);
+		int range = (int) ((float) d / 100.f * nbtype);
 		if(range>nbtype) {
 			range = nbtype;
 		}
-		mType = bonusOrder[(int) (Math.random() * range) + 1];
-		Log.i("Strategie", "Bmax : "+ ( (float) d / 100.f * nbtype) + 1);
+		mType = bonusOrder[(int) (Math.random() * range)];
+		Log.i("Strategie", "Bmax : "+ ( (float) d / 100.f * nbtype));
 		sndTouch = mGame.sndBonus[mType];
 		mSprite=new AngleSprite(mGame.mBonusLayout[mType]);
 		addCircleCollider(new BallCollider(0, 0, radius));
