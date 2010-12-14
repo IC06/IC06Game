@@ -109,14 +109,20 @@ class Ball extends AnglePhysicObject
 	
 	public int getIntTexture()
 	{
+		// +4*2 grand +5*2 petit
+		int add = 0;
+		if (mActivity.mGame.mTypeBonus == TypeBonus.MOREJUMP)
+			add = 8;
+		else if (mActivity.mGame.mTypeBonus == TypeBonus.LESSJUMP)
+			add = 10;
 		if (mActivity.mGame.mTypeBonus == TypeBonus.ALLPLATEFORME)
-			return 6 + sens;
+			return 6 + sens + add;
 		else if ( mColors[1] == Color.VERT )
-			return 0 + sens;
+			return 0 + sens+ add;
 		else if ( mColors[1] == Color.JAUNE )
-			return 2 + sens;
+			return 2 + sens + add;
 		else
-			return 4 + sens;
+			return 4 + sens + add;
 	}
 	
 	/**
