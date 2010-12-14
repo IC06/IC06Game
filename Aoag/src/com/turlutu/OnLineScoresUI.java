@@ -18,7 +18,6 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Looper;
 import android.util.Log;

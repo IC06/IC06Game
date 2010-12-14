@@ -17,7 +17,6 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleObject;
 import com.android.angle.AnglePhysicObject;
-import com.android.angle.AngleSegmentCollider;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
@@ -200,7 +199,7 @@ public class OptionsUI  extends AngleUI
 		mBall.jump();
 
 		// ajoute une plateforme en bas qui prend toute la place pour le debut
-		LifePlateforme mLife = new LifePlateforme();
+		LifePlateforme mLife = new LifePlateforme(null);
 		mPhysics.addObject(mLife); // Down wall
 		mLife.setLife(-1);
 	}
