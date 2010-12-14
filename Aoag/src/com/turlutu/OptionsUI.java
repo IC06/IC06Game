@@ -200,11 +200,9 @@ public class OptionsUI  extends AngleUI
 		mBall.jump();
 
 		// ajoute une plateforme en bas qui prend toute la place pour le debut
-		AnglePhysicObject mWall = new AnglePhysicObject(1, 0);
-		mWall.mPosition.set(0, HEIGHT-15);
-		mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, WIDTH, 0));
-		mWall.mBounce = 1f;
-		mPhysics.addObject(mWall); // Down wall
+		LifePlateforme mLife = new LifePlateforme();
+		mPhysics.addObject(mLife); // Down wall
+		mLife.setLife(-1);
 	}
 	
 	public void askResetScores()
