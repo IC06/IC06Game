@@ -34,6 +34,7 @@ public class MainActivity extends AngleActivity
 	protected OptionsUI mOptions;
 	protected InstructionsUI mInstructions;
 	protected OnLineScoresUI mScoresOnLine;
+	protected GameOverUI mGameOver;
 	private boolean loaded = false;
 	protected FrameLayout mMainLayout;
 	protected int mSensibility;
@@ -155,7 +156,8 @@ public class MainActivity extends AngleActivity
 		AngleSpriteLayout mLayoutMenu = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 6*320, 0, 320, 480);
 		AngleSpriteLayout mLayoutScore = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 2*320, 0, 320, 480);
 		AngleSpriteLayout mLayoutOnLineScore = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 3*320, 0, 320, 480);
-				
+		AngleSpriteLayout mLayoutGameOver = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 0, 0, 320, 480);
+		
 		
 		Background mBackgroundOptions = null;
 		Background mBackgroundGame = null;
@@ -163,6 +165,7 @@ public class MainActivity extends AngleActivity
 		Background mBackgroundMenu = null;
 		Background mBackgroundScore = null;
 		Background mBackgroundOnLineScore = null;
+		Background mBackgroundGameOver = null;
 		// TODO RELEASE a decommenter pour avoir des background dans les differentes UI (autre que le menu)
 		mBackgroundOptions= new Background(mLayoutOptions);
 		mBackgroundGame = new Background(mLayoutGame);
@@ -170,6 +173,9 @@ public class MainActivity extends AngleActivity
 		mBackgroundMenu = new Background(mLayoutMenu);
 		mBackgroundScore = new Background(mLayoutScore);
 		mBackgroundOnLineScore = new Background(mLayoutOnLineScore);
+		mBackgroundGameOver = new Background(mLayoutGameOver);
+
+		
 		
 		
 		mOptions=new OptionsUI(this,mBackgroundOptions);
@@ -177,6 +183,7 @@ public class MainActivity extends AngleActivity
 		mScores=new ScoresUI(this,mBackgroundScore);
 		mScoresOnLine = new OnLineScoresUI(this,mBackgroundOnLineScore);
 		mGame=new GameUI(this,mBackgroundGame);
+		mGameOver = new GameOverUI(this,mBackgroundGameOver);
 		mGame.setGravity(0f,10f);
 		mMenu=new MenuUI(this,mBackgroundMenu);
 		
