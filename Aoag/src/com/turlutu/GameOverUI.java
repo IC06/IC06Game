@@ -110,7 +110,6 @@ public class GameOverUI   extends AngleUI
         		long i = db.insertScore( ((MainActivity) mActivity).mGame.mScore, name);
         		Log.i("ScoresUI", "ScoresUI on click on ok insert : " + i);
         		db.close();
-        		((MainActivity) mActivity).mGame.mScore = 0;
         }
 	}
 	
