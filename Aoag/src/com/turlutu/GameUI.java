@@ -31,7 +31,7 @@ public class GameUI extends AngleUI {
 	protected MyPhysicsEngine mPhysics;
 
 	private AngleSpriteLayout mBordsLayout[];
-	private AngleString mString, mString2;
+	private AngleString mString, mString2, mStringLife;
 	private AngleObject ogDashboard;
 	private LifePlateforme mLife;
 	private float mTimeEllapsedBonus, mTimeActionBonus;
@@ -58,7 +58,7 @@ public class GameUI extends AngleUI {
 		
 		
 		mBonusLayout = new AngleSpriteLayout[9];
-		for(int i=0;i<8;i++) {
+		for(int i=0;i<9;i++) {
 			mBonusLayout[i] = new AngleSpriteLayout(activity.mGLSurfaceView, 32, 32, com.turlutu.R.drawable.bonus, i*40, 0, 32, 32);
 		}
 		
@@ -101,6 +101,12 @@ public class GameUI extends AngleUI {
 		mString = (AngleString)ogDashboard.addObject(new AngleString(((MainActivity)mActivity).fntGlobal,"0",50,20,AngleString.aCenter));
 		mString2 = (AngleString)ogDashboard.addObject(new AngleString(((MainActivity)mActivity).fntGlobal,"0",50,20,AngleString.aCenter));
 		mString2.mLength = 0;
+		
+		// Indication du nombre de vie restante
+		addObject(new AngleSprite(300,15,mBonusLayout[8]));
+		mStringLife = (AngleString)ogDashboard.addObject(new AngleString(((MainActivity)mActivity).fntGlobal,"",265,25,AngleString.aCenter));
+
+		
 
 		mBall = new Ball ((MainActivity)mActivity,mBallLayout,32,80,1,sndJump);
 		mPhysics.addObject(mBall);
@@ -153,12 +159,15 @@ public class GameUI extends AngleUI {
 		mString.set("0");
 		mString2.set("0");
 		
+
 		
 		// ajoute la plateforme de vie
-		mLife = new LifePlateforme();
+		mLife = new LifePlateforme(this);
 		mPhysics.addObject(mLife); // Down wall
 		
 		mLife.setLife(3);
+		setLife();
+
 		
 		// add barre
 		Plateforme Plateforme = new Plateforme(mPlateformew);
@@ -250,6 +259,10 @@ public class GameUI extends AngleUI {
 			mString2.setAndHide(String.valueOf(mScore));
 			mString.mLength = mString.getLength();
 		}
+	}
+	
+	public void setLife() {
+			mStringLife.set(String.valueOf(mLife.get()));
 	}
 
 	
