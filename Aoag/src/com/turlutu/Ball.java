@@ -122,6 +122,10 @@ class Ball extends AnglePhysicObject
 			add += 8;
 		else if (mActivity.mGame.mTypeBonus == TypeBonus.LESSJUMP)
 			add += 10;
+		else if (mActivity.mGame.mTypeBonus == TypeBonus.CHANGEPHYSICS)
+			add = 20;
+		
+		
 		if (mActivity.mGame.mTypeBonus == TypeBonus.ALLPLATEFORME)
 			return 6 + sens + add;
 		else if ( mColors[1] == Color.VERT )
