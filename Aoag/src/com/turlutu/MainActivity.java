@@ -153,20 +153,29 @@ public class MainActivity extends AngleActivity
 		AngleSpriteLayout mLayoutGame = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 7*320, 0, 320, 480);
 		AngleSpriteLayout mLayoutWhite = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 8*320, 0, 320, 480);
 		AngleSpriteLayout mLayoutMenu = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 6*320, 0, 320, 480);
+		AngleSpriteLayout mLayoutScore = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 2*320, 0, 320, 480);
+		AngleSpriteLayout mLayoutOnLineScore = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 3*320, 0, 320, 480);
+				
+		
 		Background mBackgroundOptions = null;
 		Background mBackgroundGame = null;
 		Background mBackgroundWhite = null;
 		Background mBackgroundMenu = null;
+		Background mBackgroundScore = null;
+		Background mBackgroundOnLineScore = null;
 		// TODO RELEASE a decommenter pour avoir des background dans les differentes UI (autre que le menu)
 		mBackgroundOptions= new Background(mLayoutOptions);
 		mBackgroundGame = new Background(mLayoutGame);
 		mBackgroundWhite = new Background(mLayoutWhite);
 		mBackgroundMenu = new Background(mLayoutMenu);
+		mBackgroundScore = new Background(mLayoutScore);
+		mBackgroundOnLineScore = new Background(mLayoutOnLineScore);
+		
 		
 		mOptions=new OptionsUI(this,mBackgroundOptions);
 		mInstructions= new InstructionsUI(this,mBackgroundWhite);
-		mScores=new ScoresUI(this,mBackgroundWhite);
-		mScoresOnLine = new OnLineScoresUI(this,mBackgroundWhite);
+		mScores=new ScoresUI(this,mBackgroundScore);
+		mScoresOnLine = new OnLineScoresUI(this,mBackgroundOnLineScore);
 		mGame=new GameUI(this,mBackgroundGame);
 		mGame.setGravity(0f,10f);
 		mMenu=new MenuUI(this,mBackgroundMenu);
