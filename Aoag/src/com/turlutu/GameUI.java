@@ -45,7 +45,6 @@ public class GameUI extends AngleUI {
 			addObject(mBackGround);
 		WIDTH = 320f;
 		HEIGHT = 480f;
-		mScore = 0;
 		sndJump=new AngleSound(mActivity,R.raw.rebond);
 		
 		// BONUS
@@ -114,8 +113,6 @@ public class GameUI extends AngleUI {
 	public void onActivate()
 	{
 		Log.i("GameUI", "GameUI onActivate debut");
-		mScore=0;
-		mString.set("0");
 		init();
             
 		super.onActivate();
@@ -151,7 +148,13 @@ public class GameUI extends AngleUI {
 		mBall.mPosition.set(50,300);
 		mBall.jump();
 		
-		// ajoute une plateforme en bas qui prend toute la place pour le debut
+		// SCORE
+		mScore=0;
+		mString.set("0");
+		mString2.set("0");
+		
+		
+		// ajoute la plateforme de vie
 		mLife = new LifePlateforme();
 		mPhysics.addObject(mLife); // Down wall
 		
