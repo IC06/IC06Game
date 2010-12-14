@@ -61,39 +61,65 @@ class Bonus extends AnglePhysicObject
 		0}; // NONE 
 	static int[] bonusOrder = { 
 		0, 						// MOREJUMP
+		/// LESS JUMP
 			1,					// LESSJUMP
+		0,	
 			1,
-		0,
+		
+		/// ADD SCORE
 				5,				// ADDSCORE
+		0,
 				5,
+			1,
 				5,
-		0,	1,
-					2,			// DISABLE CHANGE COLOR
+		
+		/// DISABLE CHANGE COLOR
+					2, 			// DISABLE CHANGE COLOR
+		0,
 					2,
+			1,
 					2,
+				5,
 					2,
-		0,	1,	5,
+					
+		/// ALL PALTEFORME
 						3,		// ALL PLATEFORME
+		0,
 						3,
+			1,
 						3,
+				5,
 						3,
+					2,
 						3,
-		0,	1,	5,	2,
+						
+		/// CHANGE PHYSICS
 							4,	//CHANGEPHYSICS
+		0,
 							4,
+			1,
 							4,
+				5,
 							4,
+					2,
 							4,
+						3,
 							4,
-		0,	1,	5,	2,	3,
+		
+		//// LIFE
 								8, //LIFE
+		0,
 								8,
+			1,
 								8,
+				5,
 								8,
+					2,
 								8,
+						3,
 								8,
-								8,
-		0,	1,	5,	2,	3,	4
+							4,
+								8
 	};
 	
 	public Bonus(GameUI game, int d) // d compris entre 0 et 100 (difficulté croissante)
