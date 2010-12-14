@@ -59,16 +59,4 @@ public class LifePlateforme extends AnglePhysicObject
 		}
 	}
 	
-	/**
-	 * Draw sprite and/or colliders
-	 */
-	@Override
-	public void draw(GL10 gl)
-	{
-		// To debug a supprimer TODO
-		if(alive()) {
-			drawColliders(gl,1f,1f,1f);
-		}
-	}
-	
 }
