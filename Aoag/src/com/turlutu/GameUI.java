@@ -34,6 +34,7 @@ public class GameUI extends AngleUI {
 	private AngleSpriteLayout mBordsLayout[];
 	private AngleString mString, mString2;
 	private AngleObject ogDashboard;
+	private LifePlateforme mLife;
 	private float mTimeEllapsedBonus, mTimeActionBonus;
 	
 	public GameUI(AngleActivity activity, Background mBackGround)
@@ -151,11 +152,10 @@ public class GameUI extends AngleUI {
 		mBall.jump();
 		
 		// ajoute une plateforme en bas qui prend toute la place pour le debut
-		AnglePhysicObject mWall = new AnglePhysicObject(1, 0);
-		mWall.mPosition.set(0, HEIGHT-15);
-		mWall.addSegmentCollider(new AngleSegmentCollider(0, 0, WIDTH, 0));
-		mWall.mBounce = 1f;
-		mPhysics.addObject(mWall); // Down wall
+		mLife = new LifePlateforme();
+		mPhysics.addObject(mLife); // Down wall
+		
+		mLife.setLife(3);
 		
 		// add barre
 		Plateforme Plateforme = new Plateforme(mPlateformew);
@@ -191,7 +191,7 @@ public class GameUI extends AngleUI {
 	public boolean onTouchEvent(MotionEvent event)
 	{
 		// TODO RELEASE Supprimer (ou commenter) tout ce qui n'est pas entre PAUSE et FIN PAUSE dans la fonction pour les versions mobiles
-		   /* 
+		  // /* 
 		  float eY = event.getY();
 
 		if(eY < 100) { 
@@ -220,7 +220,7 @@ public class GameUI extends AngleUI {
 				((MainActivity)mActivity).onPause();
 			}
 			// FIN PAUSE 
-			 /*
+			// /*
 		} else {
 			mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
 			if (mTypeBonus == TypeBonus.CHANGEPHYSICS)
