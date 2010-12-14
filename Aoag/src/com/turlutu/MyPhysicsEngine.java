@@ -107,7 +107,7 @@ public class MyPhysicsEngine extends AnglePhysicsEngine
 					newPlateforme.mPosition.set(new_x,-1);
 					addObject(newPlateforme);
 					Log.i("Strategie", "Random bonus > "+(0.9 - (0.4 * ((float) d / 100.f) )));
-					if(Math.random()> (0.9 - (0.2 * ((float) d /100.f ) ))) {
+					if(Math.random()> (0.8 - (0.2 * ((float) d /100.f ) ))) {
 						Bonus bonus = new Bonus(mGameUI, d);
 						Log.i("Strategie", "diifculty /100 "+d);
 						bonus.mPosition.set(new_x+(int) (Math.random() * (Plateforme.SIZE) - (Plateforme.SIZE / 2)),-22);
