@@ -150,18 +150,20 @@ public class MainActivity extends AngleActivity
 	{
 		Log.i("MainActivity", "Load() start");
 		
-		AngleSpriteLayout mLayoutOptions = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 320, 0, 320, 480);
-		AngleSpriteLayout mLayoutGame = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 7*320, 0, 320, 480);
-		AngleSpriteLayout mLayoutWhite = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 8*320, 0, 320, 480);
-		AngleSpriteLayout mLayoutMenu = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 6*320, 0, 320, 480);
-		AngleSpriteLayout mLayoutScore = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 2*320, 0, 320, 480);
-		AngleSpriteLayout mLayoutOnLineScore = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 3*320, 0, 320, 480);
-		AngleSpriteLayout mLayoutGameOver = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.fonds, 0, 0, 320, 480);
+		AngleSpriteLayout mLayoutOptions = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.options, 0, 0, 320, 480);
+		AngleSpriteLayout mLayoutGame = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.background_jeu, 0, 0, 320, 480);
+		AngleSpriteLayout mLayoutInstruction1 = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.instruction1, 0, 0, 320, 480);
+		AngleSpriteLayout mLayoutInstruction2 = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.instruction2, 0, 0, 320, 480);
+		AngleSpriteLayout mLayoutMenu = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.background_accueil, 0, 0, 320, 480);
+		AngleSpriteLayout mLayoutScore = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.score, 0, 0, 320, 480);
+		AngleSpriteLayout mLayoutOnLineScore = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.score_online, 0, 0, 320, 480);
+		AngleSpriteLayout mLayoutGameOver = new AngleSpriteLayout(mGLSurfaceView,320,480,com.turlutu.R.drawable.game_over, 0, 0, 320, 480);
 		
 		
 		Background mBackgroundOptions = null;
 		Background mBackgroundGame = null;
-		Background mBackgroundWhite = null;
+		Background mBackgroundInstruction1 = null;
+		Background mBackgroundInstruction2 = null;
 		Background mBackgroundMenu = null;
 		Background mBackgroundScore = null;
 		Background mBackgroundOnLineScore = null;
@@ -169,17 +171,17 @@ public class MainActivity extends AngleActivity
 		// TODO RELEASE a decommenter pour avoir des background dans les differentes UI (autre que le menu)
 		mBackgroundOptions= new Background(mLayoutOptions);
 		mBackgroundGame = new Background(mLayoutGame);
-		mBackgroundWhite = new Background(mLayoutWhite);
 		mBackgroundMenu = new Background(mLayoutMenu);
 		mBackgroundScore = new Background(mLayoutScore);
 		mBackgroundOnLineScore = new Background(mLayoutOnLineScore);
 		mBackgroundGameOver = new Background(mLayoutGameOver);
-
+		mBackgroundInstruction1 = new Background(mLayoutInstruction1);
+		mBackgroundInstruction2 = new Background(mLayoutInstruction2);
 		
 		
 		
 		mOptions=new OptionsUI(this,mBackgroundOptions);
-		mInstructions= new InstructionsUI(this,mBackgroundWhite);
+		mInstructions= new InstructionsUI(this,mBackgroundInstruction1);
 		mScores=new ScoresUI(this,mBackgroundScore);
 		mScoresOnLine = new OnLineScoresUI(this,mBackgroundOnLineScore);
 		mGame=new GameUI(this,mBackgroundGame);
