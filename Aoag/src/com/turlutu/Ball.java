@@ -146,16 +146,16 @@ class Ball extends AnglePhysicObject
 	@Override
 	public void draw(GL10 gl)
 	{
-			mSprite.mPosition.set(mPosition);
-			mSprite.draw(gl);
-			/*if(mColors[1] == Color.ROUGE)
-				drawColliders(gl,1f,0f,0f);
-			else if(mColors[1] ==  Color.BLEU)
-				drawColliders(gl,0f,0f,1f);
-			else if(mColors[1] == Color.VERT)
-				drawColliders(gl,0f,1f,0f);
-			else
-				drawColliders(gl,1f,1f,1f);*/
+		mSprite.mPosition.set(mPosition);
+		mSprite.draw(gl);
+		/*if(mColors[1] == Color.ROUGE)
+			drawColliders(gl,1f,0f,0f);
+		else if(mColors[1] ==  Color.BLEU)
+			drawColliders(gl,0f,0f,1f);
+		else if(mColors[1] == Color.VERT)
+			drawColliders(gl,0f,1f,0f);
+		else
+			drawColliders(gl,1f,1f,1f);*/
 	}
 	
 	public void jump()
@@ -173,11 +173,16 @@ class Ball extends AnglePhysicObject
 	
 	public void changeSens()
 	{
-		if(mSens == 1 && mVelocity.mX < 0)
+		if(mVelocity.mX < 0)
+		{
 			mSens=0;
-		else if(mSens == 0 && mVelocity.mX > 0)
+			updateBodyColor();
+		}
+		else if(mVelocity.mX > 0)
+		{
 			mSens=1;
-		updateBodyColor();
+			updateBodyColor();
+		}
 	}
 	
 	public boolean collide(Bonus other)

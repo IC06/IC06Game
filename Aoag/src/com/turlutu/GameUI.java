@@ -98,9 +98,9 @@ public class GameUI extends AngleUI {
 				for (int sens=0; sens<2; ++sens)
 				{
 					layoutsFor1Color1Bonus[sens] = new AngleSpriteLayout(activity.mGLSurfaceView,
-														60, 64, 
+														60, 64,
 														couleurs.get(i_colors),
-														60*(i_bonus+sens), 0,
+														60*(i_bonus*2+sens), 0,
 														60,64);
 				}
 				layoutsFor1Color.put(bonus[i_bonus],layoutsFor1Color1Bonus);
@@ -308,7 +308,7 @@ public class GameUI extends AngleUI {
 				mBall.updateBodyColor();
 			}
 			else
-			mTimeEllapsedBonus += secondsElapsed;
+				mTimeEllapsedBonus += secondsElapsed;
 		}
 		
 		super.step(secondsElapsed);
