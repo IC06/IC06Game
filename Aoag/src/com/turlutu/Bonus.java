@@ -1,5 +1,7 @@
 package com.turlutu;
 
+import java.util.HashMap;
+
 import javax.microedition.khronos.opengles.GL10;
 
 import android.util.Log;
@@ -35,6 +37,21 @@ class Bonus extends AnglePhysicObject
 	private boolean mustdraw = true;
 	private AngleSprite mSprite;
 	private int mType = 0;
+	
+	static HashMap<TypeBonus,Integer> TypeBonusToInt;
+	static {
+		TypeBonusToInt = new HashMap<TypeBonus,Integer>();
+		TypeBonusToInt.put(TypeBonus.MOREJUMP,			0);
+		TypeBonusToInt.put(TypeBonus.LESSJUMP,			1);
+		TypeBonusToInt.put(TypeBonus.DISABLECHANGECOLOR,2);
+		TypeBonusToInt.put(TypeBonus.ALLPLATEFORME,		3);
+		TypeBonusToInt.put(TypeBonus.CHANGEPHYSICS,		4);
+		TypeBonusToInt.put(TypeBonus.ADDSCORE,			5);
+		TypeBonusToInt.put(TypeBonus.BONUSX,			6);
+		TypeBonusToInt.put(TypeBonus.BONUSINTERO,		7);
+		TypeBonusToInt.put(TypeBonus.LIFE,				8);
+		TypeBonusToInt.put(TypeBonus.NONE,				9);
+	}
 	
 	static int radius = 16;
 	static int nbtype = 49;

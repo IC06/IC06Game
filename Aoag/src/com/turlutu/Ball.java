@@ -1,5 +1,7 @@
 package com.turlutu;
 
+import java.util.HashMap;
+
 import javax.microedition.khronos.opengles.GL10;
 
 import com.android.angle.AnglePhysicObject;
@@ -20,13 +22,23 @@ class Ball extends AnglePhysicObject
 	protected enum Color {JAUNE, VERT, ROUGE, TOUTE};
 	protected float mRadius;
 	protected AngleVector mAcceleration;
-	public int sens = 1;
+	public int mSens = 1;
 	
 	private MainActivity mActivity;
 	private AngleSound sndJump;
 	private Color mColors[];
 	private AngleSprite mSprite;
 	private AngleSpriteLayout mTexture[];
+	
+
+	static HashMap<Color,Integer> ColorToInt;
+	static {
+		ColorToInt = new HashMap<Color,Integer>();
+		ColorToInt.put(Color.ROUGE,			0);
+		ColorToInt.put(Color.VERT,			1);
+		ColorToInt.put(Color.JAUNE,			2);
+		ColorToInt.put(Color.TOUTE,			3);
+	}
 	
 	
 	public Ball(MainActivity activity, AngleSpriteLayout texture[], float radius, float mass, float bounce, AngleSound soundJump)
@@ -127,13 +139,13 @@ class Ball extends AnglePhysicObject
 		
 		
 		if (mActivity.mGame.mTypeBonus == TypeBonus.ALLPLATEFORME)
-			return 6 + sens + add;
+			return 6 + mSens + add;
 		else if ( mColors[1] == Color.VERT )
-			return 0 + sens+ add;
+			return 0 + mSens+ add;
 		else if ( mColors[1] == Color.JAUNE )
-			return 2 + sens + add;
+			return 2 + mSens + add;
 		else
-			return 4 + sens + add;
+			return 4 + mSens + add;
 	}
 	
 	/**
@@ -181,10 +193,10 @@ class Ball extends AnglePhysicObject
 	
 	public void changeSens()
 	{
-		if(sens == 1 && mVelocity.mX < 0)
-			sens=0;
-		else if(sens == 0 && mVelocity.mX > 0)
-			sens=1;
+		if(mSens == 1 && mVelocity.mX < 0)
+			mSens=0;
+		else if(mSens == 0 && mVelocity.mX > 0)
+			mSens=1;
 		mSprite.setLayout(mTexture[getIntTexture()]);
 	}
 	
