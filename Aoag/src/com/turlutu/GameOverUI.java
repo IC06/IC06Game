@@ -18,7 +18,7 @@ import com.android.angle.AngleUI;
 public class GameOverUI   extends AngleUI
 {
 	private AngleObject ogMenuTexts;
-	private AngleString strExit, strNewScore;
+	private AngleString strExit, strNewScore, strReplay;
 	
 	public GameOverUI(AngleActivity activity, Background mBackGround)
 	{
@@ -28,8 +28,9 @@ public class GameOverUI   extends AngleUI
 		ogMenuTexts = new AngleObject();
 		
 		addObject(ogMenuTexts);
-
+		
 		strNewScore = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 160, 30, AngleString.aCenter));
+		strReplay = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Play Again", 160, 100, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Back home", 160, 390, AngleString.aCenter));
 
 	}
@@ -44,7 +45,9 @@ public class GameOverUI   extends AngleUI
 
 			if (strExit.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
-
+			else if (strReplay.test(eX, eY))
+				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mGame);
+			
 			return true;
 		}
 		return false;
