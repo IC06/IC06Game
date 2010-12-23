@@ -120,7 +120,15 @@ class Ball extends AnglePhysicObject
 	
 	public void updateBodyColor()
 	{
-		mSprite.setLayout(mSprites.get(mColors[1]).get(mActivity.mGame.mTypeBonus)[mSens]);
+		TypeBonus typeBonus = mActivity.mGame.mTypeBonus;
+		if (typeBonus != TypeBonus.NONE &&
+			typeBonus != TypeBonus.MOREJUMP &&
+			typeBonus != TypeBonus.LESSJUMP &&
+			typeBonus != TypeBonus.CHANGEPHYSICS)
+		{
+			typeBonus = TypeBonus.NONE;
+		}
+		mSprite.setLayout(mSprites.get(mColors[1]).get(typeBonus)[mSens]);
 	}
 	
 	public Color getColor()
@@ -173,12 +181,12 @@ class Ball extends AnglePhysicObject
 	
 	public void changeSens()
 	{
-		if(mVelocity.mX < 0)
+		if(mSens == 1 && mVelocity.mX < 0)
 		{
 			mSens=0;
 			updateBodyColor();
 		}
-		else if(mVelocity.mX > 0)
+		else if(mSens == 0 && mVelocity.mX > 0)
 		{
 			mSens=1;
 			updateBodyColor();
