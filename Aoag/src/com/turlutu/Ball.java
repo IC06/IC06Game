@@ -28,7 +28,7 @@ class Ball extends AnglePhysicObject
 	private AngleSound sndJump;
 	private Color mColors[];
 	private AngleSprite mSprite;
-	private AngleSpriteLayout mTexture[];
+	private HashMap<Color,HashMap<TypeBonus,AngleSpriteLayout[]> > mSprites;
 	
 
 	static HashMap<Color,Integer> ColorToInt;
@@ -41,7 +41,12 @@ class Ball extends AnglePhysicObject
 	}
 	
 	
-	public Ball(MainActivity activity, AngleSpriteLayout texture[], float radius, float mass, float bounce, AngleSound soundJump)
+	public Ball(MainActivity activity, 
+				HashMap<Color,HashMap<TypeBonus,AngleSpriteLayout[]> > sprites, 
+				float radius, 
+				float mass, 
+				float bounce, 
+				AngleSound soundJump)
 	{
 		super(0, 1);
 		mActivity = activity;
@@ -51,8 +56,9 @@ class Ball extends AnglePhysicObject
 		mColors[0] = Color.ROUGE;
 		mColors[1] = Color.VERT;
 		mColors[2] = Color.JAUNE;
-		mSprite=new AngleSprite(texture[0]);
-		mTexture=texture;
+		mSens=0;
+		mSprite=new AngleSprite(sprites.get(Color.VERT).get(TypeBonus.NONE)[0]);
+		mSprites=sprites;
 		addCircleCollider(new BallCollider(0, 0, radius));
 		mRadius = radius;
 		mMass = mass;
@@ -94,24 +100,27 @@ class Ball extends AnglePhysicObject
 	
 	private void setColor(Color newColor)
 	{
+		setBodyColor(newColor);
 		if (newColor == Color.ROUGE)
 		{
 			mActivity.mGame.setSpriteLeft(Color.JAUNE);
-			mSprite.setLayout(mTexture[5]);
 			mActivity.mGame.setSpriteRight(Color.VERT);
 		}
 		else if(newColor == Color.VERT)
 		{
 			mActivity.mGame.setSpriteLeft(Color.ROUGE);
-			mSprite.setLayout(mTexture[1]);
 			mActivity.mGame.setSpriteRight(Color.JAUNE);
 		}
 		else
 		{
 			mActivity.mGame.setSpriteLeft(Color.VERT);
-			mSprite.setLayout(mTexture[3]);
 			mActivity.mGame.setSpriteRight(Color.ROUGE);
 		}
+	}
+	
+	private void setBodyColor(Color newColor)
+	{
+		mSprite.setLayout(mSprites.get(newColor).get(mActivity.mGame.mTypeBonus)[mSens]);
 	}
 	
 	public Color getColor()
@@ -119,7 +128,7 @@ class Ball extends AnglePhysicObject
 		return mColors[1];
 	}
 	
-	public int getIntTexture()
+	/*public int getIntTexture()
 	{
 		int add = 0;
 		
@@ -146,7 +155,7 @@ class Ball extends AnglePhysicObject
 			return 2 + mSens + add;
 		else
 			return 4 + mSens + add;
-	}
+	}*/
 	
 	/**
 	 * I think this function does nothing important
@@ -197,7 +206,7 @@ class Ball extends AnglePhysicObject
 			mSens=0;
 		else if(mSens == 0 && mVelocity.mX > 0)
 			mSens=1;
-		mSprite.setLayout(mTexture[getIntTexture()]);
+		setBodyColor(mColors[1]);
 	}
 	
 	public boolean collide(Bonus other)

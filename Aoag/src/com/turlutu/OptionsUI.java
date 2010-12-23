@@ -1,5 +1,7 @@
 package com.turlutu;
 
+import java.util.HashMap;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -20,11 +22,13 @@ import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
+import com.turlutu.Ball.Color;
+import com.turlutu.Bonus.TypeBonus;
 
 public class OptionsUI  extends AngleUI
 {
 
-	protected AngleSpriteLayout mBallLayout[];
+	protected HashMap<Color,HashMap<TypeBonus,AngleSpriteLayout[]>> mBallLayouts;
 	protected Ball mBall;
 
 	private MyPhysicsEngine mPhysics;
@@ -191,7 +195,7 @@ public class OptionsUI  extends AngleUI
 	{
 		mPhysics = ((MainActivity)mActivity).mGame.mPhysics;
 		addObject(mPhysics);
-		mBallLayout = ((MainActivity)mActivity).mGame.mBallLayout;
+		mBallLayouts = ((MainActivity)mActivity).mGame.mBallLayouts;
 		mBall = ((MainActivity)mActivity).mGame.mBall;
 		mPhysics.addObject(mBall);
 		

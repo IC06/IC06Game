@@ -1,5 +1,7 @@
 package com.turlutu;
 
+import java.util.HashMap;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Looper;
@@ -20,7 +22,8 @@ import com.turlutu.Bonus.TypeBonus;
 
 public class GameUI extends AngleUI {
 
-	protected AngleSpriteLayout mBallLayout[], mPlateformeLayout, mBackGroundLayout, mBonusLayout[];
+	protected AngleSpriteLayout mPlateformeLayout, mBackGroundLayout, mBonusLayout[];
+	protected HashMap<Color,HashMap<TypeBonus,AngleSpriteLayout[]>> mBallLayouts;
 	protected Ball mBall;
 	protected int mScore;
 	protected BorderSprite mSpriteLeft, mSpriteRight;
@@ -40,8 +43,8 @@ public class GameUI extends AngleUI {
 	{
 		super(activity);
 		Log.i("GameUI", "GameUI constructor debut");
-		if(mBackGround != null)
-			addObject(mBackGround);
+		//if(mBackGround != null)
+		//	addObject(mBackGround);
 		WIDTH = 320f;
 		HEIGHT = 480f;
 		sndJump=new AngleSound(mActivity,R.raw.rebond);
@@ -74,11 +77,37 @@ public class GameUI extends AngleUI {
 		mPlateformew = new AngleSprite(mPlateformeLayout);
 
 		// BALL
-		mBallLayout = new AngleSpriteLayout[34];
-		for (int j=0;j<2;j++)
-			for (int i=0;i<17;++i)
-				mBallLayout[i+j*17] = new AngleSpriteLayout(activity.mGLSurfaceView, 60, 64, com.turlutu.R.drawable.persos,60*i,64*j,60,64);
-		
+		Log.i("GameUI", "GameUI constructor load sprites ball debut");
+		TypeBonus[] bonus = new TypeBonus[4];
+		bonus[0] = TypeBonus.NONE;
+		bonus[1] = TypeBonus.MOREJUMP;
+		bonus[2] = TypeBonus.LESSJUMP;
+		bonus[3] =  TypeBonus.CHANGEPHYSICS;
+		HashMap<Color,Integer> couleurs = new HashMap<Color,Integer>();
+		couleurs.put(Color.ROUGE, com.turlutu.R.drawable.persosverts);
+		couleurs.put(Color.VERT, com.turlutu.R.drawable.persosverts);
+		couleurs.put(Color.JAUNE, com.turlutu.R.drawable.persosverts);
+		couleurs.put(Color.TOUTE, com.turlutu.R.drawable.persosverts);
+		mBallLayouts = new HashMap<Color,HashMap<TypeBonus,AngleSpriteLayout[]>>();
+		for (Color i_colors : couleurs.keySet())
+		{
+			HashMap<TypeBonus,AngleSpriteLayout[]> layoutsFor1Color = new HashMap<TypeBonus,AngleSpriteLayout[]>();
+			for (int i_bonus=0; i_bonus<bonus.length; ++i_bonus)
+			{
+				AngleSpriteLayout[] layoutsFor1Color1Bonus = new AngleSpriteLayout[2];
+				for (int sens=0; sens<2; ++sens)
+				{
+					layoutsFor1Color1Bonus[sens] = new AngleSpriteLayout(activity.mGLSurfaceView,
+														60, 64, 
+														couleurs.get(i_colors),
+														60*(i_bonus+sens), 0,
+														60,64);
+				}
+				layoutsFor1Color.put(bonus[i_bonus],layoutsFor1Color1Bonus);
+			}
+			mBallLayouts.put(i_colors, layoutsFor1Color);
+		}
+		Log.i("GameUI", "GameUI constructor load sprites ball fin");
 		
 		mBordsLayout = new AngleSpriteLayout[3];
 		mBordsLayout[0] = new AngleSpriteLayout(activity.mGLSurfaceView, 64, 256, com.turlutu.R.drawable.bords,0,0,64,256);
@@ -109,7 +138,7 @@ public class GameUI extends AngleUI {
 
 		
 
-		mBall = new Ball ((MainActivity)mActivity,mBallLayout,32,80,1,sndJump);
+		mBall = new Ball ((MainActivity)mActivity,mBallLayouts,32,80,1,sndJump);
 		mPhysics.addObject(mBall);
 
 		//init();
@@ -204,8 +233,11 @@ public class GameUI extends AngleUI {
 	public boolean onTouchEvent(MotionEvent event)
 	{
 		// TODO RELEASE Supprimer (ou commenter) tout ce qui n'est pas entre PAUSE et FIN PAUSE dans la fonction pour les versions mobiles
-		   /* 
+		   ///* 
 		  float eY = event.getY();
+		mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
+		if (mTypeBonus == TypeBonus.CHANGEPHYSICS)
+			mBall.mVelocity.mX = -mBall.mVelocity.mX;
 
 		if(eY < 100) { 
 			 // */ // PAUSE
@@ -232,13 +264,7 @@ public class GameUI extends AngleUI {
 				}.start();
 				((MainActivity)mActivity).onPause();
 			}
-			// FIN PAUSE 
-			 /*
-		} else {
-			mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
-			if (mTypeBonus == TypeBonus.CHANGEPHYSICS)
-				mBall.mVelocity.mX = -mBall.mVelocity.mX;
-		} // */
+		}
 		return true;
 	}
 	
