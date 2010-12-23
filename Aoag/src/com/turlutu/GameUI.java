@@ -84,10 +84,10 @@ public class GameUI extends AngleUI {
 		bonus[2] = TypeBonus.LESSJUMP;
 		bonus[3] =  TypeBonus.CHANGEPHYSICS;
 		HashMap<Color,Integer> couleurs = new HashMap<Color,Integer>();
-		couleurs.put(Color.ROUGE, com.turlutu.R.drawable.persosverts);
+		couleurs.put(Color.ROUGE, com.turlutu.R.drawable.persosrouges);
 		couleurs.put(Color.VERT, com.turlutu.R.drawable.persosverts);
-		couleurs.put(Color.JAUNE, com.turlutu.R.drawable.persosverts);
-		couleurs.put(Color.TOUTE, com.turlutu.R.drawable.persosverts);
+		couleurs.put(Color.JAUNE, com.turlutu.R.drawable.persosjaunes);
+		couleurs.put(Color.TOUTE, com.turlutu.R.drawable.persostoutes);
 		mBallLayouts = new HashMap<Color,HashMap<TypeBonus,AngleSpriteLayout[]>>();
 		for (Color i_colors : couleurs.keySet())
 		{
@@ -305,6 +305,7 @@ public class GameUI extends AngleUI {
 			{
 				Log.i("GameUI", "GameUI step fin bonus : "+mTypeBonus);
 				mTypeBonus = TypeBonus.NONE;
+				mBall.updateBodyColor();
 			}
 			else
 			mTimeEllapsedBonus += secondsElapsed;
@@ -340,6 +341,7 @@ public class GameUI extends AngleUI {
 		mTimeEllapsedBonus = 0;
 		mTypeBonus = t;
 		mTimeActionBonus = s;
+		mBall.updateBodyColor();
 		upScore(200);
 		Log.i("GameUI", "GameUI setBonus fin");
 	}

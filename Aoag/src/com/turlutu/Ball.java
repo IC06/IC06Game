@@ -100,7 +100,7 @@ class Ball extends AnglePhysicObject
 	
 	private void setColor(Color newColor)
 	{
-		setBodyColor(newColor);
+		updateBodyColor();
 		if (newColor == Color.ROUGE)
 		{
 			mActivity.mGame.setSpriteLeft(Color.JAUNE);
@@ -118,44 +118,15 @@ class Ball extends AnglePhysicObject
 		}
 	}
 	
-	private void setBodyColor(Color newColor)
+	public void updateBodyColor()
 	{
-		mSprite.setLayout(mSprites.get(newColor).get(mActivity.mGame.mTypeBonus)[mSens]);
+		mSprite.setLayout(mSprites.get(mColors[1]).get(mActivity.mGame.mTypeBonus)[mSens]);
 	}
 	
 	public Color getColor()
 	{
 		return mColors[1];
 	}
-	
-	/*public int getIntTexture()
-	{
-		int add = 0;
-		
-		if(mColors[1] == Color.VERT)
-			add = 0;
-		else if (mColors[1] == Color.JAUNE)
-			add = 2;
-		else if(mColors[1] == Color.JAUNE)
-			add = 4;
-		
-		if (mActivity.mGame.mTypeBonus == TypeBonus.MOREJUMP)
-			add += 8;
-		else if (mActivity.mGame.mTypeBonus == TypeBonus.LESSJUMP)
-			add += 10;
-		else if (mActivity.mGame.mTypeBonus == TypeBonus.CHANGEPHYSICS)
-			add = 20;
-		
-		
-		if (mActivity.mGame.mTypeBonus == TypeBonus.ALLPLATEFORME)
-			return 6 + mSens + add;
-		else if ( mColors[1] == Color.VERT )
-			return 0 + mSens+ add;
-		else if ( mColors[1] == Color.JAUNE )
-			return 2 + mSens + add;
-		else
-			return 4 + mSens + add;
-	}*/
 	
 	/**
 	 * I think this function does nothing important
@@ -206,7 +177,7 @@ class Ball extends AnglePhysicObject
 			mSens=0;
 		else if(mSens == 0 && mVelocity.mX > 0)
 			mSens=1;
-		setBodyColor(mColors[1]);
+		updateBodyColor();
 	}
 	
 	public boolean collide(Bonus other)
