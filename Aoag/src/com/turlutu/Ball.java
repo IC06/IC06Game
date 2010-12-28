@@ -3,7 +3,6 @@ package com.turlutu;
 import java.util.HashMap;
 
 import javax.microedition.khronos.opengles.GL10;
-
 import com.android.angle.AnglePhysicObject;
 import com.android.angle.AngleSound;
 import com.android.angle.AngleSprite;
@@ -124,11 +123,15 @@ class Ball extends AnglePhysicObject
 		if (typeBonus != TypeBonus.NONE &&
 			typeBonus != TypeBonus.MOREJUMP &&
 			typeBonus != TypeBonus.LESSJUMP &&
-			typeBonus != TypeBonus.CHANGEPHYSICS)
+			typeBonus != TypeBonus.CHANGEPHYSICS &&
+			typeBonus != TypeBonus.ALLPLATEFORME)
 		{
 			typeBonus = TypeBonus.NONE;
 		}
-		mSprite.setLayout(mSprites.get(mColors[1]).get(typeBonus)[mSens]);
+		if(typeBonus == TypeBonus.ALLPLATEFORME) {
+			mSprite.setLayout(mSprites.get(Color.TOUTE).get(TypeBonus.NONE)[mSens]);
+		} else
+			mSprite.setLayout(mSprites.get(mColors[1]).get(typeBonus)[mSens]);
 	}
 	
 	public Color getColor()
