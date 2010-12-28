@@ -54,11 +54,12 @@ public class MainActivity extends AngleActivity
 		{
 			if (loaded & event.sensor.getType()==Sensor.TYPE_ACCELEROMETER)
 			{
-				mGame.mBall.mVelocity.mX = (-mOptions.mSensibility*2*event.values[0]);
 				if(mOptions.mBall != null)
 					mOptions.mBall.mVelocity.mX = (-mOptions.mSensibility*2*event.values[0]);
 				if (mGame.mTypeBonus == TypeBonus.CHANGEPHYSICS)
-					mGame.mBall.mVelocity.mX = -mGame.mBall.mVelocity.mX;
+					mGame.mBall.mVelocity.mX = (mOptions.mSensibility*2*event.values[0]);
+				else
+					mGame.mBall.mVelocity.mX = (-mOptions.mSensibility*2*event.values[0]);
 			}
 		}
 	};
