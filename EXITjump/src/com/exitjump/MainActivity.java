@@ -32,7 +32,7 @@ public class MainActivity extends AngleActivity
 	protected MenuUI mMenu;
 	protected ScoresUI mScores;
 	protected OptionsUI mOptions;
-	protected InstructionsUI mInstructions;
+	protected Instructions1UI mInstructions1;
 	protected OnLineScoresUI mScoresOnLine;
 	protected GameOverUI mGameOver;
 	private boolean loaded = false;
@@ -181,14 +181,14 @@ public class MainActivity extends AngleActivity
 		
 		
 		
-		mOptions=new OptionsUI(this,mBackgroundOptions);
-		mInstructions= new InstructionsUI(this,mBackgroundInstruction1);
-		mScores=new ScoresUI(this,mBackgroundScore);
+		mOptions = new OptionsUI(this,mBackgroundOptions);
+		mInstructions1 = new Instructions1UI(this,mBackgroundInstruction1);
+		mScores = new ScoresUI(this,mBackgroundScore);
 		mScoresOnLine = new OnLineScoresUI(this,mBackgroundOnLineScore);
-		mGame=new GameUI(this,mBackgroundGame);
+		mGame = new GameUI(this,mBackgroundGame);
 		mGameOver = new GameOverUI(this,mBackgroundGameOver);
 		mGame.setGravity(0f,10f);
-		mMenu=new MenuUI(this,mBackgroundMenu);
+		mMenu = new MenuUI(this,mBackgroundMenu);
 		
 		
 		setUI(mMenu);

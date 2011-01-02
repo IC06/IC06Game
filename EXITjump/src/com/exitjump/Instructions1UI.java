@@ -5,28 +5,26 @@ import android.view.MotionEvent;
 
 import com.android.angle.AngleActivity;
 import com.android.angle.AngleObject;
-import com.android.angle.AngleSpriteLayout;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
 
 
 
-public class InstructionsUI  extends AngleUI
+public class Instructions1UI extends AngleUI
 {
 	
-	private AngleObject ogMenuTexts;
+	private AngleObject ogTexts;
 	private AngleString strExit;
+	private Background mBackgroud;
 
-	public InstructionsUI(AngleActivity activity, Background mBackGround)
+	public Instructions1UI(AngleActivity activity, Background mBackGround)
 	{
 		super(activity);
 		Log.i("InstructionsUI", "constructor debut");
-		if(mBackGround != null)
-			addObject(mBackGround);
-		ogMenuTexts = new AngleObject();
-		addObject(ogMenuTexts);
+		ogTexts = new AngleObject();
+		addObject(ogTexts);
 
-		ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Instructions", 160, 20, AngleString.aCenter));
+		ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Instructions", 160, 20, AngleString.aCenter));
 		
 		String instruct = "Use your phone's accelerometer\n" +
 				"to control your character.\n" +
@@ -40,8 +38,8 @@ public class InstructionsUI  extends AngleUI
 				"and be able to bounce\n" +
 				"on the platforms of your color!";
 		
-		ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal1, instruct, 160, 140, AngleString.aCenter));
-		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Go back", 160, 390, AngleString.aCenter));
+		ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal1, instruct, 160, 140, AngleString.aCenter));
+		strExit = (AngleString) ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Go back", 160, 390, AngleString.aCenter));
 		Log.i("InstructionsUI", "constructor fin");
 	}
 	

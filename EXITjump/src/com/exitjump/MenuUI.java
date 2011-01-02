@@ -49,7 +49,7 @@ public class MenuUI  extends AngleUI
 			else if (strHiScoresOnLine.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScoresOnLine);
 			else if (strInstructions.test(eX, eY))
-				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mInstructions);
+				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mInstructions1);
 			else if (strExit.test(eX, eY))
 				mActivity.finish();
 
