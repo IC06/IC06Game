@@ -33,7 +33,3 @@ TODO LIST :
 	la police IMPACT (dans openoffice)
 	autre ???
 
-BUG LIST :
-* Chaque rebond dans settings entrainerait un point dans le score qui 
-s'afficherait ensuite comme lastscore dans Hi-Score
-(A verifier, bug indiqué par Arthur)

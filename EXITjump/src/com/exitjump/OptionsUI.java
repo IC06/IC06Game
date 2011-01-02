@@ -198,7 +198,10 @@ public class OptionsUI  extends AngleUI
 		mBall = ((MainActivity)mActivity).mGame.mBall;
 		mPhysics.addObject(mBall);
 		
-		mBall.mPosition.set(50,300);
+		((MainActivity)mActivity).mGame.mTypeBonus = TypeBonus.NONE;
+		
+		
+		mBall.mPosition.set(50,400);
 		mBall.jump();
 
 		// ajoute une plateforme en bas qui prend toute la place pour le debut
