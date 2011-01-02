@@ -13,17 +13,9 @@ import com.android.angle.AngleUI;
 
 public class InstructionsUI  extends AngleUI
 {
-
-	protected AngleSpriteLayout mBallLayout[];
-	protected Ball mBall;
 	
 	private AngleObject ogMenuTexts;
 	private AngleString strExit;
-
-	protected int mSensibility;
-	protected int mVolume;
-	protected int mVibrations;
-	protected String mName;
 
 	public InstructionsUI(AngleActivity activity, Background mBackGround)
 	{
@@ -51,6 +43,16 @@ public class InstructionsUI  extends AngleUI
 		ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal1, instruct, 160, 140, AngleString.aCenter));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Go back", 160, 390, AngleString.aCenter));
 		Log.i("InstructionsUI", "constructor fin");
+	}
+	
+	private void showInstructions1()
+	{
+		
+	}
+	
+	private void showInstructions2()
+	{
+		
 	}
 	
 	@Override
