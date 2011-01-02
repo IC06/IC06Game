@@ -24,6 +24,7 @@ TODO LIST :
 * Remplacer image/son
 ==> Image done, voir pour les sons
 * Faire des screenshots pour le site
+* + screencasts
 * Score 
 	* (tout mettre dans la meme UI, systeme d'"onglet"
 	* et proposer le push du score en ligne dès le retour du jeu
@@ -32,5 +33,7 @@ TODO LIST :
 	la police IMPACT (dans openoffice)
 	autre ???
 
-* faire la page instructions
-* revoir le menu (settings sur le bouton jaune par exemple)
+BUG LIST :
+* Chaque rebond dans settings entrainerait un point dans le score qui 
+s'afficherait ensuite comme lastscore dans Hi-Score
+(A verifier, bug indiqué par Arthur)
