@@ -29,21 +29,23 @@ public class Instructions2UI extends AngleUI
 		
 		
 		
-		/*String instruct = "Use your phone's accelerometer\n" +
-				"to control your character.\n" +
-				"You have to climb\n" +
-				"as high as possible.\n" +
-				"Warning some bonus will help you\n" +
-				"and some other will not ...\n" +
-				"\n " +
-				"Remember you must go across\n" +
+		String instruct = "Remember you must go across\n" +
 				"the screen sides to change color\n" +
-				"and be able to bounce\n" +
-				"on the platforms of your color!";*/
+				"and be able to bounce off\n" +
+				"on colored plateforms!";
+		
+		ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobalSmall, instruct, 160, 220, AngleString.aCenter));
+		
+		instruct = "You are going to \n" +
+				"discover bonus\n" +
+				"Be warned some of them \n" +
+				"are malus...";
+
+		ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobalSmall, instruct, 190, 320, AngleString.aCenter));
 		
 		strExit = (AngleString) ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, 
 													"Back", 
-													160, 460, 
+													270, 450, 
 													AngleString.aCenter));
 		
 		Log.i("InstructionsUI", "constructor fin");
