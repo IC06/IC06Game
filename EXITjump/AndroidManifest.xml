@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      android:versionName="@string/app_version" android:versionCode="49" package="com.exitjump">
+      android:versionName="@string/app_version" package="com.exitjump" android:versionCode="50">
 	<supports-screens android:smallScreens="false"
                   android:normalScreens="true"
                   android:largeScreens="false" 

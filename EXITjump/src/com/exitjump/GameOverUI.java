@@ -15,7 +15,6 @@ import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
 import com.exitjump.R;
 
-// TODO rajouter un bouton rejouer
 public class GameOverUI   extends AngleUI
 {
 	private AngleObject ogMenuTexts;

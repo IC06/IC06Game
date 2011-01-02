@@ -10,11 +10,10 @@ import com.android.angle.AngleObject;
 import com.android.angle.AngleString;
 import com.android.angle.AngleUI;
 
-// TODO rajouter un bouton rejouer
 public class ScoresUI   extends AngleUI
 {
 	private AngleObject ogMenuTexts;
-	private AngleString strExit, strScores, strNames, strNewScore;
+	private AngleString strExit, strScores, strNames, strNewScore, strOnline;
 	
 	public ScoresUI(AngleActivity activity, Background mBackGround)
 	{
@@ -29,6 +28,7 @@ public class ScoresUI   extends AngleUI
 		strScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 30, 100, AngleString.aLeft));
 		strNames = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 170, 100, AngleString.aLeft));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Back home", 160, 390, AngleString.aCenter));
+		strOnline = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Online \n   Scores...", 230, 440, AngleString.aCenter));
 
 	}
 	
@@ -42,6 +42,8 @@ public class ScoresUI   extends AngleUI
 
 			if (strExit.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
+			else if (strOnline.test(eX, eY))
+				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScoresOnLine);
 
 			return true;
 		}
