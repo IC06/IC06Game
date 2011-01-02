@@ -12,59 +12,44 @@ import com.android.angle.AngleUI;
 
 public class Instructions1UI extends AngleUI
 {
-	
-	private AngleObject ogTexts;
 	private AngleString strExit;
-	private Background mBackgroud;
 
-	public Instructions1UI(AngleActivity activity, Background mBackGround)
+	public Instructions1UI(AngleActivity activity, Background background)
 	{
 		super(activity);
 		Log.i("InstructionsUI", "constructor debut");
-		ogTexts = new AngleObject();
+		
+		if (background != null)
+			addObject(background);
+		
+		AngleObject ogTexts = new AngleObject();
 		addObject(ogTexts);
-
+		
 		ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Instructions", 160, 20, AngleString.aCenter));
 		
-		String instruct = "Use your phone's accelerometer\n" +
-				"to control your character.\n" +
+		ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobalSmall,
+										"Use your phone's\n"+
+										"accelerometer to\n" +
+										"control your character.",
+										110, 110,
+										AngleString.aLeft));
+		ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobalSmall,
+							"Jump is\n" +
+							"automatic.",
+							210, 290,
+							AngleString.aLeft));
+		ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobalSmall,
 				"You have to climb\n" +
-				"as high as possible.\n" +
-				"Warning some bonus will help you\n" +
-				"and some other will not ...\n" +
-				"\n " +
-				"Remember you must go across\n" +
-				"the screen sides to change color\n" +
-				"and be able to bounce\n" +
-				"on the platforms of your color!";
+				"as high as possible.\n",
+				80, 385,
+				AngleString.aLeft));
 		
-		ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal1, instruct, 160, 140, AngleString.aCenter));
-		strExit = (AngleString) ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Go back", 160, 390, AngleString.aCenter));
+		strExit = (AngleString) ogTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, 
+													"Next", 
+													160, 460, 
+													AngleString.aCenter));
+		
 		Log.i("InstructionsUI", "constructor fin");
-	}
-	
-	private void showInstructions1()
-	{
-		
-	}
-	
-	private void showInstructions2()
-	{
-		
-	}
-	
-	@Override
-	public void onActivate()
-	{
-		Log.i("InstructionsUI", "onActivate debut");
-		Log.i("InstructionsUI", "onActivate fin");
-	}
-	
-	@Override
-	public void onDeactivate()
-	{
-		Log.i("InstructionsUI", "onDeactivate debut");
-		Log.i("InstructionsUI", "onDeactivate fin");
 	}
 	
 	@Override
@@ -76,7 +61,7 @@ public class Instructions1UI extends AngleUI
 			float eY = event.getY();
 
 			if (strExit.test(eX, eY))
-				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
+				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mInstructions2);
 
 			return true;
 		}
