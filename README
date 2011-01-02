@@ -21,19 +21,12 @@ TODO LIST :
 
 * Ne pas desactiver les bonus au profit de certains autres (ex : $)
 ==> En partie fait (reste a le faire pour le bonus allpalteforme)
-* Ajouter de la vie
-==> DONE
 * Remplacer image/son
 ==> Image done, voir pour les sons
 * Faire des screenshots pour le site
 * Score 
 	* (tout mettre dans la meme UI, systeme d'"onglet"
 	* et proposer le push du score en ligne dès le retour du jeu
-		==> Done
-	* bouton rejouer
-		==> Done
-* faire une UI gameover
-==> done
 * trouver une police :
 	http://www.dafont.com/fr/capture-it.font
 	la police IMPACT (dans openoffice)
