@@ -31,7 +31,7 @@ public class GameUI extends AngleUI {
 	protected AngleSprite mPlateformew,mPlateformer,mPlateformev,mPlateformej;
 	protected AngleSound sndJump, sndBonus[];
 	protected TypeBonus mTypeBonus = TypeBonus.NONE;
-	protected float WIDTH,HEIGHT;
+	public static float WIDTH = 320, HEIGHT = 480;
 	protected MyPhysicsEngine mPhysics;
 
 	private AngleSpriteLayout mBordsLayout[];
@@ -44,10 +44,10 @@ public class GameUI extends AngleUI {
 	{
 		super(activity);
 		Log.i("GameUI", "GameUI constructor debut");
-		//if(mBackGround != null)
-		//	addObject(mBackGround);
-		WIDTH = 320f;
-		HEIGHT = 480f;
+		
+		if(mBackGround != null)
+			addObject(mBackGround);
+		
 		sndJump=new AngleSound(mActivity,R.raw.rebond);
 		
 		// BONUS

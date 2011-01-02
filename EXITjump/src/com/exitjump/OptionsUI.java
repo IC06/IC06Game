@@ -33,7 +33,6 @@ public class OptionsUI  extends AngleUI
 	protected Ball mBall;
 
 	private MyPhysicsEngine mPhysics;
-	private final float WIDTH = 320f,HEIGHT = 480f;
 	private AngleObject ogMenuTexts;
 	//TODO faire ça mieu
 	private boolean dbEmpty;
@@ -88,7 +87,7 @@ public class OptionsUI  extends AngleUI
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
+		mBall.mVelocity.mX = (event.getX()-GameUI.WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
 		
 		if (event.getAction() == MotionEvent.ACTION_DOWN)
 		{
