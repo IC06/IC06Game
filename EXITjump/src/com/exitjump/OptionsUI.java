@@ -34,7 +34,6 @@ public class OptionsUI  extends AngleUI
 
 	private MyPhysicsEngine mPhysics;
 	private AngleObject ogMenuTexts;
-	//TODO faire ça mieu
 	private boolean dbEmpty;
 	private AngleString strSensibility, strVolume, strVibrations, strResetScores, strExit;
 

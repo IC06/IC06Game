@@ -24,11 +24,11 @@ public class MenuUI  extends AngleUI
 		addObject(ogMenuTexts);
 
 		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Play", 240, 120, AngleString.aLeft));
-		strHiScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Hi Score", 210, 215, AngleString.aCenter));
-		strHiScoresOnLine = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "On line Score", 25, 40, AngleString.aLeft));
-		strInstructions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Instructions", 25, 100, AngleString.aLeft));
-		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Settings", 175, 295, AngleString.aCenter));
-		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Exit", 250, 360, AngleString.aCenter));
+		strHiScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Hi Score", 230, 210, AngleString.aCenter));
+		//strHiScoresOnLine = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "On line Score", 25, 40, AngleString.aLeft));
+		strInstructions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Instructions", 125, 290, AngleString.aLeft));
+		strOptions = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Settings", 240, 355, AngleString.aCenter));
+		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Exit", 265, 440, AngleString.aCenter));
 		
 	}
 	
@@ -46,8 +46,8 @@ public class MenuUI  extends AngleUI
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mOptions);
 			else if (strHiScores.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScores);
-			else if (strHiScoresOnLine.test(eX, eY))
-				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScoresOnLine);
+			/*else if (strHiScoresOnLine.test(eX, eY))
+				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScoresOnLine);*/
 			else if (strInstructions.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mInstructions1);
 			else if (strExit.test(eX, eY))

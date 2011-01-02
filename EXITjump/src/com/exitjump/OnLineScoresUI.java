@@ -34,7 +34,7 @@ import com.exitjump.R;
 public class OnLineScoresUI   extends AngleUI
 {
 	private AngleObject ogMenuTexts;
-	private AngleString strExit, strScores, strNames, strPushScore;
+	private AngleString strExit, strScores, strNames, strPushScore, strLocal;
 	
 	public OnLineScoresUI(AngleActivity activity, Background mBackGround)
 	{
@@ -49,6 +49,7 @@ public class OnLineScoresUI   extends AngleUI
 		strScores = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 30, 100, AngleString.aLeft));
 		strNames = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "", 170, 100, AngleString.aLeft));
 		strExit = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Back home", 160, 390, AngleString.aCenter));
+		strLocal = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Local\n    Scores...", 250, 440, AngleString.aCenter));
 
 	}
 	
@@ -62,6 +63,8 @@ public class OnLineScoresUI   extends AngleUI
 
 			if (strExit.test(eX, eY))
 				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mMenu);
+			else if (strLocal.test(eX, eY))
+				((MainActivity) mActivity).setUI(((MainActivity) mActivity).mScores);
 			else if (strPushScore.test(eX, eY)) {
 				Toast.makeText(mActivity, 
 		                "You're score are being send please wait !" ,

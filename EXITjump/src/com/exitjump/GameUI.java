@@ -234,7 +234,7 @@ public class GameUI extends AngleUI {
 	public boolean onTouchEvent(MotionEvent event)
 	{
 		// TODO RELEASE Supprimer (ou commenter) tout ce qui n'est pas entre PAUSE et FIN PAUSE dans la fonction pour les versions mobiles
-		   ///* 
+		   /* 
 		  float eY = event.getY();
 		mBall.mVelocity.mX = (event.getX()-WIDTH/2)*((MainActivity)mActivity).mOptions.mSensibility/25;
 		if (mTypeBonus == TypeBonus.CHANGEPHYSICS)
@@ -265,7 +265,7 @@ public class GameUI extends AngleUI {
 				}.start();
 				((MainActivity)mActivity).onPause();
 			}
-		}
+		//}
 		return true;
 	}
 	
