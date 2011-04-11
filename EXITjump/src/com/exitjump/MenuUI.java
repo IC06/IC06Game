@@ -19,8 +19,9 @@ public class MenuUI  extends AngleUI
 		super(activity);
 		ogMenuTexts = new AngleObject();
 
+		if (mBackground != null)
+			addObject(mBackground);
 		
-		addObject(mBackground);
 		addObject(ogMenuTexts);
 
 		strPlay = (AngleString) ogMenuTexts.addObject(new AngleString(((MainActivity)mActivity).fntGlobal, "Play", 240, 120, AngleString.aLeft));
